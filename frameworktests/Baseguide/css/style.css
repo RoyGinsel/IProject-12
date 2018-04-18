@@ -1,4 +1,45 @@
 .sass-box {
-  height: 400; }
+  background-color: red;
+  width: 100%; }
+
+.sass-box1 {
+  background-color: magenta; }
+
+.form {
+  width: 100%; }
+
+.dropdown {
+  height: 50px; }
+
+.dropdown li {
+  visibility: hidden;
+  position: relative;
+  right: 1em;
+  width: 50px;
+  background-color: magenta; }
+
+.dropdown:hover li {
+  visibility: visible; }
+
+header {
+  padding-top: 10px; }
+
+main {
+  margin-left: 1rem;
+  margin-right: 1rem; }
+
+.sass-col {
+  margin-top: 1rem;
+  background-color: lime; }
+
+.artikel {
+  border: 0.3rem solid #C0AB8C;
+  margin: 0.5rem; }
+
+.col {
+  font-size: 16px; }
+
+h1 {
+  font-size: 24px; }
 
 /*# sourceMappingURL=style.css.map */
