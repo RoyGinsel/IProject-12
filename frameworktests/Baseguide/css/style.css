@@ -1,9 +1,9 @@
-.sass-box {
-  background-color: red;
+.sass-boxA {
+  background-color: #A58A68;
   width: 100%; }
 
 .sass-box1 {
-  background-color: magenta; }
+  background-color: #C0AB8C; }
 
 .form {
   width: 100%; }
@@ -16,7 +16,7 @@
   position: relative;
   right: 1em;
   width: 50px;
-  background-color: magenta; }
+  background-color: #A58A68; }
 
 .dropdown:hover li {
   visibility: visible; }
