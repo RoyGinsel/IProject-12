@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+  //include('..\SQLSrvConnect.php');
 $cookie_name = "test";
 if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,"1",time() + (86400 * 30),"/",null,null,null);
@@ -20,19 +20,6 @@ if(!isset($_COOKIE[$cookie_name])){
 <body>
 
    <!-- * Alert message (voor eerste bezoekers) -->
-
-  <?php
-  //include('..\SQLSrvConnect.php');
-
-if(!isset($_COOKIE[$cookie_name])) {
-    echo  '
-    <>
-    <div class="welkom-melding" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <h1> Welkom op de website!</h1> </div>';
-}
-// session_destroy() ;
-    ?>
 
 
   <header class="uk-nav-header">
@@ -86,6 +73,18 @@ if(!isset($_COOKIE[$cookie_name])) {
       </div>
     </nav>
   </header>
+  <?php
+
+
+if(!isset($_COOKIE[$cookie_name])) {
+    echo  '
+    <>
+    <div class="welkom-melding" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <h1> Welkom op de website!</h1>
+        <p> Veel koop plezier </p> </div>';
+}
+    ?>
   <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-width-1-1">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-1" uk-grid>
       <div class="uk-card uk-card-default uk-width-1-4">

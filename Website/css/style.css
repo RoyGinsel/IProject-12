@@ -5,5 +5,12 @@ header {
     height: 150px;
 }
 .welkom-melding{
-  
+  background-color:white;
+  border: solid black 2px;
+  z-index: 1;
+  position: absolute;
+  display: inline;
+  margin-top: 100px;
+  margin-left: 35%;
+  padding:50px;
 }
