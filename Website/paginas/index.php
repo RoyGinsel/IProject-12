@@ -33,7 +33,8 @@ if(!isset($_COOKIE[$cookie_name])) {
 }
 // session_destroy() ;
     ?>
-    <button type="button" name="button" action="button.php" >DEL COOKIE</button>
+
+
   <header class="uk-nav-header">
     <nav class="uk-navbar-container" uk-navbar>
       <div class="uk-navbar-left">
