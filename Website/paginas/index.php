@@ -6,7 +6,7 @@ if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,"1",time() + (86400 * 30),"/",null,null,null);
 }
  ?>
-<html lang="en" dir="ltr">
+<html lang="nl" dir="ltr">
 
 <head>
   <meta charset="utf-8">
@@ -34,7 +34,6 @@ if(!isset($_COOKIE[$cookie_name])){
                 </a>
           </li>
         </ul>
-
         <nav class="uk-navbar-container uk-margin uk-hidden-touch" uk-navbar>
           <div class="uk-navbar-item">
             <div>Some <a href="#">Link</a></div>
@@ -78,7 +77,6 @@ if(!isset($_COOKIE[$cookie_name])){
 
 if(!isset($_COOKIE[$cookie_name])) {
     echo  '
-    <>
     <div class="welkom-melding" uk-alert>
         <a class="uk-alert-close" uk-close></a>
         <h1> Welkom op de website!</h1>
