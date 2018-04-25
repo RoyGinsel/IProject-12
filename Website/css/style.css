@@ -37,7 +37,7 @@ button>img:hover {
 }
 
 .breadcrumb {
-  border: solid 3px #333333;
+  border: solid 4px #333333;
   border-top: solid 0px #7D6444;
   background-color: #EAD9C4;
 }
@@ -45,6 +45,7 @@ button>img:hover {
 footer{
   font-size: 8px;
   text-align: center;
+  background: #FFF7EC
 }
 
 main {
