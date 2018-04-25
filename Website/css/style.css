@@ -65,5 +65,9 @@ main {
 }
 
 .tabel{
-  background: #FFF7EC
+  background: #EAD9C4
+}
+
+.uk-table-hover tbody tr:hover, .uk-table-hover>tr:hover{
+  background-color: #FFF7EC
 }
