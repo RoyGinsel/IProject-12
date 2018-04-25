@@ -2,6 +2,7 @@
 session_start();
   //include('..\SQLSrvConnect.php');
 $cookie_name = "test";
+
 if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,"1",time() + (86400 * 30),"/",null,null,null);
 }
