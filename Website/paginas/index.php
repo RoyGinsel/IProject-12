@@ -123,7 +123,7 @@ if(!isset($_COOKIE[$cookie_name])) {
                     <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
                 </td>
                 <td class="">$120948</td>
-                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>
         </tbody>
@@ -150,7 +150,7 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
             </td>
             <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+            <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
         </tr>
     </tbody>
