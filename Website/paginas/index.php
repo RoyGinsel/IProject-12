@@ -34,9 +34,9 @@ if(!isset($_COOKIE[$cookie_name])){
   //call-out bericht
 if(isset($_COOKIE[$cookie_name])) {
     echo  '
-    <div class="call-out uk-width-1-2 " uk-alert>
+    <div class="call-out uk-width-1-2 uk-text-center uk-position-center" uk-alert>
         <a class="uk-alert-close" uk-close></a>
-        <h1> Welkom op de website!</h1>
+        <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> Welkom op de website!</h1>
         <p> Veel koop plezier </p> </div>';
 }
     ?>
@@ -127,6 +127,36 @@ if(isset($_COOKIE[$cookie_name])) {
                 <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
 
             </tr>
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+                </td>
+                <td class="">$120948</td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+
+            </tr>
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+                </td>
+                <td class="">$120948</td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+
+            </tr>
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+                </td>
+                <td class="">$120948</td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+
+            </tr>
         </tbody>
     </table>
 </div>
@@ -134,6 +164,7 @@ if(isset($_COOKIE[$cookie_name])) {
 <!-- tabel uitgelichte-items -->
 <div class="uk-overflow-auto">
   <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
+        <div class="uk-height-max-medium">
 <table class="uk-table uk-table-hover uk-table-middle uk-table-divider ">
     <thead>
         <tr>
@@ -144,7 +175,6 @@ if(isset($_COOKIE[$cookie_name])) {
         </tr>
     </thead>
     <tbody>
-      <div class="uk-height-max-medium">
         <tr>
             <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
             <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
