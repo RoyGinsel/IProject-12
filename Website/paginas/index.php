@@ -3,6 +3,7 @@ session_start();
   //include('..\SQLSrvConnect.php');
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
+  $crumbs = array();
 
 //Cookie zetten voor callout
 if(!isset($_COOKIE[$cookie_name])){
@@ -158,6 +159,9 @@ if(!isset($_COOKIE[$cookie_name])) {
 </div>
 </div>
 </main>
+<?php
+  include "includes/footer.php";
+  ?>
 </body>
 
 </html>

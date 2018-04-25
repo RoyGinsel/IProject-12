@@ -2,16 +2,6 @@ h1 {
   font-size: 40px;
   font-family: 'Work Sans', sans-serif;
 }
-.call-out{
-  background-color:white;
-  border: solid black 2px;
-  z-index: 1;
-  position: absolute;
-  display: inline;
-  margin-top: 100px;
-  margin-left: 35%;
-  padding:50px;
-}
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -24,6 +14,13 @@ h1>a {
 h1>a:hover {
   text-decoration: none;
   color:#333333;
+}
+
+button>img {
+  background-color: #7D6444
+}
+button>img:hover {
+  background-color: #EAD9C4;
 }
 
 .header {
@@ -45,9 +42,26 @@ h1>a:hover {
   background-color: #EAD9C4;
 }
 
+footer{
+  font-size: 8px;
+  text-align: center;
+}
+
 main {
   background-color: #FFF7EC;
 }
+
+.call-out{
+  background-color:white;
+  border: solid black 2px;
+  z-index: 1;
+  position: absolute;
+  display: inline;
+  margin-top: 100px;
+  margin-left: 35%;
+  padding:50px;
+}
+
 .tabel{
   background: #FFF7EC
 }
