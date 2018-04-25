@@ -8,7 +8,7 @@
 <header>
  <div class="uk-flex-inline uk-flex-between uk-flex-middle uk-width-1-1 header">
     <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left"><img src="../media/Hamburgermenu.png" alt=""></button>
-    <div uk-dropdown>
+    <div class="dropmenu" uk-dropdown>
       <ul class="uk-nav uk-dropdown-nav">
         <li><a href="index.php">Home</a></li>
         <li><a href="producten.php">Producten</a></li>
