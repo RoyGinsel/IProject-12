@@ -74,7 +74,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 
 
 <!-- Lijsten -->
-  <div class="uk-card uk-card-default uk-card-body uk-child-width-1-2@m uk-child-width-1-1 uk-width-1-1 uk-flex-inline@m uk-flex-around@m" uk-grid>
+  <div class="uk-card uk-card-body tabel uk-margin-remove uk-child-width-1-2@m uk-child-width-1-1 uk-width-1-1 uk-flex-inline@m uk-flex-around@m" uk-grid>
 
 <!-- tabel populaire-items -->
     <div class="uk-overflow-auto">
