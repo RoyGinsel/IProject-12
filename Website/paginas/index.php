@@ -152,7 +152,7 @@ if(!isset($_COOKIE[$cookie_name])) {
   //                   <h4 class="uk-text-small">'.$waarde['omschrijving'].'</h4>
   //               </td>
   //               <td class="">'.$waarde['prijs'].'</td>
-  //               <td><button class="uk-button uk-button-default" type="button" href="'.$waarde['link'].'">Button</button></td>
+  //               <td><button class="uk-button uk-button-default" type="button" href="'.$waarde['link'].'">Ga naar bieding</button></td>
   //
   //           </tr>'
             ?>
