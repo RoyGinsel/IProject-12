@@ -3,6 +3,7 @@ session_start();
   //include('..\SQLSrvConnect.php');
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
+  $crumbs = array();
 
 if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
