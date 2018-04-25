@@ -132,8 +132,11 @@ if(isset($_COOKIE[$cookie_name])) {
 </div>
 
 <!-- tabel uitgelichte-items -->
+
 <div class="uk-overflow-auto">
   <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
+  <div class="uk-height-max-medium">
+
 <table class="uk-table uk-table-hover uk-table-middle uk-table-divider ">
     <thead>
         <tr>
@@ -144,8 +147,7 @@ if(isset($_COOKIE[$cookie_name])) {
         </tr>
     </thead>
     <tbody>
-      <div class="uk-height-max-medium">
-        <tr>
+              <tr>
             <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
             <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
             <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
@@ -219,7 +221,6 @@ if(isset($_COOKIE[$cookie_name])) {
     </tbody>
 
 </table>
-</div>
 </div>
 </div>
 </main>
