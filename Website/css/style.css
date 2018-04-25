@@ -4,7 +4,7 @@ header {
     width: 100%-300px;
     height: 150px;
 }
-.welkom-melding{
+.call-out{
   background-color:white;
   border: solid black 2px;
   z-index: 1;
@@ -13,4 +13,7 @@ header {
   margin-top: 100px;
   margin-left: 35%;
   padding:50px;
+}
+.page {
+  background-color:
 }

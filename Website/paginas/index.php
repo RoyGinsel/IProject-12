@@ -1,9 +1,11 @@
 <?php
 session_start();
   //include('..\SQLSrvConnect.php');
-$cookie_name = "test";
+  $cookie_name = "callout";
+  $cookie_value = "cookieVoorCallout";
+
 if(!isset($_COOKIE[$cookie_name])){
-    setcookie($cookie_name ,"1",time() + (86400 * 30),"/",null,null,null);
+    setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
 }
  ?>
 <html lang="en" dir="ltr">
@@ -21,6 +23,7 @@ if(!isset($_COOKIE[$cookie_name])){
 
    <!-- * Alert message (voor eerste bezoekers) -->
 
+<main class="page">
 
   <header class="uk-nav-header">
     <nav class="uk-navbar-container" uk-navbar>
@@ -74,33 +77,128 @@ if(!isset($_COOKIE[$cookie_name])){
     </nav>
   </header>
   <?php
-
-
 if(!isset($_COOKIE[$cookie_name])) {
     echo  '
-    <>
-    <div class="welkom-melding" uk-alert>
+    <div class="call-out" uk-alert>
         <a class="uk-alert-close" uk-close></a>
         <h1> Welkom op de website!</h1>
         <p> Veel koop plezier </p> </div>';
 }
     ?>
-  <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-width-1-1">
-    <div class="uk-card uk-card-default uk-card-body uk-width-1-1" uk-grid>
-      <div class="uk-card uk-card-default uk-width-1-4">
-        <img src="https://media.production.coolgift.com/product/Chocolat-Game-Controller-1.jpg" alt="">
-      </div>
-      <div class="uk-card uk-card-default uk-width-1-4">
-        <p>Omschrijvinga aslkdfjaljfioera; uiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii jksdnhfuisdnj skdjnfjsdnfolsdkj sdkljfoaisdfjio</p>
-      </div>
-      <div class="uk-card uk-card-default uk-width-1-4">
-        dfsfse fesef esf se fseesfse ffs
-      </div>
-      <div class="uk-card uk-card-default uk-width-1-4">
+    <div class="uk-alert-primary uk-margin-remove" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <p class= "uk-text-center">Aantal veiling sinds laatste bezoek toegevoegd: ..</p>
+</div>
+<!-- voorfoto -->
+<div class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="animation: fade">
 
-      </div>
-    </div>
-  </div>
+    <ul class="uk-slideshow-items uk-slid">
+        <li>
+            <img src="../media/veiling-hamer.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom uk-height-max-medium">
+                <h3 class="uk-margin-remove">Bottom</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+        <li>
+            <img src="../media/veiling-groep.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-left uk-text-center uk-transition-slide-left uk-width-medium">
+                <h3 class="uk-margin-remove">Bottom</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+        <li>
+            <img src="../media/hamer-huis.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium ">
+                <h3 class="uk-margin-remove">Left</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+</div>
+
+
+<!-- Lijsten -->
+  <div class="uk-card uk-card-default uk-card-body uk-child-width-1-2@m uk-child-width-1-1 uk-width-1-1 uk-flex-inline@m uk-flex-around@m" uk-grid>
+
+<!-- tabel populaire-items -->
+    <div class="uk-overflow-auto">
+      <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+        <thead>
+            <tr>
+                <th class="uk-table-shrink">Product</th>
+                <th class="uk-table-expand uk-visible@s">Omschrijving</th>
+                <th class="uk-width-small">Prijs</th>
+                <th class="uk-table-shrink uk-text-nowrap"></th>
+            </tr>
+        </thead>
+        <tbody>
+          <?php
+  //         $sql = "SELECT title, image,omschrijving,prijs,link from tabelnaam ";
+  //         $query = $dbh->prepare($sql);
+  //         $query->execute($sql);
+  // //fetch de uitkomst en stop het in een array resultaat
+  //         $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+  //           foreach ($resultaat as $waarde) { }
+  //         $lijst .= '
+  //           <tr>
+  //               <td><img class="uk-preserve-width uk-border-rounded " src="'.$waarde['image'].'" width="80" alt="">
+  //               <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">'.$waarde['title'].'</h3></td>
+  //               <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+  //                   <h4 class="uk-text-small">'.$waarde['omschrijving'].'</h4>
+  //               </td>
+  //               <td class="">'.$waarde['prijs'].'</td>
+  //               <td><button class="uk-button uk-button-default" type="button" href="'.$waarde['link'].'">Button</button></td>
+  //
+  //           </tr>'
+            ?>
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+                </td>
+                <td class="">$120948</td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- tabel uitgelichte-items -->
+<div class="uk-overflow-auto">
+  <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
+<table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+    <thead>
+        <tr>
+            <th class="uk-table-shrink">Product</th>
+            <th class="uk-table-expand uk-visible@s">Omschrijving</th>
+            <th class="uk-width-small">Prijs</th>
+            <th class="uk-table-shrink uk-text-nowrap"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+            </td>
+            <td class="">$120948</td>
+            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</main>
 </body>
 
 </html>
