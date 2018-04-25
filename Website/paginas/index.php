@@ -158,6 +158,9 @@ if(!isset($_COOKIE[$cookie_name])) {
 </div>
 </div>
 </main>
+<?php
+  include "includes/footer.php";
+  ?>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$crumbs = array("Producten");
+$crumbs = array("Producten","Product");
 ?>
 <!DOCTYPE html>
 <html lang="en">
