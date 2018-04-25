@@ -47,9 +47,9 @@ if(!isset($_COOKIE[$cookie_name])) {
 </div>
 
 <!-- voorfoto slideshow-->
-<div class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="animation: fade">
+<div class="uk-position-relative uk-visible-toggle uk-light " uk-slideshow="animation: fade min-height: 300; max-height: 600">
 
-    <ul class="uk-slideshow-items uk-slid">
+    <ul class="uk-slideshow-items uk-slid ">
         <li>
             <img src="../media/veiling-hamer.jpg" alt="" uk-cover>
             <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom uk-height-max-medium">
@@ -86,6 +86,7 @@ if(!isset($_COOKIE[$cookie_name])) {
     <div class="uk-overflow-auto">
       <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
     <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+
         <thead>
             <tr>
                 <th class="uk-table-shrink">Product</th>
