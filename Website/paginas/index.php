@@ -184,7 +184,7 @@ if(!isset($_COOKIE[$cookie_name])) {
     </thead>
     <tbody>
         <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
             <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
             <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                 <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>

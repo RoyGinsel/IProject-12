@@ -1,7 +1,4 @@
 <?php
-  $_SESSION["crumbs"] = 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
