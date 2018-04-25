@@ -8,7 +8,7 @@ if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
 }
  ?>
-<html lang="en" dir="ltr">
+<html lang="nl" dir="ltr">
 
 <head>
   <meta charset="utf-8">
@@ -37,7 +37,6 @@ if(!isset($_COOKIE[$cookie_name])){
                 </a>
           </li>
         </ul>
-
         <nav class="uk-navbar-container uk-margin uk-hidden-touch" uk-navbar>
           <div class="uk-navbar-item">
             <div>Some <a href="#">Link</a></div>
