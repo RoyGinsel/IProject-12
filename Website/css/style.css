@@ -71,3 +71,6 @@ main {
 .uk-table-hover tbody tr:hover, .uk-table-hover>tr:hover{
   background-color: #FFF7EC
 }
+.uk-button{
+  line-height: 15px;
+}
