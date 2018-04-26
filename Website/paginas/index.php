@@ -168,7 +168,7 @@ if(isset($_COOKIE[$cookie_name])) {
 
         <div class="uk-height-max-medium">
 
-<table class="uk-table uk-table-hover uk-table-middle uk-table-divider ">
+<table id="test" class="uk-table uk-table-hover uk-table-middle uk-table-divider ">
     <thead>
         <tr>
             <th class="uk-table-shrink">Product</th>
@@ -250,7 +250,6 @@ if(isset($_COOKIE[$cookie_name])) {
         </tr>
 
     </tbody>
-
 </table>
 </div>
 </div>
