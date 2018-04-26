@@ -47,9 +47,13 @@ button>img:hover {
 }
 
 footer{
-  font-size: 9px;
+  font-size: 10px;
   text-align: center;
-  background: #FFF7EC
+  background: #fff7EC
+}
+
+.back-to-top{
+  font-size: 16px;
 }
 
 main {
