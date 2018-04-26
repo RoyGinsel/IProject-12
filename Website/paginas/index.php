@@ -5,6 +5,7 @@ session_start();
   $cookie_value = "cookieVoorCallout";
   $crumbs = array();
 
+
 //Cookie zetten voor callout
 if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
@@ -32,7 +33,7 @@ if(!isset($_COOKIE[$cookie_name])){
 
   <?php
   //call-out bericht
-if(isset($_COOKIE[$cookie_name])) {
+if(!isset($_COOKIE[$cookie_name])) {
     echo  '
     <div class="call-out uk-width-1-2 uk-text-center uk-position-center" uk-alert>
         <a class="uk-alert-close" uk-close></a>
