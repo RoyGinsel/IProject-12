@@ -92,7 +92,7 @@ if(!isset($_COOKIE[$cookie_name])) {
             <tr>
                 <th class="uk-table-shrink">Product</th>
                 <th class="uk-table-expand uk-visible@s">Omschrijving</th>
-                <th class="uk-width-small">Prijs</th>
+                <th class="uk-width-small uk-visible@s">Prijs</th>
                 <th class="uk-table-shrink uk-text-nowrap"></th>
             </tr>
         </thead>
@@ -124,8 +124,8 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                     <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
                 </td>
-                <td class="">$120948</td>
-                <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+                <td class="uk-visible@s">$120948</td>
+                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>
             <tr>
@@ -134,8 +134,8 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                     <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
                 </td>
-                <td class="">$120948</td>
-                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+                <td class="uk-visible@s">$120948</td>
+                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>
             <tr>
@@ -144,8 +144,8 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                     <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
                 </td>
-                <td class="">$120948</td>
-                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+                <td class="uk-visible@s">$120948</td>
+                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>
             <tr>
@@ -154,10 +154,21 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                     <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
                 </td>
-                <td class="">$120948</td>
-                <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+                <td class="uk-visible@s">$120948</td>
+                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+                </td>
+                <td class="uk-visible@s">$120948</td>
+                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+
+            </tr>
+
         </tbody>
     </table>
 </div>
@@ -179,76 +190,57 @@ if(!isset($_COOKIE[$cookie_name])) {
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+      <tr>
+          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+          </td>
+          <td class="uk-visible@s">$120948</td>
+          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+      </tr>
+      <tr>
+          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+          </td>
+          <td class="uk-visible@s">$120948</td>
+          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+      </tr>
+      <tr>
+          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+          </td>
+          <td class="uk-visible@s">$120948</td>
+          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+      </tr>
+      <tr>
+          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+          </td>
+          <td class="uk-visible@s">$120948</td>
+          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
+      </tr>
+      <tr>
+          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
+          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
+          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
+          </td>
+          <td class="uk-visible@s">$120948</td>
+          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Button</button></td>
-
-        </tr>
-        <tr>
-            <td><img class="uk-preserve-width uk-border-rounded " src="../media/mazda.png" width="80" alt="">
-            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-            <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-            </td>
-            <td class="">$120948</td>
-            <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-        </tr>
+      </tr>
+      
 
     </tbody>
 </table>

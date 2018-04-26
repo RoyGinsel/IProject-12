@@ -33,20 +33,37 @@
     </div>
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
   </div>
-  <div class="uk-button-group uk-inline uk-hidden@m uk-width-1-1">
+
+  <div class="uk-button-group uk-inline uk-hidden@m uk-width-1-1" uk-dropdown-grid>
       <button class="uk-button uk-button-default uk-width-1-1" type="button" name="button"><span uk-icon="icon:  triangle-down">Dropdown</span></button>
-      <div class="uk-visible-small" uk-dropdown="pos: bottom-justify; mode: click; boundary: ! .uk-button-group; boundary-align: true;">
+      <div class="uk-visible-small" uk-dropdown="pos: bottom-justify; mode: click;">
+        <div class="uk-grid" uk-grid>
           <ul class="uk-nav uk-dropdown-nav">
-              <li class="uk-active"><a href="#">Active</a></li>
-              <li><a href="#">Item</a></li>
-              <li class="uk-nav-header">Header</li>
-              <li><a href="#">Item</a></li>
-              <li><a href="#">Item</a></li>
-              <li class="uk-nav-divider"></li>
-              <li><a href="#">Item</a></li>
+              <li class="uk-active"><a href="#">rubriek</a>
+                <ul>
+                  <li>subrubriek</li>
+                </ul>
+              </li>
+              <li class="uk-active"><a href="#">rubriek</a>
+                <ul>
+                  <li>subrubriek</li>
+                </ul>
+              </li>
+              <li class="uk-active"><a href="#">rubriek</a>
+                <ul>
+                  <li>subrubriek</li>
+                </ul>
+              </li>
+              <li class="uk-active"><a href="#">rubriek</a>
+                <ul>
+                  <li>subrubriek</li>
+                </ul>
+              </li>
+              <ul>
           </ul>
-    </div>
-  </div>
+          </div>
+          </div>
+        </div>
   <div class="uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb ">
       <?php echo $breadcrumb; ?>
