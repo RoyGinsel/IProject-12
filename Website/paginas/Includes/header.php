@@ -17,19 +17,17 @@
           <li><a href="product.php">Product</a></li>
         </ul>
       </div>
-      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left rubriekenmenu">Rubrieken</button>
-      <div class="uk-width-1-3 lightcolour" uk-dropdown="mode: click">
+      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left">IK DROP</button>
+      <div class="uk-width-1-2 uk-child-width-1-3" uk-dropdown="mode: click" uk-grid>
         <!-- search -->
         <div class="uk-margin-remove">
            <!-- php pagina met rubrieken -->
-            <form class="uk-search uk-search-default lightestcolour" action="">
+            <form class="uk-search uk-search-default" action="">
                 <a href="" uk-search-icon></a>
                 <input class="uk-search-input" type="search" name="search" placeholder="Search...">
             </form>
         </div>
-        <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-child-width-1-2">
-          <?php include "Rubriekenboom-header-dropdown.php"?>
-        </div>
+        <?php include "Rubriekenboom-header-dropdown.php"?>
       </div>
     </div>
 
