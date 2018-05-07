@@ -23,8 +23,26 @@ button>img:hover {
   background-color: #EAD9C4;
 }
 
+.lightcolour {
+  background-color: #EAD9C4;
+}
+
+.lightestcolour {
+  background-color: #fff7EC;
+}
+
 .dropmenu {
   background-color: #EAD9C4;
+}
+
+.rubriekenmenu {
+  background-color: #7D6444;
+  color:#C5Ae91;
+}
+
+.rubriekenmenu:hover{
+  background-color: #EAD9C4;
+  color:#A58A68;
 }
 
 .header {
