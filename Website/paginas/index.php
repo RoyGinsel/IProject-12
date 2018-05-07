@@ -1,6 +1,6 @@
 <?php
 session_start();
-  include "../../SQLSrvConnect.php";
+//   include "../../SQLSrvConnect.php";
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
   $crumbs = array();
