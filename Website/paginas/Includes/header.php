@@ -30,7 +30,6 @@
         <?php include "Rubriekenboom-header-dropdown.php"?>
       </div>
     </div>
-  </div>
 
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
   </div>
