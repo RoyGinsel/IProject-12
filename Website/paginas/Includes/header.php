@@ -27,7 +27,9 @@
                 <input class="uk-search-input" type="search" name="search" placeholder="Search...">
             </form>
         </div>
-        <?php include "Rubriekenboom-header-dropdown.php"?>
+        <div class="uk-flex uk-flex-wrap">
+          <?php include "Rubriekenboom-header-dropdown.php"?>
+        </div>
       </div>
     </div>
 
