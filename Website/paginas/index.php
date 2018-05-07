@@ -1,6 +1,6 @@
 <?php
 session_start();
-  //include('..\SQLSrvConnect.php');
+  include "../../SQLSrvConnect.php";
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
   $crumbs = array();
@@ -240,7 +240,7 @@ if(!isset($_COOKIE[$cookie_name])) {
           <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
       </tr>
-      
+
 
     </tbody>
 </table>
