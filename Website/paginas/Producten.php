@@ -4,7 +4,7 @@ $crumbs = array("Producten");
 if(isset($_GET["data"]))
 {
     $data = $_GET["data"];
-}else {
+} else {
   $data = 1;
 }
 $pagination = "<ul class='uk-pagination'>";
