@@ -4,29 +4,36 @@ $crumbs = array("Producten");
 if(isset($_GET["data"]))
 {
     $data = $_GET["data"];
-} else {
+}else {
   $data = 1;
+}
+
+if(isset($_GET["rubriek"]))
+{
+  $rubriek = $_GET["rubriek"];
+}else{
+  $rubriek = "";
 }
 $pagination = "<ul class='uk-pagination'>";
 if($data != 1){
   $prev = $data-1;
   $pagination .= "<li><a href='producten.php?data=1'><<</span></a></li>
-                  <li><a href='producten.php?data=$prev'><</a></li>";
+                  <li><a href='producten.php?data=$prev&rubriek=$rubriek'><</a></li>";
 }
 if($data == 2){
   $pagination .= "<li><a href='producten.php?data=1'>1</a></li>";
 } elseif($data > 2){
   $prev1 = $data - 1;
   $prev2 = $data - 2;
-  $pagination .= "<li><a href='producten.php?data=$prev2'>$prev2</a></li>
-                  <li><a href='producten.php?data=$prev1'>$prev1</a></li>";
+  $pagination .= "<li><a href='producten.php?data=$prev2&rubriek=$rubriek'>$prev2</a></li>
+                  <li><a href='producten.php?data=$prev1&rubriek=$rubriek'>$prev1</a></li>";
 }
 $next1 = $data+1;
 $next2 = $data+2;
 $pagination .= "<li class='uk-active'><span>$data</span></li>
-                <li><a href='producten.php?data=$next1'>$next1</a></li>
-                <li><a href='producten.php?data=$next2'>$next2</a></li>
-                <li><a href='producten.php?data=$next1'>></a></li>
+                <li><a href='producten.php?data=$next1&rubriek=$rubriek'>$next1</a></li>
+                <li><a href='producten.php?data=$next2&rubriek=$rubriek'>$next2</a></li>
+                <li><a href='producten.php?data=$next1&rubriek=$rubriek'>></a></li>
                 </ul>";
 
 
