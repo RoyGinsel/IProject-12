@@ -1,6 +1,7 @@
 <?php
 session_start();
-//   include "../../SQLSrvConnect.php";
+   include "../../SQLSrvConnect.php";
+   include "functies.php";
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
   $crumbs = array();
@@ -100,74 +101,23 @@ if(!isset($_COOKIE[$cookie_name])) {
           <?php
           //gegevens halen uit de database en in tabel body zetten
 
-  //         $sql = "SELECT title, image,omschrijving,prijs,link from tabelnaam ";
-  //         $query = $dbh->prepare($sql);
-  //         $query->execute($sql);
-  // //fetch de uitkomst en stop het in een array resultaat
-  //         $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
-  //           foreach ($resultaat as $waarde) { }
-  //         $lijst .= '
-  //           <tr>
-  //               <td><img class="uk-preserve-width uk-border-rounded " src="'.$waarde['image'].'" width="80" alt="">
-  //               <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">'.$waarde['title'].'</h3></td>
-  //               <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-  //                   <h4 class="uk-text-small">'.$waarde['omschrijving'].'</h4>
-  //               </td>
-  //               <td class="">'.$waarde['prijs'].'</td>
-  //               <td><button class="uk-button uk-button-default" type="button" href="'.$waarde['link'].'">Ga naar bieding</button></td>
-  //
-  //           </tr>'
+          $lijst = "";
+            foreach (populaireitems() as $waarde) {
+           $lijst .= '
+            <tr>
+                <td><img class="uk-preserve-width uk-border-rounded " src=../media/Hamburgermenu.png width="80" alt="">
+                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">'.$waarde['titel'].'</h3></td>
+                <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                    <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
+                </td>
+                <td class="">'.$waarde['startPrijs'].'</td>
+                <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+
+            </tr>';
+          }
+            echo $lijst;
             ?>
-            <tr>
-                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-                </td>
-                <td class="uk-visible@s">$120948</td>
-                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-            </tr>
-            <tr>
-                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-                </td>
-                <td class="uk-visible@s">$120948</td>
-                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-            </tr>
-            <tr>
-                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-                </td>
-                <td class="uk-visible@s">$120948</td>
-                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-            </tr>
-            <tr>
-                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-                </td>
-                <td class="uk-visible@s">$120948</td>
-                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-            </tr>
-            <tr>
-                <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-                <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-                <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-                    <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-                </td>
-                <td class="uk-visible@s">$120948</td>
-                <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-            </tr>
 
         </tbody>
     </table>
@@ -176,7 +126,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 <!-- tabel uitgelichte-items -->
 
 <div class="uk-overflow-auto">
-  <h2 class="uk-text-bold uk-text-center uk-text-large">Populaire items</h2>
+  <h2 class="uk-text-bold uk-text-center uk-text-large">uitgelichte-items</h2>
 
         <div class="uk-height-max-medium">
 
@@ -190,56 +140,27 @@ if(!isset($_COOKIE[$cookie_name])) {
         </tr>
     </thead>
     <tbody>
-      <tr>
-          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-          </td>
-          <td class="uk-visible@s">$120948</td>
-          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-      </tr>
-      <tr>
-          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-          </td>
-          <td class="uk-visible@s">$120948</td>
-          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+      <?php
+      //gegevens halen uit de database en in tabel body zetten
 
-      </tr>
-      <tr>
-          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-          </td>
-          <td class="uk-visible@s">$120948</td>
-          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+      $lijst = "";
+        foreach (uitgelichteitems() as $waarde) {
+       $lijst .= '
+        <tr>
+            <td><img class="uk-preserve-width uk-border-rounded " src=../media/Hamburgermenu.png width="80" alt="">
+            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">'.$waarde['titel'].'</h3></td>
+            <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
+            </td>
+            <td class="">'.$waarde['startPrijs'].'</td>
+            <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
-      </tr>
-      <tr>
-          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-          </td>
-          <td class="uk-visible@s">$120948</td>
-          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+        </tr>';
+      }
+        echo $lijst;
+        ?>
 
-      </tr>
-      <tr>
-          <td><img class="uk-preserve-width uk-border-rounded " src="../media/Hamburgermenu.png" width="80" alt="">
-          <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">Mazda MX5</h3></td>
-          <td class=" uk-text-truncate uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
-              <h4 class="uk-text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h4>
-          </td>
-          <td class="uk-visible@s">$120948</td>
-          <td><h4 class="uk-hidden@s">$120948</h4><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
-      </tr>
 
 
     </tbody>

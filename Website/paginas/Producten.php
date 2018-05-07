@@ -49,7 +49,86 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   include "includes/header.php";
 ?>
 <main>
+<div class="uk-float-left ">
+  <button class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-usage">Rubrieken-filter</button>
+  <div class="" id="toggle-usage">
+    <p >What's up?</p>
+    <form class="" action="index.html" method="post">
+      <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-grid-divider">
+            <label><input class="uk-radio" type="checkbox" checked> A</label>
+            <label><input class="uk-radio" type="checkbox"> B</label>
+        </div>
+        <button class="uk-button uk-button-default">Submit</button>
+    </form>
+    <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
+        <li class="uk-open">
+            <a class="uk-accordion-title" href="#">Item 1</a>
+            <div class="uk-accordion-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </li>
+        <li>
+            <a class="uk-accordion-title" href="#">Item 2</a>
+            <div class="uk-accordion-content">
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+            </div>
+        </li>
+        <li>
+            <a class="uk-accordion-title" href="#">Item 3</a>
+            <div class="uk-accordion-content">
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
+            </div>
+        </li>
+    </ul>
+  </div>
+</div>
 
+  <div class="uk-flex uk-flex-center">
+<div class="">
+  <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
+      <li class="uk-open">
+          <a class="uk-accordion-title" href="#">Item 1</a>
+          <div class="uk-accordion-content">
+            <table class="uk-table uk-table-middle uk-table-divider">
+    <thead>
+        <tr>
+            <th class="uk-width-small">Table Heading</th>
+            <th>Table Heading</th>
+            <th>Table Heading</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Table Data</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+            <td><button class="uk-button uk-button-default" type="button">Button</button></td>
+        </tr>
+        <tr>
+            <td>Table Data</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+            <td><button class="uk-button uk-button-default" type="button">Button</button></td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+      </li>
+      <li>
+          <a class="uk-accordion-title" href="#">Item 2</a>
+          <div class="uk-accordion-content">
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+          </div>
+      </li>
+      <li>
+          <a class="uk-accordion-title" href="#">Item 3</a>
+          <div class="uk-accordion-content">
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
+          </div>
+      </li>
+  </ul>
+<h3>DIT IS EEN BLOK</h3>
+</div>
+  </div>
+</div>
 <div class="uk-flex uk-flex-center">
 <?php echo $pagination ?>
 </div>
@@ -58,6 +137,6 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
 <?php
   include "includes/footer.php";
   ?>
-  
+
 </body>
 </html>
