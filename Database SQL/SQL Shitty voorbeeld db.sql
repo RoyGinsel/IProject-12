@@ -41,14 +41,6 @@ create table tblVoorwerpRubriek(
 	constraint fk_tblVoorwerpRubriek_rubriekNummer foreign key (rubriekNummer) references tblRubriek(rubriekNummer)
 )
 
-insert into tblRubriek values
-	(1,'Auto',null,1),
-	(2,'Aston Martin',1,2)
-
-
 insert into tblVoorwerp values
 	(1,'Aston Martin Vulcan','Hele mooie waggie jonguh',2000000.20,'PayPal','gimme da money','Loo','Nederland','5','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/30/2018','14:48:00.0000',0,null),
 	(2,'Diploma HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
-
-insert into tblVoorwerpRubriek values
-	(1,1)
