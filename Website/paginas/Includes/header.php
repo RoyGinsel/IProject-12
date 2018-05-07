@@ -17,22 +17,17 @@
           <li><a href="product.php">Product</a></li>
         </ul>
       </div>
-      <div class="uk-button-group uk-inline uk-visible@m ">
-        <button class="uk-button uk-button-default" type="button" name="button"><span uk-icon="icon:  triangle-down">Dropdown</span></button>
-        <div class="uk-width-large" uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
-          <div class="uk-dropdown-grid uk-child-width-1-2"uk-grid>
-            
-            <!-- search -->
-            <div class="uk-margin-remove">
-               <!-- php pagina met rubrieken -->
-                <form class="uk-search uk-search-default" action="">
-                    <a href="" uk-search-icon></a>
-                    <input class="uk-search-input" type="search" name="search" placeholder="Search...">
-                </form>
-            </div>
-
-            <?php include "includes/Rubriekenboom-header-dropdown.php" ?>
-      </div>
+      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left">IK DROP</button>
+      <div class="uk-width-1-2 uk-child-width-1-3" uk-dropdown="mode: click" uk-grid>
+        <!-- search -->
+        <div class="uk-margin-remove">
+           <!-- php pagina met rubrieken -->
+            <form class="uk-search uk-search-default" action="">
+                <a href="" uk-search-icon></a>
+                <input class="uk-search-input" type="search" name="search" placeholder="Search...">
+            </form>
+        </div>
+        <?php include "Rubriekenboom-header-dropdown.php"?>
       </div>
     </div>
   </div>
