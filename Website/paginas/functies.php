@@ -1,6 +1,6 @@
 <?php
 include "database.php";
-include "../../SQLSrvConnect.php";
+//include "../../SQLSrvConnect.php";
 
 //Aanpassen AUB! Simon :)
 //Index.php -> Select statement voor populaireitems
