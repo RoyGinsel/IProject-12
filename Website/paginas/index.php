@@ -33,10 +33,10 @@ if(!isset($_COOKIE[$cookie_name])){
 
   <?php
   //call-out bericht
-if(!isset($_COOKIE[$cookie_name])) {
+if(isset($_COOKIE[$cookie_name])) {
     echo  '
-    <div class="call-out uk-width-1-2 uk-text-center uk-position-center" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
+    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+        <a class="sluiten uk-alert-close" uk-close ></a>
         <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> Welkom op de website!</h1>
         <p> Veel koop plezier </p> </div>';
 }

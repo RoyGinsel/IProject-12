@@ -73,11 +73,12 @@ main {
 }
 
 .call-out{
-  background-color:white;
-  border: solid black 2px;
+  background-color:FFF7EC;
+  border: solid black 3px;
   z-index: 1;
   position: absolute;
   display: inline;
+
 }
 
 .tabel{

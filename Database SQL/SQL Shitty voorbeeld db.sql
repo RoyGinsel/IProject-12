@@ -52,7 +52,11 @@ create table tblBod(
 
 insert into tblVoorwerp values
 	(1,'Aston Martin Vulcan','Hele mooie waggie jonguh',2000000.20,'PayPal','gimme da money','Loo','Nederland','5','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/30/2018','14:48:00.0000',0,null),
-	(2,'Diploma HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
+	(2,'Diploma HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null),
+	(3,'MBO-Nivea4','Deze diploma heb je niks an',100,'PayPal','gimme da money','Loo','Nederland','5','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/30/2018','14:48:00.0000',0,null),
+	(4,'Turbocharged Fiets','Ow fiets is nooit meer zelfde',800,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null),
+	(5,'Supercharged BMX','Kannie leg op t kerkhof, Wilnie leg d''r''naost',500,'PayPal','gimme da money','Loo','Nederland','5','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/30/2018','14:48:00.0000',0,null),
+	(6,'Viagra pil','Dan hej de schaopn ant drietn an',0.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
 
 insert into tblVoorwerp values
 	(3,'gesdaw HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
@@ -60,7 +64,12 @@ insert into tblVoorwerp values
 insert into tblbod values
 	(1,9000000.00,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
 	(2,3.21,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
-	(2,4.32,'LEEEROOOOOY-roy','4/27/2018','14:48:00.0000')
+	(2,4.32,'LEEEROOOOOY-roy','4/27/2018','14:48:00.0000'),
+	(3,200,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
+	(4,1250,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
+	(5,800,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
+	(5,801,'LEEEROOOOOY-roy','4/27/2018','14:48:00.0000'),
+	(6,100,'Luuk-Lucky','4/27/2018','14:48:00.0000')
 
 select * from tblRubriek where parentRubriek = 260
 
