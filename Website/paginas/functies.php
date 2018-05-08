@@ -28,7 +28,7 @@ function uitgelichteitems()
 
 function rubrieken()
 {
-  return query("SELECT titel,beschrijving,startPrijs FROM tblRubriek");
+  return query("SELECT * FROM tblRubriek where parentRubriek = -1");
 }
 
  ?>

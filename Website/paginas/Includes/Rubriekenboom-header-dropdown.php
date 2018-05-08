@@ -1,3 +1,4 @@
+
 <!-- search -->
 <div class="uk-margin-remove">
    <!-- php pagina met rubrieken -->
@@ -7,7 +8,7 @@
     </form>
 </div>
 
-<div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
+<div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2 uk-dropdown-scrollable">
   <?php
 foreach (rubrieken() as $waarde) {
   echo '
@@ -17,7 +18,7 @@ foreach (rubrieken() as $waarde) {
     <li>europa</li>
     <li>amerika</li>
   </ul>
-</div>'
+</div>';
 } ?>
 
 <div class="uk-padding-small uk-nav uk-dropdown-nav">
