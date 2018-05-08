@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "functies.php";
 $crumbs = array("Producten");
 if(isset($_GET["data"]))
 {
@@ -56,16 +57,17 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   include "includes/header.php";
 ?>
 <main>
-<div class="uk-float-left ">
-  <button class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-usage">Rubrieken-filter</button>
-  <div class="" id="toggle-usage">
-    <p >What's up?</p>
-    <form class="" action="index.html" method="post">
-      <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-grid-divider">
-            <label><input class="uk-radio" type="checkbox" checked> A</label>
-            <label><input class="uk-radio" type="checkbox"> B</label>
+<div class="uk-float-left uk-width-1-4@s uk-width-1-1 uk-margin uk-child-width-1-1 uk-text-small uk-text-large@m">
+  <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage"><h5>
+  Rubrieken-filter</h5></button>
+  <div class="uk-child-width-auto" id="toggle-usage">
+    <form class="uk-flex uk-flex-center " action="index.html" method="post">
+      <div class="uk-flex-column uk-margin uk-grid-small uk-child-width-auto uk-grid uk-grid-divider">
+            <label><input class="uk-radio" type="checkbox" checked> Alfabetisch</label>
+            <span class="uk-flex-inline" uk-icon="question"></span>
+            <label><input class="uk-radio" type="checkbox"> Aantal veilingen</label>
         </div>
-        <button class="uk-button uk-button-default">Submit</button>
+        <button class="uk-button uk-button-default">Zoek</button>
     </form>
     <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
         <li>
@@ -90,31 +92,53 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   </div>
 </div>
 
-  <div class="uk-flex uk-flex-center">
-<div class="">
+
+
+  <div class="uk-flex uk-flex-center uk-width-3-4@s uk-width-1-1">
+<div class=" uk-child-width-auto uk-width-5-6">
+
+  <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+      <h3>Hoofdrubriek</h3>
+  </div>
+  <div class="uk-navbar-right">
+    <h3>Subrubriek</h3>
+  </div>
+  </nav>
+
   <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
       <li class="uk-open">
           <a class="uk-accordion-title" href="#">Item 1</a>
-          <div class="uk-accordion-content">
+          <div class="uk-accordion-content uk-overflow-auto">
             <table class="uk-table uk-table-middle uk-table-divider">
     <thead>
-        <tr>
-            <th class="uk-width-small">Table Heading</th>
-            <th>Table Heading</th>
-            <th>Table Heading</th>
-        </tr>
+      <tr>
+          <th class="uk-table-shrink">Product</th>
+          <th class="uk-table-expand uk-visible@s">Omschrijving</th>
+          <th class="uk-width-small uk-visible">Prijs</th>
+          <th class="uk-table-shrink uk-text-nowrap"></th>
+      </tr>
     </thead>
     <tbody>
+      <?php
+      //gegevens halen uit de database en in tabel body zetten
+
+      $lijst = "";
+        foreach (populaireitems() as $waarde) {
+       $lijst .= '
         <tr>
-            <td>Table Data</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-            <td><button class="uk-button uk-button-default" type="button">Button</button></td>
-        </tr>
-        <tr>
-            <td>Table Data</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-            <td><button class="uk-button uk-button-default" type="button">Button</button></td>
-        </tr>
+            <td><img class="uk-preserve-width uk-border-rounded " src=../media/Hamburgermenu.png width="80" alt="">
+            <h3 class="uk-text-top uk-margin-remove uk-text-bold uk-text-small">'.$waarde['titel'].'</h3></td>
+            <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
+                <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
+            </td>
+            <td class="uk-visible">'.$waarde['startPrijs'].'</td>
+            <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+
+        </tr>';
+      }
+        echo $lijst;
+        ?>
     </tbody>
   </table>
   </div>
@@ -133,11 +157,11 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
       </li>
   </ul>
 <h3>DIT IS EEN BLOK</h3>
-</div>
-  </div>
-</div>
+
 <div class="uk-flex uk-flex-center">
 <?php echo $pagination ?>
+</div>
+</div>
 </div>
 
 </main>
