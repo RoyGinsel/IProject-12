@@ -16,8 +16,17 @@ function query($stringquery)
 
 function populaireitems()
 {
-return query("SELECT titel,beschrijving,startPrijs FROM tblVoorwerp");
+return query("SELECT titel, beschrijving, b.bodBedrag
+FROM tblVoorwerp v
+inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
+			FROM tblBod
+			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+where v.voorwerpNummer in(select top 5 voorwerpNummer
+							from tblBod
+							group by voorwerpNummer
+							order by count(voorwerpnummer) desc)");
 }
+
 
 //Index.php -> Select statement voor uitgelichteitems
 function uitgelichteitems()
@@ -28,7 +37,6 @@ function uitgelichteitems()
 
 function rubrieken()
 {
-  return query("SELECT * FROM tblRubriek where parentRubriek = -1");
 }
 
  ?>
