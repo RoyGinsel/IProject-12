@@ -61,7 +61,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
         <button class="uk-button uk-button-default">Submit</button>
     </form>
     <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
-        <li class="uk-open">
+        <li>
             <a class="uk-accordion-title" href="#">Item 1</a>
             <div class="uk-accordion-content">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
