@@ -17,24 +17,27 @@
           <li><a href="product.php">Product</a></li>
         </ul>
       </div>
-      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left">IK DROP</button>
-      <div class="uk-width-1-2 uk-child-width-1-3" uk-dropdown="mode: click" uk-grid>
-        <!-- search -->
-        <div class="uk-margin-remove">
-           <!-- php pagina met rubrieken -->
-            <form class="uk-search uk-search-default" action="">
-                <a href="" uk-search-icon></a>
-                <input class="uk-search-input" type="search" name="search" placeholder="Search...">
-            </form>
-        </div>
-        <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
+      <!-- Rubrieken dropdown medium & larger -->
+      <span class="uk-visible@s">
+      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left">Rubrieken</button>
+      <div class=" uk-width-1-2 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
           <?php include "Rubriekenboom-header-dropdown.php"?>
-        </div>
       </div>
     </div>
+  </span>
 
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
   </div>
+
+  <!-- Rubrieken dropdown small -->
+  <span class="uk-hidden@s">
+  <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-remove uk-width-1-1 uk-margin-small-left">Rubrieken</button>
+  <div class="uk-width-1-1 uk-padding-remove-left uk-padding-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
+      <?php include "Rubriekenboom-header-dropdown.php"?>
+  </div>
+  </div>
+  </span>
+
 
   <div class="uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb ">

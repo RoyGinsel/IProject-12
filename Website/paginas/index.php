@@ -1,7 +1,6 @@
 <?php
 session_start();
-   include "../../SQLSrvConnect.php";
-   include "functies.php";
+  include "functies.php";
   $cookie_name = "callout";
   $cookie_value = "cookieVoorCallout";
   $crumbs = array();
@@ -110,7 +109,7 @@ if(!isset($_COOKIE[$cookie_name])) {
                 <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                     <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
                 </td>
-                <td class="">'.$waarde['startPrijs'].'</td>
+                <td class="uk-visible@s">'.$waarde['startPrijs'].'</td>
                 <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
             </tr>';
@@ -126,7 +125,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 <!-- tabel uitgelichte-items -->
 
 <div class="uk-overflow-auto">
-  <h2 class="uk-text-bold uk-text-center uk-text-large">uitgelichte-items</h2>
+  <h2 class="uk-text-bold uk-text-center uk-text-large">Uitgelichte items</h2>
 
         <div class="uk-height-max-medium">
 

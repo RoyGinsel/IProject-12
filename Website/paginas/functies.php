@@ -1,26 +1,34 @@
 <?php
 include "database.php";
-include "../../SQLSrvConnect.php";
+//include "../../SQLSrvConnect.php";
 
 //Aanpassen AUB! Simon :)
 //Index.php -> Select statement voor populaireitems
-function populaireitems()
+
+function query($stringquery)
 {
   global $dbh;
-  $sql = "SELECT titel,beschrijving,startPrijs FROM tblVoorwerp";
+  $sql = $stringquery;
   $query = $dbh->prepare($sql);
   $query->execute();
-return  $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function populaireitems()
+{
+return query("SELECT titel,beschrijving,startPrijs FROM tblVoorwerp");
 }
 
 //Index.php -> Select statement voor uitgelichteitems
 function uitgelichteitems()
 {
-  global $dbh;
-  $sql = "SELECT titel,beschrijving,startPrijs FROM tblVoorwerp";
-  $query = $dbh->prepare($sql);
-  $query->execute();
-return  $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+  return query("SELECT titel,beschrijving,startPrijs FROM tblVoorwerp");
+
+}
+
+function rubrieken()
+{
+  return query("SELECT * FROM tblRubriek where parentRubriek = -1");
 }
 
  ?>
