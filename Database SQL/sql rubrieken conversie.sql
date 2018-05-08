@@ -3405,18 +3405,9 @@ INSERT Categorieen (ID,Name,Parent) VALUES (179171,'Miners',179197)
 INSERT Categorieen (ID,Name,Parent) VALUES (179172,'Mining-contracten',179197)
 INSERT Categorieen (ID,Name,Parent) VALUES (179197,'Virtueel geld',11116)
 
-select * from Categorieen
-
 insert into tblRubriek
 select distinct cast(ID as int) as rubriekNummer,
     left(Name,100) as rubriekNaam,
     cast(Parent as int) as parentRubriek,
     cast(ID as int) as volgnr
 from Categorieen
-
-select * from tblRubriek
-
-delete from tblRubriek
-delete from tblVoorwerp
-
-delete from tblVoorwerpRubriek
