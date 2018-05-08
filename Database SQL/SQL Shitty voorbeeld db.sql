@@ -54,6 +54,9 @@ insert into tblVoorwerp values
 	(1,'Aston Martin Vulcan','Hele mooie waggie jonguh',2000000.20,'PayPal','gimme da money','Loo','Nederland','5','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/30/2018','14:48:00.0000',0,null),
 	(2,'Diploma HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
 
+insert into tblVoorwerp values
+	(3,'gesdaw HBO-ICT','bespaat jezelf 4 jaar',1.50,'PayPal','gimme da money','Loo','Nederland','3','4/26/2018','14:48:00.0000',3.50,'in da box',20,20,'4/29/2018','14:48:00.0000',0,null)
+
 insert into tblbod values
 	(1,9000000.00,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),
 	(2,3.21,'Dinosaurus-Dex','4/27/2018','14:48:00.0000'),

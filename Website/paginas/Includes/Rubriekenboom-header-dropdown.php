@@ -28,35 +28,15 @@
 //       </div>";
 //       }
 //   }
-  $hoofdRubriek = "";
-  $subRubriek = "";
-  $rubriek = "<div><ul>";
-  foreach (rubrieken() as $waarde) {
-    if($waarde['hoofdRubriek'] <> $hoofdRubriek){
-      $rubriek .= "</ul></div>";
-      $hoofdRubriek = $waarde['hoofdRubriek'];
-      $rubriek .= "<div class='uk-padding-small uk-nav uk-dropdown-nav'>
-      <h3>".$waarde['hoofdRubriek']."</h3>
-      <ul class='uk-list uk-list-striped'>";
+  $rubriek = "";
+  foreach(rubrieken(-1) as $waarde){
+    $rubriek .=  "<div> <h3> ".$waarde['rubriekNaam']."<ul>";
+    foreach(rubrieken($waarde['rubriekNummer'])as $sub){
+      $rubriek .= "<li>".$sub['rubriekNaam']."</li>";
     }
-    $rubriek .= "<li>".$waarde['subRubriek']."</li>";
-    echo "$rubriek </ul></div>";
+    $rubriek .= "</ul></div>";
   }
+  echo $rubriek;
 ?>
 
-<div class="uk-padding-small uk-nav uk-dropdown-nav">
-  <h3>postzegels</h3>
-  <ul>
-    <li>europa</li>
-    <li>amerika</li>
-  </ul>
-</div>
-
-<div class="uk-padding-small uk-nav uk-dropdown-nav">
-  <h3>postzegels</h3>
-  <ul>
-    <li>europa</li>
-    <li>amerika</li>
-  </ul>
-</div>
 </div>

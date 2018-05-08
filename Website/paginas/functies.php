@@ -45,12 +45,12 @@ function uitgelichteitems()
 
 }
 
-function rubrieken()
+function rubrieken($waarde)
 {
-  return query("SELECT h.rubriekNaam as hoofdRubriek, s.rubriekNaam as subRubriek from tblRubriek h
-	inner join tblRubriek s on h.rubriekNummer=s.parentRubriek
-where h.parentrubriek= -1
-order by h.rubriekNaam asc, s.rubriekNaam asc");
+  return query("SELECT rubriekNaam, rubriekNummer
+								from tblRubriek
+								where parentRubriek = $waarde
+								order by rubriekNaam asc");
 }
 
  ?>
