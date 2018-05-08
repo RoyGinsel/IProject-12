@@ -41,7 +41,7 @@ function uitgelichteitems()
   							inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
   							from tblBod
   							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-  							order by bodBedrag-startPrijs desc)");
+  							order by startPrijs/bodBedrag*100 desc)");
 
 }
 
