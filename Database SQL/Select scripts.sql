@@ -1,4 +1,4 @@
-select titel, beschrijving, b.bodBedrag
+select titel, beschrijving, b.bodBedrag, startprijs
 from tblVoorwerp v 
 inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 			from tblBod
@@ -13,11 +13,9 @@ from tblVoorwerp v
 inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 			from tblBod
 			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-where
-
-
-select top 2 v.voorwerpNummer, bodBedrag-startPrijs as verschil
-from tblVoorwerp v 
-inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-			from tblBod
-			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+where v.voorwerpNummer in (select top 2 v.voorwerpNummer
+							from tblVoorwerp v 
+							inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+							from tblBod
+							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+							order by bodBedrag-startPrijs desc)
