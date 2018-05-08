@@ -24,7 +24,7 @@ select h.rubriekNaam as hoofdRubriek, s.rubriekNaam as subRubriek
 from tblRubriek h 
 	inner join tblRubriek s on h.rubriekNummer=s.parentRubriek
 where h.parentrubriek= -1
-order by h.rubriekNaam asc
+order by h.rubriekNaam asc, s.rubriekNaam asc
 
 
 
