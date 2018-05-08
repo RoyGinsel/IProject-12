@@ -132,7 +132,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
             <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                 <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
             </td>
-            <td class="uk-visible">'.$waarde['startPrijs'].'</td>
+            <td class="uk-visible">'.$waarde['bodBedrag'].'</td>
             <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
         </tr>';
