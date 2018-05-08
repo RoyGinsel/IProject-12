@@ -1,4 +1,4 @@
-select titel, beschrijving, b.bodBedrag, startprijs
+select titel, beschrijving, b.bodBedrag
 from tblVoorwerp v 
 inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 			from tblBod
@@ -20,6 +20,12 @@ where v.voorwerpNummer in (select top 2 v.voorwerpNummer
 							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 							order by bodBedrag-startPrijs desc)
 
+select * from tblvoorwerp
+
+select count(*)
+from tblVoorwerp
+where  looptijdBeginDag > '2018-04-25'
+
 select h.rubriekNaam as hoofdRubriek, s.rubriekNaam as subRubriek
 from tblRubriek h 
 	inner join tblRubriek s on h.rubriekNummer=s.parentRubriek
@@ -27,6 +33,5 @@ where h.parentrubriek= -1
 order by h.rubriekNaam asc, s.rubriekNaam asc
 
 
-
-select rubrieknaam from tblRubriek
-where parentRubriek = -1
+select * from tblRubriek
+where rubriekNummer = 2
