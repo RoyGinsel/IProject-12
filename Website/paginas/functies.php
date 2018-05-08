@@ -16,12 +16,12 @@ function query($stringquery)
 
 function populaireitems()
 {
-return query("SELECT titel, beschrijving, b.bodBedrag
-FROM tblVoorwerp v
-inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
-			FROM tblBod
+return query("SELECT titel, beschrijving, b.bodBedrag, startprijs
+from tblVoorwerp v
+inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+			from tblBod
 			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-              where v.voorwerpNummer in(select top 5 voorwerpNummer
+where v.voorwerpNummer in(select top 2 voorwerpNummer
 							from tblBod
 							group by voorwerpNummer
 							order by count(voorwerpnummer) desc)");
