@@ -18,7 +18,7 @@ where v.voorwerpNummer in (select top 2 v.voorwerpNummer
 							inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 							from tblBod
 							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-							order by 100/startprijs*bodbedrag desc)
+							order by startprijs/bodbedrag*100 desc)
 
 select * from tblvoorwerp
 
