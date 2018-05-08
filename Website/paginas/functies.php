@@ -16,10 +16,10 @@ function query($stringquery)
 
 function populaireitems()
 {
-return query("SELECT titel, beschrijving, b.bodBedrag, startprijs
-from tblVoorwerp v
-inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-			from tblBod
+return query("SELECT titel, beschrijving, bodBedrag
+FROM tblVoorwerp v
+inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
+			FROM tblBod
 			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 where v.voorwerpNummer in(select top 2 voorwerpNummer
 							from tblBod
@@ -47,6 +47,10 @@ function uitgelichteitems()
 
 function rubrieken()
 {
+  return query("SELECT h.rubriekNaam as hoofdRubriek, s.rubriekNaam as subRubriek from tblRubriek h
+	inner join tblRubriek s on h.rubriekNummer=s.parentRubriek
+where h.parentrubriek= -1
+order by h.rubriekNaam asc, s.rubriekNaam asc");
 }
 
  ?>
