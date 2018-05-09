@@ -23,13 +23,21 @@ button>img:hover{
   background-color: #EAD9C4;
 }
 
-
-
-.rubriek{
+.rubriekenlijst{
 
 padding-left:8px;
-margin-bottom:0px;
+margin:0px;
+
 }
+
+
+
+
+.crumb{
+  margin: 5px;
+
+}
+
 .rubrieken{
 
   padding-top:14px;

@@ -43,8 +43,8 @@ setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
   </span>
 
 
-  <div class="uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
-    <ul class="uk-breadcrumb ">
+  <div class="uk-flex uk-flex-center  uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
+    <ul class="uk-breadcrumb crumb">
       <?php echo $breadcrumb; ?>
     </ul>
   </div>
