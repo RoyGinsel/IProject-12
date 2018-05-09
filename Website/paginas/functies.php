@@ -1,8 +1,6 @@
 <?php
 include "database.php";
 //include "../../SQLSrvConnect.php";
-
-//Aanpassen AUB! Simon :)
 //Index.php -> Select statement voor populaireitems
 
 function query($stringquery)
@@ -42,7 +40,6 @@ function uitgelichteitems()
   							from tblBod
   							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
   							order by startPrijs/bodBedrag*100 desc)");
-
 }
 
 function rubrieken($waarde)
