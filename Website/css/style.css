@@ -99,3 +99,7 @@ main {
 .uk-button{
   line-height: 15px;
 }
+
+.pointer{
+  cursor: pointer;
+}
