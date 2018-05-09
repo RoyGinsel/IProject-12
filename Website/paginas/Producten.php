@@ -75,16 +75,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
                 </form>
             </div>
     <?php
-    $rubriek = "";
-    foreach(rubrieken(-1) as $waarde){
-      $rubriek .=  "<ul uk-accordion> <li> <a class='uk-accordion-title' >"
-      .$waarde['rubriekNaam']."</a> <div class='uk-accordion-content'><ul class='uk-list uk-list-striped'>";
-      foreach(rubrieken($waarde['rubriekNummer'])as $sub){
-        $rubriek .= "<li>".$sub['rubriekNaam']."</li>";
-      }
-      $rubriek .= "</ul></li></ul>";
-    }
-    echo $rubriek;
+    include "includes/Rubrieken-accordion.php"
   ?>
   </div>
 </div>

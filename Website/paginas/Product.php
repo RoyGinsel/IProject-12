@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'functies.php';
 $crumbs = array("Producten","Product");
 ?>
 <!DOCTYPE html>
@@ -19,11 +20,11 @@ $crumbs = array("Producten","Product");
   include "includes/header.php";
 ?>
 <main>
-  
+
 </main>
 <?php
   include "includes/footer.php";
   ?>
-  
+
 </body>
 </html>
