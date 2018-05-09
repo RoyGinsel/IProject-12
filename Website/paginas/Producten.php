@@ -59,22 +59,23 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
 <main>
 <div class="uk-clearfix">
 <div class="uk-float-left uk-width-1-4@s uk-width-1-1 uk-margin uk-child-width-1-1 uk-text-small uk-text-large@m">
-  <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage"><h5>
-  Rubrieken-filter</h5></button>
+  <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage">
+    <h5>Rubrieken-filter</h5>
+  </button>
   <div class="uk-child-width-auto " id="toggle-usage">
-      <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
-        <!-- search -->
-           <!-- php pagina met rubrieken -->
-            <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php">
-              <div class="autocomplete">
-                <input id="myInput" class="uk-search-input" type="search" placeholder="Zoek op rubrieken">
-              </div>
-              <div class="uk-float-right ">
-              <input class="uk-button" type="submit">
-              </div>
-                </form>
-            </div>
-    <?php
+    <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
+      <!-- search -->
+      <!-- php pagina met rubrieken -->
+      <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get">
+        <div class="autocomplete">
+          <input id="myInput" class="uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
+        </div>
+        <div class="uk-float-right ">
+          <input class="uk-button" type="submit">
+        </div>
+      </form>
+    </div>
+  <?php
     include "includes/Rubrieken-accordion.php"
   ?>
   </div>
@@ -141,13 +142,21 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
 <?php
   include "includes/footer.php";
   ?>
-
 </body>
 </html>
 
 <script type="text/javascript">
-var countries = ["Afghanistan","Albania","Algeria"];
-
+<?php
+$autoRubriek = "";
+foreach(rubrieken(-1) as $waarde){
+  foreach(rubrieken($waarde['rubriekNummer'])as $sub){
+    $autoRubriek .=  '"' . $sub['rubriekNaam'] . '",';
+  }
+}
+$autoRubriek .= '""';
+echo "var rubrieken = [$autoRubriek];";
+?>
+ //var rubrieken = ['aaaapen','gekkehonden','CRRAAAAzy roy'];
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -245,6 +254,6 @@ document.addEventListener("click", function (e) {
 });
 }
 
-autocomplete(document.getElementById("myInput"), countries);
+autocomplete(document.getElementById("myInput"), rubrieken);
 
 </script>
