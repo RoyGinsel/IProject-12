@@ -1,15 +1,9 @@
 <?php
 session_start();
   include "functies.php";
-  $cookie_name = "callout";
-  $cookie_value = "cookieVoorCallout";
   $crumbs = array();
 
 
-//Cookie zetten voor callout
-if(!isset($_COOKIE[$cookie_name])){
-    setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
-}
  ?>
 <html lang="nl" dir="ltr">
 
@@ -33,7 +27,7 @@ if(!isset($_COOKIE[$cookie_name])){
 
   <?php
   //call-out bericht
-if(isset($_COOKIE[$cookie_name])) {
+if(!isset($_COOKIE[$cookie_name])) {
     echo  '
     <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
         <a class="sluiten uk-alert-close" uk-close ></a>
@@ -44,7 +38,21 @@ if(isset($_COOKIE[$cookie_name])) {
 <!-- alert van aantal veilingen sinds laatste bezoek toegevoegd -->
     <div class="uk-alert-primary uk-margin-remove" uk-alert>
     <a class="uk-alert-close" uk-close></a>
-    <p class= "uk-text-center">Aantal veiling sinds laatste bezoek toegevoegd: ..</p>
+<?php
+if(isset($_COOKIE[$cookie_name])) {
+    $changes = veranderingen($_COOKIE[$cookie_name]);
+    $value = 0;
+    foreach($changes as $row){
+        $value = $row['aantal'];
+    }
+} else {
+    $changes = veranderingen("2000/01/01");
+    foreach($changes as $row){
+        $value = $row['aantal'];
+    }
+}
+    echo "<p class= 'uk-text-center'>Aantal veiling sinds laatste bezoek toegevoegd:$value</p>";
+    ?>
 </div>
 
 <!-- voorfoto slideshow-->

@@ -1,8 +1,6 @@
 <?php
 include "database.php";
 //include "../../SQLSrvConnect.php";
-
-//Aanpassen AUB! Simon :)
 //Index.php -> Select statement voor populaireitems
 
 function query($stringquery)
@@ -42,15 +40,21 @@ function uitgelichteitems()
   							from tblBod
   							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
   							order by startPrijs/bodBedrag*100 desc)");
-
 }
 
-function rubrieken($waarde)
+function rubrieken($value)
 {
   return query("SELECT rubriekNaam, rubriekNummer
 								from tblRubriek
-								where parentRubriek = $waarde
+								where parentRubriek = $value
 								order by rubriekNaam asc");
+}
+
+function veranderingen($date)
+{
+	return query("SELECT count(*) as aantal
+				from tblVoorwerp
+				where  looptijdBeginDag > '$date'");
 }
 
  ?>
