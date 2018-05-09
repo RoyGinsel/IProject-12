@@ -88,14 +88,11 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
 
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
-      <h3>Hoofdrubriek</h3>
+      <?php
+      echo '<h3>'. $_GET['rubriek'].'</h3>';?>
+
   </div>
-  <div class="uk-position-center">
-    <span uk-icon="icon: triangle-right; ratio: 2"></span>
-  </div>
-  <div class="uk-navbar-right">
-    <h3>Subrubriek</h3>
-  </div>
+
   </nav>
 
   <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
