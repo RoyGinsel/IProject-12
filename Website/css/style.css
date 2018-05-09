@@ -24,6 +24,12 @@ button>img:hover{
 }
 
 
+
+.rubriek{
+
+padding-left:8px;
+margin-bottom:0px;
+}
 .rubrieken{
 
   padding-top:14px;
@@ -92,4 +98,8 @@ main {
 }
 .uk-button{
   line-height: 15px;
+}
+
+.pointer{
+  cursor: pointer;
 }
