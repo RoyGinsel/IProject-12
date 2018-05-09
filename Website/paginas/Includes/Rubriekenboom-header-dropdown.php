@@ -8,7 +8,7 @@
        <input id="myInput" class="uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
       </div>
      <div class="uk-float-right ">
-       <input class="" type="submit">
+       <input class="submitButton" type="submit">
      </div>
    </form>
 </div>

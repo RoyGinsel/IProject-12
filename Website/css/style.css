@@ -30,18 +30,34 @@ margin:0px;
 
 }
 
+.searchbartext{
 
+width:auto;
+margin-right:10px;
+margin-bottom:10px;
 
+}
+.submitButton{
+background-color: #7D6444;
+padding:10px;
+color:#EAD9C4;
+
+}
+
+.submitButton:hover{
+
+  color:black;
+  background-color: #EAD9C4;
+}
 
 .crumb{
-  margin: 5px;
 
+  margin: 5px;
 }
 
 .rubrieken{
 
-  padding-top:14px;
-  padding-bottom:14px;
+  padding:14.5px;
   color:#EAD9C4;
   background-color:  #7D6444;
 }
