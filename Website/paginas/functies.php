@@ -42,12 +42,19 @@ function uitgelichteitems()
   							order by startPrijs/bodBedrag*100 desc)");
 }
 
-function rubrieken($waarde)
+function rubrieken($value)
 {
   return query("SELECT rubriekNaam, rubriekNummer
 								from tblRubriek
-								where parentRubriek = $waarde
+								where parentRubriek = $value
 								order by rubriekNaam asc");
+}
+
+function veranderingen($date)
+{
+	return query("SELECT count(*) as aantal
+				from tblVoorwerp
+				where  looptijdBeginDag > '$date'");
 }
 
  ?>
