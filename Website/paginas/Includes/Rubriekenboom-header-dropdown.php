@@ -3,8 +3,8 @@
 <!-- search -->
 <div class="uk-margin-remove">
    <!-- php pagina met rubrieken -->
-   <form class="uk-search uk-search-default uk-flex-inline" autocompleteHead="off" action="Producten.php" method="get" class="pointer">
-     <div class="autocompleteHead">
+   <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
+     <div class="autocomplete">
        <input id="myInput" class="uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
       </div>
      <div class="uk-float-right ">
@@ -22,33 +22,32 @@
 
 <script type="text/javascript">
 <?php
-$autoRubriekHead = "";
-foreach(rubrieken(-1) as $waardeHead){
-  foreach(rubrieken($waardeHead['rubriekNummer'])as $subHead){
-    $autoRubriekHead .=  '"' . $subHead['rubriekNaam'] . '",';
+$autoRubriek = "";
+foreach(rubrieken(-1) as $waarde){
+  foreach(rubrieken($waarde['rubriekNummer'])as $sub){
+    $autoRubriek .=  '"' . $sub['rubriekNaam'] . '",';
   }
 }
-$autoRubriekHead .= '""';
-echo "var rubrieken = [$autoRubriekHead];";
+$autoRubriek .= '""';
+echo "var rubrieken = [$autoRubriek];";
 ?>
- //var rubrieken = ['aaaapen','gekkehonden','CRRAAAAzy roy'];
-function autocompleteHead(inp, arr) {
-  /*the autocompleteHead function takes two arguments,
-  the text field element and an array of possible autocompleteHead values:*/
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
   var currentFocus;
   /*execute a function when someone writes in the text field:*/
   inp.addEventListener("input", function(e) {
       var a, b, i, val = this.value;
-      /*close any already open lists of autocompleteHead values*/
-      closeAllListsHead();
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
       if (!val) { return false;}
       currentFocus = -1;
       /*create a DIV element that will contain the items (values):*/
       a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocompleteHead-list");
-      a.setAttribute("class", "autocompleteHead-items");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
       a.setAttribute("class", "pointer");
-      /*append the DIV element as a child of the autocompleteHead container:*/
+      /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
       for (i = 0; i < arr.length; i++) {
@@ -63,11 +62,11 @@ function autocompleteHead(inp, arr) {
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
               b.addEventListener("click", function(e) {
-              /*insert the value for the autocompleteHead text field:*/
+              /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
-              /*close the list of autocompleteHeadd values,
-              (or any other open lists of autocompleteHeadd values:*/
-              closeAllListsHead();
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
           });
           a.appendChild(b);
         }
@@ -75,20 +74,20 @@ function autocompleteHead(inp, arr) {
   });
   /*execute a function presses a key on the keyboard:*/
   inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocompleteHead-list");
+      var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
         /*If the arrow DOWN key is pressed,
         increase the currentFocus variable:*/
         currentFocus++;
         /*and and make the current item more visible:*/
-        addActiveHead(x);
+        addActive(x);
       } else if (e.keyCode == 38) { //up
         /*If the arrow UP key is pressed,
         decrease the currentFocus variable:*/
         currentFocus--;
         /*and and make the current item more visible:*/
-        addActiveHead(x);
+        addActive(x);
       } else if (e.keyCode == 13) {
         /*If the ENTER key is pressed, prevent the form from being submitted,*/
         e.preventDefault();
@@ -98,26 +97,26 @@ function autocompleteHead(inp, arr) {
         }
       }
   });
-  function addActiveHead(x) {
+  function addActive(x) {
     /*a function to classify an item as "active":*/
     if (!x) return false;
     /*start by removing the "active" class on all items:*/
-    removeActiveHead(x);
+    removeActive(x);
     if (currentFocus >= x.length) currentFocus = 0;
     if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocompleteHead-active":*/
-    x[currentFocus].classList.add("autocompleteHead-active");
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
   }
-  function removeActiveHead(x) {
-    /*a function to remove the "active" class from all autocompleteHead items:*/
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
     for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocompleteHead-active");
+      x[i].classList.remove("autocomplete-active");
     }
   }
-  function closeAllListsHead(elmnt) {
-    /*close all autocompleteHead lists in the document,
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
     except the one passed as an argument:*/
-    var x = document.getElementsByClassName("autocompleteHead-items ");
+    var x = document.getElementsByClassName("autocomplete-items");
     for (var i = 0; i < x.length; i++) {
       if (elmnt != x[i] && elmnt != inp) {
       x[i].parentNode.removeChild(x[i]);
@@ -126,10 +125,10 @@ function autocompleteHead(inp, arr) {
 }
 /*execute a function when someone clicks in the document:*/
 document.addEventListener("click", function (e) {
-    closeAllListsHead(e.target);
+    closeAllLists(e.target);
 });
 }
 
-autocompleteHead(document.getElementById("myInput"), rubrieken);
+autocomplete(document.getElementById("myInput"), rubrieken);
 
 </script>

@@ -47,4 +47,4 @@ full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-where r.rubriekNaam like '%uto%'
+where r.rubriekNaam like '%hoi%'
