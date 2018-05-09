@@ -61,14 +61,19 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage"><h5>
   Rubrieken-filter</h5></button>
   <div class="uk-child-width-auto" id="toggle-usage">
-    <form class="uk-flex uk-flex-center " action="index.html" method="post">
       <div class="uk-flex-column uk-margin uk-grid-small uk-child-width-auto uk-grid uk-grid-divider">
-            <label><input class="uk-radio" type="checkbox" checked> Alfabetisch</label>
-            <span class="uk-flex-inline" uk-icon="question"></span>
-            <label><input class="uk-radio" type="checkbox"> Aantal veilingen</label>
-        </div>
-        <button class="uk-button uk-button-default">Zoek</button>
-    </form>
+        <!-- search -->
+        <div class="uk-margin-remove">
+           <!-- php pagina met rubrieken -->
+            <form class="uk-search uk-search-default" autocomplete="off" action="Producten.php">
+              <div class="auto-complete uk-flex-inline">
+                <input id="auto-complete" class="uk-search-input" type="text" name="" value="Search">
+                <input type="submit" name="Zoek" value="Zoek">
+              </div>
+                </form>
+              </div>
+            </div>
+
     <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
         <li>
             <a class="uk-accordion-title" href="#">Item 1</a>
