@@ -57,4 +57,25 @@ function veranderingen($date)
 				where  looptijdBeginDag > '$date'");
 }
 
+function items($zoek)
+{
+	echo $zoek;
+	if($zoek != ""){
+	return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+				from tblVoorwerp v 
+				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+							from tblBod
+							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+				inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
+				inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
+				where r.rubriekNaam like '%uto%'");
+	} else {
+		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+				from tblVoorwerp v 
+				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+							from tblBod
+							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
+	}
+}
+
  ?>

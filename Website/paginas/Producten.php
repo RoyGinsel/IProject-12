@@ -8,7 +8,7 @@ if(isset($_GET["data"]))
 } else {
   $data = 1;
 }
-
+$rubriek;
 if(isset($_GET["rubriek"]))
 {
   $rubriek = $_GET["rubriek"];
@@ -113,8 +113,15 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
     </thead>
     <tbody>
       <?php
+      $rubriek;
+      if(isset($_GET["rubriek"]))
+      {
+        $rubriek = $_GET["rubriek"];
+      }else{
+        $rubriek = "";
+      }
       $lijst = "";
-        foreach (populaireitems() as $waarde) {
+        foreach (items($rubriek) as $waarde) {
        $lijst .= '
         <tr>
             <td><img class="uk-preserve-width uk-border-rounded " src=../media/Hamburgermenu.png width="80" alt="">
@@ -124,7 +131,6 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
             </td>
             <td class="uk-visible">'.$waarde['bodBedrag'].'</td>
             <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
-
         </tr>';
       }
         echo $lijst;
