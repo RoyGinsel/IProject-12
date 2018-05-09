@@ -1,7 +1,7 @@
 <!-- search -->
 <div class="uk-margin-remove">
    <!-- php pagina met rubrieken -->
-    <form class="uk-search uk-search-default" action="">
+    <form class="uk-search uk-search-default" action="" class="pointer">
         <a href="" uk-search-icon></a>
         <input class="uk-search-input" type="search" name="search" placeholder="Search...">
     </form>
