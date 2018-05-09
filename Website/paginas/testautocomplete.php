@@ -16,8 +16,9 @@
 </html>
 
 <script type="text/javascript">
-var countries = ["Afghanistan","Albania","Algeria"];
-
+<?php
+echo  'var countries = ["Afghanistan","Albania","Algeria"];';
+?>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
