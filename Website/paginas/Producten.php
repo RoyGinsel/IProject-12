@@ -64,16 +64,6 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   </button>
   <div class="uk-child-width-auto " id="toggle-usage">
     <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
-      <!-- search -->
-      <!-- php pagina met rubrieken -->
-      <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get">
-        <div class="autocomplete">
-          <input id="myInput" class="uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
-        </div>
-        <div class="uk-float-right ">
-          <input class="uk-button" type="submit">
-        </div>
-      </form>
     </div>
   <?php
     include "includes/Rubrieken-accordion.php"
@@ -157,5 +147,3 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   ?>
 </body>
 </html>
-
-<?php include 'includes/rubrieken-zoeken.php'; ?>
