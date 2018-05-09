@@ -89,7 +89,14 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
       <?php
-      echo '<h3>'. $_GET['rubriek'].'</h3>';?>
+      if(isset($_GET["rubriek"]))
+      {
+        $rubriek = $_GET["rubriek"];
+      }else{
+        $rubriek = "";
+      }
+      echo '<h3>'. $rubriek.'</h3>';
+      ?>
 
   </div>
 
