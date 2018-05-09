@@ -57,43 +57,26 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   include "includes/header.php";
 ?>
 <main>
+<div class="uk-clearfix">
 <div class="uk-float-left uk-width-1-4@s uk-width-1-1 uk-margin uk-child-width-1-1 uk-text-small uk-text-large@m">
   <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage"><h5>
   Rubrieken-filter</h5></button>
-  <div class="uk-child-width-auto" id="toggle-usage">
-      <div class="uk-flex-column uk-margin uk-grid-small uk-child-width-auto uk-grid uk-grid-divider">
+  <div class="uk-child-width-auto " id="toggle-usage">
+      <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
         <!-- search -->
-        <div class="uk-margin-remove">
            <!-- php pagina met rubrieken -->
-            <form class="uk-search uk-search-default" autocomplete="off" action="Producten.php">
-              <div class="auto-complete uk-flex-inline">
-                <input id="auto-complete" class="uk-search-input" type="text" name="" value="Search">
-                <input type="submit" name="Zoek" value="Zoek">
+            <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php">
+              <div class="autocomplete">
+                <input id="myInput" class="uk-search-input" type="search" placeholder="Zoek op rubrieken">
+              </div>
+              <div class="uk-float-right ">
+              <input class="uk-button" type="submit">
               </div>
                 </form>
-              </div>
             </div>
-
-    <ul class="uk-list-striped uk-list" uk-accordion="multiple: true">
-        <li>
-            <a class="uk-accordion-title" href="#">Item 1</a>
-            <div class="uk-accordion-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-        </li>
-        <li>
-            <a class="uk-accordion-title" href="#">Item 2</a>
-            <div class="uk-accordion-content">
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
-            </div>
-        </li>
-        <li>
-            <a class="uk-accordion-title" href="#">Item 3</a>
-            <div class="uk-accordion-content">
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
-            </div>
-        </li>
-    </ul>
+    <?php
+    include "includes/Rubrieken-accordion.php"
+  ?>
   </div>
 </div>
 
@@ -105,6 +88,9 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
       <h3>Hoofdrubriek</h3>
+  </div>
+  <div class="uk-position-center">
+    <span uk-icon="icon: triangle-right; ratio: 2"></span>
   </div>
   <div class="uk-navbar-right">
     <h3>Subrubriek</h3>
@@ -126,8 +112,6 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
     </thead>
     <tbody>
       <?php
-      //gegevens halen uit de database en in tabel body zetten
-
       $lijst = "";
         foreach (populaireitems() as $waarde) {
        $lijst .= '
@@ -147,24 +131,11 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
     </tbody>
   </table>
   </div>
-      </li>
-      <li>
-          <a class="uk-accordion-title" href="#">Item 2</a>
-          <div class="uk-accordion-content">
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
-          </div>
-      </li>
-      <li>
-          <a class="uk-accordion-title" href="#">Item 3</a>
-          <div class="uk-accordion-content">
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
-          </div>
-      </li>
+  </li>
   </ul>
-<h3>DIT IS EEN BLOK</h3>
-
 <div class="uk-flex uk-flex-center">
 <?php echo $pagination ?>
+</div>
 </div>
 </div>
 </div>
@@ -176,3 +147,107 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
 
 </body>
 </html>
+
+<script type="text/javascript">
+var countries = ["Afghanistan","Albania","Algeria"];
+
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items ");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+autocomplete(document.getElementById("myInput"), countries);
+
+</script>

@@ -161,7 +161,7 @@ if(isset($_COOKIE[$cookie_name])) {
             <td class="uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate">
                 <h4 class="uk-text-small">'.$waarde['beschrijving'].'</h4>
             </td>
-            <td class="">€ '.$waarde['bodBedrag'].'</td>
+            <td class="uk-visible@s">€ '.$waarde['bodBedrag'].'</td>
             <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
 
         </tr>';
