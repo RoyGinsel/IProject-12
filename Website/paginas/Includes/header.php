@@ -3,6 +3,17 @@
   foreach($crumbs as $crumb) {
     $breadcrumb .= "<li><a href='$crumb.php'>$crumb</a></li>";
   }
+
+
+
+//Cookie zetten voor callout
+$cookie_name = "Callout";
+$cookie_value = date("d-m-Y");
+if(!isset($_COOKIE[$cookie_name])){
+    setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
+}
+
+
 ?>
 
 <a name="top"> </a>

@@ -6,10 +6,15 @@ session_start();
   $crumbs = array();
 
 
-//Cookie zetten voor callout
-if(!isset($_COOKIE[$cookie_name])){
-    setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
-}
+//   $cookie_name = "random";
+//   $cookie_value = date("d-m-Y");
+//
+// //Cookie zetten voor callout
+// if(!isset($_COOKIE[$cookie_name])){
+//     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
+// }
+
+
  ?>
 <html lang="nl" dir="ltr">
 
@@ -33,7 +38,7 @@ if(!isset($_COOKIE[$cookie_name])){
 
   <?php
   //call-out bericht
-if(isset($_COOKIE[$cookie_name])) {
+if(!isset($_COOKIE[$cookie_name])) {
     echo  '
     <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
         <a class="sluiten uk-alert-close" uk-close ></a>
