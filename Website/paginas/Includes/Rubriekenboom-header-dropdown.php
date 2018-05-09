@@ -5,10 +5,10 @@
    <!-- php pagina met rubrieken -->
    <form class="uk-search uk-search-default uk-flex-inline" autocompleteHead="off" action="Producten.php" method="get" class="pointer">
      <div class="autocompleteHead">
-       <input id="myInput" class="uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
+       <input id="myInput" class="searchbartext uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
       </div>
      <div class="uk-float-right ">
-       <input class="" type="submit">
+       <input class="submitButton" type="submit">
      </div>
    </form>
 </div>
