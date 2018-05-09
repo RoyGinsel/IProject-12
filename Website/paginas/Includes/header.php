@@ -19,7 +19,6 @@ setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="index.php">Home</a></li>
           <li><a href="producten.php">Producten</a></li>
-          <li><a href="product.php">Product</a></li>
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
