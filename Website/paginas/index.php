@@ -1,18 +1,7 @@
 <?php
 session_start();
   include "functies.php";
-  $cookie_name = "callout";
-  $cookie_value = "cookieVoorCallout";
   $crumbs = array();
-
-
-//   $cookie_name = "random";
-//   $cookie_value = date("d-m-Y");
-//
-// //Cookie zetten voor callout
-// if(!isset($_COOKIE[$cookie_name])){
-//     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
-// }
 
 
  ?>
