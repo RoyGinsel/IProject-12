@@ -38,7 +38,21 @@ if(!isset($_COOKIE[$cookie_name])) {
 <!-- alert van aantal veilingen sinds laatste bezoek toegevoegd -->
     <div class="uk-alert-primary uk-margin-remove" uk-alert>
     <a class="uk-alert-close" uk-close></a>
-    <p class= "uk-text-center">Aantal veiling sinds laatste bezoek toegevoegd: ..</p>
+<?php
+if(isset($_COOKIE[$cookie_name])) {
+    $changes = veranderingen($_COOKIE[$cookie_name]);
+    $value = 0;
+    foreach($changes as $row){
+        $value = $row['aantal'];
+    }
+} else {
+    $changes = veranderingen("2000/01/01");
+    foreach($changes as $row){
+        $value = $row['aantal'];
+    }
+}
+    echo "<p class= 'uk-text-center'>Aantal veiling sinds laatste bezoek toegevoegd:$value</p>";
+    ?>
 </div>
 
 <!-- voorfoto slideshow-->
