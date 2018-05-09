@@ -13,7 +13,6 @@ if(!isset($_COOKIE[$cookie_name])){
     setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
 }
 
-
 ?>
 
 <a name="top"> </a>
@@ -30,7 +29,7 @@ if(!isset($_COOKIE[$cookie_name])){
       </div>
       <!-- Rubrieken dropdown medium & larger -->
       <span class="uk-visible@s">
-      <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left">Rubrieken</button>
+      <button type="button" class=" rubrieken uk-button uk-button-small uk-margin-small-left uk-text-capitalize">Rubrieken</button>
       <div class=" uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
           <?php include "Rubriekenboom-header-dropdown.php"?>
       </div>
