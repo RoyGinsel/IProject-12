@@ -5,7 +5,7 @@
    <!-- php pagina met rubrieken -->
    <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
      <div class="autocomplete">
-       <input id="<?php echo $SearchId; ?>" class="searchbartext uk-search-input" name="rubriek" type="search" placeholder="Zoek op rubrieken">
+       <?php echo "<input id='$id' class='searchbartext uk-search-input' name='rubriek' type='search' placeholder='Zoek op rubrieken'>"; ?>
       </div>
      <div class="uk-float-right ">
        <input class="submitButton" type="submit">
@@ -15,7 +15,7 @@
 
 <div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
   <?php
-  include "includes/Rubrieken-accordion.php"
+  include "includes/Rubrieken-accordion.php";
 ?>
 
 </div>
@@ -46,7 +46,6 @@ function autocomplete(inp, arr) {
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
-      a.setAttribute("class", "pointer");
       /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
@@ -129,6 +128,6 @@ document.addEventListener("click", function (e) {
 });
 }
 
-autocomplete(document.getElementById("myInput"), rubrieken);
+<?php echo "autocomplete(document.getElementById('$id'), rubrieken);"; ?>
 
 </script>
