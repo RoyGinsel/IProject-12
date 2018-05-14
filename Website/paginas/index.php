@@ -17,9 +17,9 @@
 </head>
 
 <body>
-  <?php
-  include "includes/header.php";
-  ?>
+    <?php
+    include "includes/header.php";
+    ?>
     <main class="page">
         <?php
             //call-out bericht aan eerste bezoek (Als de cookie nog niet is gezet)
@@ -50,54 +50,8 @@
                 echo "<div class='uk-alert-primary uk-margin-remove' uk-alert>
                  <a class='uk-alert-close' uk-close></a><p class= 'uk-text-center'>Aantal veiling sinds laatste bezoek toegevoegd:$value</p>";
             }
-        echo "</div> <main class='page'>";
-
-  //call-out bericht
-if(!isset($_COOKIE[$cookie_name])) {
-    echo  '
-    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
-        <a class="sluiten uk-alert-close" uk-close ></a>
-        <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> Welkom op de website!</h1>
-        <p> Veel koop plezier </p> </div>';
-}
-    ?>
-<!-- alert van aantal veilingen sinds laatste bezoek toegevoegd -->
-<?php
-if(isset($_COOKIE[$cookie_name])) {
-    $changes = changes($_COOKIE[$cookie_name]);
-    $value = 0;
-    foreach($changes as $row){
-        $value = $row['aantal'];
-    }
-} else {
-    $changes = changes("2000/01/01");
-    foreach($changes as $row){
-        $value = $row['aantal'];
-    }
-}
-    if($value != 0){
-    echo "<div class='uk-alert-primary uk-margin-remove' uk-alert>
-    <a class='uk-alert-close' uk-close></a><p class= 'uk-text-center'>Aantal veiling sinds laatste bezoek toegevoegd:$value</p>";
-    }
-    ?>
-</div>
-
-<!-- voorfoto slideshow-->
-<div class="uk-position-relative uk-visible-toggle uk-light " uk-slideshow="animation: fade min-height: 300; max-height: 600">
-
-    <ul class="uk-slideshow-items uk-slid ">
-        <li>
-            <img src="../media/veiling-hamer.jpg" alt="" uk-cover>
-            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom uk-height-max-medium">
-                <h3 class="uk-margin-remove">Eenmaal Andermaal!</h3>
-                <p class="uk-margin-remove">De duurzaam tweedhands item verkoop website van 2k18.</p>
-            </div>
-        </li>
-        <li>
-            <img src="../media/veiling-groep.jpg" alt="" uk-cover>
-            <div class="uk-overlay uk-overlay-primary uk-position-left uk-text-center uk-transition-slide-left uk-width-medium">
-                <h3 class="uk-margin-remove">Samen</h3>
-                <p class="uk-margin-remove">nemen we stappen naar een duurzame samenleving</p>
+            echo "</div>";
+        ?>
         <!-- voorfoto slideshow-->
         <div class="uk-position-relative uk-visible-toggle uk-light " uk-slideshow="animation: fade min-height: 300; max-height: 600">
         <ul class="uk-slideshow-items uk-slid ">
@@ -126,7 +80,6 @@ if(isset($_COOKIE[$cookie_name])) {
         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
         </div>
-
         <!-- Lijsten "grid"-->
         <div class="uk-card uk-card-body tabel uk-margin-remove uk-child-width-1-2@m uk-child-width-1-1 uk-width-1-1 uk-flex-inline@m uk-flex-around@m " uk-grid>
             <!-- tabel populaire-items -->
@@ -163,7 +116,6 @@ if(isset($_COOKIE[$cookie_name])) {
                         </tbody>
                     </table>
                 </div>
-
             </div>
             <!-- tabel uitgelichte-items -->
             <div class="uk-overflow-auto">
