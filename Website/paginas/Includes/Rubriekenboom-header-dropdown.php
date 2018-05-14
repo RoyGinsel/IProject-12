@@ -21,14 +21,14 @@
 
 <script type="text/javascript">
 <?php
-$autoRubriek = "";
-foreach(rubrieken(-1) as $waarde){
-  foreach(rubrieken($waarde['rubriekNummer'])as $sub){
-    $autoRubriek .=  '"' . $sub['rubriekNaam'] . '",';
+$autoSection = "";
+foreach(sections(-1) as $value){
+  foreach(sections($value['rubriekNummer'])as $sub){
+    $autoSection .=  '"' . $sub['rubriekNaam'] . '",';
   }
 }
-$autoRubriek .= '""';
-echo "var rubrieken = [$autoRubriek];";
+$autoSection .= '""';
+echo "var sections = [$autoSection];";
 ?>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -127,6 +127,6 @@ document.addEventListener("click", function (e) {
 });
 }
 
-<?php echo "autocomplete(document.getElementById('$id'), rubrieken);"; ?>
+<?php echo "autocomplete(document.getElementById('$id'), sections);"; ?>
 
 </script>

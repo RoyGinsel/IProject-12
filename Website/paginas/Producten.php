@@ -8,33 +8,33 @@ if(isset($_GET["data"]))
 } else {
   $data = 1;
 }
-$rubriek;
+$section;
 if(isset($_GET["rubriek"]))
 {
-  $rubriek = htmlspecialchars($_GET["rubriek"]);
+  $section = htmlspecialchars($_GET["rubriek"]);
 }else{
-  $rubriek = "";
+  $section = "";
 }
 $pagination = "<ul class='uk-pagination'>";
 if($data != 1){
   $prev = $data-1;
   $pagination .= "<li><a href='producten.php?data=1'><<</span></a></li>
-                  <li><a href='producten.php?data=$prev&rubriek=$rubriek'><</a></li>";
+                  <li><a href='producten.php?data=$prev&rubriek=$section'><</a></li>";
 }
 if($data == 2){
   $pagination .= "<li><a href='producten.php?data=1'>1</a></li>";
 } elseif($data > 2){
   $prev1 = $data - 1;
   $prev2 = $data - 2;
-  $pagination .= "<li><a href='producten.php?data=$prev2&rubriek=$rubriek'>$prev2</a></li>
-                  <li><a href='producten.php?data=$prev1&rubriek=$rubriek'>$prev1</a></li>";
+  $pagination .= "<li><a href='producten.php?data=$prev2&rubriek=$section'>$prev2</a></li>
+                  <li><a href='producten.php?data=$prev1&rubriek=$section'>$prev1</a></li>";
 }
 $next1 = $data+1;
 $next2 = $data+2;
 $pagination .= "<li class='uk-active'><span>$data</span></li>
-                <li><a href='producten.php?data=$next1&rubriek=$rubriek'>$next1</a></li>
-                <li><a href='producten.php?data=$next2&rubriek=$rubriek'>$next2</a></li>
-                <li><a href='producten.php?data=$next1&rubriek=$rubriek'>></a></li>
+                <li><a href='producten.php?data=$next1&rubriek=$section'>$next1</a></li>
+                <li><a href='producten.php?data=$next2&rubriek=$section'>$next2</a></li>
+                <li><a href='producten.php?data=$next1&rubriek=$section'>></a></li>
                 </ul>";
 
 
@@ -81,11 +81,11 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
       <?php
       if(isset($_GET["rubriek"]))
       {
-        $rubriek = htmlspecialchars($_GET["rubriek"]);
+        $section = htmlspecialchars($_GET["rubriek"]);
       }else{
-        $rubriek = "";
+        $section = "";
       }
-      echo '<h3>'. $rubriek.'</h3>';
+      echo '<h3>'. $section.'</h3>';
       ?>
 
   </div>
@@ -107,15 +107,15 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
     </thead>
     <tbody>
       <?php
-      $rubriek;
+      $section;
       if(isset($_GET["rubriek"]))
       {
-        $rubriek = htmlspecialchars($_GET["rubriek"]);
+        $section = htmlspecialchars($_GET["rubriek"]);
       }else{
-        $rubriek = "";
+        $section = "";
       }
       $lijst = "";
-        foreach (items($rubriek) as $waarde) {
+        foreach (items($section) as $waarde) {
        $lijst .= '
         <tr>
             <td><img class="uk-preserve-width uk-border-rounded " src=../media/Hamburgermenu.png width="80" alt="">

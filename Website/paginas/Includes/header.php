@@ -8,6 +8,7 @@
 $cookie_name = "Callout";
 $cookie_value = date("Y-m-d");
 setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
+
 ?>
 
 <a name="top"> </a>
