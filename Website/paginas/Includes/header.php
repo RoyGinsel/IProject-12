@@ -25,7 +25,9 @@ setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
       <span class="uk-visible@s">
       <button type="button" class=" rubrieken uk-button uk-button-small uk-margin-small-left uk-text-capitalize">Rubrieken</button>
       <div class=" uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
-          <?php include "Rubriekenboom-header-dropdown.php"?>
+        <?php 
+        $id = "search1"
+        include "Rubriekenboom-header-dropdown.php"?>
       </div>
     </div>
   </span>
@@ -37,7 +39,9 @@ setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
   <span class="uk-hidden@s">
   <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-remove uk-width-1-1 uk-margin-small-left">Rubrieken</button>
   <div class="uk-width-1-1 uk-padding-remove-left uk-padding-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
-      <?php include "Rubriekenboom-header-dropdown.php"?>
+      <?php
+      $id = "search2" 
+      include "Rubriekenboom-header-dropdown.php"?>
   </div>
   </div>
   </span>
