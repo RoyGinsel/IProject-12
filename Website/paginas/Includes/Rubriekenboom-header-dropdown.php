@@ -1,4 +1,3 @@
-
 <!-- search -->
 <div class="uk-margin-remove">
    <!-- php pagina met rubrieken -->
