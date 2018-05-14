@@ -1,8 +1,8 @@
 <?php
-  $hostname = "DESKTOP-BFMGFQ8";
-  $dbname = "EenmaalAndermaal";
-  $username = "user";
-  $pw = "P@ssw0rd";
+  $hostname = "(local)";
+  $dbname = "lokaaliproject";
+  $username = "sa";
+  $pw = "Samsung7!";
 
     try { //probeer connectie te maken
         $dbh = new PDO ("sqlsrv:Server=$hostname;Database=$dbname;
@@ -11,9 +11,7 @@
             PDO::ERRMODE_EXCEPTION);
     } //geeft foutmelding
     catch (PDOException $e) {
-        $e->getMessage();
-        exit("Database connectie heeft gefaald, Het script is gestopt, hier een virtueel koekje 🍪.");
+        //$e->getMessage();
+        //exit("Database connectie heeft gefaald, Het script is gestopt, hier een virtueel koekje 🍪.");
     }
-
-
 ?>

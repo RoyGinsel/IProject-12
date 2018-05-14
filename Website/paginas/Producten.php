@@ -4,14 +4,14 @@ include "functies.php";
 $crumbs = array("Producten");
 if(isset($_GET["data"]))
 {
-    $data = $_GET["data"];
+    $data = htmlspecialchars($_GET["data"]);
 } else {
   $data = 1;
 }
 $rubriek;
 if(isset($_GET["rubriek"]))
 {
-  $rubriek = $_GET["rubriek"];
+  $rubriek = htmlspecialchars($_GET["rubriek"]);
 }else{
   $rubriek = "";
 }
@@ -66,7 +66,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
     <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
     </div>
   <?php
-    include "includes/Rubrieken-accordion.php"
+    include "includes/Rubrieken-accordion.php";
   ?>
   </div>
 </div>
@@ -81,7 +81,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
       <?php
       if(isset($_GET["rubriek"]))
       {
-        $rubriek = $_GET["rubriek"];
+        $rubriek = htmlspecialchars($_GET["rubriek"]);
       }else{
         $rubriek = "";
       }
@@ -110,7 +110,7 @@ $pagination .= "<li class='uk-active'><span>$data</span></li>
       $rubriek;
       if(isset($_GET["rubriek"]))
       {
-        $rubriek = $_GET["rubriek"];
+        $rubriek = htmlspecialchars($_GET["rubriek"]);
       }else{
         $rubriek = "";
       }

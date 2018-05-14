@@ -1,6 +1,6 @@
 <?php
-include "database.php";
-//include "../../SQLSrvConnect.php";
+// include "database.php";
+include "../../SQLSrvConnect.php";
 //Index.php -> Select statement voor populaireitems
 
 function query($stringquery)
@@ -61,7 +61,7 @@ function items($zoek)
 {
 	if($zoek != ""){
 	return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
-				from tblVoorwerp v 
+				from tblVoorwerp v
 				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 							from tblBod
 							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
@@ -70,7 +70,7 @@ function items($zoek)
 				where r.rubriekNaam like '%$zoek%'");
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
-				from tblVoorwerp v 
+				from tblVoorwerp v
 				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 							from tblBod
 							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
