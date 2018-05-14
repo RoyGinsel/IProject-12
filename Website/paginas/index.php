@@ -10,7 +10,7 @@ session_start();
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TEST</title>
+  <title>EenmaalAndermaal</title>
   <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
   <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
@@ -27,6 +27,7 @@ session_start();
 
   <?php
   //call-out bericht
+  //
 if(!isset($_COOKIE[$cookie_name])) {
     echo  '
     <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
