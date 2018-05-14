@@ -1,15 +1,12 @@
 <?php
-$rubriek = "";
-foreach(rubrieken(-1) as $waarde){
-  //hoofdrubriek
-  $rubriek .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a class='uk-accordion-title'>"
-  .$waarde['rubriekNaam']."</a> <div class='uk-accordion-content'><ul class='uk-list uk-list-striped'>";
-  //sub-items toevoegen
-  foreach(rubrieken($waarde['rubriekNummer'])as $sub){
-    $rubriek .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>";
+$section = "";
+foreach(sections(-1) as $value){
+  $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a class='uk-accordion-title'>"
+  .$value['rubriekNaam']."</a> <div class='uk-accordion-content'><ul class='uk-list uk-list-striped'>";
+  foreach(sections($value['rubriekNummer'])as $sub){
+    $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>";
   }
-  //sluiten
-  $rubriek .= "</ul></li></ul>";
+  $section .= "</ul></li></ul>";
 }
-echo $rubriek;
+echo $section;
 ?>

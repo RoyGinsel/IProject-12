@@ -1,18 +1,24 @@
 <?php
-// include "database.php";
-include "../../SQLSrvConnect.php";
+include "database.php";
+//include "../../SQLSrvConnect.php";
 //Index.php -> Select statement voor populaireitems
 
 function query($stringquery)
 {
+	try{
   global $dbh;
   $sql = $stringquery;
   $query = $dbh->prepare($sql);
   $query->execute();
   return $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(PDOException $e) {
+		$e->getMessage();
+		exit("you broke it numbskull");
+	}
 }
 
-function populaireitems()
+function hotItems()
 {
 return query("SELECT titel, beschrijving, bodBedrag
 FROM tblVoorwerp v
@@ -27,7 +33,7 @@ where v.voorwerpNummer in(select top 2 voorwerpNummer
 
 
 //Index.php -> Select statement voor uitgelichteitems
-function uitgelichteitems()
+function featuredItems()
 {
   return query("SELECT titel, beschrijving, b.bodBedrag
   from tblVoorwerp v
@@ -42,7 +48,7 @@ function uitgelichteitems()
   							order by startPrijs/bodBedrag*100 desc)");
 }
 
-function rubrieken($value)
+function sections($value)
 {
   return query("SELECT rubriekNaam, rubriekNummer
 								from tblRubriek
@@ -50,16 +56,16 @@ function rubrieken($value)
 								order by rubriekNaam asc");
 }
 
-function veranderingen($date)
+function changes($date)
 {
 	return query("SELECT count(*) as aantal
 				from tblVoorwerp
 				where  looptijdBeginDag > '$date'");
 }
 
-function items($zoek)
+function items($search)
 {
-	if($zoek != ""){
+	if($search != ""){
 	return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 				from tblVoorwerp v
 				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
@@ -67,7 +73,7 @@ function items($zoek)
 							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 				inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 				inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-				where r.rubriekNaam like '%$zoek%'");
+				where r.rubriekNaam like '%$search%'");
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 				from tblVoorwerp v
