@@ -1,33 +1,31 @@
 <!-- search -->
 <div class="uk-margin-remove">
-   <!-- php pagina met rubrieken -->
-   <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
-     <div class="autocomplete">
-       <?php echo "<input id='$id' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; ?>
-      </div>
-     <div class="uk-float-right ">
-       <input class="submitButton" type="submit">
-     </div>
-   </form>
+  <!-- php pagina met rubrieken -->
+  <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
+    <div class="autocomplete">
+      <?php echo "<input id='$id' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; ?>
+    </div>
+    <div class="uk-float-right ">
+      <input class="submitButton" type="submit">
+    </div>
+  </form>
 </div>
-
 <div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
   <?php
-  include "includes/Rubrieken-accordion.php";
-?>
-
+    include "includes/Rubrieken-accordion.php";
+  ?>
 </div>
 
 <script type="text/javascript">
 <?php
-$autoSection = "";
-foreach(sections(-1) as $value){
-  foreach(sections($value['rubriekNummer'])as $sub){
-    $autoSection .=  '"' . $sub['rubriekNaam'] . '",';
+  $autoSection = "";
+  foreach(sections(-1) as $value){
+    foreach(sections($value['rubriekNummer'])as $sub){
+      $autoSection .=  '"' . $sub['rubriekNaam'] . '",';
+    }
   }
-}
-$autoSection .= '""';
-echo "var sections = [$autoSection];";
+  $autoSection .= '""';
+  echo "var sections = [$autoSection];";
 ?>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -125,7 +123,5 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-
 <?php echo "autocomplete(document.getElementById('$id'), sections);"; ?>
-
 </script>
