@@ -23,14 +23,14 @@
 <!-- Javascript -->
 <script type="text/javascript">
 <?php
-$autoSection = "";
-foreach(sections(-1) as $value){
-  foreach(sections($value['rubriekNummer'])as $sub){
-    $autoSection .=  '"' . $sub['rubriekNaam'] . '",';
+  $autoSection = "";
+  foreach(sections(-1) as $value){
+    foreach(sections($value['rubriekNummer'])as $sub){
+      $autoSection .=  '"' . $sub['rubriekNaam'] . '",';
+    }
   }
-}
-$autoSection .= '""';
-echo "var sections = [$autoSection];";
+  $autoSection .= '""';
+  echo "var sections = [$autoSection];";
 ?>
 function autocomplete(inp, arr) {
   // de functie heeft 2 parameters, de input in het zoekveld en de array van strings waarop ge-autocomplete moet worden.
@@ -126,7 +126,5 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-
 <?php echo "autocomplete(document.getElementById('$id'), sections);"; ?>
-
 </script>
