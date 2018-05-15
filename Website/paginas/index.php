@@ -52,6 +52,7 @@
             }
             echo "</div>";
         ?>
+
         <!-- voorfoto slideshow-->
         <div class="uk-position-relative uk-visible-toggle uk-light " uk-slideshow="animation: fade min-height: 300; max-height: 600">
         <ul class="uk-slideshow-items uk-slid ">
@@ -77,9 +78,11 @@
                 </div>
             </li>
         </ul>
+        <!-- next/previous -->
         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
         </div>
+
         <!-- Lijsten "grid"-->
         <div class="uk-card uk-card-body tabel uk-margin-remove uk-child-width-1-2@m uk-child-width-1-1 uk-width-1-1 uk-flex-inline@m uk-flex-around@m " uk-grid>
             <!-- tabel populaire-items -->
@@ -117,6 +120,7 @@
                     </table>
                 </div>
             </div>
+            
             <!-- tabel uitgelichte-items -->
             <div class="uk-overflow-auto">
                 <h2 class="uk-text-bold uk-text-center uk-text-large">Uitgelichte items</h2>

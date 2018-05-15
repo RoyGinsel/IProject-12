@@ -1,21 +1,26 @@
 <!-- search -->
 <div class="uk-margin-remove">
-  <!-- php pagina met rubrieken -->
-  <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
-    <div class="autocomplete">
-      <?php echo "<input id='$id' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; ?>
-    </div>
-    <div class="uk-float-right ">
-      <input class="submitButton" type="submit">
-    </div>
-  </form>
-</div>
-<div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
-  <?php
-    include "includes/Rubrieken-accordion.php";
-  ?>
+   <!-- php pagina met rubrieken  en autocomplete-->
+   <form class="uk-search uk-search-default uk-flex-inline" autocomplete="off" action="Producten.php" method="get" class="pointer">
+     <div class="autocomplete">
+       <?php //autocomplete id veranderd omdat hij vaker word aangeroepen
+       //id wordt gebruikt in de javascript autocomplete functie
+        echo "<input id='$id' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; ?>
+      </div>
+     <div class="uk-float-right ">
+       <input class="submitButton" type="submit">
+     </div>
+   </form>
 </div>
 
+<!-- Rubrieken accordion -->
+<div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
+  <?php
+  include "includes/Rubrieken-accordion.php";
+?>
+</div>
+
+<!-- Javascript -->
 <script type="text/javascript">
 <?php
   $autoSection = "";
@@ -28,32 +33,30 @@
   echo "var sections = [$autoSection];";
 ?>
 function autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
-  var currentFocus;
-  /*execute a function when someone writes in the text field:*/
+  // de functie heeft 2 parameters, de input in het zoekveld en de array van strings waarop ge-autocomplete moet worden.
+  //De functie wordt uitgevoerd als er wordt getypt
   inp.addEventListener("input", function(e) {
       var a, b, i, val = this.value;
-      /*close any already open lists of autocompleted values*/
+      //Sluit elke lijst die geopend zijn
       closeAllLists();
       if (!val) { return false;}
       currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
+      //DIV element wordt gecreerd om de list items
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
+      //DIV is een kind va de autocomplete container
       this.parentNode.appendChild(a);
-      /*for each item in the array...*/
+
       for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
+        //kijk of de item begint met de zelfde letters als er wordt ingetypt
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          /*create a DIV element for each matching element:*/
+          //DIV element wordt gecreerd om de matching list items
           b = document.createElement("DIV");
-          /*make the matching letters bold:*/
+          //Maak de matching letters BOLD
           b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i].substr(val.length);
-          /*insert a input field that will hold the current array item's value:*/
+          //maak een input type dat de waarde houd die geselecteerd is
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
               b.addEventListener("click", function(e) {
