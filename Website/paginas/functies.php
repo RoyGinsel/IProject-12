@@ -95,4 +95,14 @@ function items($search)
 	}
 }
 
+function loop($section)
+{
+	echo "<ul>";
+	foreach(sections($section) as $row){
+		echo "<li>".$row ['rubriekNaam']."</li>";
+		loop($row['rubriekNummer']);
+	}
+	echo "</ul>";
+}
+
  ?>

@@ -7,9 +7,7 @@
   <body>
     <?php
     include "functies.php";
-      while(sections(32) == null){
-        echo "HALLOOOO";
-      }
+      loop(-1);
     ?>
   </body>
 </html>
