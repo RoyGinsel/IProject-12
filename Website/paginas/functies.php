@@ -13,8 +13,21 @@ function query($stringquery)
     	return $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 	catch(PDOException $e) {
-		$e->getMessage();
-		exit("you broke it numbskull");
+		echo $e->getMessage();
+	}
+}
+
+function preparedQuery($stringquery,$parameters)
+{
+	try{
+		global $dbh;
+	
+    	$query = $dbh->prepare($stringquery);
+    	$query->execute($parameters);
+    	return $query->fetchAll();
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
 	}
 }
 
@@ -49,30 +62,30 @@ function featuredItems()
 
 function sections($value)
 {
-  	return query("SELECT rubriekNaam, rubriekNummer
+  	return preparedQuery("SELECT rubriekNaam, rubriekNummer
 				from tblRubriek
-				where parentRubriek = $value
-				order by rubriekNaam asc");
+				where parentRubriek = :rubrieknumber
+				order by rubriekNaam asc", [":rubrieknumber"=>$value]);
 }
 
 function changes($date)
 {
-	return query("SELECT count(*) as aantal
+	return preparedQuery("SELECT count(*) as aantal
 				from tblVoorwerp
-				where  looptijdBeginDag > '$date'");
+				where  looptijdBeginDag > :date",["date"=>$date]);
 }
 
 function items($search)
 {
 	if($search != ""){
-		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-					where r.rubriekNaam like '%$search%'");
+					where r.rubriekNaam like '%:rubriekname%'",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 					from tblVoorwerp v
