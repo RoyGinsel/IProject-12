@@ -5,6 +5,11 @@
     <title></title>
   </head>
   <body>
-
+    <?php
+    include "functies.php";
+      while(sections(32) == null){
+        echo "HALLOOOO";
+      }
+    ?>
   </body>
 </html>
