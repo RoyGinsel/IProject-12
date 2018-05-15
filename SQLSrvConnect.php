@@ -1,31 +1,12 @@
 <?php
-// AANPASSEN
-$serverName = "mssql.iproject.icasites.nl";
-$connectionInfo = array( "Database"=>"iproject",  "UID"=>"iproject", "PWD"=>"SecurePass");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
-
-if($conn)
+try
 {
-	echo "Connection established.<br />";
-
-	$tsql = "SELECT tst_Column1, tst_Column2, tst_Column3 FROM test";
-	$result = sqlsrv_query( $conn, $tsql, null);
-
-	if ( $result === false)
-	{
-		die( FormatErrors( sqlsrv_errors() ) );
-	}
-
-	while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC))
-	{
-		echo $row['tst_Column1'].", ".$row['tst_Column2']."<br />";
-	}
-	sqlsrv_free_stmt($result);
-  	sqlsrv_close($conn);
-} else
-{
-	echo "Connection could not be established.<br />";
-	die( print_r( sqlsrv_errors(), true));
+    $dbh = new PDO("sqlsrv:Server=mssql2.iproject.icasites.nl,1433;Database=iproject12;ConnectionPooling=0", "iproject12", "zGP7JWvP2U");
+    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
-
+catch(PDOException $e)
+{
+    echo $e->getMessage();
+    exit(";klasdjfioasdjfkawe;ljfioskdljfiowejf");
+}
 ?>
