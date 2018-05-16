@@ -79,7 +79,3 @@ insert into tblbod values
 	(5,801,'LEEEROOOOOY-roy','4/27/2018','14:48:00.0000'),
 	(6,100,'Luuk-Lucky','4/27/2018','14:48:00.0000')
 
-select * from tblRubriek where parentRubriek = 260
-
-select * from tblbod
-select * from tblVoorwerp
