@@ -1,80 +1,114 @@
 <?php
-// include "database.php";
-include "../../SQLSrvConnect.php";
+<<<<<<< HEAD
+ include "database.php";
+//include "../../SQLSrvConnect.php";
 //Index.php -> Select statement voor populaireitems
+=======
+	include "database.php";
+	//include "../../SQLSrvConnect.php";
+	//Index.php -> Select statement voor populaireitems
+>>>>>>> ff87c21e59cd4ef30924e972fcca16393a4026b7
 
 function query($stringquery)
 {
-  global $dbh;
-  $sql = $stringquery;
-  $query = $dbh->prepare($sql);
-  $query->execute();
-  return $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+	try{
+    	global $dbh;
+    	$sql = $stringquery;
+    	$query = $dbh->prepare($sql);
+    	$query->execute();
+    	return $resultaat = $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
 }
 
-function populaireitems()
+function preparedQuery($stringquery,$parameters)
 {
-return query("SELECT titel, beschrijving, bodBedrag
-FROM tblVoorwerp v
-inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
-			FROM tblBod
-			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-where v.voorwerpNummer in(select top 2 voorwerpNummer
-							from tblBod
-							group by voorwerpNummer
-							order by count(voorwerpnummer) desc)");
+	try{
+		global $dbh;
+	
+    	$query = $dbh->prepare($stringquery);
+    	$query->execute($parameters);
+    	return $query->fetchAll();
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
 }
 
+function hotItems()
+{
+	return query("SELECT titel, beschrijving, bodBedrag
+				FROM tblVoorwerp v
+				inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
+				FROM tblBod
+				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+				where v.voorwerpNummer in(select top 2 voorwerpNummer
+				from tblBod
+				group by voorwerpNummer
+				order by count(voorwerpnummer) desc)");
+}
 
 //Index.php -> Select statement voor uitgelichteitems
-function uitgelichteitems()
+function featuredItems()
 {
-  return query("SELECT titel, beschrijving, b.bodBedrag
-  from tblVoorwerp v
-  inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-  			from tblBod
-  			group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+  	return query("SELECT titel, beschrijving, b.bodBedrag
+  				from tblVoorwerp v
+  				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+  				from tblBod
+  				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
                 where v.voorwerpNummer in (select top 5 v.voorwerpNummer
-  							from tblVoorwerp v
-  							inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-  							from tblBod
-  							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-  							order by startPrijs/bodBedrag*100 desc)");
+  				from tblVoorwerp v
+  				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+  				from tblBod
+  				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+  				order by startPrijs/bodBedrag*100 desc)");
 }
 
-function rubrieken($value)
+function sections($value)
 {
-  return query("SELECT rubriekNaam, rubriekNummer
-								from tblRubriek
-								where parentRubriek = $value
-								order by rubriekNaam asc");
+  	return preparedQuery("SELECT rubriekNaam, rubriekNummer
+				from tblRubriek
+				where parentRubriek = :rubrieknumber
+				order by rubriekNaam asc", [":rubrieknumber"=>$value]);
 }
 
-function veranderingen($date)
+function changes($date)
 {
-	return query("SELECT count(*) as aantal
+	return preparedQuery("SELECT count(*) as aantal
 				from tblVoorwerp
-				where  looptijdBeginDag > '$date'");
+				where  looptijdBeginDag > :date",["date"=>$date]);
 }
 
-function items($zoek)
+function items($search)
 {
-	if($zoek != ""){
-	return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
-				from tblVoorwerp v
-				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-							from tblBod
-							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-				inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
-				inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-				where r.rubriekNaam like '%$zoek%'");
+	if($search != ""){
+		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+					from tblVoorwerp v
+					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+					from tblBod
+					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
+					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
+					where r.rubriekNaam like '%:rubriekname%'",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
-				from tblVoorwerp v
-				full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-							from tblBod
-							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
+					from tblVoorwerp v
+					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+					from tblBod
+					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
 	}
+}
+
+function loop($section)
+{
+	echo "<ul>";
+	foreach(sections($section) as $row){
+		echo "<li>".$row ['rubriekNaam']."</li>";
+		loop($row['rubriekNummer']);
+	}
+	echo "</ul>";
 }
 
  ?>
