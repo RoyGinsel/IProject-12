@@ -1,13 +1,8 @@
 <?php
-<<<<<<< HEAD
- include "database.php";
-//include "../../SQLSrvConnect.php";
-//Index.php -> Select statement voor populaireitems
-=======
+
 	include "database.php";
 	//include "../../SQLSrvConnect.php";
 	//Index.php -> Select statement voor populaireitems
->>>>>>> ff87c21e59cd4ef30924e972fcca16393a4026b7
 
 function query($stringquery)
 {
@@ -27,7 +22,7 @@ function preparedQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-	
+
     	$query = $dbh->prepare($stringquery);
     	$query->execute($parameters);
     	return $query->fetchAll();
