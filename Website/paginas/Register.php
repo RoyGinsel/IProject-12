@@ -30,7 +30,7 @@ session_start();
   <!-- registratieformulier-->
 
 
-<form action="#" method="post">
+<form action="handler/handler.php" method="post">
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-large-top">
     <div class="uk-flex uk-flex-around uk-flex-column uk-height-large">
       <span>Email:</span>
