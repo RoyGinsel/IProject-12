@@ -95,12 +95,16 @@ function items($search)
 	}
 }
 
+
+
 function loop($section)
 {
-	echo "<ul>";
+	echo "<ul uk-accordion>";
 	foreach(sections($section) as $row){
-		echo "<li>".$row ['rubriekNaam']."</li>";
+		echo "<li class ='uk-flex'> <a class='uk-accordion-title'> 
+		 ".$row ['rubriekNaam']."</a> <div class='uk-accordion-content'>";
 		loop($row['rubriekNummer']);
+		echo "</div></li>";
 	}
 	echo "</ul>";
 }
