@@ -1,7 +1,6 @@
 
   <script>
 var rubriekClicked;
-
 function appendText(nummer,html){
   $("#"+nummer + "div").append(html);
 }
