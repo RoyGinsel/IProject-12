@@ -21,7 +21,7 @@ function preparedQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-	
+
     	$query = $dbh->prepare($stringquery);
     	$query->execute($parameters);
     	return $query->fetchAll();
