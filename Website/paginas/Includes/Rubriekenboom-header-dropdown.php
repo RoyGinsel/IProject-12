@@ -54,7 +54,8 @@ function autocomplete(inp, arr) {
           //DIV element wordt gecreerd om de matching list items
           b = document.createElement("DIV");
           //Maak de matching letters BOLD
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          
+          b.innerHTML = "<strong> <a href='producten.php?rubriek='>" + arr[i].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i].substr(val.length);
           //maak een input type dat de waarde houd die geselecteerd is
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
