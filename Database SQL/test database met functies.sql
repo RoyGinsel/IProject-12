@@ -1,124 +1,3 @@
-/* tblVoorwerp af */
-create table tblVoorwerp(
-	voorwerpNummer bigint not null,
-	titel varchar(50) not null,
-	beschrijving varchar(max) not null,
-	startPrijs numeric(11,2) not null default 0.00,
-	betaalWijze varchar(16) not null,
-	betalingsInstructie varchar(max) null,
-	plaatsnaam varchar(60) not null,
-	land varchar (50) not null,
-	looptijd int not null default 7,
-	looptijdBeginDag date not null,
-	looptijdBeginTijdstip time not null,
-	verzendkosten numeric(5,2) null,
-	verzendInstructie varchar(max) null,
-	verkoper varchar(20) not null,
-	koper as [dbo].[buyer]([dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),voorwerpNummer),
-	looptijdEindeDag as dateadd(day,looptijd,looptijdBeginDag),
-	looptijdEindeTijdstip as looptijdBeginTijdstip,
-	veilingGesloten as [dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),
-	verkoopPrijs as [dbo].[highestBid]([dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),voorwerpNummer),
-	constraint pk_tblVoorwerp primary key(voorwerpnummer),
-	constraint fk_tblVoorwerp_verkoper foreign key(verkoper) references tblVerkoper(gebruikersNaam),
-	/*constraint fk_tblVoorwerp_koper foreign key(koper) references tblGebruiker(gebruikersNaam),*/
-	constraint chk_tblvoorwerp_looptijd check (looptijd in (1,3,5,7,10))
-)
-
-drop table tblVoorwerp
-
-/* tblrubriek uitfaseren colom toevoegen */
-create table tblRubriek(
-	rubriekNummer int not null,
-	rubriekNaam varchar(100) not null,
-	parentRubriek int null,
-	constraint pk_tblRubriek primary key (rubriekNummer),
-	constraint fk_rubriek_rubriek foreign key (parentRubriek) references tblRubriek(rubriekNummer)
-)
-
-/* tblVoorwerpRubriek af */
-create table tblVoorwerpRubriek(
-	voorwerpNummer bigint not null,
-	rubriekNummer int not null,
-	constraint pk_tblVoorwerpRubriek primary key (voorwerpNummer,rubriekNummer),
-	constraint fk_tblVoorwerpRubriek_voorwerpNummer foreign key (voorwerpNummer) references tblVoorwerp(voorwerpNummer),
-	constraint fk_tblVoorwerpRubriek_rubriekNummer foreign key (rubriekNummer) references tblRubriek(rubriekNummer)
-)
-
-/* tblbod af */
-create table tblBod(
-	voorwerpNummer bigint not null,
-	bodBedrag numeric(11,2) not null,
-	gebruiker varchar(20) not null,
-	bodDag as convert(date,CURRENT_TIMESTAMP),
-	bodTijdstip as convert(time,CURRENT_TIMESTAMP),
-	constraint pk_tblBod primary key (voorwerpNummer,bodBedrag),
-	constraint fk_tblBod_voorwerpNummer foreign key (voorwerpNummer) references tblVoorwerp(voorwerpNummer),
-	constraint fk_tblBod_gebruikersNaam foreign key (gebruiker) references tblGebruiker(gebruikersNaam),
-	constraint chk_tblBod_hoger_bedrag check([dbo].[higherBid](bodBedrag,voorwerpNummer) = 1),
-	constraint chk_tblBod_Niet_verkoper check([dbo].[notSeller](gebruiker,voorwerpNummer) = 1)
-)
-
-/* tblVraag */
-create table tblVraag(
-vraagNummer int not null,
-tekstVraag varchar(40) not null,
-constraint pk_tblVraag primary key(vraagNummer)
-)
-
-/* tblVerkoper */
-create table tblVerkoper(
-gebruikersNaam varchar(20) not null,
-bank varchar(10) null,
-bankrekening varchar(20) null,
-controle varchar(15) not null,
-creditcardNummer varchar(25) null,
-constraint pk_tblVerkoper primary key(gebruikersNaam),
-constraint fk_tblVerkoper_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam),
-constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1),
-constraint chk_tblVerkoper_controle check(controle = 'Creditcard' or controle = 'Post'),
-constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1),
-constraint chk_tblVerkoper_geenrekening check([dbo].[aBillingAddress](bankrekening,creditcardNummer) = 1)
-)
-
-/* tblGebruiker af */
-create table tblGebruiker(
-gebruikersNaam varchar(20) not null,
-voornaam varchar(50) not null,
-achternaam varchar(52) not null,
-adresRegel varchar(95) not null,
-extraAdresRegel varchar(95) null,
-postcode varchar(9) not null,
-plaatsNaam varchar(35) not null,
-land varchar(55) not null,
-geboorteDag date not null,
-mail varchar(254) not null,
-wachtwoord varchar(25) not null,
-vraagNummer int not null,
-antwoordVraag varchar(50) not null,
-mogelijkeVerkoper bit not null default 0,
-constraint pk_tblGebruiker primary key(gebruikersNaam),
-constraint fk_tblGebruiker_vraag foreign key(vraagNummer) references tblVraag(vraagNummer)
-)
-
-
-
-insert into tblVoorwerp values
-(8,'Aston Martin DB11','Hele mooie waggie jonguh',1000000.20,'PayPal','gimme da money','Loo','Nederland',5,'4/26/2018','14:48:00.0000',3.50,'in da box',20,20,0,null)
-
-create table test(
-tijd time not null,
-datum date not null,
-iets as [DBO].[expired](tijd,datum)
-)
-select * from test
-
-insert into test values
-('10:56:00.0000','5/17/2018'),
-('10:59:00.0000','5/17/2018'),
-('10:59:00.0000','5/16/2018')
-
-
 create function expired (@time time, @date date)
 returns bit
 as
@@ -216,3 +95,158 @@ begin
 		return 1
 	return 1
 end
+
+create function maxPictures (@id bigint)
+returns bit
+as
+begin
+	if((select count(*)
+		from tblBestand
+		where voorwerpNummer = @id) <= 4)
+		return 1
+	else
+		return 0
+	return 0
+end
+
+
+/* tblVraag */
+create table tblVraag(
+vraagNummer int identity(1,1),
+tekstVraag varchar(40) not null,
+constraint pk_tblVraag primary key(vraagNummer)
+)
+
+/* tblGebruiker af */
+create table tblGebruiker(
+gebruikersNaam varchar(20) not null,
+voornaam varchar(50) not null,
+achternaam varchar(52) not null,
+adresRegel varchar(95) not null,
+extraAdresRegel varchar(95) null,
+postcode varchar(9) not null,
+plaatsNaam varchar(35) not null,
+land varchar(55) not null,
+geboorteDag date not null,
+mail varchar(254) not null,
+wachtwoord varchar(25) not null,
+vraagNummer int not null,
+antwoordVraag varchar(50) not null,
+mogelijkeVerkoper bit not null default 0,
+constraint pk_tblGebruiker primary key(gebruikersNaam),
+constraint fk_tblGebruiker_vraag foreign key(vraagNummer) references tblVraag(vraagNummer)
+)
+
+/* tblVerkoper */
+create table tblVerkoper(
+gebruikersNaam varchar(20) not null,
+bank varchar(10) null,
+bankrekening varchar(20) null,
+controle varchar(15) not null,
+creditcardNummer varchar(25) null,
+constraint pk_tblVerkoper primary key(gebruikersNaam),
+constraint fk_tblVerkoper_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam),
+constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1),
+constraint chk_tblVerkoper_controle check(controle = 'Creditcard' or controle = 'Post'),
+constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1),
+constraint chk_tblVerkoper_geenrekening check([dbo].[aBillingAddress](bankrekening,creditcardNummer) = 1)
+)
+
+
+/* tblVoorwerp af */
+create table tblVoorwerp(
+	voorwerpNummer bigint not null,
+	titel varchar(50) not null,
+	beschrijving varchar(max) not null,
+	startPrijs numeric(11,2) not null default 0.00,
+	betaalWijze varchar(16) not null,
+	betalingsInstructie varchar(max) null,
+	plaatsnaam varchar(60) not null,
+	land varchar (50) not null,
+	looptijd int not null default 7,
+	looptijdBeginDag date not null,
+	looptijdBeginTijdstip time not null,
+	verzendkosten numeric(5,2) null,
+	verzendInstructie varchar(max) null,
+	verkoper varchar(20) not null,
+	koper as [dbo].[buyer]([dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),voorwerpNummer),
+	looptijdEindeDag as dateadd(day,looptijd,looptijdBeginDag),
+	looptijdEindeTijdstip as looptijdBeginTijdstip,
+	veilingGesloten as [dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),
+	verkoopPrijs as [dbo].[highestBid]([dbo].[expired](looptijdBeginTijdstip,dateadd(day,looptijd,looptijdBeginDag)),voorwerpNummer),
+	constraint pk_tblVoorwerp primary key(voorwerpnummer),
+	constraint fk_tblVoorwerp_verkoper foreign key(verkoper) references tblVerkoper(gebruikersNaam),
+	/*constraint fk_tblVoorwerp_koper foreign key(koper) references tblGebruiker(gebruikersNaam),*/
+	constraint chk_tblvoorwerp_looptijd check (looptijd in (1,3,5,7,10))
+)
+
+/* tblrubriek uitfaseren colom toevoegen */
+create table tblRubriek(
+	rubriekNummer int not null,
+	rubriekNaam varchar(100) not null,
+	parentRubriek int null,
+	constraint pk_tblRubriek primary key (rubriekNummer),
+	constraint fk_rubriek_rubriek foreign key (parentRubriek) references tblRubriek(rubriekNummer)
+)
+
+/* tblVoorwerpRubriek af */
+create table tblVoorwerpRubriek(
+	voorwerpNummer bigint not null,
+	rubriekNummer int not null,
+	constraint pk_tblVoorwerpRubriek primary key (voorwerpNummer,rubriekNummer),
+	constraint fk_tblVoorwerpRubriek_voorwerpNummer foreign key (voorwerpNummer) references tblVoorwerp(voorwerpNummer),
+	constraint fk_tblVoorwerpRubriek_rubriekNummer foreign key (rubriekNummer) references tblRubriek(rubriekNummer)
+)
+
+/* tblbod af */
+create table tblBod(
+	voorwerpNummer bigint not null,
+	bodBedrag numeric(11,2) not null,
+	gebruiker varchar(20) not null,
+	bodDag as convert(date,CURRENT_TIMESTAMP),
+	bodTijdstip as convert(time,CURRENT_TIMESTAMP),
+	constraint pk_tblBod primary key (voorwerpNummer,bodBedrag),
+	constraint fk_tblBod_voorwerpNummer foreign key (voorwerpNummer) references tblVoorwerp(voorwerpNummer),
+	constraint fk_tblBod_gebruikersNaam foreign key (gebruiker) references tblGebruiker(gebruikersNaam),
+	constraint chk_tblBod_hoger_bedrag check([dbo].[higherBid](bodBedrag,voorwerpNummer) = 1),
+	constraint chk_tblBod_Niet_verkoper check([dbo].[notSeller](gebruiker,voorwerpNummer) = 1)
+)
+
+create table tblBestand(
+fileNumber bigint identity(1,1),
+fileNaam varbinary(MAX) not null,
+voorwerpNummer bigint not null,
+constraint pk_tblBestan primary key(fileNumber),
+constraint fk_tblBestand_voorwerpNummer foreign key(voorwerpNummer) references tblVoorwerp(voorwerpNummer),
+constraint chk_tblBestand_4plaatjes check([dbo].[maxPictures](voorwerpNummer) = 1)
+)
+
+create table tblFeedback(
+voorwerpNummer bigint not null,
+soortGebruiker bit not null,
+feedbackSoort varchar(15) not null,
+dag date not null,
+tijd time not null,
+commentaar varchar(max) null,
+constraint pk_tblFeedback primary key(voorwerpNummer,soortGebruiker),
+constraint fk_tblFeedback foreign key(voorwerpNummer) references tblVoorwerp(voorwerpNummer),
+constraint chk_tblFeedback_soort check(feedbackSoort in ('Positief','Matig','Negatief'))
+)
+
+create table tblTelefoonNummer(
+volgNummer bigint identity(1,1),
+gebruikersNaam varchar(20) not null,
+telefoonNummer varchar(50) not null,
+constraint pk_tblTelefoonNummer primary key(volgNummer,gebruikersNaam),
+constraint fk_tblTelefoonNummer_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam)
+)
+
+insert into tblVoorwerp values
+(8,'Aston Martin DB11','Hele mooie waggie jonguh',1000000.20,'PayPal','gimme da money','Loo','Nederland',5,'4/26/2018','14:48:00.0000',3.50,'in da box',20,20,0,null)
+
+insert into test values
+('10:56:00.0000','5/17/2018'),
+('10:59:00.0000','5/17/2018'),
+('10:59:00.0000','5/16/2018')
+
+
