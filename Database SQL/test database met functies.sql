@@ -129,7 +129,7 @@ plaatsNaam varchar(35) not null,
 land varchar(55) not null,
 geboorteDag date not null,
 mail varchar(254) not null,
-wachtwoord varchar(25) not null,
+wachtwoord varchar(100) not null,
 vraagNummer int not null,
 antwoordVraag varchar(50) not null,
 mogelijkeVerkoper bit not null default 0,
@@ -241,12 +241,5 @@ constraint pk_tblTelefoonNummer primary key(volgNummer,gebruikersNaam),
 constraint fk_tblTelefoonNummer_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam)
 )
 
-insert into tblVoorwerp values
-(8,'Aston Martin DB11','Hele mooie waggie jonguh',1000000.20,'PayPal','gimme da money','Loo','Nederland',5,'4/26/2018','14:48:00.0000',3.50,'in da box',20,20,0,null)
-
-insert into test values
-('10:56:00.0000','5/17/2018'),
-('10:59:00.0000','5/17/2018'),
-('10:59:00.0000','5/16/2018')
 
 
