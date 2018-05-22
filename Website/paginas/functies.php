@@ -136,4 +136,10 @@ function loginCheck($username)
 
 }
 
+function getPassword($username){
+	return preparedQuery("SELECT wachtwoord
+											FROM tblGebruiker
+											WHERE gebruikersNaam = :username",[":username" =>$username]);
+}
+
  ?>
