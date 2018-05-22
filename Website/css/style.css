@@ -11,6 +11,13 @@ h1>a {
   color: #333333;
 }
 
+.orText {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 h1>a:hover {
   text-decoration: none;
   color:#333333;
@@ -158,4 +165,29 @@ main {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+.orText > span {
+    position: relative;
+    display: inline-block;
+}
+
+.orText > span:before,
+.orText > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: black;
+}
+
+.orText > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.orText > span:after {
+    left: 100%;
+    margin-left: 15px;
 }
