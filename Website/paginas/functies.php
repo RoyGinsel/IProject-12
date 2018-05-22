@@ -21,7 +21,7 @@ function preparedQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-	
+
     	$query = $dbh->prepare($stringquery);
     	$query->execute($parameters);
     	return $query->fetchAll();
@@ -101,12 +101,19 @@ function loop($section)
 {
 	echo "<ul uk-accordion>";
 	foreach(sections($section) as $row){
-		echo "<li class ='uk-flex'> <a class='uk-accordion-title'> 
+		echo "<li class ='uk-flex'> <a class='uk-accordion-title'>
 		 ".$row ['rubriekNaam']."</a> <div class='uk-accordion-content'>";
 		loop($row['rubriekNummer']);
 		echo "</div></li>";
 	}
 	echo "</ul>";
+}
+
+function loginCheck($username)
+{
+	return preparedQuery("SELECT gebruikersNaam, wachtwoord
+												FROM tblGebruiker
+												WHERE gebruikersNaam = :username",[":username" =>$username]);
 }
 
  ?>
