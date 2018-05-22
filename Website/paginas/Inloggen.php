@@ -59,7 +59,7 @@
           <span>Of</span>
         </div>
         <!--Registreer knop  -->
-        <form class="" action="sign-up.php">
+        <form class="" action="Register.php">
           <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove knopje" type="Submit" name="Submit" value="registreren">
         </form>
       </div>
