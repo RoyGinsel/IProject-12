@@ -19,6 +19,7 @@
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="index.php">Home</a></li>
           <li><a href="producten.php">Producten</a></li>
+          <li><a href="inloggen.php">Inloggen</a></li>
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
