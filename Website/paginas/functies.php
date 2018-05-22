@@ -115,23 +115,24 @@ function loop($section)
 
 // kijken of de mail bestaat bij registreren.
 function checkbestaandemail($mail){
-				return preparedQuery("select mail
-														from tblGebruiker
-														where mail =:mail",[":mail"=> $mail]);
+	return preparedQuery("select mail
+						from tblGebruiker
+						where mail =:mail",[":mail"=> $mail]);
 }
 
 
 //kijken of de mail.
 function checkbestaandeGebruikersNaam($GebruikersNaam){
-				return preparedQuery("select GebruikersNaam
-														from tblGebruiker
-														where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
+	return preparedQuery("select GebruikersNaam
+						from tblGebruiker
+						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
+}
 
 function loginCheck($username)
 {
 	return preparedQuery("SELECT gebruikersNaam, wachtwoord
-												FROM tblGebruiker
-												WHERE gebruikersNaam = :username",[":username" =>$username]);
+						FROM tblGebruiker
+						WHERE gebruikersNaam = :username",[":username" =>$username]);
 
 }
 
