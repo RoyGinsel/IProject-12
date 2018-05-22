@@ -7,7 +7,8 @@
 
    $username = $_POST['post_gebruikersnaam'];
    $password = $_POST['post_wachtwoord'];
-   $hash = '';
+
+   $hash = getPassword($_SESSION['username']);
 
  if (password_verify($password, $hash)) {
        echo 'Password is valid!';
