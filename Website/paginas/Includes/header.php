@@ -19,13 +19,14 @@
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="index.php">Home</a></li>
           <li><a href="producten.php">Producten</a></li>
+          <li><a href="inloggen.php">Inloggen</a></li>
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
       <span class="uk-visible@s">
         <button type="button" class=" rubrieken uk-button uk-button-small uk-margin-small-left uk-text-capitalize">Rubrieken</button>
         <div class=" uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
-          <?php 
+          <?php
             $id = "search1";
             include "Rubriekenboom-header-dropdown.php";
           ?>
@@ -33,6 +34,9 @@
       </span>
     </div>
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
+    <?php if(isset($_SESSION['username'])){
+      echo $_SESSION['username'];
+    }  ?>
   </div>
 
   <!-- Rubrieken dropdown small -->

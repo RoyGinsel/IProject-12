@@ -7,6 +7,11 @@
     } else {
       $data = 1;
     }
+    // Wanneer wachtwoord of username verkeerd is ingevoerd maakt hij een error message
+    $error="";
+    if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
+              $error = "Wrong Username / Password";
+    }
  ?>
 <html lang="nl" dir="ltr">
 <head>
@@ -28,13 +33,16 @@
   <!-- Main inhoud -->
     <main class="signIn">
     <!-- Inlogveld  -->
-      <div class="uk-align-center uk-width-medium"  method="POST">
-        <form class="uk-panel uk-panel-box uk-form">
+      <div class="uk-align-center uk-width-medium">
+        <h1>Inloggen:</h1>
+        <!--Echo'ed de warning message  -->
+        <p class="uk-text-danger"><?php echo $error; ?></p>
+        <form action="index.php" method="post" class="uk-panel uk-panel-box uk-form">
           <div class="uk-form-row">
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" placeholder="Gebruikersnaam" name="gebruikersnaam" type="text" required>
+            <input class="uk-width-1-1 uk-form-large" name="post_gebruikersnaam" type="text"  placeholder="Gebruikersnaam" required>
           </div>
           <div class="uk-form-row">
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" placeholder="Wachtwoord" name="wachtwoord" type="password" required>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_wachtwoord" type="password" placeholder="Wachtwoord" required>
           </div>
           <div class="uk-flex uk-flex-inline uk-width-1-1 uk-child-width-1-2  uk-margin-top">
             <div class="uk-form-row uk-text-small">
@@ -46,9 +54,14 @@
             </div>
           </div>
         </form>
+        <!--Scheidende tekst ("of")  -->
         <div class="orText">
           <span>Of</span>
         </div>
+        <!--Registreer knop  -->
+        <form class="" action="sign-up.php">
+          <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove knopje" type="Submit" name="Submit" value="registreren">
+        </form>
       </div>
     </main>
     <!-- Footer -->
