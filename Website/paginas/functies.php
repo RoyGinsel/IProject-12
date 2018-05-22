@@ -3,6 +3,7 @@
 	//include "../../SQLSrvConnect.php";
 	//Index.php -> Select statement voor populaireitems
 
+
 function query($stringquery)
 {
 	try{
@@ -21,7 +22,7 @@ function preparedQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-	
+
     	$query = $dbh->prepare($stringquery);
     	$query->execute($parameters);
     	return $query->fetchAll();
@@ -101,12 +102,29 @@ function loop($section)
 {
 	echo "<ul uk-accordion>";
 	foreach(sections($section) as $row){
-		echo "<li class ='uk-flex'> <a class='uk-accordion-title'> 
+		echo "<li class ='uk-flex'> <a class='uk-accordion-title'>
 		 ".$row ['rubriekNaam']."</a> <div class='uk-accordion-content'>";
 		loop($row['rubriekNummer']);
 		echo "</div></li>";
 	}
 	echo "</ul>";
+}
+
+
+
+// kijken of de mail bestaat bij registreren.
+function checkbestaandemail($mail){
+				return preparedQuery("select mail
+														from tblGebruiker
+														where mail =:mail",[":mail"=> $mail]);
+}
+
+
+//kijken of de mail.
+function checkbestaandeGebruikersNaam($GebruikersNaam){
+				return preparedQuery("select GebruikersNaam
+														from tblGebruiker
+														where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
 }
 
  ?>

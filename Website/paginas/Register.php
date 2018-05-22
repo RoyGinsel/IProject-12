@@ -29,6 +29,22 @@ session_start();
 
   <!-- registratieformulier-->
 
+<div class="melding">
+<?php
+
+if(isset($_GET['error'])){
+  if($_GET['error'] == "email"){
+
+   echo "Email is niet goed";
+
+  }else if($_GET['error'] == "Gebruikersnaam"){
+
+  echo "Gebruikersnaam is niet goed";
+
+  };
+}
+?>
+</div>
 
 <form action="handler/handler.php" method="post">
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-large-top">
@@ -52,20 +68,20 @@ session_start();
 
 
     <div class="uk-flex uk-flex-column uk-flex-around uk-margin-large-left">
-      <input type="email" name="email" maxlength="25" required>
-      <input type="text" name="Voornaam"  maxlength="50" required>
-      <input type="text" name="achternaam" maxlength="52" required>
-      <input type="text" name="Gebruikersnaam" maxlengt="20" required>
-      <input type="Password" name="wachtwoord" maxlenght="25" required>
-      <input type="Password" name="herhaal wachtwoord" maxlength="25" required>
-      <input type="text" name="Adress" maxlength="95" required>
-      <input type="text" name="Adress" maxlength="95">
-      <input type="text" name="Postcode" maxlength="9" required>
-      <input type="text" name="Plaats" maxlength="35" required>
-      <input type="text" name="land" maxlength="55" required>
-      <input type="number" name="Telefoonnummer" required>
-      <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>" required>
-      <select class="uk-form-select" name="Geheimevraag" required>
+      <input type="email" name="email" maxlength="25" >
+      <input type="text" name="Voornaam"  maxlength="50">
+      <input type="text" name="Achternaam" maxlength="52" >
+      <input type="text" name="Gebruikersnaam" maxlengt="20">
+      <input type="Password" name="Wachtwoord" maxlenght="25" >
+      <input type="Password" name="WachtwoordHer" maxlength="25" >
+      <input type="text" name="Adres" maxlength="95">
+      <input type="text" name="Adres2" maxlength="95">
+      <input type="text" name="Postcode" maxlength="9">
+      <input type="text" name="Plaats" maxlength="35">
+      <input type="text" name="Land" maxlength="55">
+      <input type="number" name="Telefoonnummer">
+      <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
+      <select class="uk-form-select" name="Geheimevraag">
         <option value="1">hoe heet je moeder</option>
         <option value="2">hoe heet je vader</option>
       </select>
@@ -76,7 +92,7 @@ session_start();
 
   </div>
   <div class="uk-flex uk-flex-center uk-padding-large">
-<button type="submit" class="uk-button uk-button-default uk-button-primary" value="submitbutton">Verzenden</button>
+<button type="submit" class="uk-button uk-button-default uk-button-primary" value="submitbutton" name="submit">Verzenden</button>
 </div>
 </form>
 

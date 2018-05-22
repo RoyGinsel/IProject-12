@@ -4,13 +4,13 @@
     $crumbs = array();
  ?>
 
+
 <html lang="nl" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EenmaalAndermaal</title>
     <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
@@ -121,8 +121,8 @@
                     </table>
                 </div>
             </div>
-            
-            <!-- tabel uitgelichte-items -->
+
+            <!-- tabel uitgelichte-items weergeven -->
             <div class="uk-overflow-auto">
                 <h2 class="uk-text-bold uk-text-center uk-text-large">Uitgelichte items</h2>
                 <div class="uk-height-max-medium">
@@ -137,7 +137,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                //gegevens halen uit de database en in tabel body zetten
+                                //gegevens van uitgelichte items doormiddel van query uit de database halen en dan door de array lopen met de foreach
                                 $list = "";
                                 foreach (featuredItems() as $value) {
                                     $list .= '
