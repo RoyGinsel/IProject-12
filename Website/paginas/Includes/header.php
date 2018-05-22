@@ -35,8 +35,10 @@
     </div>
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
     <?php if(isset($_SESSION['username'])){
-      echo $_SESSION['username'];
-    }  ?>
+      echo "You logged in as: ", $_SESSION['username'];
+      echo "</br><a href='uitloggen.php'>Logout</a>";
+       }
+      ?>
   </div>
 
   <!-- Rubrieken dropdown small -->
