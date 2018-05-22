@@ -39,7 +39,7 @@ if(isset($_GET['error'])){
 
   }else if($_GET['error'] == "Gebruikersnaam"){
 
-  echo "Gebruikersnaam is niet goed";
+  echo "Gebruikersnaam is niet goed ";
 
   };
 }
