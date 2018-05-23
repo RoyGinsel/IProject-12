@@ -29,45 +29,33 @@ session_start();
 
   <!-- registratieformulier-->
 
-<div class="melding">
-<?php
-
-// if(isset($_GET['error'])){
-//   if($_GET['error'] == "email"){
-//
-//    echo "Email is niet goed";
-//
-//   }else if($_GET['error'] == "Gebruikersnaam"){
-//
-//   echo "Gebruikersnaam is niet goed";
-//
-// } else if($_GET['error'] == "wachtwoord"){
-//
-//  echo "wachtwoord is niet goed";
-//
-//   };
-// }
+<?phptr
 
 
+// geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
 if(isset($_GET['error'])){
   switch($_GET['error']){
 
 case "Email":
-  echo  "email is niet goed";
+  $melding = "Emailadres is al in gebruik.";
 break;
 
 case "Gebruikersnaam":
-  echo "gebruikersnaam is niet goed";
+  $melding = "Gebruikersnaam is al in gebruik.";
 break;
 
 case "Wachtwoord":
-  echo "wachtwoord is niet het zelfde";
+  $melding = "Wachtwoord is niet ingevuld of niet het zelfde.";
   break;
   }
-}
-?>
-</div>
 
+}
+
+?>
+
+
+</div>
+<p class='uk-flex uk-flex-center uk-margin-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
 <form action="handler/handler.php" method="post">
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-large-top">
     <div class="uk-flex uk-flex-around uk-flex-column uk-height-large">
@@ -117,9 +105,11 @@ case "Wachtwoord":
 
     </div>
   </div>
-  <div class="uk-flex uk-flex-center uk-padding-large">
-<button type="submit" class="uk-button uk-button-default uk-button-primary" value="submitbutton" name="submit">Verzenden</button>
+  <div class="uk-flex uk-flex-center padding-large">
+<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-small-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
+<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $melding; }?> </div>
+
 </form>
 
 

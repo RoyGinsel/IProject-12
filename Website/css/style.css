@@ -34,7 +34,8 @@ h1>a:hover {
 }
 
 button>img {
-  background-color: #7D6444
+  background-color: #7D6444;
+  padding-right:1px;
 }
 button>img:hover{
   background-color: #EAD9C4;
@@ -106,6 +107,7 @@ margin:0px;
   border: solid 3px #333333;
   border-top: solid 0px #7D6444;
   background-color: #EAD9C4;
+  padding-left: 2%;
 }
 
 footer{
