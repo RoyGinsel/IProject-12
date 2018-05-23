@@ -13,7 +13,7 @@ if(!isset($_POST['submit'])){
 
   if (empty($_POST['Wachtwoord']) && empty($_POST['WachtwoordHer'])){
 
-    header('Location: /iproject-12/website/paginas/register.php?error=wachtwoord');
+    header('Location: /iproject-12/website/paginas/register.php?error=Wachtwoord');
     die();
 
   }
@@ -24,7 +24,7 @@ if(!isset($_POST['submit'])){
 
 
 
-  header('Location: /iproject-12/website/paginas/register.php?error=wachtwoord');
+  header('Location: /iproject-12/website/paginas/register.php?error=Wachtwoord');
     Die();
   }
 
@@ -86,7 +86,7 @@ if(isset($_POST['Telefoonnummer'])){
   if (!empty(checkbestaandemail($email))) {
 
 
-      header('Location: /iproject-12/website/paginas/register.php?error=email');
+      header('Location: /iproject-12/website/paginas/register.php?error=Email');
       die();
     }else {
 

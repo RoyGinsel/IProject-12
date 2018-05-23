@@ -32,20 +32,38 @@ session_start();
 <div class="melding">
 <?php
 
+// if(isset($_GET['error'])){
+//   if($_GET['error'] == "email"){
+//
+//    echo "Email is niet goed";
+//
+//   }else if($_GET['error'] == "Gebruikersnaam"){
+//
+//   echo "Gebruikersnaam is niet goed";
+//
+// } else if($_GET['error'] == "wachtwoord"){
+//
+//  echo "wachtwoord is niet goed";
+//
+//   };
+// }
+
+
 if(isset($_GET['error'])){
-  if($_GET['error'] == "email"){
+  switch($_GET['error']){
 
-   echo "Email is niet goed";
+case "Email":
+  echo  "email is niet goed";
+break;
 
-  }else if($_GET['error'] == "Gebruikersnaam"){
+case "Gebruikersnaam":
+  echo "gebruikersnaam is niet goed";
+break;
 
-  echo "Gebruikersnaam is niet goed";
-
-}else if($_GET['error'] == "wachtwoord"){
-
- echo "wachtwoord is niet goed";
-
-};
+case "Wachtwoord":
+  echo "wachtwoord is niet het zelfde";
+  break;
+  }
 }
 ?>
 </div>
