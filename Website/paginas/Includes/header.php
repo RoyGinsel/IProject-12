@@ -23,6 +23,7 @@
             echo '<li><a href="uitloggen.php">Uitloggen</a></li>';
           }else{
             echo '<li><a href="inloggen.php">Inloggen</a></li>';
+            echo '<li><a href="Register.php">Registreren</a></li>';
           }
   ?>
         </ul>
