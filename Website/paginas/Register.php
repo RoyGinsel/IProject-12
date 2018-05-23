@@ -1,11 +1,42 @@
 <?php
 session_start();
-  include "functies.php";
-  $crumbs = array();
+include "functies.php";
+$crumbs = array("Inloggen");
+if(isset($_GET["data"])){
+  $data = htmlspecialchars($_GET["data"]);
+} else {
+  $data = 1;
+}
 
 
+if(isset($_SESSION['username'])){
+
+  header('Location: /iproject-12/website/paginas/index.php');
+
+}
+
+// geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
+if(isset($_GET['error'])){
+  switch($_GET['error']){
+
+    case "Email":
+      $Warning = "Emailadres is al in gebruik.";
+    break;
+
+    case "Gebruikersnaam":
+      $Warning = "Gebruikersnaam is al in gebruik.";
+    break;
+
+    case "Wachtwoord":
+      $Warning = "Wachtwoord is niet ingevuld of niet het zelfde.";
+      break;
+    }
+
+}
 
  ?>
+
+ <!DOCTYPE HTML>
 <html lang="nl" dir="ltr">
 
   <head>
@@ -28,31 +59,6 @@ session_start();
 <main class="page">
 
   <!-- registratieformulier-->
-
-<?phptr
-
-
-// geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
-if(isset($_GET['error'])){
-  switch($_GET['error']){
-
-case "Email":
-  $melding = "Emailadres is al in gebruik.";
-break;
-
-case "Gebruikersnaam":
-  $melding = "Gebruikersnaam is al in gebruik.";
-break;
-
-case "Wachtwoord":
-  $melding = "Wachtwoord is niet ingevuld of niet het zelfde.";
-  break;
-  }
-
-}
-
-?>
-
 
 </div>
 <p class='uk-flex uk-flex-center uk-margin-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
@@ -92,7 +98,6 @@ case "Wachtwoord":
       <input type="number" name="Telefoonnummer" required>
       <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
       <select class="uk-form-select"  name="Geheimevraag" required>
-
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>
 
@@ -106,9 +111,9 @@ case "Wachtwoord":
     </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-small-top" value="submitbutton" name="submit">Verzenden</button>
+<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
-<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $melding; }?> </div>
+<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $Warning; }?> </div>
 
 </form>
 
