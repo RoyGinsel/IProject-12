@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['username'])) {
    session_destroy();
-   header('location: index.php');
+   header('location: index.php?msg=uitgelogd');
 };
    /**
     * We just want to hash our password using the current DEFAULT algorithm.

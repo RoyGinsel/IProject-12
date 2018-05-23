@@ -45,7 +45,7 @@
             <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_wachtwoord" type="password" placeholder="Wachtwoord" required>
           </div>
           <div class="uk-flex uk-flex-inline uk-width-1-1 uk-child-width-1-2  uk-margin-top">
-            <div class="uk-form-row uk-text-small">
+            <div class="uk-form-row uk-text-small uk-flex uk-flex-middle">
               <a class="uk-link" href="#">Wachtwoord vergeten?</a>
             </div>
             <div class="uk-form-row">

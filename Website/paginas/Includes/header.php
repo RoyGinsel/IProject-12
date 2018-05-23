@@ -51,10 +51,25 @@
         ?>
       </div>
   </span>
-
   <div class="uk-flex uk-flex-center  uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb crumb">
       <?php echo $breadcrumb; ?>
     </ul>
+  </div>
+  <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
+  <?php
+    $currentDate = date('d-m-Y');
+      if(isset($_SESSION['username'])){
+        echo "Welkom, $username! <br>";
+        echo "Ingelogd op: $currentDate";
+      }
+      if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
+        echo  '
+        <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+        <a class="sluiten uk-alert-close" uk-close ></a>
+        <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
+        <p> Tot de volgende keer! </p> </div>';
+      }
+  ?>
   </div>
 </header>
