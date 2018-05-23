@@ -72,7 +72,7 @@ if(isset($_POST['Telefoonnummer'])){
 
 
 //kijken of de gebruikersnaam al bestaat.
-  if (!empty(checkbestaandeGebruikersNaam($userName))) {
+  if (!empty(checkavailableUsername($userName))) {
 
 
 
@@ -83,7 +83,7 @@ if(isset($_POST['Telefoonnummer'])){
 
 
   // kijken of email bestaat
-  if (!empty(checkbestaandemail($email))) {
+  if (!empty(checkavailableMail($email))) {
 
 
       header('Location: /iproject-12/website/paginas/register.php?error=Email');
@@ -103,6 +103,7 @@ if(isset($_POST['Telefoonnummer'])){
         //inserten
         newAccount($registratieForm);
         $_SESSION['username'] = $userName;
+        $_SESSION['date'] = date('d-m-Y');
         header('Location: /iproject-12/website/paginas/index.php');
             }
 

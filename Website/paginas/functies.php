@@ -114,7 +114,7 @@ function loop($section)
 
 
 // kijken of de mail bestaat bij registreren.
-function checkbestaandemail($mail){
+function checkavailableMail($mail){
 	return preparedQuery("select mail
 						from tblGebruiker
 						where mail =:mail",[":mail"=> $mail]);
@@ -122,14 +122,14 @@ function checkbestaandemail($mail){
 
 
 //kijken of de gebruikersnaambestaat
-function checkbestaandeGebruikersNaam($GebruikersNaam){
+function checkavailableUsername($GebruikersNaam){
 	return preparedQuery("select GebruikersNaam
 						from tblGebruiker
 						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
 }
 
 
-// Dex
+// kijken of de username voorkomt in de database
 function loginCheck($username)
 {
 	return preparedQuery("SELECT gebruikersNaam, wachtwoord
