@@ -19,13 +19,16 @@
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="index.php">Home</a></li>
           <li><a href="producten.php">Producten</a></li>
+          <!-- If user is ingelogd show uitloggen anders show inloggen + rest -->
           <?php if(isset($_SESSION['username'])){
-            echo '<li><a href="uitloggen.php">Uitloggen</a></li>';
+            echo '<li><a href="#">Mijn veilingen</a></li>';
+            echo '<li><a href="#">Mijn biedingen</a></li>';
+            echo '<li><a class="uk-text-danger uk-text-center uk-text-uppercase " href="uitloggen.php">Uitloggen</a></li>';
           }else{
             echo '<li><a href="inloggen.php">Inloggen</a></li>';
             echo '<li><a href="Register.php">Registreren</a></li>';
           }
-  ?>
+          ?>
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
