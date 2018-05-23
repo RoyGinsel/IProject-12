@@ -1,3 +1,5 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <?php
   $breadcrumb = "<li><a href='index.php'>Home</a></li>";
   foreach($crumbs as $crumb) {
