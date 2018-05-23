@@ -122,10 +122,10 @@ function checkavailableMail($mail){
 
 
 //kijken of de gebruikersnaambestaat
-function checkavailableUsername($GebruikersNaam){
+function checkavailableUsername($userName){
 	return preparedQuery("select GebruikersNaam
 						from tblGebruiker
-						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
+						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $userName]);
 }
 
 
@@ -145,8 +145,8 @@ function getPassword($username){
 }
 
 // registreren.
-function newAccount($RegistratieForm){
-	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistratieForm);
+function newAccount($RegistrationForm){
+	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistrationForm);
 }
 
 

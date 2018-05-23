@@ -9,6 +9,12 @@ if(isset($_GET["data"])){
 }
 
 
+if(isset($_SESSION['username'])){
+
+  header('Location: /iproject-12/website/paginas/index.php');
+
+}
+
 // geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
 if(isset($_GET['error'])){
   switch($_GET['error']){
