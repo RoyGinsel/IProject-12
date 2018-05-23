@@ -7,11 +7,16 @@
     } else {
       $data = 1;
     }
+    //Zorgt ervoor dat je niet terug kan gaan naar inloggen.php
+    if(isset($_SESSION['username'])){
+      header('Location: index.php');
+    }
     // Wanneer wachtwoord of username verkeerd is ingevoerd maakt hij een error message
     $error="";
     if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
               $error = "Wrong Username / Password";
     }
+
  ?>
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">

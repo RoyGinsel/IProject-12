@@ -1,6 +1,6 @@
 <?php
-    include "../Website/paginas/database.php";
-    //include "../SQLSrvConnect.php";
+    //include "../Website/paginas/database.php";
+    include "../SQLSrvConnect.php";
 
     function query($stringquery)
     {
@@ -26,19 +26,30 @@
             return $query->fetchAll();
         }
         catch(PDOException $e) {
-            echo $e->getMessage();
+            $e->getMessage();
         }
     }
 
     function allSections()
     {
-        echo "ik ben misbruikt";
         return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
                     from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
                     order by rubriekNaam asc");
     }
 
-    function test(){
-        echo 'hallo';
+    function renameSection($name, $number)
+    {
+        preparedQuery("UPDATE tblRubriek
+                        SET rubriekNaam = :name
+                        where rubriekNummer = :number",['name' => $name,'number' => $number]);
+    }
+
+    function checkSubSections($number)
+    {
+        if((preparedQuery("SELECT * from tblRubriek where parentRubriek = :number"),['number' => $number]) == false){
+            return 1
+        } else  {
+            return 0
+        }
     }
 ?>

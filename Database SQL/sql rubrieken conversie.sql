@@ -3408,6 +3408,7 @@ INSERT Categorieen (ID,Name,Parent) VALUES (179197,'Virtueel geld',11116)
 insert into tblRubriek
 select distinct cast(ID as int) as rubriekNummer,
     left(Name,100) as rubriekNaam,
-    cast(Parent as int) as parentRubriek,
-    cast(ID as int) as volgnr
+    cast(Parent as int) as parentRubriek
 from Categorieen
+
+drop table Categorieen
