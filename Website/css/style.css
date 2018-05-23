@@ -97,6 +97,12 @@ background-color: #EAD9C4;
   background-color: #EAD9C4;
 }
 
+.userStat {
+  border: solid 3px #333333;
+  border-top: solid 0px #7D6444;
+  background-color: #EAD9C4;
+}
+
 footer{
   font-size: 10px;
   text-align: center;
