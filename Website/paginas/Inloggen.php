@@ -46,7 +46,6 @@
           </div>
           <div class="uk-flex uk-flex-inline uk-width-1-1 uk-child-width-1-2  uk-margin-top">
             <div class="uk-form-row uk-text-small">
-              <input class="uk-padding-remove" type="checkbox" name="checkbox" value="checkbox">Remember me
               <a class="uk-link" href="#">Wachtwoord vergeten?</a>
             </div>
             <div class="uk-form-row">
