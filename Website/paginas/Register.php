@@ -8,6 +8,26 @@ if(isset($_GET["data"])){
   $data = 1;
 }
 
+
+// geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
+if(isset($_GET['error'])){
+  switch($_GET['error']){
+
+    case "Email":
+      $Warning = "Emailadres is al in gebruik.";
+    break;
+
+    case "Gebruikersnaam":
+      $Warning = "Gebruikersnaam is al in gebruik.";
+    break;
+
+    case "Wachtwoord":
+      $Warning = "Wachtwoord is niet ingevuld of niet het zelfde.";
+      break;
+    }
+
+}
+
  ?>
 
  <!DOCTYPE HTML>
@@ -33,31 +53,6 @@ if(isset($_GET["data"])){
 <main class="page">
 
   <!-- registratieformulier-->
-
-<?php
-
-
-// geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
-if(isset($_GET['error'])){
-  switch($_GET['error']){
-
-case "Email":
-  $melding = "Emailadres is al in gebruik.";
-break;
-
-case "Gebruikersnaam":
-  $melding = "Gebruikersnaam is al in gebruik.";
-break;
-
-case "Wachtwoord":
-  $melding = "Wachtwoord is niet ingevuld of niet het zelfde.";
-  break;
-  }
-
-}
-
-?>
-
 
 </div>
 <p class='uk-flex uk-flex-center uk-margin-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
@@ -97,7 +92,6 @@ case "Wachtwoord":
       <input type="number" name="Telefoonnummer" required>
       <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
       <select class="uk-form-select"  name="Geheimevraag" required>
-
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>
 
@@ -113,7 +107,7 @@ case "Wachtwoord":
   <div class="uk-flex uk-flex-center padding-large">
 <button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
-<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $melding; }?> </div>
+<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $Warning; }?> </div>
 
 </form>
 

@@ -56,11 +56,11 @@ if(isset($_POST['Telefoonnummer'])){
 }
 
 
-  $registratieForm = ["Gebruikersnaam" => $_POST['Gebruikersnaam'], "Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Adres" => $_POST['Adres'], "AdresExtra" => $_POST['AdresExtra'], "Postcode" => $_POST['Postcode'],"Plaatsnaam" =>
-  $_POST['Plaatsnaam'], "Land" => $_POST['Land'], "Geboortedatum" => $_POST['Geboortedatum'],"Wachtwoord" =>  $_POST['Wachtwoord'], "WachtwoordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag'],"Antwoordvraag" => $_POST['Antwoordvraag']];
+  $registratieForm = ["userName" => $_POST['Gebruikersnaam'], "Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Adres" => $_POST['Adres'], "AdresExtra" => $_POST['AdresExtra'], "Postcode" => $_POST['Postcode'],"Plaatsnaam" =>
+  $_POST['Plaatsnaam'], "Land" => $_POST['Land'], "Geboortedatum" => $_POST['Geboortedatum'],"Password" =>  $_POST['Wachtwoord'], "PasswordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag'],"Antwoordvraag" => $_POST['Antwoordvraag']];
 
 
-//sanitize strings
+//sanitize invoervelden
   foreach($registratieForm as $key => $value){
 
     $registratieForm[$key] = filter_var($value, FILTER_SANITIZE_STRING);
@@ -72,7 +72,7 @@ if(isset($_POST['Telefoonnummer'])){
 
 
 //kijken of de gebruikersnaam al bestaat.
-  if (!empty(checkbestaandeGebruikersNaam($Gebruikersnaam))) {
+  if (!empty(checkbestaandeGebruikersNaam($userName))) {
 
 
 
@@ -90,19 +90,19 @@ if(isset($_POST['Telefoonnummer'])){
       die();
     }else {
 
-      $hashpassword = password_hash($Wachtwoord, PASSWORD_DEFAULT);
+      $hashpassword = password_hash($Password, PASSWORD_DEFAULT);
 
-      //wachtwoord verwijderen uit formulier.
+      //wachtwoord verwijderen uit formulier voor veiligheidsredenen
 
       if(isset($hashpassword)){
 
-        $registratieForm['Wachtwoord'] = $hashpassword;
+        $registratieForm['Password'] = $hashpassword;
         $registratieForm['Mail'] = $email;
-        unset($registratieForm['WachtwoordHer']);
+        unset($registratieForm['PasswordHer']);
 
         //inserten
         newAccount($registratieForm);
-        $_SESSION['username'] = $Gebruikersnaam;
+        $_SESSION['username'] = $userName;
         header('Location: /iproject-12/website/paginas/index.php');
             }
 

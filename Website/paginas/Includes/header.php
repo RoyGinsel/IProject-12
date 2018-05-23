@@ -64,11 +64,8 @@
   <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
 
   <?php
-<<<<<<< HEAD
 
     $currentDate = date('d-m-Y');
-=======
->>>>>>> ccb7d0f22352d8b6026f8a305ebcd70976a312c8
       if(isset($_SESSION['username'])){
         echo "Welkom, ". $_SESSION['username']."! <br>";
         echo "Ingelogd op: ". $_SESSION['date'];
