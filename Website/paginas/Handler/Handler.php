@@ -56,10 +56,8 @@ if(isset($_POST['Telefoonnummer'])){
 }
 
 
-// text velden in array stoppen.
-
-  $registratieForm = ["Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Gebruikersnaam" => $_POST['Gebruikersnaam'], "Adres" => $_POST['Adres'], "Adres2" => $_POST['Adres2'], "Postcode" => $_POST['Postcode'],"Plaats" =>
-  $_POST['Plaats'], "Land" => $_POST['Land'], "Wachtwoord" => $_POST['Wachtwoord'], "WachtwoordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag']];
+  $registratieForm = ["Gebruikersnaam" => $_POST['Gebruikersnaam'], "Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Adres" => $_POST['Adres'], "AdresExtra" => $_POST['AdresExtra'], "Postcode" => $_POST['Postcode'],"Plaatsnaam" =>
+  $_POST['Plaatsnaam'], "Land" => $_POST['Land'], "Geboortedatum" => $_POST['Geboortedatum'],"Wachtwoord" =>  $_POST['Wachtwoord'], "WachtwoordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag'],"Antwoordvraag" => $_POST['Antwoordvraag']];
 
 
 //sanitize strings
@@ -81,42 +79,38 @@ if(isset($_POST['Telefoonnummer'])){
 
       header('Location: /iproject-12/website/paginas/register.php?error=Gebruikersnaam');
       die();
-  }
+  }else
 
 
   // kijken of email bestaat
   if (!empty(checkbestaandemail($email))) {
 
 
-
-
       header('Location: /iproject-12/website/paginas/register.php?error=email');
       die();
     }else {
 
-  $hashpassword = password_hash($Wachtwoord, PASSWORD_DEFAULT);
+      $hashpassword = password_hash($Wachtwoord, PASSWORD_DEFAULT);
 
-  // wachtwoord verwijderen uit formulier.
+      //wachtwoord verwijderen uit formulier.
 
-  if(isset($hashpassword)){
-  unset($Wachtwoord,$WachtwoordHer);
-  $Verwijderen = array('Wachtwoord','WachtwoordHer');
+      if(isset($hashpassword)){
 
-  foreach($Verwijderen as $key){
+        $registratieForm['Wachtwoord'] = $hashpassword;
+        $registratieForm['Mail'] = $email;
+        unset($registratieForm['WachtwoordHer']);
 
-    unset($registratieForm[$key]);
+        //inserten
+        newAccount($registratieForm);
+        header('Location: /iproject-12/website/paginas/index.php');
+            }
+
+    };
   }
 
-  };
-}
+
+  echo '<pre>', var_dump($registratieForm), '</pre>';
 
 
 
-
-echo $Voornaam;
-
-
-
-
-}
 ?>

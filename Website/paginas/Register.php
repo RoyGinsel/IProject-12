@@ -39,7 +39,7 @@ if(isset($_GET['error'])){
 
   }else if($_GET['error'] == "Gebruikersnaam"){
 
-  echo "Gebruikersnaam is niet goed ";
+  echo "Gebruikersnaam is niet goed";
 
   };
 }
@@ -56,7 +56,7 @@ if(isset($_GET['error'])){
       <span>Wachtwoord:</span>
       <span>Herhaal Wachtwoord:</span>
       <span>Adress:</span>
-      <span>Adress2:</span>
+      <span>AdressExtra:</span>
       <span>Postcode:</span>
       <span>Plaats:</span>
       <span>Land:</span>
@@ -75,21 +75,24 @@ if(isset($_GET['error'])){
       <input type="Password" name="Wachtwoord" maxlenght="25" >
       <input type="Password" name="WachtwoordHer" maxlength="25" >
       <input type="text" name="Adres" maxlength="95">
-      <input type="text" name="Adres2" maxlength="95">
+      <input type="text" name="AdresExtra" maxlength="95">
       <input type="text" name="Postcode" maxlength="9">
-      <input type="text" name="Plaats" maxlength="35">
+      <input type="text" name="Plaatsnaam" maxlength="35">
       <input type="text" name="Land" maxlength="55">
       <input type="number" name="Telefoonnummer">
       <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
       <select class="uk-form-select" name="Geheimevraag">
-        <option value="1">hoe heet je moeder</option>
-        <option value="2">hoe heet je vader</option>
+
+       <!-- haalt de geheimenvraag uit de database met value -->
+        <?php foreach(getQuestions() as $key => $value){
+                echo '<option value='.$value['Vraagnummer'].'>'.$value['tekstVraag'].'</option>';
+              }
+        ?>
       </select>
-      <input type="text" name="Geheimevraag" required>
+      <input type="text" name="Antwoordvraag" required>
+
 
     </div>
-
-
   </div>
   <div class="uk-flex uk-flex-center uk-padding-large">
 <button type="submit" class="uk-button uk-button-default uk-button-primary" value="submitbutton" name="submit">Verzenden</button>
