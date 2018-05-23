@@ -7,26 +7,19 @@
 
    $username = $_POST['post_gebruikersnaam'];
    $password = $_POST['post_wachtwoord'];
-   $hash = '';
-
- if (password_verify($password, $hash)) {
-       echo 'Password is valid!';
- }else {
-       echo 'Invalid password.';
- }
+   $hash = getPassword($username);
 
   if(loginCheck($username) == false){
        header('location: inloggen.php?msg=failed');
   }
  foreach(loginCheck($username) as $row){
-   if($row ['wachtwoord'] == $password){
+   if(password_verify($password, $row['wachtwoord'])){
      $_SESSION['username'] = $username;
    }else
     header('Location: inloggen.php?msg=failed');
    }
  }
 ?>
-
 
 <html lang="nl" dir="ltr">
 <head>

@@ -19,7 +19,12 @@
         <ul class="uk-nav uk-dropdown-nav">
           <li><a href="index.php">Home</a></li>
           <li><a href="producten.php">Producten</a></li>
-          <li><a href="inloggen.php">Inloggen</a></li>
+          <?php if(isset($_SESSION['username'])){
+            echo '<li><a href="uitloggen.php">Uitloggen</a></li>';
+          }else{
+            echo '<li><a href="inloggen.php">Inloggen</a></li>';
+          }
+  ?>
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
@@ -34,9 +39,6 @@
       </span>
     </div>
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
-    <?php if(isset($_SESSION['username'])){
-      echo $_SESSION['username'];
-    }  ?>
   </div>
 
   <!-- Rubrieken dropdown small -->
@@ -49,10 +51,25 @@
         ?>
       </div>
   </span>
-
   <div class="uk-flex uk-flex-center  uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb crumb">
       <?php echo $breadcrumb; ?>
     </ul>
+  </div>
+  <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
+  <?php
+    $currentDate = date('d-m-Y');
+      if(isset($_SESSION['username'])){
+        echo "Welkom, $username! <br>";
+        echo "Ingelogd op: $currentDate";
+      }
+      if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
+        echo  '
+        <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+        <a class="sluiten uk-alert-close" uk-close ></a>
+        <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
+        <p> Tot de volgende keer! </p> </div>';
+      }
+  ?>
   </div>
 </header>

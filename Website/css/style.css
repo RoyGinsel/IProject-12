@@ -1,6 +1,16 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
 h1 {
   font-size: 40px;
   font-family: 'Work Sans', sans-serif;
+}
+
+html{
+  background-color: #fff7EC;
 }
 
 body {
@@ -38,40 +48,35 @@ margin:0px;
 }
 
 .searchbartext{
-
-width:auto;
-margin-right:10px;
-margin-bottom:10px;
-
+  width:auto;
+  margin-right:10px;
+  margin-bottom:10px;
 }
-.submitButton{
-background-color: #7D6444;
-padding:10px;
-color:#EAD9C4;
 
+.submitButton{
+  background-color: #7D6444;
+  padding:10px;
+  color:#EAD9C4;
 }
 
 .submitButton:hover{
-
   color:black;
   background-color: #EAD9C4;
 }
 
 .crumb{
-
   margin: 5px;
 }
 
 .rubrieken{
-
   padding:14.5px;
   color:#EAD9C4;
   background-color:  #7D6444;
 }
 
 .rubrieken:hover{
-color:black;
-background-color: #EAD9C4;
+  color:black;
+  background-color: #EAD9C4;
 }
 
 .dropmenu {
@@ -97,10 +102,15 @@ background-color: #EAD9C4;
   background-color: #EAD9C4;
 }
 
+.userStat {
+  border: solid 3px #333333;
+  border-top: solid 0px #7D6444;
+  background-color: #EAD9C4;
+}
+
 footer{
   font-size: 10px;
   text-align: center;
-  background: #fff7EC
 }
 
 .back-to-top{
@@ -192,10 +202,8 @@ main {
     margin-left: 15px;
 }
 
-
 .melding{
-
-margin-left:50%;
-padding-top:20px;
-font-size:15px;
+  margin-left:50%;
+  padding-top:20px;
+  font-size:15px;
 }
