@@ -59,10 +59,9 @@
   </div>
   <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
   <?php
-    $currentDate = date('d-m-Y');
       if(isset($_SESSION['username'])){
-        echo "Welkom, $username! <br>";
-        echo "Ingelogd op: $currentDate";
+        echo "Welkom, ". $_SESSION['username']."! <br>";
+        echo "Ingelogd op: ". $_SESSION['date'];
       }
       if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
         echo  '
