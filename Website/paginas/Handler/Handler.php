@@ -13,7 +13,7 @@ if(!isset($_POST['submit'])){
 
   if (empty($_POST['Wachtwoord']) && empty($_POST['WachtwoordHer'])){
 
-    echo "wachtwoord is niet ingevuld";
+    header('Location: /iproject-12/website/paginas/register.php?error=wachtwoord');
     die();
 
   }
@@ -24,7 +24,7 @@ if(!isset($_POST['submit'])){
 
 
 
-    echo "wachtwoord is niet het zelfde";
+  header('Location: /iproject-12/website/paginas/register.php?error=wachtwoord');
     Die();
   }
 
@@ -67,7 +67,7 @@ if(isset($_POST['Telefoonnummer'])){
   };
 
 
-// zet de array om in variabelen zodat ze geinsert kunnen worden.
+// zet de array om in variabelen zodat er gekeken kan worden of ze bestaan.
   extract($registratieForm, EXTR_PREFIX_SAME, "wddx");
 
 

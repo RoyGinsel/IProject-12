@@ -41,7 +41,11 @@ if(isset($_GET['error'])){
 
   echo "Gebruikersnaam is niet goed";
 
-  };
+}else if($_GET['error'] == "wachtwoord"){
+
+ echo "wachtwoord is niet goed";
+
+};
 }
 ?>
 </div>
@@ -68,26 +72,27 @@ if(isset($_GET['error'])){
 
 
     <div class="uk-flex uk-flex-column uk-flex-around uk-margin-large-left">
-      <input type="email" name="email" maxlength="25" >
-      <input type="text" name="Voornaam"  maxlength="50">
-      <input type="text" name="Achternaam" maxlength="52" >
-      <input type="text" name="Gebruikersnaam" maxlengt="20">
-      <input type="Password" name="Wachtwoord" maxlenght="25" >
-      <input type="Password" name="WachtwoordHer" maxlength="25" >
-      <input type="text" name="Adres" maxlength="95">
+      <input type="email" name="email" maxlength="25" required >
+      <input type="text" name="Voornaam"  maxlength="50" required>
+      <input type="text" name="Achternaam" maxlength="52" required >
+      <input type="text" name="Gebruikersnaam" maxlengt="20" required>
+      <input type="Password" name="Wachtwoord" maxlenght="25" required >
+      <input type="Password" name="WachtwoordHer" maxlength="25" required >
+      <input type="text" name="Adres" maxlength="95" required>
       <input type="text" name="AdresExtra" maxlength="95">
-      <input type="text" name="Postcode" maxlength="9">
-      <input type="text" name="Plaatsnaam" maxlength="35">
-      <input type="text" name="Land" maxlength="55">
-      <input type="number" name="Telefoonnummer">
+      <input type="text" name="Postcode" maxlength="9" required>
+      <input type="text" name="Plaatsnaam" maxlength="35" required>
+      <input type="text" name="Land" maxlength="55" required>
+      <input type="number" name="Telefoonnummer" required>
       <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
-      <select class="uk-form-select" name="Geheimevraag">
+      <select class="uk-form-select"  name="Geheimevraag" required>
 
        <!-- haalt de geheimenvraag uit de database met value -->
-        <?php foreach(getQuestions() as $key => $value){
-                echo '<option value='.$value['Vraagnummer'].'>'.$value['tekstVraag'].'</option>';
-              }
-        ?>
+        <?php foreach(getQuestions() as $key => $value){ ?>
+
+         <option value="<?php echo $value['vraagNummer'] ?>"><?php echo $value['tekstVraag'] ?></option>
+
+          <?php  } ?>
       </select>
       <input type="text" name="Antwoordvraag" required>
 
