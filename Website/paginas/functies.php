@@ -121,18 +121,33 @@ function checkbestaandemail($mail){
 }
 
 
-//kijken of de mail.
+//kijken of de gebruikersnaambestaat
 function checkbestaandeGebruikersNaam($GebruikersNaam){
 	return preparedQuery("select GebruikersNaam
 						from tblGebruiker
 						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
 }
 
+
+// Dex
 function loginCheck($username)
 {
 	return preparedQuery("SELECT gebruikersNaam, wachtwoord
 						FROM tblGebruiker
 						WHERE gebruikersNaam = :username",[":username" =>$username]);
+
+}
+
+// registreren.
+function newAccount($RegistratieForm){
+	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistratieForm);
+}
+
+
+// Vragen uit database halen
+function getQuestions(){
+
+return query("select * from tblVraag");
 
 }
 
