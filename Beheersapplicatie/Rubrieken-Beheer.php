@@ -1,5 +1,11 @@
 <?php
 include "includes/functies.php";
+
+if(isset($_GET['hrRubriek'])){
+    renameSection($_GET['hrNaam'],$_GET['hrRubriek']);
+}
+if(isset($_GET['vwRubriek']))
+    if(checkSubSection)
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +28,12 @@ include "includes/functies.php";
 <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2" >
     <div class="uk-padding">
         <h1>Verwijderen</h1>
-        <form action=""method="post">
-            <select name="vw_rubriek">
-                <option value="EKVMW">Niks verwijderen</option>
+        <form action="" method="get" class="uk-flex uk-flex-column uk-child-width-1-2">
+            <select name="vwRubriek">
+                <option value="">Niks verwijderen</option>
                 <?php
                     foreach(allSections() as $row){
-                        echo "<option value=".$row['rubriekNaam'].">".$row['rubriekNaam']."</option>";
+                        echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
                     }
                 ?>
             </select>
@@ -36,9 +42,9 @@ include "includes/functies.php";
     </div>
     <div class="uk-padding">
         <h1>Hernoemen</h1>
-        <form action=""method="post" class="uk-flex uk-flex-column uk-child-width-1-2">
+        <form action="" method="get" class="uk-flex uk-flex-column uk-child-width-1-2">
             <select name="hrRubriek">
-                <option value="EKVMW">Niks verwijderen</option>
+                <option value="">Niks Hernoemen</option>
                 <?php
                     foreach(allSections() as $row){
                         echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
