@@ -42,7 +42,7 @@ if(isset($_GET['error'])){
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TEST</title>
+  <title>Inschrijven</title>
   <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
   <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
@@ -61,10 +61,10 @@ if(isset($_GET['error'])){
   <!-- registratieformulier-->
 
 </div>
-<p class='uk-flex uk-flex-center uk-margin-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
+<p class='uk-flex uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
 <form action="handler/handler.php" method="post">
-  <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-large-top">
-    <div class="uk-flex uk-flex-around uk-flex-column uk-height-large">
+  <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
+    <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-medium-left uk-text-nowrap">
       <span>Email:</span>
       <span>Voornaam:</span>
       <span>Achternaam:</span>
@@ -78,12 +78,12 @@ if(isset($_GET['error'])){
       <span>Land:</span>
       <span>Telefoonnummer:</span>
       <span>Geboortedatum:</span>
-      <span>Kies een geheimevraag:</span>
-      <span>Geheimevraag antwoord:</span>
+      <span>Kies Geheimevraag:</span>
+      <span>Geheimevraag Antwoord:</span>
     </div>
 
 
-    <div class="uk-flex uk-flex-column uk-flex-around uk-margin-large-left">
+    <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
       <input type="email" name="email" maxlength="25" required >
       <input type="text" name="Voornaam"  maxlength="50" required>
       <input type="text" name="Achternaam" maxlength="52" required >
@@ -97,7 +97,7 @@ if(isset($_GET['error'])){
       <input type="text" name="Land" maxlength="55" required>
       <input type="number" name="Telefoonnummer" required>
       <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
-      <select class="uk-form-select"  name="Geheimevraag" required>
+      <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>
 
