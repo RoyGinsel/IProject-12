@@ -1,3 +1,5 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <?php
   $breadcrumb = "<li><a href='index.php'>Home</a></li>";
   foreach($crumbs as $crumb) {
@@ -9,11 +11,10 @@
   $cookie_value = date("Y-m-d");
   setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
 ?>
-
-<a name="top"> </a>
+<!DOCTYPE html>
 <header>
   <div class="uk-flex-inline uk-flex-between uk-flex-middle uk-width-1-1 header">
-    <div>
+    <div class="uk-flex uk-flex-row">
       <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-small-left"><img src="../media/Hamburgermenu.png" alt=""></button>
       <div class="dropmenu" uk-dropdown>
         <ul class="uk-nav uk-dropdown-nav">
@@ -32,7 +33,7 @@
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
-      <span class="uk-visible@s">
+      <div class="uk-visible@s uk-flex uk-flex-row">
         <button type="button" class=" rubrieken uk-button uk-button-small uk-margin-small-left uk-text-capitalize">Rubrieken</button>
         <div class=" uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
           <?php
@@ -40,7 +41,7 @@
             include "Rubriekenboom-header-dropdown.php";
           ?>
         </div>
-      </span>
+      </div>
     </div>
     <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
   </div>
@@ -63,11 +64,14 @@
   <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
 
   <?php
+<<<<<<< HEAD
 
     $currentDate = date('d-m-Y');
+=======
+>>>>>>> ccb7d0f22352d8b6026f8a305ebcd70976a312c8
       if(isset($_SESSION['username'])){
-        echo "Welkom, $username! <br>";
-        echo "Ingelogd op: $currentDate";
+        echo "Welkom, ". $_SESSION['username']."! <br>";
+        echo "Ingelogd op: ". $_SESSION['date'];
       }
       if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
         echo  '
