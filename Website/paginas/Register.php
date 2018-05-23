@@ -1,11 +1,16 @@
 <?php
 session_start();
-  include "functies.php";
-  $crumbs = array();
-
-
+include "functies.php";
+$crumbs = array("Inloggen");
+if(isset($_GET["data"])){
+  $data = htmlspecialchars($_GET["data"]);
+} else {
+  $data = 1;
+}
 
  ?>
+
+ <!DOCTYPE HTML>
 <html lang="nl" dir="ltr">
 
   <head>
@@ -29,7 +34,7 @@ session_start();
 
   <!-- registratieformulier-->
 
-<?phptr
+<?php
 
 
 // geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
@@ -106,7 +111,7 @@ case "Wachtwoord":
     </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-small-top" value="submitbutton" name="submit">Verzenden</button>
+<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
 <div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $melding; }?> </div>
 

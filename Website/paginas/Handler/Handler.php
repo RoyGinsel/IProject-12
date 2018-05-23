@@ -102,6 +102,7 @@ if(isset($_POST['Telefoonnummer'])){
 
         //inserten
         newAccount($registratieForm);
+        $_SESSION['username'] = $Gebruikersnaam;
         header('Location: /iproject-12/website/paginas/index.php');
             }
 

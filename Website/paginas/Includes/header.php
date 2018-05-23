@@ -61,7 +61,9 @@
     </ul>
   </div>
   <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
+
   <?php
+
     $currentDate = date('d-m-Y');
       if(isset($_SESSION['username'])){
         echo "Welkom, $username! <br>";
