@@ -15,6 +15,7 @@
  foreach(loginCheck($username) as $row){
    if(password_verify($password, $row['wachtwoord'])){
      $_SESSION['username'] = $username;
+     $_SESSION['date'] = date('d-m-Y');
    }else
     header('Location: inloggen.php?msg=failed');
    }
