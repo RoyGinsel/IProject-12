@@ -138,6 +138,12 @@ function loginCheck($username)
 
 }
 
+function getPassword($username){
+	return preparedQuery("SELECT wachtwoord
+											FROM tblGebruiker
+											WHERE gebruikersNaam = :username",[":username" =>$username]);
+}
+
 // registreren.
 function newAccount($RegistratieForm){
 	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistratieForm);
