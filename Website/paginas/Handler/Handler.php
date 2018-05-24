@@ -1,6 +1,6 @@
 <?php
 session_start();
-Require_once('../functies.php');
+include "../functies.php";
 
 
 // kijken of form wel gesubmit is.
@@ -56,23 +56,23 @@ if(isset($_POST['Telefoonnummer'])){
 }
 
 
-  $registratieForm = ["Gebruikersnaam" => $_POST['Gebruikersnaam'], "Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Adres" => $_POST['Adres'], "AdresExtra" => $_POST['AdresExtra'], "Postcode" => $_POST['Postcode'],"Plaatsnaam" =>
-  $_POST['Plaatsnaam'], "Land" => $_POST['Land'], "Geboortedatum" => $_POST['Geboortedatum'],"Wachtwoord" =>  $_POST['Wachtwoord'], "WachtwoordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag'],"Antwoordvraag" => $_POST['Antwoordvraag']];
+  $registrationForm = ["userName" => $_POST['Gebruikersnaam'], "Voornaam" => $_POST['Voornaam'], "Achternaam" => $_POST['Achternaam'], "Adres" => $_POST['Adres'], "AdresExtra" => $_POST['AdresExtra'], "Postcode" => $_POST['Postcode'],"Plaatsnaam" =>
+  $_POST['Plaatsnaam'], "Land" => $_POST['Land'], "Geboortedatum" => $_POST['Geboortedatum'],"Password" =>  $_POST['Wachtwoord'], "PasswordHer" =>  $_POST['WachtwoordHer'], "Geheimevraag" => $_POST['Geheimevraag'],"Antwoordvraag" => $_POST['Antwoordvraag']];
 
 
-//sanitize strings
-  foreach($registratieForm as $key => $value){
+//sanitize invoervelden
+  foreach($registrationForm as $key => $value){
 
-    $registratieForm[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+    $registrationForm[$key] = filter_var($value, FILTER_SANITIZE_STRING);
   };
 
 
 // zet de array om in variabelen zodat er gekeken kan worden of ze bestaan.
-  extract($registratieForm, EXTR_PREFIX_SAME, "wddx");
+  extract($registrationForm, EXTR_PREFIX_SAME, "wddx");
 
 
 //kijken of de gebruikersnaam al bestaat.
-  if (!empty(checkbestaandeGebruikersNaam($Gebruikersnaam))) {
+  if (!empty(checkavailableUsername($userName))) {
 
 
 
@@ -83,25 +83,27 @@ if(isset($_POST['Telefoonnummer'])){
 
 
   // kijken of email bestaat
-  if (!empty(checkbestaandemail($email))) {
+  if (!empty(checkavailableMail($email))) {
 
 
       header('Location: /iproject-12/website/paginas/register.php?error=Email');
       die();
     }else {
 
-      $hashpassword = password_hash($Wachtwoord, PASSWORD_DEFAULT);
+      $hashpassword = password_hash($Password, PASSWORD_DEFAULT);
 
-      //wachtwoord verwijderen uit formulier.
+      //wachtwoord verwijderen uit formulier voor veiligheidsredenen
 
       if(isset($hashpassword)){
 
-        $registratieForm['Wachtwoord'] = $hashpassword;
-        $registratieForm['Mail'] = $email;
-        unset($registratieForm['WachtwoordHer']);
+        $registrationForm['Password'] = $hashpassword;
+        $registrationForm['Mail'] = $email;
+        unset($registrationForm['PasswordHer']);
 
         //inserten
-        newAccount($registratieForm);
+        newAccount($registrationForm);
+        $_SESSION['username'] = $userName;
+        $_SESSION['date'] = date('d-m-Y');
         header('Location: /iproject-12/website/paginas/index.php');
             }
 
@@ -109,7 +111,7 @@ if(isset($_POST['Telefoonnummer'])){
   }
 
 
-  echo '<pre>', var_dump($registratieForm), '</pre>';
+  echo '<pre>', var_dump($registrationForm), '</pre>';
 
 
 

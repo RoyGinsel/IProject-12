@@ -114,7 +114,7 @@ function loop($section)
 
 
 // kijken of de mail bestaat bij registreren.
-function checkbestaandemail($mail){
+function checkavailableMail($mail){
 	return preparedQuery("select mail
 						from tblGebruiker
 						where mail =:mail",[":mail"=> $mail]);
@@ -122,14 +122,14 @@ function checkbestaandemail($mail){
 
 
 //kijken of de gebruikersnaambestaat
-function checkbestaandeGebruikersNaam($GebruikersNaam){
+function checkavailableUsername($userName){
 	return preparedQuery("select GebruikersNaam
 						from tblGebruiker
-						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $GebruikersNaam]);
+						where GebruikersNaam =:GebruikersNaam",[":GebruikersNaam"=> $userName]);
 }
 
 
-// Dex
+// kijken of de username voorkomt in de database
 function loginCheck($username)
 {
 	return preparedQuery("SELECT gebruikersNaam, wachtwoord
@@ -145,8 +145,8 @@ function getPassword($username){
 }
 
 // registreren.
-function newAccount($RegistratieForm){
-	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistratieForm);
+function newAccount($RegistrationForm){
+	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistrationForm);
 }
 
 
@@ -157,4 +157,7 @@ return query("select * from tblVraag");
 
 }
 
+"SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
+from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
+order by rubriekNaam asc"
  ?>
