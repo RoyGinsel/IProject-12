@@ -4,8 +4,27 @@ include "includes/functies.php";
 if(isset($_GET['hrRubriek'])){
     renameSection($_GET['hrNaam'],$_GET['hrRubriek']);
 }
-if(isset($_GET['vwRubriek']))
-    if(checkSubSection)
+if(isset($_GET['vwRubriek']) && !isset($_GET['probleem'])){
+    $number = $_GET['vwRubriek'];
+    if(checkSubSections($number)){
+        echo "in de if";
+        foreach(section($number) as $row){
+            echo "in foreach";
+            changeParentRubriek($number,$row['parentRubriek']);
+            deleteRubriek($number);
+        }
+    } elseif(checkAuctions($number)){
+        header("Rubrieken-beheer.php?vwRubiek=$number&probleem=1");
+    } else {
+        deleteRubriek($number);
+    }
+} elseif(isset($_GET['vwRubriek']) && isset($_GET['doorgaan'])){
+    $number = $_GET['vwRubriek'];
+    echo "in foreach";
+    deleteAuctionRubriek($number);
+    deleteRubriek($number);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +43,16 @@ if(isset($_GET['vwRubriek']))
 <body>
     <?php
         include "includes/header.php";
+        if(isset($_GET['probleem'])){
+            echo "<div class='uk-align-center uk-width-1-2'>
+            <p class='uk-align-center'>De rubriek die u wilde verwijderen heeft veilig items.<br>
+            Wilt u toch doorgaan met de actie dan worden de veilig items ontbonden van dat rubriek.</p>
+            <div class='uk-flex uk-flex-around uk-width-1-1'>
+                <a href='Rubrieken-Beheer.php?vwRubriek=$number&doorgaan=1'>Ja</a>
+                <a href='Rubrieken-Beheer.php'>Nee</a>
+            </div>
+        </div>";
+        }
     ?>
 <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2" >
     <div class="uk-padding">

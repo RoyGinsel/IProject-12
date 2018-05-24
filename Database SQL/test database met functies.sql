@@ -63,11 +63,11 @@ begin
 	return 0
 end
 
-create function availableSeller (@username varchar(20))
+alter function availableSeller (@username varchar(20))
 returns bit
 as
 begin
-	if((select * from tblGebruiker where gebruikersNaam = @username and mogelijkeVerkoper = 1) is not null)
+	if((select gebruikersNaam from tblGebruiker where gebruikersNaam = @username and mogelijkeVerkoper = 1) is not null)
 		return 1
 	else
 		return 0
@@ -79,6 +79,9 @@ returns bit
 as
 begin
 	if(@control = 'Creditcard' and @number is not null)
+		return 1
+	else
+	if(@control = 'Post')
 		return 1
 	else
 		return 0
@@ -109,6 +112,8 @@ begin
 	return 0
 end
 
+alter table tblverkoper
+add constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1)
 
 /* tblVraag */
 create table tblVraag(

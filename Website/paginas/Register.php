@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "functies.php";
-$crumbs = array("Inloggen");
+$crumbs = array("Register");
 if(isset($_GET["data"])){
   $data = htmlspecialchars($_GET["data"]);
 } else {
@@ -11,7 +11,7 @@ if(isset($_GET["data"])){
 
 if(isset($_SESSION['username'])){
 
-  header('Location: /iproject-12/website/paginas/index.php');
+  header('Location: index.php');
 
 }
 
@@ -61,9 +61,10 @@ if(isset($_GET['error'])){
   <!-- registratieformulier-->
 
 </div>
-<p class='uk-flex uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
-<form action="handler/handler.php" method="post">
-  <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
+<p class='uk-flex  uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
+<form action="handler.php" method="post">
+  <div class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
+  
     <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-medium-left uk-text-nowrap">
       <span>Email:</span>
       <span>Voornaam:</span>
@@ -96,7 +97,7 @@ if(isset($_GET['error'])){
       <input type="text" name="Plaatsnaam" maxlength="35" required>
       <input type="text" name="Land" maxlength="55" required>
       <input type="number" name="Telefoonnummer" required>
-      <input type="date" name="Geboortedatum" max="<?php echo date("Y-m-d") ?>">
+      <input type="date" name="Geboortedatum"  max="<?php echo date("Y-m-d") ?>">
       <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>
