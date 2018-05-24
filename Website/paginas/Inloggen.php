@@ -45,16 +45,12 @@
         <form action="index.php" method="post" class="uk-panel uk-panel-box uk-form">
           <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" name="post_gebruikersnaam" type="text"  placeholder="Gebruikersnaam" required>
-          </div>
-          <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_wachtwoord" type="password" placeholder="Wachtwoord" required>
-          </div>
-          <div class="uk-flex uk-flex-inline uk-width-1-1 uk-child-width-1-2  uk-margin-top">
-            <div class="uk-form-row uk-text-small uk-flex uk-flex-middle">
-              <a class="uk-link" href="#">Wachtwoord vergeten?</a>
-            </div>
-            <div class="uk-form-row">
-              <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove knopje" type="Submit" name="Submit" value="LOG IN">
+            <div class="uk-flex uk-flex-inline uk-width-1-1 uk-child-width-1-2  uk-margin-top">
+              <div class="uk-text-small uk-flex uk-flex-middle">
+                <a class="uk-link" href="#">Wachtwoord vergeten?</a>
+              </div>
+                <input class="uk-button uk-button-primary uk-width-1-2 uk-padding-remove knopje" type="Submit" name="Submit" value="LOG IN">
             </div>
           </div>
         </form>
