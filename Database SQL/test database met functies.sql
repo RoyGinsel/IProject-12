@@ -62,8 +62,8 @@ begin
 		return 0
 	return 0
 end
-
-alter function availableSeller (@username varchar(20))
+/* verbeterd */
+create function availableSeller (@username varchar(20))
 returns bit
 as
 begin
@@ -73,7 +73,7 @@ begin
 		return 0
 	return 0
 end
-
+/* verbeterd */
 create function controle (@control varchar(15),@number varchar(25))
 returns bit
 as
@@ -111,10 +111,10 @@ begin
 		return 0
 	return 0
 end
-
+/*
 alter table tblverkoper
-add constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1)
-
+add constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1)
+*/
 /* tblVraag */
 create table tblVraag(
 vraagNummer int identity(1,1),
@@ -204,12 +204,13 @@ create table tblVoorwerpRubriek(
 )
 
 /* tblbod af */
+/* verbeterd */
 create table tblBod(
 	voorwerpNummer bigint not null,
 	bodBedrag numeric(11,2) not null,
 	gebruiker varchar(20) not null,
-	bodDag as convert(date,CURRENT_TIMESTAMP),
-	bodTijdstip as convert(time,CURRENT_TIMESTAMP),
+	bodDag date not null,
+	bodTijdstip time not null,
 	constraint pk_tblBod primary key (voorwerpNummer,bodBedrag),
 	constraint fk_tblBod_voorwerpNummer foreign key (voorwerpNummer) references tblVoorwerp(voorwerpNummer),
 	constraint fk_tblBod_gebruikersNaam foreign key (gebruiker) references tblGebruiker(gebruikersNaam),
