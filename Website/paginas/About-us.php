@@ -5,6 +5,8 @@
     <title></title>
   </head>
   <body>
-
+    <?php
+      echo password_hash('123', PASSWORD_DEFAULT);
+    ?>
   </body>
 </html>

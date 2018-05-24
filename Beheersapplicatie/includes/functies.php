@@ -1,6 +1,6 @@
 <?php
-    //include "../Website/paginas/database.php";
-    include "../SQLSrvConnect.php";
+    include "../Website/paginas/database.php";
+    //include "../SQLSrvConnect.php";
 
     function query($stringquery)
     {
@@ -44,12 +44,21 @@
                         where rubriekNummer = :number",['name' => $name,'number' => $number]);
     }
 
-    function checkSubSections($number)
-    {
-        if((preparedQuery("SELECT * from tblRubriek where parentRubriek = :number"),['number' => $number]) == false){
-            return 1
-        } else  {
-            return 0
-        }
-    }
+    // function checkSubSections($number)
+    // {
+    //     if((preparedQuery("SELECT * from tblRubriek where parentRubriek = :number"),['number' => $number]) == false){
+    //         return 1;
+    //     } else  {
+    //         return 0;
+    //     }
+    // }
+
+    // function checkAutions($number)
+    // {
+    //     if((preparedQuery("SELECT * from tblVoorwerpRubriek where rubriekNummer  = :number"),['number' => $number]) == false){
+    //         return 1;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
 ?>

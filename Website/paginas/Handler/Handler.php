@@ -1,6 +1,6 @@
 <?php
 session_start();
-Require_once('../functies.php');
+include "../functies.php";
 
 
 // kijken of form wel gesubmit is.
