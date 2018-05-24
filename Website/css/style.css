@@ -209,3 +209,21 @@ main {
   padding-top:20px;
   font-size:15px;
 }
+.SamenvattingMobile h1{
+  font-size: 14px;
+}
+.SamenvattingMobile p{
+  font-size: 12px;
+}
+.voorwerpOmschrijving{
+  list-style-type: none;
+}
+
+.voorwerpFoto{
+  max-width:90%;
+  margin-left:3px ;
+}
+.voorwerpFotoMobile{
+  max-width:80%;
+  margin-left:10px ;
+}
