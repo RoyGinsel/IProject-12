@@ -1,4 +1,4 @@
-
+   
 <?php
 include "../functies.php";
 //Opgevangen variabele van de ajax request op rubrieken-accordion.php
