@@ -1,3 +1,6 @@
+delete from tblRubriek
+where 1=1
+
 create table Categorieen(
 ID int not null,
 Name varchar(100) not null,
