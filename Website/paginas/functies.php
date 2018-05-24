@@ -1,12 +1,6 @@
 <?php
-<<<<<<< HEAD
     include "database.php";
 	//include "../../SQLSrvConnect.php";
-=======
-	include "database.php";
-	//include "../../SQLSrvConnect.php";
-	//Index.php -> Select statement voor populaireitems
->>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 
 
 function query($stringquery)
@@ -32,8 +26,8 @@ function preparedQuery($stringquery,$parameters)
 		$query->execute($parameters);
 		return $query->fetchAll();
 
-		
-		
+
+
 	}
 	catch(PDOException $e) {
 		echo $e->getMessage();
@@ -87,7 +81,8 @@ function changes($date)
 
 function items($search)
 {
-	if($search != ""){
+  $search = "%".$search."%";
+	if($search != "%%"){
 		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
@@ -95,9 +90,9 @@ function items($search)
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-					where r.rubriekNaam like '%:rubriekname%'",["rubriekname"=>$search]);
+					where r.rubriekNaam like :rubriekname",["rubriekname"=>$search]);
 	} else {
-		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs, v.voorwerpNummer
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
@@ -167,8 +162,8 @@ function newAccount($RegistrationForm){
 		$query->execute(array($RegistrationForm['userName'], $RegistrationForm['voornaam'], $RegistrationForm['achternaam'], $RegistrationForm['adres'], $RegistrationForm['adresExtra'], $RegistrationForm['postcode'], $RegistrationForm['plaatsnaam'], $RegistrationForm['land'],"08-08-1996", $RegistrationForm['mail'], $RegistrationForm['password'],
 							  $RegistrationForm['geheimevraag'],$RegistrationForm['antwoordvraag'],"0"));
 
-	  
-		
+
+
 
 
 	} catch (PDOException $e) {
@@ -176,7 +171,7 @@ function newAccount($RegistrationForm){
 
 		echo $e->getMessage();
 	}
-	
+
 	header('location: ./index.php');
 }
 
