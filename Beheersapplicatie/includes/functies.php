@@ -30,6 +30,11 @@
         }
     }
 
+    function section($number)
+    {
+        return preparedQuery("select * from tblRubriek where rubriekNummer = :number",['number' => $number]);
+    }
+
     function allSections()
     {
         return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
@@ -44,21 +49,41 @@
                         where rubriekNummer = :number",['name' => $name,'number' => $number]);
     }
 
-    // function checkSubSections($number)
-    // {
-    //     if((preparedQuery("SELECT * from tblRubriek where parentRubriek = :number"),['number' => $number]) == false){
-    //         return 1;
-    //     } else  {
-    //         return 0;
-    //     }
-    // }
+    function checkSubSections($number)
+    {
+        if(preparedQuery("SELECT * from tblRubriek where parentRubriek = :number",['number' => $number]) == false){
+            var_dump(preparedQuery("SELECT * from tblRubriek where parentRubriek = :number",['number' => $number]));
+            return 0;
+        } else  {
+            return 1;
+        }
+    }
 
-    // function checkAutions($number)
-    // {
-    //     if((preparedQuery("SELECT * from tblVoorwerpRubriek where rubriekNummer  = :number"),['number' => $number]) == false){
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    // }
+    function changeParentRubriek($number, $newParent)
+    {
+        preparedQuery("update tblRubriek
+                        set parentRubriek = :newParent
+                        where parentRubriek = :number",['newParent'=> $newParent, 'number' => $number]);
+    }
+
+    function checkAuctions($number)
+    {
+        if(preparedQuery("SELECT * from tblVoorwerpRubriek where rubriekNummer  = :number",['number' => $number]) == false){
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    function deleteRubriek($number)
+    {
+        preparedQuery("DELETE from tblRubriek
+                        where rubriekNummer = :number",['number' => $number]);
+    }
+
+    function deleteAuctionRubriek($number)
+    {
+        preparedQuery("DELETE from tblVoorwerpRubriek
+                        where rubriekNummer = :number",['number' => $number]);
+    }
 ?>
