@@ -12,7 +12,7 @@ $url =  $_SERVER['REQUEST_URI'];
   $cookie_value = date("Y-m-d");
   setcookie($cookie_name ,$cookie_value,time() + (86400 * 30),"/",null,null,null);
 ?>
-<!DOCTYPE html>
+
 <header>
   <div class="uk-flex-inline uk-flex-between uk-flex-middle uk-width-1-1 header">
     <div class="uk-flex uk-flex-row">
@@ -59,9 +59,11 @@ $url =  $_SERVER['REQUEST_URI'];
       <?php echo $breadcrumb; ?>
     </ul>
   </div>
-  <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">
 
-  <?php
+ <?php
+  if(isset($_SESSION['username'])){
+
+   echo ' <div class="uk-flex uk-flex-left uk-width-1-1 userStat uk-flex-inline uk-flex-left">' ;
 
     $currentDate = date('d-m-Y');
       if(isset($_SESSION['username'])){
@@ -75,6 +77,8 @@ $url =  $_SERVER['REQUEST_URI'];
         <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
         <p> Tot de volgende keer! </p> </div>';
       }
+  
+}   
   ?>
   </div>
 </header>
