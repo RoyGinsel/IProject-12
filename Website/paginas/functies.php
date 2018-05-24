@@ -1,6 +1,12 @@
 <?php
+<<<<<<< HEAD
     include "database.php";
 	//include "../../SQLSrvConnect.php";
+=======
+	include "database.php";
+	//include "../../SQLSrvConnect.php";
+	//Index.php -> Select statement voor populaireitems
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 
 
 function query($stringquery)

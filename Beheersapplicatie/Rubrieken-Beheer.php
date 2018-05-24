@@ -7,14 +7,23 @@ if(isset($_GET['hrRubriek'])){
 if(isset($_GET['vwRubriek']) && !isset($_GET['probleem'])){
     $number = $_GET['vwRubriek'];
     if(checkSubSections($number)){
+<<<<<<< HEAD
         echo "in de if";
         foreach(section($number) as $row){
             echo "in foreach";
+=======
+        foreach(section($number) as $row){
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
             changeParentRubriek($number,$row['parentRubriek']);
             deleteRubriek($number);
         }
     } elseif(checkAuctions($number)){
+<<<<<<< HEAD
         header("Rubrieken-beheer.php?vwRubiek=$number&probleem=1");
+=======
+        echo "ik kom hier door";
+        header("location: Rubrieken-beheer.php?vwRubiek=$number&probleem=1");
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
     } else {
         deleteRubriek($number);
     }
