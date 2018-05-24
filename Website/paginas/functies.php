@@ -1,6 +1,6 @@
 <?php
-	//include "database.php";
-	include "../../SQLSrvConnect.php";
+	include "database.php";
+	//include "../../SQLSrvConnect.php";
 	//Index.php -> Select statement voor populaireitems
 
 
@@ -157,4 +157,7 @@ return query("select * from tblVraag");
 
 }
 
+"SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
+from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
+order by rubriekNaam asc"
  ?>

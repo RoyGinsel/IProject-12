@@ -4,8 +4,14 @@ include "includes/functies.php";
 if(isset($_GET['hrRubriek'])){
     renameSection($_GET['hrNaam'],$_GET['hrRubriek']);
 }
-if(isset($_GET['vwRubriek']))
-    if(checkSubSection)
+// if(isset($_GET['vwRubriek'])){
+//     $number = $_GET['vwRubriek'];
+//     if(checkSubSection($number)){
+        
+//     } elseif(checkAuctions($number)){
+
+//     }
+// }
 ?>
 
 <!DOCTYPE html>

@@ -10,7 +10,6 @@ $(document).ready(function(){
   $('.a').one("click",function (element) {
        //bepalen van id waarop geklikt is
         rubriekClicked =  $(this).attr('id');
-        alert(rubriekClicked);
         //stuurt een request naar de url
         $.ajax({type: 'POST',
         //haalt de data op van de url
