@@ -47,7 +47,7 @@ if(isset($_GET['vwRubriek']) && !isset($_GET['probleem'])){
             <p class='uk-align-center'>De rubriek die u wilde verwijderen heeft veilig items.<br>
             Wilt u toch doorgaan met de actie dan worden de veilig items ontbonden van dat rubriek.</p>
             <div class='uk-flex uk-flex-around uk-width-1-1'>
-                <a href='Rubrieken-Beheer.php?vwRubriek=$number&doorgaan=1'>Ja</a>
+                <a href='Rubrieken-Beheer.php?vwRubriek=""&doorgaan=1'>Ja</a>
                 <a href='Rubrieken-Beheer.php'>Nee</a>
             </div>
         </div>";
