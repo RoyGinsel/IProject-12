@@ -33,9 +33,9 @@
         </ul>
       </div>
       <!-- Rubrieken dropdown medium & larger -->
-      <div class="uk-visible@s uk-flex uk-flex-row">
+      <div class="uk-flex uk-flex-row">
         <button type="button" class=" rubrieken uk-button uk-button-small uk-margin-small-left uk-text-capitalize">Rubrieken</button>
-        <div class=" uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
+        <div class="uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
           <?php
             $id = "search1";
             include "Rubriekenboom-header-dropdown.php";
@@ -43,19 +43,14 @@
         </div>
       </div>
     </div>
-    <h1 class="uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
-  </div>
-
-  <!-- Rubrieken dropdown small -->
-  <span class="uk-hidden@s">
-    <button type="button" class="uk-button uk-button-small uk-padding-remove uk-margin-remove uk-width-1-1 uk-margin-small-left">Rubrieken</button>
-      <div class="uk-width-1-1 uk-padding-remove-left uk-padding-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
-        <?php
-          $id = "search2";
-          include "Rubriekenboom-header-dropdown.php";
-        ?>
-      </div>
-  </span>
+    <div class="uk-visible@m">
+    <h1 class=" uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
+    </div>
+    <div class="uk-hidden@m ">
+    <h2 class=" uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h2>
+    </div>
+  </div>      
+ 
   <div class="uk-flex uk-flex-center  uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb crumb">
       <?php echo $breadcrumb; ?>
