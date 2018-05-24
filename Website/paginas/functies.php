@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
+    include "database.php";
+	//include "../../SQLSrvConnect.php";
+=======
 	include "database.php";
 	//include "../../SQLSrvConnect.php";
 	//Index.php -> Select statement voor populaireitems
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 
 
 function query($stringquery)
@@ -24,11 +29,15 @@ function preparedQuery($stringquery,$parameters)
 		global $dbh;
 
     	$query = $dbh->prepare($stringquery);
-    	$query->execute($parameters);
-    	return $query->fetchAll();
+		$query->execute($parameters);
+		return $query->fetchAll();
+
+		
+		
 	}
 	catch(PDOException $e) {
 		echo $e->getMessage();
+
 	}
 }
 
@@ -146,8 +155,33 @@ function getPassword($username){
 
 // registreren.
 function newAccount($RegistrationForm){
-	return preparedQuery("insert into tblGebruiker values (:Gebruikersnaam,:Voornaam,:Achternaam,:Adres,:AdresExtra,:Postcode,:Plaatsnaam,:Land,:Geboortedatum,:Mail,:Wachtwoord,:Geheimevraag,:Antwoordvraag,0)",$RegistrationForm);
+
+
+	try {
+
+		global $dbh;
+		$sql = "insert into tblGebruiker(gebruikersNaam,voornaam,achternaam,adresRegel,extraAdresRegel,postcode,plaatsNaam,land,geboorteDag,mail,wachtwoord,vraagNummer,antwoordvraag,mogelijkeVerkoper) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$query = $dbh->prepare($sql);
+
+
+		$query->execute(array($RegistrationForm['userName'], $RegistrationForm['voornaam'], $RegistrationForm['achternaam'], $RegistrationForm['adres'], $RegistrationForm['adresExtra'], $RegistrationForm['postcode'], $RegistrationForm['plaatsnaam'], $RegistrationForm['land'],"08-08-1996", $RegistrationForm['mail'], $RegistrationForm['password'],
+							  $RegistrationForm['geheimevraag'],$RegistrationForm['antwoordvraag'],"0"));
+
+	  
+		
+
+
+	} catch (PDOException $e) {
+
+
+		echo $e->getMessage();
+	}
+	
+	header('location: ./index.php');
 }
+
+
+
 
 
 // Vragen uit database halen
