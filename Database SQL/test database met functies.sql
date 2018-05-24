@@ -62,8 +62,13 @@ begin
 		return 0
 	return 0
 end
+<<<<<<< HEAD
+
+alter function availableSeller (@username varchar(20))
+=======
 /* verbeterd */
 create function availableSeller (@username varchar(20))
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 returns bit
 as
 begin
@@ -111,10 +116,17 @@ begin
 		return 0
 	return 0
 end
+<<<<<<< HEAD
+
+alter table tblverkoper
+add constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1)
+
+=======
 /*
 alter table tblverkoper
 add constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1)
 */
+>>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 /* tblVraag */
 create table tblVraag(
 vraagNummer int identity(1,1),
