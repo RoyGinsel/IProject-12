@@ -51,10 +51,10 @@
       </div>
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
-        <table class="uk-table uk-table-divider uk-width-1-1 ">
+        <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
           <tr>
             <td>Voorwerpnummer:</td>
-            <td>1</td>
+            <td></td>
           </tr>
           <tr>
             <td>Locatie:</td>
@@ -88,7 +88,7 @@
           <form action="" method="post" class="uk-panel uk-panel-box uk-form">
             <div class="uk-form-row">
               <input class="uk-width-1-3 uk-form-large" name="invoerBod" type="number"  placeholder="Bod" required>
-              <input class="uk-button uk-button-primary uk-width-1-2 uk-padding-remove knopje" type="Submit" name="Bod" value="Bieden">
+              <input class="uk-button uk-button-primary uk-width-1-2 uk-padding-remove" type="Submit" name="Bod" value="Bieden">
             </div>
           </form>
         </div>
@@ -106,7 +106,7 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
-        <div class="uk-body">
+        <div class="uk-body uk-scrollable-text">
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
                 <th>Commentaar:</th>
@@ -215,7 +215,7 @@
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
           </div>
-          <div class="uk-body">
+          <div class="uk-body uk-scrollable-text">
               <div class="uk-width-1-1 SamenvattingMobile">
                 <div class="uk-margin-top">
                   <h1>Commentaar:</h1>
