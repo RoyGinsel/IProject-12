@@ -7,7 +7,7 @@
        //id wordt gebruikt in de javascript autocomplete functie
         echo "<input id='search1' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; 
         ?>
-      <div id="autocomplete-list"></div>
+      <div id="autocomplete-list" uk-dropdown="mode: click"></div>
       </div>
      <div class="uk-float-right ">
        <input class="submitButton" type="submit">

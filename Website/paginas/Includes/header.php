@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <?php
+$url =  $_SERVER['REQUEST_URI'];
+ $url = basename($url);;
   $breadcrumb = "<li><a href='index.php'>Home</a></li>";
   foreach($crumbs as $crumb) {
     $breadcrumb .= "<li><a href='$crumb.php'>$crumb</a></li>";
@@ -38,7 +39,9 @@
         <div class="uk-width-3-4 uk-padding-remove-left uk-padding-remove-right uk-margin-remove-left uk-margin-remove-right uk-child-width-1-3@M" uk-dropdown="mode: click" uk-grid>
           <?php
             $id = "search1";
+            if($url != 'producten.php'){
             include "Rubriekenboom-header-dropdown.php";
+            }
           ?>
         </div>
       </div>
