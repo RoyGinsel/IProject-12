@@ -65,7 +65,7 @@ if(isset($_GET['error'])){
 <form action="handler.php" method="post">
   <div class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
   
-    <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-medium-left uk-text-nowrap">
+    <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-small-left uk-text-nowrap">
       <span>Email:</span>
       <span>Voornaam:</span>
       <span>Achternaam:</span>
@@ -84,7 +84,7 @@ if(isset($_GET['error'])){
     </div>
 
 
-    <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-medium-right uk-text-truncate">
+    <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
       <input type="email" name="email" maxlength="25" required >
       <input type="text" name="Voornaam"  maxlength="50" required>
       <input type="text" name="Achternaam" maxlength="52" required >
