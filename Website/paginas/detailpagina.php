@@ -8,6 +8,7 @@
       $data = 1;
     }
     $info = getProductinfo($_GET['item']);
+    $seller = getseller($_GET['item']);
  ?>
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
@@ -63,7 +64,12 @@
        
        <!-- samenvatting -->
 
+
+      
+
        <?php 
+
+       //echo "<pre>",var_dump($seller), "</pre>";
 
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
@@ -95,11 +101,15 @@
           </tr>
           <tr>
             <td>Verkoper:</td>
-            <td>'.$info[0]['verkoper'].'</td>
+            <td>'.$seller[0]['verkoper'].'</td>
           </tr>
           <tr>
             <td>succesvolle verkopen:</td>
-            <td>'.$info[0]['verkoper'].'</td>
+            <td>'.$seller[0]['succesvolleVerkopen'].'</td>
+          </tr>
+          <tr>
+            <td>lid sinds:</td>
+            <td>'.$seller[0]['lidSinds'].'</td>
           </tr>
         </table>
       </div>

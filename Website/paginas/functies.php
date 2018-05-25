@@ -182,7 +182,7 @@ function getProductinfo($itemID)
 				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
-function getProductinfo($itemID)
+function getseller($itemID)
 {
   	return preparedQuery(" SELECT verkoper, lidSinds, succesvolleVerkopen
                           FROM tblVerkoper, tblVoorwerp
