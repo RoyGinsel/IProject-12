@@ -182,6 +182,12 @@ function getProductinfo($itemID)
 				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
+function getProductinfo($itemID)
+{
+  	return preparedQuery(" SELECT verkoper, lidSinds, succesvolleVerkopen
+                          FROM tblVerkoper, tblVoorwerp
+                          WHERE tblverkoper.gebruikersnaam = tblvoorwerp.verkoper and tblvoorwerp.voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
+}
 
 
 // Vragen uit database halen
