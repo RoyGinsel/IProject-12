@@ -7,6 +7,7 @@
     } else {
       $data = 1;
     }
+    $info = getProductinfo($_GET['item']);
  ?>
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
@@ -40,48 +41,68 @@
           <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
           <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
         </div>
+
+
+          <!-- omschrijving -->
+          <?php
+        $omschrijving = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving:</h1>
           <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
-            <li class="uk-margin-top">Looptijd:</li>
-            <li class="uk-margin-top">Gestart op:</li>
-            <li class="uk-margin-top">Eindigd op:</li>
+            <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
+            <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
+            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
           </ul>
         </div>
       </div>
+      ';
+
+      echo $omschrijving;
+      ?>
+       
+       <!-- samenvatting -->
+
+       <?php 
+
+       $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
         <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
           <tr>
             <td>Voorwerpnummer:</td>
-            <td></td>
+            <td>'.$info[0]['voorwerpNummer'].'</td>
           </tr>
           <tr>
             <td>Locatie:</td>
-            <td>Zeddam</td>
+            <td>'.$info[0]['plaatsnaam'].'</td>
           </tr>
           <tr>
             <td>Betalingswijze:</td>
-            <td>Paypal</td>
+            <td>'.$info[0]['betaalWijze'].'</td>
           </tr>
           <tr>
             <td>Betalingsinstructie:</td>
-            <td>Maak over naar rekening: .......</td>
+            <td>'.$info[0]['betalingsInstructie'].'</td>
           </tr>
           <tr>
             <td>Startprijs:</td>
-            <td>&euro; 80.000</td>
+            <td>&euro; '.$info[0]['startPrijs'].'</td>
           </tr>
           <tr>
             <td>Verzendkosten:</td>
-            <td>&euro; 2</td>
+            <td>&euro; '.$info[0]['verzendkosten'].'</td>
           </tr>
           <tr>
             <td>Verkoper:</td>
-            <td>Dex</td>
+            <td>'.$info[0]['verkoper'].'</td>
           </tr>
         </table>
       </div>
+     ';
+
+     echo $samenvatting;
+      ?>
       <div class="uk-card uk-card-default uk-card-body uk-width-1-3 uk-margin-top">
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>

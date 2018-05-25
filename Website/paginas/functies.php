@@ -177,8 +177,8 @@ function newAccount($RegistrationForm){
 
 function getProductinfo($itemID)
 {
-  	return preparedQuery("SELECT voorwerpNummer, locatie, Betalingswijze, Betalingsinstructie, startPrijs, Verzendkosten, verkoper
-				from tblVoorwerpRubriek
+  	return preparedQuery("SELECT looptijdBeginDag, looptijdEindeDag,looptijd,titel,voorwerpNummer,plaatsnaam,betaalWijze,betalingsInstructie,startPrijs,verzendkosten,verkoper
+				from tblVoorwerp
 				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
