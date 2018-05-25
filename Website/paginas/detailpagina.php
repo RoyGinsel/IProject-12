@@ -63,7 +63,7 @@
       ?>
        <!-- samenvatting -->
        <?php
-       
+
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
@@ -181,8 +181,8 @@
       ';
       echo $mobileomschrijving;
       ?>
-        
-        <?php 
+
+        <?php
 
 
       $mobilesamenvatting = '
@@ -212,6 +212,9 @@
             <div>
               <h1>Verzendkosten:</h1>
               <p>&euro; '.$info[0]['verzendkosten'].'</p>
+            </div>
+            <div>
+              <h1 class="uk-card-title uk-text-center uk-margin-bottom uk-width-1-1">Informatie over verkoper:</h1>
             </div>
             <div>
               <h1>Verkoper:</h1>
