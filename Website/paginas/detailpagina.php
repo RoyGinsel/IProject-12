@@ -168,7 +168,7 @@
         $mobileomschrijving = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
-          <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
+          <ul class="voorwerpOmschrijving uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
             <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
