@@ -36,7 +36,6 @@ begin
 		return null
 	return null
 end
-*/
 
 create function higherBid (@bedrag numeric(11,2), @id bigint)
 returns bit
@@ -62,13 +61,9 @@ begin
 		return 0
 	return 0
 end
-<<<<<<< HEAD
 
-alter function availableSeller (@username varchar(20))
-=======
 /* verbeterd */
 create function availableSeller (@username varchar(20))
->>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 returns bit
 as
 begin
@@ -116,17 +111,15 @@ begin
 		return 0
 	return 0
 end
-<<<<<<< HEAD
+
 
 alter table tblverkoper
 add constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1)
 
-=======
 /*
 alter table tblverkoper
 add constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1)
 */
->>>>>>> d5bc050835c0969a31d2d2d8248050569dd02ea2
 /* tblVraag */
 create table tblVraag(
 vraagNummer int identity(1,1),
@@ -161,6 +154,8 @@ bank varchar(10) null,
 bankrekening varchar(20) null,
 controle varchar(15) not null,
 creditcardNummer varchar(25) null,
+lidSinds date not null,
+succesvolleVerkopen int not null
 constraint pk_tblVerkoper primary key(gebruikersNaam),
 constraint fk_tblVerkoper_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam),
 constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1),
