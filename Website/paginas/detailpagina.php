@@ -58,19 +58,11 @@
         </div>
       </div>
       ';
-
       echo $omschrijving;
       ?>
-       
        <!-- samenvatting -->
-
-
-      
-
-       <?php 
-
+       <?php
        //echo "<pre>",var_dump($seller), "</pre>";
-
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
@@ -99,16 +91,19 @@
             <td>Verzendkosten:</td>
             <td>&euro; '.$info[0]['verzendkosten'].'</td>
           </tr>
+          </table>
+          <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
+          <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Info over verkoper:</h1>
           <tr>
-            <td>Verkoper:</td>
+            <td>Naam:</td>
             <td>'.$seller[0]['verkoper'].'</td>
           </tr>
           <tr>
-            <td>succesvolle verkopen:</td>
+            <td>Succesvolle verkopen:</td>
             <td>'.$seller[0]['succesvolleVerkopen'].'</td>
           </tr>
           <tr>
-            <td>lid sinds:</td>
+            <td>Lid sinds:</td>
             <td>'.$seller[0]['lidSinds'].'</td>
           </tr>
         </table>
