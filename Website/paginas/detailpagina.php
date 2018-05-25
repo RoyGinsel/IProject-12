@@ -97,6 +97,14 @@
             <td>Verkoper:</td>
             <td>'.$info[0]['verkoper'].'</td>
           </tr>
+          <tr>
+            <td>lids sinds:</td>
+            <td>'.$info[0]['lidSinds'].'</td>
+          </tr>
+          <tr>
+            <td>succesvolle verkopen:</td>
+            <td>'.$info[0]['verkoper'].'</td>
+          </tr>
         </table>
       </div>
      ';
