@@ -175,8 +175,12 @@ function newAccount($RegistrationForm){
 	header('location: ./index.php');
 }
 
-
-
+function getProductinfo($itemID)
+{
+  	return preparedQuery("SELECT voorwerpNummer, locatie, Betalingswijze, Betalingsinstructie, startPrijs, Verzendkosten, verkoper
+				from tblVoorwerpRubriek
+				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
+}
 
 
 // Vragen uit database halen
