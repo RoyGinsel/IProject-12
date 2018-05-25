@@ -48,9 +48,10 @@
           <?php
         $omschrijving = '
         <div class="uk-width-1-1">
-          <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving:</h1>
+          <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
+            <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
@@ -62,7 +63,7 @@
       ?>
        <!-- samenvatting -->
        <?php
-       //echo "<pre>",var_dump($seller), "</pre>";
+       
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
@@ -73,7 +74,7 @@
           </tr>
           <tr>
             <td>Locatie:</td>
-            <td>'.$info[0]['plaatsnaam'].'</td>
+            <td>'.$info[0]['plaatsnaam'].', '.$info[0]['land'].'</td>
           </tr>
           <tr>
             <td>Betalingswijze:</td>
@@ -163,57 +164,75 @@
             </ul>
             <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
             <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-          </div>
-          <h1 class="uk-card-title uk-margin-remove uk-width-1-3">Omschrijving:</h1>
-          <div class="uk-width-1-1 uk-card-title SamenvattingMobile">
-              <div>
-                <h1>Looptijd:</h1>
-                <p></p>
-              </div>
-              <div>
-                <h1>Gestart op:</h1>
-                <p></p>
-              </div>
-              <div>
-                <h1>Eindigd op:</h1>
-                <p></p>
-              </div>
-            </div>
-          </div>
+            <?php
+        $mobileomschrijving = '
+        <div class="uk-width-1-1">
+          <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
+          <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
+            <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
+            <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
+            <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
+            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+          </ul>
         </div>
+      </div>
+      </div>
+      ';
+      echo $mobileomschrijving;
+      ?>
+        
+        <?php 
+
+
+      $mobilesamenvatting = '
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <h1 class="uk-card-title uk-margin-remove uk-width-1-3">Samenvatting:</h1>
           <div class="uk-width-1-1 uk-card-title SamenvattingMobile">
             <div>
               <h1>Voorwerpnummer:</h1>
-              <p>1</p>
+              <p>'.$info[0]['voorwerpNummer'].'</p>
             </div>
             <div>
               <h1>Locatie:</h1>
-              <p>Zeddam</p>
+              <p>'.$info[0]['plaatsnaam'].'</p>
             </div>
             <div>
               <h1>Betalingswijze:</h1>
-              <p>Paypal</p>
+              <p>'.$info[0]['betaalWijze'].'</p>
             </div>
             <div>
               <h1>Betalingsinstructie:</h1>
-              <p>Maak over naar rekening:</p>
+              <p>'.$info[0]['betalingsInstructie'].':</p>
             </div>
             <div>
               <h1>Startprijs:</h1>
-              <p>&euro; 80.000</p>
+              <p>&euro; '.$info[0]['startPrijs'].'</p>
             </div>
             <div>
               <h1>Verzendkosten:</h1>
-              <p>&euro; 2</p>
+              <p>&euro; '.$info[0]['verzendkosten'].'</p>
             </div>
             <div>
               <h1>Verkoper:</h1>
-              <p>Dex</p>
+              <p>'.$seller[0]['verkoper'].'</p>
+            </div>
+            <div>
+              <h1>succesvolle verkopen:</h1>
+              <p>'.$seller[0]['succesvolleVerkopen'].'</p>
+            </div>
+            <div>
+              <h1>lid sinds:</h1>
+              <p>'.$seller[0]['lidSinds'].'</p>
             </div>
           </div>
         </div>
+
+        ';
+
+        echo $mobilesamenvatting;
+
+        ?>
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>
