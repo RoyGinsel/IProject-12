@@ -35,10 +35,33 @@ h1>a:hover {
 
 button>img {
   background-color: #7D6444;
-  padding-right:1px;
+ 
 }
 button>img:hover{
   background-color: #EAD9C4;
+}
+
+@media only screen and (max-width: 600px) {
+  button {
+    background-color:#7D6444;
+    
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .persoonsGegevens {
+    
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .invoervelden {
+    
+   width:140px; 
+   
+  }
 }
 
 .rubriekenlijst{

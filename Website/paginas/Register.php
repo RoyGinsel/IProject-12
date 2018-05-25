@@ -84,7 +84,7 @@ if(isset($_GET['error'])){
     </div>
 
 
-    <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-medium-right uk-text-truncate">
+    <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-medium-right uk-text-truncate">
       <input type="email" name="email" maxlength="25" required >
       <input type="text" name="Voornaam"  maxlength="50" required>
       <input type="text" name="Achternaam" maxlength="52" required >
