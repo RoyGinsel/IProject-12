@@ -85,8 +85,8 @@ if(isset($_GET['vwRubriek']) && !isset($_GET['probleem']) && !isset($_GET['doorg
             <input type="submit" value="uitvoeren">
         </form>
     </div>
-    <div class="uk-padding">iets voor de toekomst</div>
-    <div class="uk-padding"  >iets anders voor de toekomsts</div>
+    <div class="uk-padding"></div>
+    <div class="uk-padding" ></div>
 </div>    
 </body>
 </html>
