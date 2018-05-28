@@ -106,7 +106,7 @@ if(isset($_GET['error'])){
       <input type="text" name="Plaatsnaam" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['plaatsNaam']; } ?>" maxlength="35" required>
       <input type="text" name="Land"  value = "<?php if(isset($_SESSION['land'])){echo $_SESSION['land']; } ?>" maxlength="55" required>
       <input type="number" class='uk-width-medium' value ="<?php if(isset($_SESSION['telefoonNummer'])){echo $_SESSION['telefoonNummer']; } ?>" name="Telefoonnummer" placeholder="<?php echo $warningNumber; ?>"  required>
-      <input type="date" name="Geboortedatum"  max="<?php echo date("Y-m-d") ?>">
+      <input type="date" name="Geboortedatum" value = "<?php if(isset($_SESSION['geboorteDag'])){echo $_SESSION['geboorteDag']; } ?>"  max="<?php echo date("Y-m-d") ?>">
       <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>

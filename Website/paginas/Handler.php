@@ -20,6 +20,7 @@ $_SESSION['postcode'] = $_POST['Postcode'];
 $_SESSION['plaatsNaam'] = $_POST['Plaatsnaam'];
 $_SESSION['land'] = $_POST['Land'];
 $_SESSION['telefoonNummer'] = $_POST['Telefoonnummer'];
+$_SESSION['geboorteDag'] = $_POST['Geboortedatum'];
 
 
 
