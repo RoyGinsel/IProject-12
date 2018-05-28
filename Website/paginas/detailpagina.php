@@ -10,6 +10,32 @@
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
  ?>
+ <!-- Script om countdown te krijgen bij producten -->
+ <script>
+    // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
+    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>).getTime();
+    // Zorgt voor de countdown met 1 seconden per refresh
+    var x = setInterval(function() {
+    // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
+    var now = new Date().getTime();
+    // Berekent de tijd vanaf je huidige datum en de opgegeven datum
+    var distance = countDownDate - now;
+    // Functies die zorgen voor het calculeren van de tijden
+    var dagen = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var uren = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minuten = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconden = Math.floor((distance % (1000 * 60)) / 1000);
+    // Output the result in an element with id
+    document.getElementById("cntdwn").innerHTML = dagen + "t " + uren + "u "
+    + minuten + "m " + seconden + "s ";
+    // If the count down is over, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("cntdwn").innerHTML = "EXPIRED";
+    }
+}, 1000);
+</script>
+
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
 <head>
@@ -51,11 +77,10 @@
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
-            <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
-            <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
+            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
+            <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-          </ul>
         </div>
       </div>
       ';
