@@ -20,7 +20,7 @@ if(!isset($_POST['submit'])){
     $email = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
 // sanitize Telefoonnummer
   if(!filter_var($_POST['Telefoonnummer'],FILTER_VALIDATE_INT) == false){
-    echo "is geen int";
+    header('location: ./Register.php');
     Die();
   }
 

@@ -119,7 +119,7 @@
           <form action="" method="post" class="uk-panel uk-panel-box uk-form">
             <div class="uk-form-row">
               <input class="uk-width-1-3 uk-form-large" name="invoerBod" type="number"  placeholder="Bod" required>
-              <input class="uk-button uk-button-primary uk-width-1-2 uk-padding-remove" type="Submit" name="Bod" value="Bieden">
+              <input class="uk-button uk-button-primary uk-width-1-2  uk-padding-remove" type="Submit" name="Bod" value="Bieden">
             </div>
           </form>
         </div>
@@ -242,7 +242,7 @@
             <form action="" method="post" class="uk-panel uk-panel-box uk-form">
               <div class="uk-form-row uk-margin uk-padding-remove">
                 <input class="uk-width-1-1 uk-input uk-form-width-medium uk-form-default" name="invoerBod" type="number"  placeholder="Bod" required>
-                <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" type="Submit" name="Bod" value="Bieden">
+                <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove uk-margin-top" type="Submit" name="Bod" value="Bieden">
               </div>
             </form>
           </div>
