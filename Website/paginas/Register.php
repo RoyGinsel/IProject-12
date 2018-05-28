@@ -85,10 +85,10 @@ if(isset($_GET['error'])){
 
 
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
-      <input type="email" name="email" maxlength="25" required >
+      <input type="email" name="email" maxlength="25" required > <?php  if(isset($_GET['error']) && $_GET ['error'] = 'Gebruikersnaam' ){ echo $warning; }  ?>  
       <input type="text" name="Voornaam"  maxlength="50" required>
       <input type="text" name="Achternaam" maxlength="52" required >
-      <input type="text" name="Gebruikersnaam" maxlengt="20" minlenght='5' required>
+      <input type="text" name="Gebruikersnaam" maxlengt="20" minlenght='5' required> <?php  if(isset($_GET['error']) && $_GET ['error'] = 'Gebruikersnaam' ){ echo $warning; }  ?> 
       <input type="Password" name="Wachtwoord" maxlenght="25" required >
       <input type="Password" name="WachtwoordHer" maxlength="25" required >
       <input type="text" name="Adres" maxlength="95" required>
