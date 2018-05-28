@@ -73,7 +73,7 @@ if(isset($_GET['error'])){
       <span>Wachtwoord:</span>
       <span>Herhaal Wachtwoord:</span>
       <span>Adress:</span>
-      <span>AdressExtra:</span>
+      <span>AdresExtra:</span>
       <span>Postcode:</span>
       <span>Plaats:</span>
       <span>Land:</span>
