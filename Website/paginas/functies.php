@@ -54,13 +54,13 @@ function featuredItems()
   	return query("SELECT titel, beschrijving, b.bodBedrag
   				from tblVoorwerp v
   				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-  				from tblBod
-  				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+  							from tblBod
+  							group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
                 where v.voorwerpNummer in (select top 5 v.voorwerpNummer
-  				from tblVoorwerp v
-  				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
-  				from tblBod
-  				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+  											from tblVoorwerp v
+  											inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
+  														from tblBod
+														group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
   				order by startPrijs/bodBedrag*100 desc)");
 }
 
