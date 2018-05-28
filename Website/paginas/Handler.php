@@ -3,10 +3,30 @@ session_start();
 
 include("functies.php");
 
+
+
 // kijken of form wel gesubmit is.
 if(!isset($_POST['submit'])){
   echo "Formulier is niet gesubmit";
 }else{
+
+$_SESSION['gebruikersNaam'] = $_POST['Gebruikersnaam'];
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['voornaam'] = $_POST['Voornaam'];
+$_SESSION['achternaam'] = $_POST['Achternaam'];
+$_SESSION['adres'] = $_POST['Adres'];
+$_SESSION['adresExtra'] = $_POST['AdresExtra'];
+$_SESSION['postcode'] = $_POST['Postcode'];
+$_SESSION['plaatsNaam'] = $_POST['Plaatsnaam'];
+$_SESSION['land'] = $_POST['Land'];
+$_SESSION['telefoonNummer'] = $_POST['Telefoonnummer'];
+
+
+
+
+
+
+
   // kijken of wachtwoord wel is ingevuld,
   if (empty($_POST['Wachtwoord']) && empty($_POST['WachtwoordHer'])){
     header('location: ./Register.php?error=Wachtwoord');
@@ -20,7 +40,7 @@ if(!isset($_POST['submit'])){
     $email = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
 // sanitize Telefoonnummer
   if(!filter_var($_POST['Telefoonnummer'],FILTER_VALIDATE_INT) == false){
-    header('location: ./Register.php');
+    header('location: ./Register.php?error=telefoonNummer');
     Die();
   }
 
@@ -34,7 +54,7 @@ if(!isset($_POST['submit'])){
 
 // zet de array om in variabelen zodat er gekeken kan worden of ze bestaan.
   extract($registrationForm, EXTR_PREFIX_SAME, "wddx");
-  
+
 
 //kijken of de gebruikersnaam al bestaat.
 if(!empty(checkavailableMail($email))) {
@@ -60,19 +80,19 @@ if(!empty(checkavailableMail($email))) {
 
      $hashpassword = password_hash($password, PASSWORD_DEFAULT);
       //wachtwoord verwijderen uit formulier voor veiligheidsredenen
-      
+
         $registrationForm['password'] = $hashpassword;
         $registrationForm['mail'] = $email;
-        
 
-        
+
+
         newAccount($registrationForm);
-    
+
         $_SESSION['username'] = $userName;
         $_SESSION['date'] = date('d-m-Y');
-      
+
             }
 
      }
-    
+
 ?>

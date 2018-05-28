@@ -14,25 +14,34 @@ if(isset($_SESSION['username'])){
   header('Location: index.php');
 
 }
-
+$warningEmail = "";
+$warningUsername = "";
+$warningPassword = "";
+$warningNumber = "";
 // geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
 if(isset($_GET['error'])){
   switch($_GET['error']){
 
     case "Email":
-      $Warning = "Emailadres is al in gebruik.";
+      $warningEmail = "Emailadres is al in gebruik.";
     break;
 
     case "Gebruikersnaam":
-      $Warning = "Gebruikersnaam is al in gebruik.";
+      $warningUsername = "Gebruikersnaam is al in gebruik.";
     break;
 
     case "Wachtwoord":
-      $Warning = "Wachtwoord is niet ingevuld of niet het zelfde.";
+      $warningPassword = 'Wachtwoord is niet het zelfde';
       break;
+
+      case "telefoonNummer":
+        $warningNumber = 'Telefoonnummer is geen geldig nummer';
+        break;
     }
 
 }
+
+
 
  ?>
 
@@ -64,39 +73,39 @@ if(isset($_GET['error'])){
 <p class='uk-flex  uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
 <form action="handler.php" method="post">
   <div class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-  
+
     <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-small-left uk-text-nowrap">
-      <span>Email:</span>
-      <span>Voornaam:</span>
-      <span>Achternaam:</span>
-      <span>Gebruikersnaam:</span>
-      <span>Wachtwoord:</span>
-      <span>Herhaal Wachtwoord:</span>
-      <span>Adress:</span>
+      <span>Email:*</span>
+      <span>Voornaam:*</span>
+      <span>Achternaam:*</span>
+      <span>Gebruikersnaam:*</span>
+      <span>Wachtwoord:*</span>
+      <span>Herhaal Wachtwoord:*</span>
+      <span>Adress:*</span>
       <span>AdresExtra:</span>
-      <span>Postcode:</span>
-      <span>Plaats:</span>
-      <span>Land:</span>
-      <span>Telefoonnummer:</span>
-      <span>Geboortedatum:</span>
-      <span>Kies Geheimevraag:</span>
-      <span>Geheimevraag Antwoord:</span>
+      <span>Postcode:*</span>
+      <span>Plaats:*</span>
+      <span>Land:*</span>
+      <span>Telefoonnummer:*</span>
+      <span>Geboortedatum:*</span>
+      <span>Kies Geheimevraag:*  </span>
+      <span>Geheimevraag Antwoord:* </span>
     </div>
 
 
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
-      <input type="email" name="email" maxlength="25" required > <?php  if(isset($_GET['error']) && $_GET ['error'] = 'Gebruikersnaam' ){ echo $warning; }  ?>  
-      <input type="text" name="Voornaam"  maxlength="50" required>
-      <input type="text" name="Achternaam" maxlength="52" required >
-      <input type="text" name="Gebruikersnaam" maxlengt="20" minlenght='5' required> <?php  if(isset($_GET['error']) && $_GET ['error'] = 'Gebruikersnaam' ){ echo $warning; }  ?> 
-      <input type="Password" name="Wachtwoord" maxlenght="25" required >
+      <input type="email" name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
+      <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
+      <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>"maxlength="52" required >
+      <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlengt="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
+      <input type="Password" name="Wachtwoord" placeholder="<?php echo $warningPassword; ?>" maxlenght="25" required >
       <input type="Password" name="WachtwoordHer" maxlength="25" required >
-      <input type="text" name="Adres" maxlength="95" required>
-      <input type="text" name="AdresExtra" maxlength="95">
-      <input type="text" name="Postcode" maxlength="9" required>
-      <input type="text" name="Plaatsnaam" maxlength="35" required>
-      <input type="text" name="Land" maxlength="55" required>
-      <input type="number" name="Telefoonnummer" required>
+      <input type="text" name="Adres" maxlength="95" value = "<?php if(isset($_SESSION['adres'])){echo $_SESSION['adres']; }  ?>"   required>
+      <input type="text" name="AdresExtra" value = "<?php if(isset($_SESSION['adresExtra'])){echo $_SESSION['adresExtra']; } ?>" maxlength="95">
+      <input type="text" name="Postcode" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['postcode']; } ?>" maxlength="9" required>
+      <input type="text" name="Plaatsnaam" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['plaatsNaam']; } ?>" maxlength="35" required>
+      <input type="text" name="Land"  value = "<?php if(isset($_SESSION['land'])){echo $_SESSION['land']; } ?>" maxlength="55" required>
+      <input type="number" class='uk-width-medium' value ="<?php if(isset($_SESSION['telefoonNummer'])){echo $_SESSION['telefoonNummer']; } ?>" name="Telefoonnummer" placeholder="<?php echo $warningNumber; ?>"  required>
       <input type="date" name="Geboortedatum"  max="<?php echo date("Y-m-d") ?>">
       <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
@@ -114,7 +123,7 @@ if(isset($_GET['error'])){
   <div class="uk-flex uk-flex-center padding-large">
 <button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
-<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'><?php if(isset($_GET['error'])){echo $Warning; }?> </div>
+
 
 </form>
 
