@@ -81,7 +81,7 @@ if(isset($_GET['error'])){
       <span>Gebruikersnaam:*</span>
       <span>Wachtwoord:*</span>
       <span>Herhaal Wachtwoord:*</span>
-      <span>Adress:*</span>
+      <span>Adres:*</span>
       <span>AdresExtra:</span>
       <span>Postcode:*</span>
       <span>Plaats:*</span>
@@ -94,7 +94,7 @@ if(isset($_GET['error'])){
 
 
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
-      <input type="email" name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
+      <input type="email"name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
       <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
       <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>"maxlength="52" required >
       <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlengt="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
