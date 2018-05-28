@@ -26,7 +26,7 @@
     var minuten = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconden = Math.floor((distance % (1000 * 60)) / 1000);
     // Output the result in an element with id
-    document.getElementById("cntdwn").innerHTML = dagen + "t " + uren + "u "
+    document.getElementById("cntdwn").innerHTML = dagen + "d " + uren + "u "
     + minuten + "m " + seconden + "s ";
     // If the count down is over, write some text
     if (distance < 0) {
