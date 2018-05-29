@@ -1,11 +1,11 @@
 <!-- search -->
 <div class="uk-margin-remove">
    <!-- php pagina met rubrieken  en autocomplete-->
-   <form class="uk-search uk-search-default uk-flex-inline"  action=producten.php method="get" class="pointer">
+   <form class="mobileSize uk-search uk-search-default uk-flex-inline"  action=producten.php method="get" class="pointer">
      <div class="autocomplete">
        <?php //autocomplete id veranderd omdat hij vaker word aangeroepen
        //id wordt gebruikt in de javascript autocomplete functie
-        echo "<input id='search1' class='searchbartext uk-search-input' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; 
+        echo "<input id='search1' class='searchbartext uk-search-input ' name='rubriek' type='text' placeholder='Zoek op rubrieken'>"; 
         ?>
       <div id="autocomplete-list" uk-dropdown="mode: click"></div>
       </div>

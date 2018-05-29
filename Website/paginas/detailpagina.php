@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "functies.php";
-    $crumbs = array("Detailpagina");
+    $crumbs = array("Producten", "Detailpagina");
     if(isset($_GET["data"])){
       $data = htmlspecialchars($_GET["data"]);
     } else {
@@ -9,15 +9,24 @@
     }
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
+    $review = getReview($seller[0]['verkoper']);
+    $highestBid;
+    if (getHighestBid($_GET['item']) != false){
+      $highestBid = getHighestBid($_GET['item']);
+      $highestBid = $highestBid[0]['HoogsteBod'];
+    } else{
+      $highestBid = $info[0]['startPrijs'];
+    }
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
     // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
-    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>).getTime();
+    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
+  // var countDownDate = new Date('2018-05-29T10:30:00')
     // Zorgt voor de countdown met 1 seconden per refresh
     var x = setInterval(function() {
     // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
-    var now = new Date().getTime();
+    var now = new Date();
     // Berekent de tijd vanaf je huidige datum en de opgegeven datum
     var distance = countDownDate - now;
     // Functies die zorgen voor het calculeren van de tijden
@@ -31,7 +40,7 @@
     // If the count down is over, write some text
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("cntdwn").innerHTML = "EXPIRED";
+        document.getElementById("cntdwn").innerHTML = "Verlopen";
     }
 }, 1000);
 </script>
@@ -54,10 +63,10 @@
     include "includes/header.php";
   ?>
   <!-- Main inhoud Browser-->
-    <main class="uk-visible@s uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
+    <main class="uk-visible@m uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
-          <ul class="uk-slideshow-items uk-slid uk-margin-right voorwerpFoto">
+          <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
             <li>
                 <img src="https://www.opumo.com/wordpress/wp-content/uploads/2018/04/OPUMO-1-7.jpg" alt="" uk-cover>
             </li>
@@ -65,12 +74,8 @@
                 <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
             </li>
           </ul>
-          <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-          <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
         </div>
-
-
-          <!-- omschrijving -->
+          <!-- omschrijving lol -->
           <?php
         $omschrijving = '
         <div class="uk-width-1-1">
@@ -81,13 +86,12 @@
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
         </div>
       </div>
       ';
       echo $omschrijving;
-      ?>
-       <!-- samenvatting -->
-       <?php
+       //samenvatting
 
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
@@ -162,24 +166,35 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
-        <div class="uk-body uk-scrollable-text">
+        <div class="uk-body uk-overflow-auto uk-height-medium">
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
-                <th>Commentaar:</th>
-                <th>Van:</th>
                 <th>Datum en Tijd:</th>
+                <th>Commentaar:</th>
                 <th>Voorwerp:</th>
+                <th>Feedback:</th>
               </tr>
+            <?php
+              foreach($review as $item => $key){
+                echo '
+                      <tr>
+                        <td>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</td>
+                        <td>'.$key['commentaar'].'</td>
+                        <td>'.$key['titel'].'</td>
+                        <td>'.$key['feedbackSoort'].'</td>
+                      </tr>'; };
+                ?>
             </table>
         </div>
       </div>
     </main>
 
+
     <!-- Main inhoud Mobile-->
-      <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
+      <main class="uk-hidden@m uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
         <div class="uk-card uk-card-default uk-width-1-1">
           <div class="uk-card-media-top uk-margin-top" uk-slideshow>
-            <ul class="uk-slideshow-items uk-slid uk-margin-right voorwerpFotoMobile">
+            <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFotoMobile">
               <li>
                   <img src="https://www.opumo.com/wordpress/wp-content/uploads/2018/04/OPUMO-1-7.jpg" alt="" uk-cover>
               </li>
@@ -187,27 +202,24 @@
                   <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
               </li>
             </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
             <?php
         $mobileomschrijving = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
-            <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
+            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
           </ul>
         </div>
       </div>
       </div>
       ';
       echo $mobileomschrijving;
-      ?>
-
-        <?php
 
 
       $mobilesamenvatting = '
@@ -288,28 +300,40 @@
               </div>
           </div>
         </div>
+
+
+
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
           </div>
-          <div class="uk-body uk-scrollable-text">
+          <div class="uk-body uk-overflow-auto  uk-height-medium">
               <div class="uk-width-1-1 SamenvattingMobile">
-                <div class="uk-margin-top">
-                  <h1>Commentaar:</h1>
-                  <p>Geweldige verkoper!</p>
-                </div>
-                <div>
-                  <h1>Van:</h1>
-                  <p>Simon</p>
-                </div>
-                <div>
-                  <h1>Datum:</h1>
-                  <p></p>
-                </div>
-                <div>
-                  <h1>Voorwerp:</h1>
-                  <p>Fiets</p>
-                </div>
+                <div class="uk-margin-top ">
+                <?php
+                      foreach($review as $item => $key){
+
+                        echo '
+                      <div>
+                        <h1>Datum en tijd:</h1>
+                        <p>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</p>
+                      </div>
+                      <div>
+                        <h1>Commentaar:</h1>
+                        <p>'.$key['commentaar'].'</p>
+                      </div>
+                      <div>
+                        <h1>Voorwerp:</h1>
+                        <p>'.$key['titel'].'</p>
+                      </div>
+                      <div>
+                        <h1>Feedback</h1>
+                        <p>'.$key['feedbackSoort'].'</p>
+                      </div>';
+                      echo "<hr>";
+
+                       };
+                        ?>
               </div>
           </div>
         </div>

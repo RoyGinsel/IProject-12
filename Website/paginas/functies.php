@@ -24,7 +24,7 @@ function preparedQuery($stringquery,$parameters)
 
     	$query = $dbh->prepare($stringquery);
 		$query->execute($parameters);
-		return $query->fetchAll();
+		return $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -182,6 +182,16 @@ function getProductinfo($itemID)
 				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
+
+function getReview($verkoper){
+
+return preparedQuery("SELECT commentaar, dag,tijd, titel ,feedbackSoort
+                      FROM tblFeedback , tblVoorwerp
+                      WHERE tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
+
+}
+
+
 function getseller($itemID)
 {
   	return preparedQuery(" SELECT verkoper, lidSinds, succesvolleVerkopen
@@ -189,6 +199,14 @@ function getseller($itemID)
                           WHERE tblverkoper.gebruikersnaam = tblvoorwerp.verkoper and tblvoorwerp.voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
+// Functie om hoogste bod van een item te krijgen
+function getHighestBid($itemID)
+{
+  return preparedQuery("SELECT TOP 1 tblBod.voorwerpNummer, tblBod.gebruiker, MAX(bodBedrag) AS HoogsteBod
+                        FROM tblBod, tblVoorwerp
+                        WHERE tblBod.voorwerpNummer = tblVoorwerp.voorwerpNummer  AND tblVoorwerp.voorwerpNummer = :voorwerpNummer
+                        GROUP BY tblBod.voorwerpNummer, tblBod.gebruiker", ["voorwerpNummer" =>$itemID]);
+}
 
 // Vragen uit database halen
 function getQuestions(){
