@@ -162,40 +162,27 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
-
-    
-      
-      
-    
-        
         <div class="uk-body uk-overflow-auto uk-height-medium">
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
                 <th>Commentaar:</th>
                 <th>Datum en Tijd:</th>
                 <th>Voorwerp:</th>
-              </tr> 
-        
-              <?php
-                
-                foreach($review as $item => $key){
-                  echo '
-                        <tr> 
-                          <td>'.$key['commentaar'].'</td>
-                          <td>'.$key['dag'].'<br>'.$key['tijd'].'</td>    
-                          <td>'.$key['titel'].'</td>    
-                        </tr>
-                        
-                      ';
-                      
-                    };
-                  ?>  
-
+              </tr>
+            <?php
+              foreach($review as $item => $key){
+                echo '
+                      <tr>
+                        <td>'.$key['commentaar'].'</td>
+                        <td>'.$key['dag'].'<br>'.$key['tijd'].'</td>
+                        <td>'.$key['titel'].'</td>
+                      </tr>'; };
+                ?>
             </table>
         </div>
       </div>
     </main>
-    
+
 
     <!-- Main inhoud Mobile-->
       <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
