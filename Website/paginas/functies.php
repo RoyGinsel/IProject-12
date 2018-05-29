@@ -183,9 +183,11 @@ function getProductinfo($itemID)
 }
 
 
-function getReview($seller){
+function getReview($verkoper){
 
-return preparedQuery("SELECT commentaar, dag,tijd, titel ,feedbackSoort from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$seller]);
+return preparedQuery("SELECT commentaar, dag,tijd, titel ,feedbackSoort
+                      FROM tblFeedback , tblVoorwerp
+                      WHERE tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
 
 }
 
@@ -197,6 +199,14 @@ function getseller($itemID)
                           WHERE tblverkoper.gebruikersnaam = tblvoorwerp.verkoper and tblvoorwerp.voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
 
+// Functie om hoogste bod van een item te krijgen
+function getHighestBid($itemID)
+{
+  return preparedQuery("SELECT TOP 1 tblBod.voorwerpNummer, tblBod.gebruiker, MAX(bodBedrag) AS HoogsteBod
+                        FROM tblBod, tblVoorwerp
+                        WHERE tblBod.voorwerpNummer = tblVoorwerp.voorwerpNummer  AND tblVoorwerp.voorwerpNummer = :voorwerpNummer
+                        GROUP BY tblBod.voorwerpNummer, tblBod.gebruiker", ["voorwerpNummer" =>$itemID]);
+}
 
 // Vragen uit database halen
 function getQuestions(){
