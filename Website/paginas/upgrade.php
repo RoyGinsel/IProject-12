@@ -36,11 +36,11 @@
         <h2>Vul de volgende gegevens in:</h2>
         <form action="index.php" method="post" class="uk-panel uk-panel-box uk-form">
           <div class="uk-form-row">
-            <input class="uk-width-1-1 uk-form-large" name="Bank" type="text"  placeholder="Wat is uw bank?" required>
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="Bankrekening" type="number" placeholder="Bankrekeningnummer" required>
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="Creditcardnumber" type="number" placeholder="Creditcardnummer" >
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bank" type="text"  placeholder="Wat is uw bank?" required>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bankrekening" type="number" placeholder="Bankrekeningnummer" required>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_creditcardnumber" type="number" placeholder="Creditcardnummer" >
             <div>
-                <input class="uk-button uk-button-primary uk-width-1-1 uk-margin-top uk-padding-remove knopje" type="Submit" name="Submit" value="Ga verder">
+                <input class="uk-button uk-button-primary uk-width-1-1 uk-margin-top uk-padding-remove knopje" type="Submit" name="Submit" value="Activeer verkopersaccount">
             </div>
           </div>
         </form>
