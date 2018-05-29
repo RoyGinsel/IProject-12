@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "functies.php";
-    $crumbs = array("Detailpagina");
+    $crumbs = array("Producten", "Detailpagina");
     if(isset($_GET["data"])){
       $data = htmlspecialchars($_GET["data"]);
     } else {
@@ -10,7 +10,13 @@
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
     $review = getReview($seller[0]['verkoper']);
-    $highestBid = getHighestBid($_GET['item']);
+    $highestBid;
+    if (getHighestBid($_GET['item']) != false){
+      $highestBid = getHighestBid($_GET['item']);
+      $highestBid = $highestBid[0]['HoogsteBod'];
+    } else{
+      $highestBid = $info[0]['startPrijs'];
+    }
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
@@ -80,14 +86,12 @@
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-            <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
+            <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
         </div>
       </div>
       ';
       echo $omschrijving;
-      ?>
-       <!-- samenvatting -->
-       <?php
+       //samenvatting
 
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
@@ -209,15 +213,15 @@
             <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
+            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
           </ul>
         </div>
       </div>
       </div>
       ';
       echo $mobileomschrijving;
-      ?>
-      <?php
+
+
       $mobilesamenvatting = '
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <h1 class="uk-card-title uk-margin-remove uk-width-1-3">Samenvatting:</h1>
