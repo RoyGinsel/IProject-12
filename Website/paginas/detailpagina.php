@@ -170,11 +170,12 @@
                 <th>Voorwerp:</th>
               </tr>
             <?php
+             
               foreach($review as $item => $key){
                 echo '
                       <tr>
                         <td>'.$key['commentaar'].'</td>
-                        <td>'.$key['dag'].'<br>'.$key['tijd'].'</td>
+                        <td>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</td>
                         <td>'.$key['titel'].'</td>
                       </tr>'; };
                 ?>
@@ -296,28 +297,39 @@
               </div>
           </div>
         </div>
+
+
+
+
+
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
           </div>
-          <div class="uk-body uk-scrollable-text">
+          <div class="uk-body uk-overflow-auto  uk-height-medium">
               <div class="uk-width-1-1 SamenvattingMobile">
                 <div class="uk-margin-top ">
-                  <h1>Commentaar:</h1>
-                  <p>Geweldige verkoper!</p>
-                </div>
-                <div>
-                  <h1>Van:</h1>
-                  <p>Simon</p>
-                </div>
-                <div>
-                  <h1>Datum:</h1>
-                  <p></p>
-                </div>
-                <div>
-                  <h1>Voorwerp:</h1>
-                  <p>Fiets</p>
-                </div>
+                <?php
+                      foreach($review as $item => $key){
+                        
+                        echo '
+                      <div>
+                        <h1>Commentaar:</h1>
+                        <p>'.$key['commentaar'].'</p>
+                      </div>
+                      <div>
+                        <h1>Datum en tijd:</h1>
+                        <p>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</p>
+                      </div>
+                      <div>
+                        <h1>Voorwerp:</h1>
+                        <p>'.$key['titel'].'</p>
+                      </div>';
+                      echo "<hr>";
+                       
+                      
+                       };
+                        ?>
               </div>
           </div>
         </div>
