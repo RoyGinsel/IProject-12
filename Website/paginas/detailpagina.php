@@ -80,7 +80,7 @@
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
+            <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
         </div>
       </div>
       ';
