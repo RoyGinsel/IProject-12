@@ -69,7 +69,7 @@
             </li>
           </ul>
         </div>
-          <!-- omschrijving -->
+          <!-- omschrijving lol -->
           <?php
         $omschrijving = '
         <div class="uk-width-1-1">
