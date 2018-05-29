@@ -7,8 +7,12 @@
     } else {
       $data = 1;
     }
+    if($_SESSION['username'] == false){
+      header('Location: index.php');
+    }
 
  ?>
+
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
 <head>
@@ -28,7 +32,18 @@
   ?>
   <!-- Main inhoud -->
     <main class="upgradeStyle">
-
+      <div class="uk-align-center uk-width-medium">
+        <h2>Vul de volgende gegevens in:</h2>
+        <form action="index.php" method="post" class="uk-panel uk-panel-box uk-form">
+          <div class="uk-form-row">
+            <input class="uk-width-1-1 uk-form-large" name="Bank" type="text"  placeholder="Wat is uw bank?" required>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="Bankrekening" type="number" placeholder="Bankrekeningnummer" required>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="Creditcardnumber" type="number" placeholder="Creditcardnummer" >
+            <div>
+                <input class="uk-button uk-button-primary uk-width-1-1 uk-margin-top uk-padding-remove knopje" type="Submit" name="Submit" value="Ga verder">
+            </div>
+          </div>
+        </form>
     </main>
     <!-- Footer -->
   <?php
