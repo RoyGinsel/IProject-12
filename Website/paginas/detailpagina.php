@@ -10,6 +10,7 @@
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
     $review = getReview($seller[0]['verkoper']);
+    $highestBid = getHighestBid($_GET['item']);
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
@@ -56,7 +57,7 @@
     include "includes/header.php";
   ?>
   <!-- Main inhoud Browser-->
-    <main class="uk-visible@s uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
+    <main class="uk-visible@m uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
           <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
@@ -68,8 +69,6 @@
             </li>
           </ul>
         </div>
-
-
           <!-- omschrijving -->
           <?php
         $omschrijving = '
@@ -81,6 +80,7 @@
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
         </div>
       </div>
       ';
@@ -171,15 +171,13 @@
                 <th>Feedback:</th>
               </tr>
             <?php
-
-             
               foreach($review as $item => $key){
                 echo '
                       <tr>
                         <td>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</td>
                         <td>'.$key['commentaar'].'</td>
                         <td>'.$key['titel'].'</td>
-                        <td>'.$key['feedbackSoort'].'</td> 
+                        <td>'.$key['feedbackSoort'].'</td>
                       </tr>'; };
                 ?>
             </table>
@@ -189,7 +187,7 @@
 
 
     <!-- Main inhoud Mobile-->
-      <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
+      <main class="uk-hidden@m uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
         <div class="uk-card uk-card-default uk-width-1-1">
           <div class="uk-card-media-top uk-margin-top" uk-slideshow>
             <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFotoMobile">
@@ -207,10 +205,11 @@
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
-            <li class="uk-margin-top">Omschrijving: '.$info[0]['beschrijving']. '</li>
+            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
           </ul>
         </div>
       </div>
@@ -218,10 +217,7 @@
       ';
       echo $mobileomschrijving;
       ?>
-
-        <?php
-
-
+      <?php
       $mobilesamenvatting = '
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <h1 class="uk-card-title uk-margin-remove uk-width-1-3">Samenvatting:</h1>
@@ -312,8 +308,8 @@
                 <div class="uk-margin-top ">
                 <?php
                       foreach($review as $item => $key){
-                        
-                        echo '  
+
+                        echo '
                       <div>
                         <h1>Datum en tijd:</h1>
                         <p>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</p>
@@ -331,7 +327,7 @@
                         <p>'.$key['feedbackSoort'].'</p>
                       </div>';
                       echo "<hr>";
-                                 
+
                        };
                         ?>
               </div>

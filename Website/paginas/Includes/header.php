@@ -47,13 +47,13 @@ $url =  $_SERVER['REQUEST_URI'];
       </div>
     </div>
     <div class="uk-visible@m">
-    <h1 class=" uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h1>
+    <h1 class=" uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h1>
     </div>
-    <div class="uk-hidden@m ">
-    <h2 class=" uk-align-right uk-margin-medium-top uk-margin-small-right"><a href="index.php"> Eenmaal Andermaal</a></h2>
+    <div class="uk-hidden@m mobileTitle  ">
+    <h2 class="uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h2>
     </div>
-  </div>      
- 
+  </div>
+
   <div class="uk-flex uk-flex-center  uk-width-1-1 breadcrumb uk-flex-inline uk-flex-center">
     <ul class="uk-breadcrumb crumb">
       <?php echo $breadcrumb; ?>
@@ -68,7 +68,8 @@ $url =  $_SERVER['REQUEST_URI'];
     $currentDate = date('d-m-Y');
       if(isset($_SESSION['username'])){
         echo "Welkom, ". $_SESSION['username']."! <br>";
-        echo "Ingelogd op: ". $_SESSION['date'];
+        echo "Ingelogd op: ". $_SESSION['date']." <br>";
+      //  echo '<a href="#">Upgrade naar verkoper!</a>';
       }
       if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
         echo  '
@@ -77,8 +78,8 @@ $url =  $_SERVER['REQUEST_URI'];
         <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
         <p> Tot de volgende keer! </p> </div>';
       }
-  
-}   
+
+}
   ?>
   </div>
 </header>
