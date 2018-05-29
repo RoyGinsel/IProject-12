@@ -9,16 +9,22 @@
     }
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
+<<<<<<< HEAD
     $review = getReview($seller[0]['verkoper']);
+=======
+
+    var_dump($info[0]['looptijdEindeTijdstip']);
+>>>>>>> 3791f758c5a44d0c84a105a89700ea6bd07d1207
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
     // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
-    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>).getTime();
+    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
+  // var countDownDate = new Date('2018-05-29T10:30:00')
     // Zorgt voor de countdown met 1 seconden per refresh
     var x = setInterval(function() {
     // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
-    var now = new Date().getTime();
+    var now = new Date();
     // Berekent de tijd vanaf je huidige datum en de opgegeven datum
     var distance = countDownDate - now;
     // Functies die zorgen voor het calculeren van de tijden
@@ -32,7 +38,7 @@
     // If the count down is over, write some text
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("cntdwn").innerHTML = "EXPIRED";
+        document.getElementById("cntdwn").innerHTML = "Verlopen";
     }
 }, 1000);
 </script>
@@ -58,7 +64,7 @@
     <main class="uk-visible@s uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
-          <ul class="uk-slideshow-items uk-slid uk-margin-right voorwerpFoto">
+          <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
             <li>
                 <img src="https://www.opumo.com/wordpress/wp-content/uploads/2018/04/OPUMO-1-7.jpg" alt="" uk-cover>
             </li>
@@ -66,8 +72,6 @@
                 <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
             </li>
           </ul>
-          <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-          <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
         </div>
 
 
@@ -163,6 +167,7 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
+<<<<<<< HEAD
 
       
       <?php echo "<pre>",var_dump($review) , "</pre>"  ;
@@ -184,6 +189,9 @@
       ?>
         
         <div class="uk-body uk-scrollable-text">
+=======
+        <div class="uk-body uk-overflow-auto uk-height-medium">
+>>>>>>> 3791f758c5a44d0c84a105a89700ea6bd07d1207
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
                 <th>Commentaar:</th>
@@ -200,7 +208,7 @@
       <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
         <div class="uk-card uk-card-default uk-width-1-1">
           <div class="uk-card-media-top uk-margin-top" uk-slideshow>
-            <ul class="uk-slideshow-items uk-slid uk-margin-right voorwerpFotoMobile">
+            <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFotoMobile">
               <li>
                   <img src="https://www.opumo.com/wordpress/wp-content/uploads/2018/04/OPUMO-1-7.jpg" alt="" uk-cover>
               </li>
@@ -208,8 +216,7 @@
                   <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
               </li>
             </ul>
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
             <?php
         $mobileomschrijving = '
         <div class="uk-width-1-1">
@@ -315,7 +322,7 @@
           </div>
           <div class="uk-body uk-scrollable-text">
               <div class="uk-width-1-1 SamenvattingMobile">
-                <div class="uk-margin-top">
+                <div class="uk-margin-top ">
                   <h1>Commentaar:</h1>
                   <p>Geweldige verkoper!</p>
                 </div>
