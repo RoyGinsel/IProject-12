@@ -9,12 +9,7 @@
     }
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
-<<<<<<< HEAD
     $review = getReview($seller[0]['verkoper']);
-=======
-
-    var_dump($info[0]['looptijdEindeTijdstip']);
->>>>>>> 3791f758c5a44d0c84a105a89700ea6bd07d1207
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
@@ -167,37 +162,35 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
-<<<<<<< HEAD
 
-      
-      <?php echo "<pre>",var_dump($review) , "</pre>"  ;
-      
+    
       
       
-      foreach($review as $item => $key){
-
-        foreach($key as $review){
-
-          echo $review. " ";
-
-        }
-       
-        echo "<Br>";
-      }
-      
-      
-      ?>
+    
         
-        <div class="uk-body uk-scrollable-text">
-=======
         <div class="uk-body uk-overflow-auto uk-height-medium">
->>>>>>> 3791f758c5a44d0c84a105a89700ea6bd07d1207
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
                 <th>Commentaar:</th>
                 <th>Datum en Tijd:</th>
                 <th>Voorwerp:</th>
-              </tr>
+              </tr> 
+        
+              <?php
+                
+                foreach($review as $item => $key){
+                  echo '
+                        <tr> 
+                          <td>'.$key['commentaar'].'</td>
+                          <td>'.$key['dag'].'<br>'.$key['tijd'].'</td>    
+                          <td>'.$key['titel'].'</td>    
+                        </tr>
+                        
+                      ';
+                      
+                    };
+                  ?>  
+
             </table>
         </div>
       </div>

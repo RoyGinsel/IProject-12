@@ -185,7 +185,7 @@ function getProductinfo($itemID)
 
 function getReview($verkoper){
 
-return preparedQuery("SELECT commentaar, dag, titel from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
+return preparedQuery("SELECT commentaar, dag,tijd, titel from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
 
 }
 
