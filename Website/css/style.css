@@ -84,13 +84,9 @@ margin:0px;
 }
 
 
-::placeholder {
-
-color:red;
-font-size:11px;
+.invoervelden ::placeholder {
+color: red;
 font-weight: bold;
-
-
 }
 
 .submitButton:hover{
