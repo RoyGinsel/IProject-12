@@ -9,6 +9,7 @@
     }
     $info = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
+    $review = getReview($seller[0]['verkoper']);
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
@@ -162,11 +163,30 @@
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
         </div>
+
+      
+      <?php echo "<pre>",var_dump($review) , "</pre>"  ;
+      
+      
+      
+      foreach($review as $item => $key){
+
+        foreach($key as $review){
+
+          echo $review. " ";
+
+        }
+       
+        echo "<Br>";
+      }
+      
+      
+      ?>
+        
         <div class="uk-body uk-scrollable-text">
             <table class="uk-table uk-table-middle uk-table-divider ">
               <tr>
                 <th>Commentaar:</th>
-                <th>Van:</th>
                 <th>Datum en Tijd:</th>
                 <th>Voorwerp:</th>
               </tr>
@@ -174,6 +194,7 @@
         </div>
       </div>
     </main>
+    
 
     <!-- Main inhoud Mobile-->
       <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">

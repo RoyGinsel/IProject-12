@@ -24,7 +24,7 @@ function preparedQuery($stringquery,$parameters)
 
     	$query = $dbh->prepare($stringquery);
 		$query->execute($parameters);
-		return $query->fetchAll();
+		return $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -181,6 +181,14 @@ function getProductinfo($itemID)
 				from tblVoorwerp
 				where voorwerpNummer = :voorwerpNummer",["voorwerpNummer" =>$itemID]);
 }
+
+
+function getReview($verkoper){
+
+return preparedQuery("SELECT commentaar, dag, titel from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
+
+}
+
 
 function getseller($itemID)
 {
