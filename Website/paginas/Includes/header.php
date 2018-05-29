@@ -25,6 +25,7 @@ $url =  $_SERVER['REQUEST_URI'];
           <?php if(isset($_SESSION['username'])){
             echo '<li><a href="#">Mijn veilingen</a></li>';
             echo '<li><a href="#">Mijn biedingen</a></li>';
+            echo '<li><a class="uk-text-success uk-text-center uk-text-uppercase " href="upgrade.php">Upgrade</a></li>';
             echo '<li><a class="uk-text-danger uk-text-center uk-text-uppercase " href="uitloggen.php">Uitloggen</a></li>';
           }else{
             echo '<li><a href="inloggen.php">Inloggen</a></li>';
