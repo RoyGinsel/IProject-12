@@ -7,15 +7,14 @@
     } else {
       $data = 1;
     }
-    $info = getProductinfo($_GET['item']);
+    $productInfo = getProductinfo($_GET['item']);
     $seller = getseller($_GET['item']);
-    $review = getReview($seller[0]['verkoper']);
-    $highestBid = getHighestBid($_GET['item']);
+    $feedback = getReview($seller[0]['verkoper']);
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
     // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
-    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
+    var countDownDate = new Date(<?php echo "'". $productInfo[0]['looptijdEindeDag'] ." ". $productInfo[0]['looptijdEindeTijdstip']. "'"?>);
   // var countDownDate = new Date('2018-05-29T10:30:00')
     // Zorgt voor de countdown met 1 seconden per refresh
     var x = setInterval(function() {
@@ -57,7 +56,7 @@
     include "includes/header.php";
   ?>
   <!-- Main inhoud Browser-->
-    <main class="uk-visible@m uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
+    <main class="uk-visible@s uk-grid uk-margin-left uk-margin-top detailpaginaLayout uk-flex-center">
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
           <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
@@ -69,53 +68,58 @@
             </li>
           </ul>
         </div>
+<<<<<<< HEAD
           <!-- omschrijving lol -->
+=======
+
+
+          <!-- omschrijving $productInfo bevat de array met gegevens -->
+>>>>>>> 802c135e2a0d66daa42e600b5f5d5f7cc37cb325
           <?php
-        $omschrijving = '
+        $description = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
-            <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
-            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
+            <li class="uk-margin-top">Titel: '.$productInfo[0]['titel']. '</li>
+            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$productInfo[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
-            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
-            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
+            <li class="uk-margin-top">Gestart op: '.$productInfo[0]['looptijdBeginDag']. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$productInfo[0]['looptijdEindeDag']. '</li>
         </div>
       </div>
       ';
-      echo $omschrijving;
+      echo $description;
       ?>
        <!-- samenvatting -->
        <?php
 
-       $samenvatting = '
+       $resume = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
         <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
           <tr>
             <td>Voorwerpnummer:</td>
-            <td>'.$info[0]['voorwerpNummer'].'</td>
+            <td>'.$productInfo[0]['voorwerpNummer'].'</td>
           </tr>
           <tr>
             <td>Locatie:</td>
-            <td>'.$info[0]['plaatsnaam'].', '.$info[0]['land'].'</td>
+            <td>'.$productInfo[0]['plaatsnaam'].', '.$productInfo[0]['land'].'</td>
           </tr>
           <tr>
             <td>Betalingswijze:</td>
-            <td>'.$info[0]['betaalWijze'].'</td>
+            <td>'.$productInfo[0]['betaalWijze'].'</td>
           </tr>
           <tr>
             <td>Betalingsinstructie:</td>
-            <td>'.$info[0]['betalingsInstructie'].'</td>
+            <td>'.$productInfo[0]['betalingsInstructie'].'</td>
           </tr>
           <tr>
             <td>Startprijs:</td>
-            <td>&euro; '.$info[0]['startPrijs'].'</td>
+            <td>&euro; '.$productInfo[0]['startPrijs'].'</td>
           </tr>
           <tr>
             <td>Verzendkosten:</td>
-            <td>&euro; '.$info[0]['verzendkosten'].'</td>
+            <td>&euro; '.$productInfo[0]['verzendkosten'].'</td>
           </tr>
           </table>
           <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
@@ -136,7 +140,7 @@
       </div>
      ';
 
-     echo $samenvatting;
+     echo $resume;
       ?>
       <div class="uk-card uk-card-default uk-card-body uk-width-1-3 uk-margin-top">
         <div class="uk-card-header">
@@ -170,14 +174,16 @@
                 <th>Voorwerp:</th>
                 <th>Feedback:</th>
               </tr>
+
+              <!-- weergeeft alle feedback weer door ze met een foreach loop uit de database te halen -->
             <?php
-              foreach($review as $item => $key){
+              foreach($feedback as $item => $key){
                 echo '
                       <tr>
                         <td>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</td>
                         <td>'.$key['commentaar'].'</td>
                         <td>'.$key['titel'].'</td>
-                        <td>'.$key['feedbackSoort'].'</td>
+                        <td>'.$key['feedbackSoort'].'</td> 
                       </tr>'; };
                 ?>
             </table>
@@ -187,7 +193,7 @@
 
 
     <!-- Main inhoud Mobile-->
-      <main class="uk-hidden@m uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
+      <main class="uk-hidden@s uk-grid uk-margin-left uk-margin-right uk-margin-top detailpaginaLayout">
         <div class="uk-card uk-card-default uk-width-1-1">
           <div class="uk-card-media-top uk-margin-top" uk-slideshow>
             <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFotoMobile">
@@ -200,51 +206,54 @@
             </ul>
 
             <?php
-        $mobileomschrijving = '
+        $mobiledescription = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-padding-remove">
-            <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
-            <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
-            <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
-            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
-            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
-            <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid[0]['HoogsteBod']. '</strong></li>
+            <li class="uk-margin-top">Titel: '.$productInfo[0]['titel']. '</li>
+            <li class="uk-margin-top">Omschrijving: '.$productInfo[0]['beschrijving']. '</li>
+            <li class="uk-margin-top">Looptijd: '.$productInfo[0]['looptijd']. ' dagen</li>
+            <li class="uk-margin-top">Gestart op: '.$productInfo[0]['looptijdBeginDag']. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$productInfo[0]['looptijdEindeDag']. '</li>
           </ul>
         </div>
       </div>
       </div>
       ';
-      echo $mobileomschrijving;
+      echo $mobiledescription;
       ?>
-      <?php
-      $mobilesamenvatting = '
+
+<!-- mobiel samenvatting weergave  -->
+        <?php
+
+    
+      $mobileresume = '
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <h1 class="uk-card-title uk-margin-remove uk-width-1-3">Samenvatting:</h1>
           <div class="uk-width-1-1 uk-card-title SamenvattingMobile">
             <div>
               <h1>Voorwerpnummer:</h1>
-              <p>'.$info[0]['voorwerpNummer'].'</p>
+              <p>'.$productInfo[0]['voorwerpNummer'].'</p>
             </div>
             <div>
               <h1>Locatie:</h1>
-              <p>'.$info[0]['plaatsnaam'].'</p>
+              <p>'.$productInfo[0]['plaatsnaam'].'</p>
             </div>
             <div>
               <h1>Betalingswijze:</h1>
-              <p>'.$info[0]['betaalWijze'].'</p>
+              <p>'.$productInfo[0]['betaalWijze'].'</p>
             </div>
             <div>
               <h1>Betalingsinstructie:</h1>
-              <p>'.$info[0]['betalingsInstructie'].':</p>
+              <p>'.$productInfo[0]['betalingsInstructie'].':</p>
             </div>
             <div>
               <h1>Startprijs:</h1>
-              <p>&euro; '.$info[0]['startPrijs'].'</p>
+              <p>&euro; '.$productInfo[0]['startPrijs'].'</p>
             </div>
             <div>
               <h1>Verzendkosten:</h1>
-              <p>&euro; '.$info[0]['verzendkosten'].'</p>
+              <p>&euro; '.$productInfo[0]['verzendkosten'].'</p>
             </div>
             <div>
               <h1 class="uk-card-title uk-text-center uk-margin-bottom uk-width-1-1">Informatie over verkoper:</h1>
@@ -266,8 +275,7 @@
 
         ';
 
-        echo $mobilesamenvatting;
-
+        echo $mobileresume;
         ?>
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <div class="uk-card-header">
@@ -298,7 +306,7 @@
         </div>
 
 
-
+  <!-- Reacties op verkoper mobile -->
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Reacties op verkoper:</h1>
@@ -306,10 +314,12 @@
           <div class="uk-body uk-overflow-auto  uk-height-medium">
               <div class="uk-width-1-1 SamenvattingMobile">
                 <div class="uk-margin-top ">
-                <?php
-                      foreach($review as $item => $key){
 
-                        echo '
+                <!-- haalt de feedback met een foreach uit de database.-->
+                <?php
+                      foreach($feedback as $item => $key){
+                        
+                        echo '  
                       <div>
                         <h1>Datum en tijd:</h1>
                         <p>'.$key['dag'].' / '.substr($key['tijd'],0,8).'</p>
@@ -327,7 +337,7 @@
                         <p>'.$key['feedbackSoort'].'</p>
                       </div>';
                       echo "<hr>";
-
+                                 
                        };
                         ?>
               </div>
