@@ -80,6 +80,16 @@ button>img:hover{
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .mobileTitle {
+  
+  font-size:27px;
+  margin-right:5px;
+  margin-left:7px;
+  text-decoration: none;
+    
+  }
+}
 
 .rubriekenlijst{
 

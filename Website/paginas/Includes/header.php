@@ -50,8 +50,8 @@ $url =  $_SERVER['REQUEST_URI'];
     <div class="uk-visible@m">
     <h1 class=" uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h1>
     </div>
-    <div class="uk-hidden@m mobileTitle  ">
-    <h2 class="uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h2>
+    <div class=" mobileTitle uk-hidden@m  ">
+    <h1 class=" mobileTitle uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h1>
     </div>
   </div>
 
