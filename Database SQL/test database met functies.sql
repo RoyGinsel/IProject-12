@@ -37,14 +37,15 @@ begin
 	return null
 end
 
-create function higherBid (@bedrag numeric(11,2), @id bigint)
+alter function higherBid (@bedrag numeric(11,2), @id bigint)
 returns bit
 as
 begin
-	if((select max(bodBedrag) from tblBod where voorwerpNummer = @id) is null 
-	or @bedrag > (select max(bodBedrag) from tblBod where voorwerpNummer = @id))
+	if((select bodBedrag from tblBod where voorwerpNummer = @id) = null)
 		return 1
-	else
+	else if(@bedrag > (select max(bodBedrag) from tblBod where voorwerpNummer = @id))
+		return 1
+	else 
 		return 0
 	return 0
 end
@@ -113,12 +114,26 @@ begin
 end
 
 
-alter table tblverkoper
-add constraint chk_tblVerkoper_creditcardNummer check([dbo].[controle](controle,creditcardNummer) = 1)
 
-/*
-alter table tblverkoper
-add constraint chk_tblVerkoper_kan_verkoper_worden check([dbo].[availableSeller](gebruikersNaam) = 1)
+alter table tblBod
+drop constraint chk_tblBod_hoger_bedrag
+
+alter function higherBid (@bedrag numeric(11,2), @id bigint)
+returns bit
+as
+begin
+	print @id
+	if((select bodBedrag from tblBod where voorwerpNummer = 1) is null)
+		return 1
+	else if(@bedrag > (select max(bodBedrag) from tblBod where voorwerpNummer = 1))
+		return 1
+	else 
+		return 0
+	return 0
+end
+
+alter table tblBod
+add constraint chk_tblBod_hoger_bedrag check([dbo].[higherBid](bodBedrag,voorwerpNummer) = 1)
 */
 /* tblVraag */
 create table tblVraag(
@@ -174,7 +189,7 @@ create table tblVoorwerp(
 	betaalWijze varchar(16) not null,
 	betalingsInstructie varchar(max) null,
 	plaatsnaam varchar(60) not null,
-	land varchar (50) not null,
+	land varchar(50) not null,
 	looptijd int not null default 7,
 	looptijdBeginDag date not null,
 	looptijdBeginTijdstip time not null,
@@ -254,5 +269,19 @@ constraint pk_tblTelefoonNummer primary key(volgNummer,gebruikersNaam),
 constraint fk_tblTelefoonNummer_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam)
 )
 
+select * from tblVoorwerp
+
+select * from tblBod
+
+alter table tblBod
+drop column bodDag
+
+alter table tblBod
+drop column bodTijdstip
+
+alter table tblbod
+add bodDag date not null
+alter table tblbod
+add bodTijdstip time not null
 
 
