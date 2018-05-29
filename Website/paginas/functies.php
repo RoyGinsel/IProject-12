@@ -183,9 +183,9 @@ function getProductinfo($itemID)
 }
 
 
-function getReview($verkoper){
+function getReview($seller){
 
-return preparedQuery("SELECT commentaar, dag,tijd, titel ,feedbackSoort from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$verkoper]);
+return preparedQuery("SELECT commentaar, dag,tijd, titel ,feedbackSoort from tblFeedback , tblVoorwerp  where tblvoorwerp.voorwerpNummer = tblFeedback.voorwerpNummer AND  verkoper = :verkoper",["verkoper" =>$seller]);
 
 }
 
