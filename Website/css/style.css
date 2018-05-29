@@ -264,3 +264,11 @@ main {
   max-width:80%;
   margin-left:10px ;
 }
+
+.mobileTitle{
+  color:black;
+  text-decoration: none;
+}
+.uk-link, a{
+  color:black;
+}
