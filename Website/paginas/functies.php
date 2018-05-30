@@ -22,16 +22,23 @@ function preparedQuery($stringquery,$parameters)
 	try{
 		global $dbh;
 
-    	$query = $dbh->prepare($stringquery);
+		$query = $dbh->prepare($stringquery);
 		$query->execute($parameters);
 		return $query->fetchAll(PDO::FETCH_ASSOC);
-
-
-
 	}
 	catch(PDOException $e) {
-		echo $e->getMessage();
+	}
+}
 
+function preparedInsertQuery($stringquery,$parameters)
+{
+	try{
+		global $dbh;
+
+		$query = $dbh->prepare($stringquery);
+		$query->execute($parameters);
+	}
+	catch(PDOException $e) {
 	}
 }
 
@@ -214,6 +221,11 @@ function getQuestions(){
 return query("select * from tblVraag");
 
 }
+
+function newVoorwerpNummer(){
+	return query("SELECT max(voorwerpNummer) +1 as voorwerpnummer from tblVoorwerp");
+}
+
 
 "SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
 from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
