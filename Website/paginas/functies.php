@@ -207,6 +207,20 @@ function getHighestBid($itemID)
                         WHERE tblBod.voorwerpNummer = tblVoorwerp.voorwerpNummer  AND tblVoorwerp.voorwerpNummer = :voorwerpNummer
                         GROUP BY tblBod.voorwerpNummer, tblBod.gebruiker", ["voorwerpNummer" =>$itemID]);
 }
+// Functie om mogelijke verkoper te krijgen
+function getSellerInfo($username)
+{
+  return preparedQuery("SELECT *
+                        FROM tblGebruiker
+                        WHERE mogelijkeVerkoper = 1 and gebruikersNaam = :GebruikersNaam",[":GebruikersNaam"=> $username]);
+}
+
+function getPossibleBuyer($username)
+{
+  return preparedQuery("SELECT *
+                        FROM tblVerkoper
+                        WHERE gebruikersNaam = :GebruikersNaam",[":GebruikersNaam"=> $username]);
+}
 
 // Vragen uit database halen
 function getQuestions(){
