@@ -290,5 +290,3 @@ alter table tblbod
 add bodDag date not null
 alter table tblbod
 add bodTijdstip time not null
-
-

@@ -10,7 +10,6 @@ select * from tblRubriek where parentRubriek = 44688
 select * from tblRubriek where rubriekNaam like '%duik%'
 select * from tblBod
 
-
 insert into tblVerkoper values
 ('simonvn1','RABO','0355251355','POST',null,convert(date,CURRENT_TIMESTAMP),0),
 ('dexdieterman12','RABO','035511555884','POST',null,convert(date,CURRENT_TIMESTAMP),0)
@@ -37,7 +36,3 @@ delete from tblBod
 ,
 (1,1000001.00,'dexdieterman12',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP)),
 (1,1000001.50,'luukj17',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
-
-select rubriekNummer
-from tblRubriek
-where rubriekNummer in 
