@@ -33,8 +33,6 @@ select * from tblBod
 
 delete from tblBod
 
-insert into tblBod values
-(1,1000000.50,'luukj17',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
 (1,1000001.00,'dexdieterman12',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
 ,
 (1,1000001.00,'dexdieterman12',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP)),
