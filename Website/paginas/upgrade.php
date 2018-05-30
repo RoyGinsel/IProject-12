@@ -10,9 +10,28 @@
     if($_SESSION['username'] == false){
       header('Location: index.php');
     }
+    if(getSellerInfo($_SESSION['username']) && getPossibleBuyer($_SESSION['username'])){
+      header('Location: index.php');
+    };
 
+    if(isset($_POST['post_creditcardnummerInvoer'])){
+      if(!filter_var($_POST['post_creditcardnummerInvoer'],FILTER_VALIDATE_INT) === false){
+        echo "is geen geldige creditcardnummer";
+        Die();
+      }
+    }
+
+    if(isset($_POST['Submit'])){
+      $bank = $_POST['post_bank'];
+      $bankrekening = filter_var($_POST['post_bankrekening'], FILTER_SANITIZE_STRING);
+      $creditorpost = $_POST['post_creditcardpost'];
+      $creditcardnummer = $_POST['post_creditcardnummerInvoer'];
+      if($bankrekening !='' && $creditorpost !=''){
+        $query = preparedQuery("INSERT INTO tblVerkoper VALUES (:chef,:bank,:bankrekening,:creditorpost,:creditcardnummer,convert(date,current_timestamp),0)",["bank"=> $bank,"chef"=>$_SESSION['username'], "bankrekening"=> $bankrekening, "creditorpost" => $creditorpost, "creditcardnummer" => $creditcardnummer]);
+        header('Location: index.php');
+      }
+    }
  ?>
-
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
 <head>
@@ -33,12 +52,21 @@
   <!-- Main inhoud -->
     <main class="upgradeStyle">
      <div class="uk-align-center uk-width-medium">
-        <h2>Vul de volgende gegevens in:</h2>
-      <form action="index.php" method="post" class="uk-panel uk-panel-box uk-form">
+        <h2>betaal methode:</h2>
+      <form action="upgrade.php" method="POST" class="uk-panel uk-panel-box uk-form">
         <div class="uk-form-row">
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bank" type="text"  placeholder="Wat is uw bank?" required>
-            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bankrekening" type="number" placeholder="Bankrekeningnummer" required>
-          <h4 class="uk-margin-remove uk-text-center">Kies verificatiemethodes: </h4>
+          <select class="uk-width-1-1 uk-form-large" name="post_bank" required>
+            <option value="ABN">ABN Ambro</option>
+            <option value="AEGON">Aegon</option>
+            <option value="ASN">Asn</option>
+            <option value="ASR">Asr</option>
+            <option value="ING">ING</option>
+            <option value="KNAB">KNAB</option>
+            <option value="RABO">Rabo bank</option>
+            <option value="SNS">SNS Bank</option>
+          </select>
+            <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bankrekening" type="text" placeholder="Bankrekeningnummer" maxlength="20" required>
+          <h4 class="uk-margin-remove uk-text-center">Kies verificatie methode: </h4>
             <input name="post_creditcardpost" type="radio" id="chose_post" value="Post" checked="checked">
               <label for="chose_post">Post</label>
               <!--If creditcard is geselecteerd weergeef de creditcard inputbox -->
@@ -48,18 +76,19 @@
               <!-- Als creditcard geselecteerd is maak het veld required  -->
             <div class="reveal-if-active">
               <label for="creditcardnummerInvoer">Vul uw creditcard nummer in:</label>
-              <input class="require-if-active uk-width-1-1 uk-form-large uk-margin-top uk-margin-bottom" id="creditcardnummerInvoer" name="creditcardnummerInvoer" type="number" placeholder="Creditcardnummer" data-require-pair="#chose_creditcard">
+              <input class="require-if-active uk-width-1-1 uk-form-large uk-margin-top uk-margin-bottom" id="creditcardnummerInvoer" name="post_creditcardnummerInvoer" type="number" placeholder="Creditcardnummer" maxlength="25" data-require-pair="#chose_creditcard">
             </div>
           </div>
             <div class="uk-text-center checkbox uk-margin-top">
             <label><input name="post_akkoord" type="checkbox" required> U gaat akkoord</label>
           </div>
           <div>
-            <input class="uk-button uk-button-primary uk-width-1-1 uk-margin-top uk-padding-remove knopje" type="Submit" name="Submit" value="Activeer verkopersaccount">
+            <input class="uk-button uk-button-primary uk-width-1-1 uk-margin-top uk-padding-remove knopje" type="Submit" name="Submit" value="Verstuur aanvraag">
           </div>
         </div>
       </form>
      </div>
+     <!--Script om wanneer de radio button "Creditcard" is geselecteerd deze required te maken  -->
      <script>
      var makeRequired = {
        init: function() {
