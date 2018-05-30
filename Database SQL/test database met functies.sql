@@ -113,24 +113,31 @@ begin
 	return 0
 end
 
-
+select * from tblVoorwerp
 
 alter table tblBod
 drop constraint chk_tblBod_hoger_bedrag
+
+select top 1 [dbo].[higherBid](1000000.50,2), * from tblVoorwerp
 
 alter function higherBid (@bedrag numeric(11,2), @id bigint)
 returns bit
 as
 begin
-	print @id
-	if((select bodBedrag from tblBod where voorwerpNummer = 1) is null)
+	declare @i int
+	select @i = count(*) from tblBod where voorwerpNummer = @id 
+	if @i = 0
 		return 1
-	else if(@bedrag > (select max(bodBedrag) from tblBod where voorwerpNummer = 1))
+	else if(@bedrag >= (select max(bodBedrag) from tblBod where voorwerpNummer = @id))
 		return 1
-	else 
+	else
 		return 0
 	return 0
 end
+
+insert into tblBod values
+(2,1000000.80,'timovn1',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
+(2,1000000.50,'timovn1',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
 
 alter table tblBod
 add constraint chk_tblBod_hoger_bedrag check([dbo].[higherBid](bodBedrag,voorwerpNummer) = 1)
