@@ -23,7 +23,7 @@ $url =  $_SERVER['REQUEST_URI'];
           <li><a href="producten.php">Producten</a></li>
           <!-- If user is ingelogd show uitloggen anders show inloggen + rest -->
           <?php if(isset($_SESSION['username'])){
-            echo '<li><a href="#">Mijn veilingen</a></li>';
+            echo '<li><a href="Mijn-veilingen.php">Mijn veilingen</a></li>';
             echo '<li><a href="#">Mijn biedingen</a></li>';
             echo '<li><a class="uk-text-success uk-text-center uk-text-uppercase " href="upgrade.php">Verkoopaccount activeren</a></li>';
             echo '<li><a class="uk-text-danger uk-text-center uk-text-uppercase " href="uitloggen.php">Uitloggen</a></li>';
