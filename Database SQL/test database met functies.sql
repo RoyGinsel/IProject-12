@@ -136,8 +136,8 @@ begin
 end
 
 insert into tblBod values
-(2,1000000.80,'timovn1',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
-(2,1000000.50,'timovn1',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
+(2,1000000.80,'luukj17',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP)),
+(2,1000010.50,'dexdieterman12',convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP))
 
 alter table tblBod
 add constraint chk_tblBod_hoger_bedrag check([dbo].[higherBid](bodBedrag,voorwerpNummer) = 1)
