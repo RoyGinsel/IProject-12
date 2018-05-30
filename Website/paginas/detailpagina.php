@@ -34,10 +34,10 @@
     var uren = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minuten = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconden = Math.floor((distance % (1000 * 60)) / 1000);
-    // Output the result in an element with id
+    // Output het resultaat in de ID
     document.getElementById("cntdwn").innerHTML = dagen + "d " + uren + "u "
     + minuten + "m " + seconden + "s ";
-    // If the count down is over, write some text
+    // Wanneer de countdown bij '0' is, plaats wat tekst
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("cntdwn").innerHTML = "Verlopen";
