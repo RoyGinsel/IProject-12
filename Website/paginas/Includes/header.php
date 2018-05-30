@@ -23,8 +23,13 @@ $url =  $_SERVER['REQUEST_URI'];
           <li><a href="producten.php">Producten</a></li>
           <!-- If user is ingelogd show uitloggen anders show inloggen + rest -->
           <?php if(isset($_SESSION['username'])){
-            echo '<li><a href="mijn-veilingen.php">Mijn veilingen</a></li>';
             echo '<li><a href="#">Mijn biedingen</a></li>';
+            if(getSellerInfo($_SESSION['username']) && !getPossibleBuyer($_SESSION['username'])){
+              echo '<li><a class="uk-text-success uk-text-center uk-text-uppercase " href="upgrade.php">Verkoopaccount activeren</a></li>';
+            }
+            if(getSellerInfo($_SESSION['username']) && getPossibleBuyer($_SESSION['username'])){
+              echo '<li><a href="Mijn-veilingen.php">Mijn veilingen</a></li>';
+            }
             echo '<li><a class="uk-text-danger uk-text-center uk-text-uppercase " href="uitloggen.php">Uitloggen</a></li>';
           }else{
             echo '<li><a href="inloggen.php">Inloggen</a></li>';
@@ -49,8 +54,8 @@ $url =  $_SERVER['REQUEST_URI'];
     <div class="uk-visible@m">
     <h1 class=" uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h1>
     </div>
-    <div class="uk-hidden@m mobileTitle  ">
-    <h2 class="uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h2>
+    <div class=" mobileTitle uk-hidden@m  ">
+    <h1 class=" mobileTitle uk-align-right uk-margin-medium-top uk-margin-small-right "><a href="index.php"> Eenmaal Andermaal</a></h1>
     </div>
   </div>
 

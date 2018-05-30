@@ -64,6 +64,41 @@ button>img:hover{
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .mobileSize {
+
+  flex-wrap:wrap;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .submitButton {
+
+    margin-left:50%;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .mobileTitle {
+
+  font-size:29px;
+  text-decoration: none;
+
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .uk-button{
+
+    font-size:10px;
+
+    padding:8px;
+  }
+}
+
+
 .rubriekenlijst{
 
 padding-left:8px;
@@ -145,6 +180,7 @@ footer{
 }
 
 .back-to-top{
+  color:blue;
   font-size: 16px;
 }
 
@@ -271,4 +307,15 @@ main {
 }
 .uk-link, a{
   color:black;
+}
+
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+input[type="radio"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 100px;
+  overflow: visible;
 }

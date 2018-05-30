@@ -48,3 +48,12 @@ full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
 where r.rubriekNaam like '%hoi%'
+
+select * from tblVoorwerp
+select * from tblBod
+
+select titel, looptijdBeginDag,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
+from tblVoorwerp v 
+full join tblBod b on v.voorwerpNummer=b.voorwerpNummer
+where verkoper = 'Simonvn1'
+group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag, looptijdEindeTijdstip

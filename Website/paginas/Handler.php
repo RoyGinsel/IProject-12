@@ -1,15 +1,12 @@
 <?php
 session_start();
-
 include("functies.php");
-
-
 
 // kijken of form wel gesubmit is.
 if(!isset($_POST['submit'])){
   echo "Formulier is niet gesubmit";
 }else{
-
+ // zet alle post waardes in een sessie, Dit zorgt er voor dat er bij foutieve invoer in het registratieforumlier de rest blijft staan voor gebruikersgemak.
 $_SESSION['gebruikersNaam'] = $_POST['Gebruikersnaam'];
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['voornaam'] = $_POST['Voornaam'];
@@ -21,12 +18,6 @@ $_SESSION['plaatsNaam'] = $_POST['Plaatsnaam'];
 $_SESSION['land'] = $_POST['Land'];
 $_SESSION['telefoonNummer'] = $_POST['Telefoonnummer'];
 $_SESSION['geboorteDag'] = $_POST['Geboortedatum'];
-
-
-
-
-
-
 
   // kijken of wachtwoord wel is ingevuld,
   if (empty($_POST['Wachtwoord']) && empty($_POST['WachtwoordHer'])){
@@ -45,6 +36,7 @@ $_SESSION['geboorteDag'] = $_POST['Geboortedatum'];
     Die();
   }
 
+  //zet alle post waarden in een array die schoongemaakt wordt en dan inserted in de database.
   $registrationForm = ["userName" => $_POST['Gebruikersnaam'], "voornaam" => $_POST['Voornaam'], "achternaam" => $_POST['Achternaam'], "adres" => $_POST['Adres'], "adresExtra" => $_POST['AdresExtra'], "postcode" => $_POST['Postcode'],"plaatsnaam" =>
   $_POST['Plaatsnaam'], "land" => $_POST['Land'], "geboortedatum" => $_POST['Geboortedatum'],"password" =>  $_POST['Wachtwoord'], "passwordHer" =>  $_POST['WachtwoordHer'], "geheimevraag" => $_POST['Geheimevraag'],"antwoordvraag" => $_POST['Antwoordvraag']];
 
