@@ -56,14 +56,14 @@
       <form action="upgrade.php" method="POST" class="uk-panel uk-panel-box uk-form">
         <div class="uk-form-row">
           <select class="uk-width-1-1 uk-form-large" name="post_bank" required>
-            <option value="ABN">ABN Ambro</option>
-            <option value="AEGON">Aegon</option>
-            <option value="ASN">Asn</option>
-            <option value="ASR">Asr</option>
+            <option value="ABN">ABN AMRO</option>
+            <option value="AEGON">AEGON</option>
+            <option value="ASN">ASN</option>
+            <option value="ASR">ASR</option>
             <option value="ING">ING</option>
             <option value="KNAB">KNAB</option>
-            <option value="RABO">Rabo bank</option>
-            <option value="SNS">SNS Bank</option>
+            <option value="RABO">RABO</option>
+            <option value="SNS">SNS</option>
           </select>
             <input class="uk-width-1-1 uk-form-large uk-margin-top" name="post_bankrekening" type="text" placeholder="Bankrekeningnummer" maxlength="20" required>
           <h4 class="uk-margin-remove uk-text-center">Kies verificatie methode: </h4>
