@@ -276,8 +276,77 @@ constraint pk_tblTelefoonNummer primary key(volgNummer,gebruikersNaam),
 constraint fk_tblTelefoonNummer_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam)
 )
 
-select * from tblVoorwerp
+create procedure spNieuwBod
+@bodBedrag numeric(11,2),
+@voorwerpNummer bigint,
+@username varchar(20)
+as
+begin
+	if (select top 1 gebruiker from tblBod where voorwerpNummer = @voorwerpNummer order by bodBedrag desc) = @username
+	begin
+		raiserror ('U heeft al het hoogste bod',16,1)
+		return
+	end
+	if (select max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) < 50
+	begin
+		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 0.5
+		begin
+			INSERT into tblBod values (@voorwerpNummer,@bodBedrag,@username,convert(date,current_timestamp),convert(time,current_timestamp))
+			return
+		end
+		else
+		begin
+			raiserror ('U moet met minstens 50 cent vehogen',16,1)
+			return
+		end
+	end
+	else if (select max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) < 500
+	begin
+		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 1.0
+		begin
+			INSERT into tblBod values (@voorwerpNummer,@bodBedrag,@username,convert(date,current_timestamp),convert(time,current_timestamp))
+			return
+		end
+		else
+		begin
+			raiserror ('U moet met minstens 1 euro vehogen',16,1)
+			return
+		end
+	end
+	else if (select max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) < 1000
+	begin
+		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 5.0
+		begin
+			INSERT into tblBod values (@voorwerpNummer,@bodBedrag,@username,convert(date,current_timestamp),convert(time,current_timestamp))
+			return
+		end
+		else
+		begin
+			raiserror ('U moet met minstens 5 euro vehogen',16,1)
+			return
+		end
+	end
+	else
+	begin
+		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 50.0
+		begin
+			INSERT into tblBod values (@voorwerpNummer,@bodBedrag,@username,convert(date,current_timestamp),convert(time,current_timestamp))
+			return
+		end
+		else
+		begin
+			raiserror ('U moet met minstens 50 euro vehogen',16,1)
+			return
+		end
+	end
+end
 
+go
+exec spNieuwBod 1000061.00, 2, 'timovn1'
+
+
+select * from tblVoorwerp
+select * from tblGebruiker
 select * from tblBod
 
 alter table tblBod
