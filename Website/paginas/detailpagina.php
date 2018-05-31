@@ -17,12 +17,25 @@
     } else{
       $highestBid = $info[0]['startPrijs'];
     }
+
+    if(isset($_POST['invoerBod']) && isset($_SESSION['username'])){
+      $error = addNewBid($_POST['invoerBod'],$_GET['item'],$_SESSION['username']);
+      $error = substr($error,71); 
+      echo $error;
+      // if($error != false){
+      //   $pos = strpos($error, ']');
+      //   while($pos !== false){
+      //     $error = substr($error,$pos); 
+      //     $pos = strpos($error, ']');
+      //   }
+      // }
+    }
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
     // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
     var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
-  // var countDownDate = new Date('2018-05-29T10:30:00')
+    // var countDownDate = new Date('2018-05-29T10:30:00')
     // Zorgt voor de countdown met 1 seconden per refresh
     var x = setInterval(function() {
     // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
