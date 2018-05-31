@@ -44,7 +44,9 @@ function allSections(){
 <body>
 <?php
     include "includes/header.php";
-$myAuctions = getAuctions('luukj18');
+
+$myAuctions = getAuctions($_SESSION['username']);
+              
 ?>
     <main class="page uk-margin-left uk-margin-right">
 
@@ -59,15 +61,22 @@ $myAuctions = getAuctions('luukj18');
                     <th>Voorwerp</th>
                     <th>Datum plaatsing</th>
                     <th>Huidige bod:</th>
-                    <th>Looptijd</th>
+                    <th>Resterende duur veiling:</th>
                     <th>Ga naar veiling </th>
                 </tr>
               </thead>
               <tbody>
               <?php
-
-             $salesItems = "";
+    
+            $salesItems = "";
             foreach($myAuctions as $item => $key){
+
+              // bepaalt de tijd en datum van het moment
+              $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
+              // zet de eind datum  en tijd van het voorwerp in end date
+              $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
+              // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
+              $difference = $DateOfToday->diff($endDate);
                if(empty($key['bodBedrag'])){
                     $prijs =  $key['startPrijs'];
                     }else { 
@@ -78,13 +87,16 @@ $myAuctions = getAuctions('luukj18');
                     <td>'.$key['titel'].'</td>
                     <td>'.$key['looptijdBeginDag'].' </td>
                     <td>€ '.$prijs.'</td>
-                    <td>'.$key['looptijd'].' Dagen</td>
+                    <td>'. format_interval($difference).' </td>
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
-                    </tr>';}
+                    </tr>';
+        
 
-                        echo $salesItems;    
+                  }
+
+                        echo $salesItems;                  
                ?>
               </tbody>
             </table>
@@ -96,12 +108,11 @@ $myAuctions = getAuctions('luukj18');
         <p uk-margin>
             <button class="uk-button uk-button-primary uk-margin-right">Home</button>
             <button class="uk-button uk-button-primary">Producten</button>
+            <button id="toggle-form" href="#toggle-animation" class="uk-button uk-button-primary uk-button-default uk-margin-left" type="button" 
+             uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden</button>
         </p>
     </div>
 
-
-<button id="toggle-form" href="#toggle-animation" class=" uk-flex  uk-align-center uk-button uk-button-default" type="button" 
-  uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden</button>
 <div id="toggle-animation" class=" uk-card uk-card-default uk-card-body uk-margin-small" hidden>
 
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">

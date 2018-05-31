@@ -250,7 +250,14 @@ function getAuctions($seller){
 	
 	}
 
-"SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
-from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
-order by rubriekNaam asc"
+
+	// tijd berekenen overgebleven dagen veiling
+	function format_interval(DateInterval $interval) {
+		$result = "";
+		if ($interval->d) { $result .= $interval->format("%d dagen "); }
+		if ($interval->h) { $result .= $interval->format("%h uur "); }
+	  
+		return $result;
+	  }
+
  ?>
