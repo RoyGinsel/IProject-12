@@ -1,6 +1,6 @@
 <?php
-    include "database.php";
-	//include "../../SQLSrvConnect.php";
+    //include "database.php";
+	include "../../SQLSrvConnect.php";
 
 
 function query($stringquery)
@@ -252,8 +252,24 @@ function newVoorwerpNummer(){
 function addNewBid($amount, $item, $username){
 	return preparedSPQuery("exec spNieuwBod :amount, :item, :username",["amount" => $amount,"item" => $item, "username" => $username]);
 }
+// veilingen halen
+function getAuctions($seller){
+	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
+	from tblVoorwerp v 
+	full join tblBod b on v.voorwerpNummer=b.voorwerpNummer
+	where verkoper = :verkoper
+	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer, looptijdEindeTijdstip",[":verkoper"=> $seller]);
+	
+}
 
-"SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
-from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
-order by rubriekNaam asc"
+
+	// tijd berekenen overgebleven dagen veiling
+function format_interval(DateInterval $interval) {
+	$result = "";
+	if ($interval->d) { $result .= $interval->format("%d dagen "); }
+	if ($interval->h) { $result .= $interval->format("%h uur "); }
+  
+	return $result;
+}
+
  ?>

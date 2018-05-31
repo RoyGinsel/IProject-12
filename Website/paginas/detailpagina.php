@@ -50,10 +50,13 @@
     // Output het resultaat in de ID
     document.getElementById("cntdwn").innerHTML = dagen + "d " + uren + "u "
     + minuten + "m " + seconden + "s ";
+    document.getElementById("cntdwnMobile").innerHTML = dagen + "d " + uren + "u "
+    + minuten + "m " + seconden + "s ";
     // Wanneer de countdown bij '0' is, plaats wat tekst
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("cntdwn").innerHTML = "Verlopen";
+        document.getElementById("cntdwnMobile").innerHTML = "Verlopen";
     }
 }, 1000);
 </script>
@@ -223,7 +226,7 @@
           <ul class="voorwerpOmschrijving uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
             <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
-            <li class="uk-margin-top">Looptijd: '.$info[0]['looptijd']. ' dagen</li>
+            <li class="uk-margin-top">Looptijd: <span id="cntdwnMobile"></span> </li>
             <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
             <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
             <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
