@@ -25,7 +25,7 @@
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
           <ul class="voorwerpOmschrijving uk-margin-remove uk-padding-remove">
             <li class="uk-margin-top">Titel: '.$_POST['form_ids'][0]. '</li>
-            <li class="uk-margin-top">Omschrijving: '.$_POST['form_ids'][13]. '</li>
+            <li class="uk-margin-top">Omschrijving: '.$_POST['form_ids'][9]. '</li>
             <li class="uk-margin-top">Looptijd: '.$_POST['form_ids'][5]. ' dagen</li>
             <li class="uk-margin-top">Gestart op: '.date("Y/m/d").' </li>
             <li class="uk-margin-top">Eindigd op: '.date_format($date, 'Y-m-d').'</li>
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <td>Betalingsinstructie:</td>
-            <td>'.$_POST['form_ids'][12].'</td>
+            <td>'.$_POST['form_ids'][8].'</td>
           </tr>
           <tr>
             <td>Startprijs:</td>

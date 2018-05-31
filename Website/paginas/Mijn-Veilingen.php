@@ -14,23 +14,7 @@ function allSections(){
   
 //   }
   
-  // geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
-  if(isset($_GET['error'])){
-    switch($_GET['error']){
-  
-      case "Email":
-        $Warning = "Emailadres is al in gebruik.";
-      break;
-  
-      case "Gebruikersnaam":
-        $Warning = "Gebruikersnaam is al in gebruik.";
-      break;
-  
-      case "Wachtwoord":
-        $Warning = "Wachtwoord is niet ingevuld of niet het zelfde.";
-        break;
-      }
-    }
+
     if (isset($_POST['Titel'])){
       $nummer = newVoorwerpNummer();
       $nummer = $nummer[0]['voorwerpnummer'];
@@ -60,20 +44,75 @@ function allSections(){
 <body>
 <?php
     include "includes/header.php";
-    ?>
-<button href="#toggle-animation" class=" uk-flex  uk-align-center uk-button uk-button-default" type="button" 
+$myAuctions = getAuctions('luukj18');
+?>
+    <main class="page uk-margin-left uk-margin-right">
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
+        <div class="uk-card-header">
+          <h1 class="uk-card-title uk-padding-remove uk uk-text-center uk-margin-bottom">Mijn veilingen:</h1>
+        </div>
+        <div class="uk-body  uk-height-large uk-overflow-auto">
+            <table class="uk-table uk-table-middle uk-table-responsive  uk-table-divider uk-table-hover">
+            <thead>
+                <tr>
+                    <th>Voorwerp</th>
+                    <th>Datum plaatsing</th>
+                    <th>Huidige bod:</th>
+                    <th>Looptijd</th>
+                    <th>Ga naar veiling </th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php
+
+             $salesItems = "";
+            foreach($myAuctions as $item => $key){
+               if(empty($key['bodBedrag'])){
+                    $prijs =  $key['startPrijs'];
+                    }else { 
+                          $prijs = $key['bodBedrag'];
+                     };                
+    $salesItems .= '  
+                    <tr>
+                    <td>'.$key['titel'].'</td>
+                    <td>'.$key['looptijdBeginDag'].' </td>
+                    <td>€ '.$prijs.'</td>
+                    <td>'.$key['looptijd'].' Dagen</td>
+                    <td>
+                    <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
+                    </td>
+                    </tr>';}
+
+                        echo $salesItems;    
+               ?>
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class='uk-margin-medium-top'>
+
+
+        <p uk-margin>
+            <button class="uk-button uk-button-primary uk-margin-right">Home</button>
+            <button class="uk-button uk-button-primary">Producten</button>
+        </p>
+    </div>
+
+
+<button id="toggle-form" href="#toggle-animation" class=" uk-flex  uk-align-center uk-button uk-button-default" type="button" 
   uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden</button>
-<div id="toggle-animation" class="uk-card uk-card-default uk-card-body uk-margin-small">
+<div id="toggle-animation" class=" uk-card uk-card-default uk-card-body uk-margin-small" hidden>
 
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
-  <div class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-  <select class="uk-form-select" name="Rubriekaanbieden[]" multiple>
-                <?php
+  <div  class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
+   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple>
+   <?php
                     foreach(allSections() as $row){
                         echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
                     }
                 ?>
-            </select>
+            </select> 
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-text-nowrap">
       <span>Titel:</span>
       <span>Plaatsnaam:</span>
@@ -94,10 +133,6 @@ $form_ids = ["Titel" => "titel",
 "Looptijd" =>"looptijd",
 "Bank" => "bank",
  "Banknummer" => "banknummer",
- "foto1" => "foto1",
- "foto2" => "foto2",
- "foto3" => "foto3",
- "foto4" => "foto4",
  "Verzendinstructie" => 'Verzendinstructie',
   "Beschrijving"=> 'Beschrijving'];
 ?>
@@ -153,7 +188,6 @@ function readAndPreview(file) {
 if (files) {
   [].forEach.call(files, readAndPreview);
 }
-
 }
 </script>
 
@@ -161,12 +195,7 @@ if (files) {
     </div>
     
   </div>
-  <div class="uk-flex uk-flex-center uk-text-center uk-margin">
-  <input id=<?php echo $form_ids['foto1'] ?> type="file" id="#imgInp1" class="a" src="" name=<?php echo $form_ids['foto1'] ?>/>
-      <input id=<?php echo $form_ids['foto2'] ?> type="file" id="#imgInp2" class="a" src="" name=""/>
-      <input id=<?php echo $form_ids['foto3'] ?> type="file" id="#imgInp3" class="a" src="" name=""/>
-      <input id=<?php echo $form_ids['foto4'] ?> type="file" id="#imgInp4" class="a" src="" name=""/> 
-</div>
+
       <div class="uk-flex uk-flex-center uk-text-center uk-margin">
   <div class="uk-margin-right">
     <h3>Verzendinstructie</h3>
@@ -182,24 +211,9 @@ if (files) {
 </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-  <a id="1" class="uk-button">Next <br> Preview</a>
+  <a id="previewButton" class="uk-button"> Next <br><br> Preview</a>
   <div id="alert">
   </div>
-
-
-<script>
-$(document).ready(function(){
-  $('a').click(function (element) {
-    <?php 
-    echo "var form_ids = [];";
-    foreach ($form_ids as $key => $value) {
-    echo "form_ids.push(document.getElementById('$value').value);";
-  }?> 
-    $('#alert').load("preview-item.php",{ form_ids:form_ids });
-    });
-});
-</script>
-
 </div>
 <div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'>
 <?php if(isset($_GET['error'])){echo $Warning; }?> 
@@ -213,3 +227,18 @@ $(document).ready(function(){
   ?>
 </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  $('#previewButton').click(function (element) {
+    <?php 
+    echo "var form_ids = [];";
+    foreach ($form_ids as $key => $value) {
+    echo "form_ids.push(document.getElementById('$value').value);";
+  }?> 
+    $('#alert').load("preview-item.php",{ form_ids:form_ids });
+    });
+});
+
+  
+</script>
