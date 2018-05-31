@@ -75,6 +75,7 @@ $myAuctions = getAuctions($_SESSION['username']);
               $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
+
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
                if(empty($key['bodBedrag'])){
@@ -102,13 +103,11 @@ $myAuctions = getAuctions($_SESSION['username']);
             </table>
         </div>
     </div>
-    <div class='uk-margin-medium-top'>
-
-
+    <div class='uk-margin-medium-top'
         <p uk-margin>
-            <button class="uk-button uk-button-primary uk-margin-right">Home</button>
-            <button class="uk-button uk-button-primary">Producten</button>
-            <button id="toggle-form" href="#toggle-animation" class="uk-button uk-button-primary uk-button-default uk-margin-left" type="button" 
+            <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>      
+            <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
+            <button id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
              uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden</button>
         </p>
     </div>
