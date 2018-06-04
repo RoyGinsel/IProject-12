@@ -2,18 +2,13 @@
 session_start();
 $crumbs = array('Mijn-Veilingen');
 include "functies.php";
-function allSections(){
-        return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
-                    from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
-                    order by rubriekNaam asc");
-    }
 
-//veranderen! C:
-// if(isset($_SESSION['username'])){
+if(!getPossibleBuyer($_SESSION['username'])){
 
-//     header('Location: index.php');
+    header('Location: index.php');
   
-//   }
+  };
+
   
     if (isset($_POST['Titel'])){
       $nummer = newVoorwerpNummer();
