@@ -4,9 +4,7 @@ $crumbs = array('Mijn-Veilingen');
 include "functies.php";
 
 if(!getPossibleBuyer($_SESSION['username'])){
-
     header('Location: index.php');
-  
   };
 
     if (isset($_POST['Titel']) ){
@@ -17,9 +15,9 @@ if(!getPossibleBuyer($_SESSION['username'])){
             alert('Upload tenminste één bestand');
                 </script>";
             }
-            if($_aantal_fotos > 4){
+            else if($_aantal_fotos > 4){
                 echo "<script>
-                alert('Je kunt maximaal 4 foto's uploaden);       
+                alert('Je kunt maximaal 4 fotos uploaden');       
                     </script>";
                 }
         if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
@@ -36,21 +34,18 @@ if(!getPossibleBuyer($_SESSION['username'])){
                 }
 
         $doel_map = "../../images/item".$nummer;
-        
         for ($i=0; $i < count($_FILES['fotos']['name']); $i++) { 
         // Geef de bestandnaam op van het bestand op een bepaalde locatie
         $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
         $uploadOk = 1;
         //kijkt welke extensie de afbeelding heeft
         $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
-
         // Bepaalde bestand extensies toestaan
         if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
             && $afbeelding_type != "gif") {
             $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
             $uploadOk = 0;
         }
-
         // kijken of $uploadOk 0 is door een error hier boven
         if ($uploadOk === 1) {    
             if (move_uploaded_file($_FILES["fotos"]["tmp_name"][$i], $doel_bestand)) {
@@ -63,6 +58,8 @@ if(!getPossibleBuyer($_SESSION['username'])){
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,9 +75,7 @@ if(!getPossibleBuyer($_SESSION['username'])){
 <body>
   <?php
     include "includes/header.php";
-    
-$myAuctions = getAuctions($_SESSION['username']);
-              
+    $myAuctions = getAuctions($_SESSION['username']);         
 ?>
     <main class="page uk-margin-left uk-margin-right">
 
@@ -100,11 +95,10 @@ $myAuctions = getAuctions($_SESSION['username']);
                 </tr>
               </thead>
               <tbody>
-              <?php   
-    
+              <?php
             $salesItems = "";
             foreach($myAuctions as $item => $key){
-                              // bepaalt de tijd en datum van het moment
+                // bepaalt de tijd en datum van het moment
               $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
@@ -119,8 +113,8 @@ $myAuctions = getAuctions($_SESSION['username']);
                 }
                if(empty($key['bodBedrag'])){
                     $prijs =  $key['startPrijs'];
-                    }else { 
-                          $prijs = $key['bodBedrag'];
+                    } else { 
+                        $prijs = $key['bodBedrag'];
                      };      
                         $salesItems .= '  
                     <tr>
@@ -132,11 +126,9 @@ $myAuctions = getAuctions($_SESSION['username']);
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
                     </tr>';       
-
                   }
-
                   // print de items weer.
-                        echo $salesItems;                  
+                echo $salesItems;                  
                ?>
               </tbody>
             </table>
@@ -146,22 +138,20 @@ $myAuctions = getAuctions($_SESSION['username']);
         <p uk-margin>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>      
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <button id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
-             uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden</button>
+            <button  href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+             uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> <a id="toggle-form">Item aanbieden </a></button>
         </p>
     </div>
 
 <div id="toggle-animation" class=" uk-card uk-card-default uk-card-body uk-margin-small" hidden>
 
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
-  <div  class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple required>
-   <?php
-                    foreach(allSections() as $row){
-                        echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
-                    }
-                ?>
-            </select> 
+  <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline@m uk-flex-center uk-margin-medium-top">
+  <div class="uk-flex uk-flex-column">
+    <select id="rubrieken" class="uk-width-1-1 uk-form-select" name="Rubriekaanbieden[]" multiple required>
+   
+    </select>
+    <div class="uk-flex uk-flex-center">
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-text-nowrap">
       <span>Titel:</span>
       <span>Plaatsnaam:</span>
@@ -185,7 +175,7 @@ $form_ids = ["Titel" => "titel",
  "Verzendinstructie" => 'Verzendinstructie',
   "Beschrijving"=> 'Beschrijving'];
 ?>
-    <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
+    <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate ">
       <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="Titel" required >
       <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="Plaatsnaam" required>
       <input type="text" id=<?php echo $form_ids['Land'] ?> name="Land" maxlength="52" value="LAND" required >
@@ -196,7 +186,7 @@ $form_ids = ["Titel" => "titel",
       <option value="1">1 dag</option>
       <option value="3">3 dagen</option>
       <option value="5">5 dagen</option>
-      <option value="7">7 dagen</option>
+      <option value="7" selected>7 dagen</option>
       <option value="10">10 dagen</option>
       </select>
       
@@ -212,7 +202,8 @@ $form_ids = ["Titel" => "titel",
       </select>
 
       <input id=<?php echo $form_ids['Banknummer'] ?> type="number" name="Banknummer" value="20389456" required>
-      
+    </div>
+    </div>
       <script>
           function previewFiles() {
 var preview = document.querySelector('#preview');
@@ -243,7 +234,7 @@ if (files) {
     
   </div>
 
-      <div class="uk-flex uk-flex-center uk-text-center uk-margin">
+      <div class="uk-flex uk-flex-center uk-text-center uk-margin uk-flex uk-flex-wrap">
   <div class="uk-margin-right">
     <h3>Verzendinstructie</h3>
     <textarea style="resize:none" name="Verzendinstructie" id=<?php echo $form_ids['Verzendinstructie'] ?> cols="30" rows="10" >sdjkafoasidjf</textarea>
@@ -287,4 +278,9 @@ $(document).ready(function(){
     });
 });
 
+ //als er een key is ingedrukt op de id ''
+ $( "#toggle-form" ).one("click",function (element) {
+        //stuurt een request naar de url
+             $('#rubrieken').load("item-aanbieden-load.php");
+      });
 </script>
