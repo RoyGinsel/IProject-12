@@ -134,7 +134,7 @@ if(!getPossibleBuyer($_SESSION['username'])){
             </table>
         </div>
     </div>
-    <div class='uk-margin-medium-top uk-flex uk-flex-center'>
+    <div class='uk-margin-medium-top'
         <p uk-margin>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>      
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
@@ -148,11 +148,9 @@ if(!getPossibleBuyer($_SESSION['username'])){
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline@m uk-flex-center uk-margin-medium-top">
   <div class="uk-flex uk-flex-column">
-  <h3 class="uk-flex uk-flex-center">Selecteer hier een rubriek</h3>
     <select id="rubrieken" class="uk-width-1-1 uk-form-select" name="Rubriekaanbieden[]" multiple required>
    
     </select>
-    <br>
     <div class="uk-flex uk-flex-center">
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-text-nowrap">
       <span>Titel:</span>
