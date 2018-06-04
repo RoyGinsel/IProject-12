@@ -20,6 +20,14 @@
     header('Location: inloggen.php?msg=failed');
    }
  }
+
+ if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
+   echo  '
+   <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+   <a class="sluiten uk-alert-close" uk-close ></a>
+   <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
+   <p> Tot de volgende keer! </p> </div>';     
+ }
 ?>
 
 <html lang="nl" dir="ltr">
