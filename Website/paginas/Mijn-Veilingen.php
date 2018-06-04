@@ -27,7 +27,33 @@ function allSections(){
         foreach($_POST['Rubriekaanbieden'] as $value){
         preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
         }
+        $doel_map = "../../images/item".$nummer;
+        var_dump($_FILES["fotos"]["name"]);
+// Geef de bestandnaam op van het bestand op een bepaalde locatie
+        $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"]);
+        $uploadOk = 1;
+//kijkt welke extensie de afbeelding heeft
+        $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
+
+// Bepaalde bestand extensies toestaan
+        if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
+            && $afbeelding_type != "gif") {
+            $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
+            $uploadOk = 0;
+        }
+
+// kijken of $uploadOk 0 is door een error hier boven
+        if ($uploadOk === 1) {
+            
+            if (move_uploaded_file($_FILES["fotos"]["tmp_name"], $doel_bestand)) {
+                $melding = "Het bestand " . basename($_FILES["fotos"]["name"]) . " is geupload.";
+            } else {
+                $melding = "Sorry, er was een error bij het uploaden van het bestand.";
+            }
+            //verander de naam naar profielfoto + email zodat er unieke foto's per user kunnen worden weergegeven.
+           // rename("item" . basename($_FILES["fotos"]["name"]), "item" . $nummer . $afbeelding_type);
     }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,7 +80,7 @@ $myAuctions = getAuctions($_SESSION['username']);
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk uk-text-center uk-margin-bottom">Mijn veilingen:</h1>
         </div>
-        <div class="uk-body  uk-height-large uk-overflow-auto">
+        <div class="uk-body uk-height-large uk-overflow-auto">
             <table class="uk-table uk-table-middle uk-table-responsive  uk-table-divider uk-table-hover">
             <thead>
                 <tr>
@@ -92,11 +118,9 @@ $myAuctions = getAuctions($_SESSION['username']);
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
-                    </tr>';
-        
+                    </tr>';       
 
                   }
-
                         echo $salesItems;                  
                ?>
               </tbody>
@@ -116,7 +140,7 @@ $myAuctions = getAuctions($_SESSION['username']);
 
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
   <div  class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple>
+   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple required>
    <?php
                     foreach(allSections() as $row){
                         echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
@@ -177,7 +201,7 @@ $form_ids = ["Titel" => "titel",
       <script>
           function previewFiles() {
 var preview = document.querySelector('#preview');
-var files   = document.querySelector('input[name="test"]').files;
+var files   = document.querySelector('input[name="fotos"]').files;
 
 function readAndPreview(file) {
   // Make sure `file.name` matches our extensions criteria
