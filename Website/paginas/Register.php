@@ -7,12 +7,9 @@ if(isset($_GET["data"])){
 } else {
   $data = 1;
 }
-
-
 if(isset($_SESSION['username'])){
 
   header('Location: index.php');
-
 }
 $warningEmail = "";
 $warningUsername = "";
@@ -35,13 +32,11 @@ if(isset($_GET['error'])){
         break;
     }
 }
-
  ?>
 
  <!DOCTYPE HTML>
 <html lang="nl" dir="ltr">
-
-  <head>
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inschrijven</title>
@@ -50,18 +45,16 @@ if(isset($_GET['error'])){
   <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  </head>
+</head>
 <body>
   <?php
   include "includes/header.php";
   ?>
 <main class="page">
   <!-- registratieformulier-->
-</div>
 <p class='uk-flex  uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
 <form action="handler.php" method="post">
   <div class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-
     <div class="persoonsGegevens uk-flex uk-flex-around uk-flex-column uk-height-large uk-margin-small-left uk-text-nowrap">
       <span>Email:*</span>
       <span>Voornaam:*</span>
@@ -77,16 +70,16 @@ if(isset($_GET['error'])){
       <span>Telefoonnummer:*</span>
       <span>Geboortedatum:*</span>
       <span>Kies Geheimevraag:*  </span>
-      <span>Geheimevraag Antwoord:* </span> </br>
+      <span>Geheimevraag Antwoord:* </span>
       <span>Ik ga akkoord met het privacybeleid. *</span>
     </div>
     <!-- Formuliervelden, value is leeg of gevuld met post waarden  als de gebruiker niet goed is ingelogd zodat gegevens gevuld blijven-->
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
-      <input type="email"name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
+      <input type="email" name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
       <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
-      <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>"maxlength="52" required >
-      <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlengt="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
-      <input type="Password" name="Wachtwoord" placeholder="<?php echo $warningPassword; ?>" maxlenght="25" required >
+      <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>" maxlength="52" required >
+      <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlength="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
+      <input type="Password" name="Wachtwoord" placeholder="<?php echo $warningPassword; ?>" maxlength="25" required >
       <input type="Password" name="WachtwoordHer" maxlength="25" required >
       <input type="text" name="Adres" maxlength="95" value = "<?php if(isset($_SESSION['adres'])){echo $_SESSION['adres']; }  ?>"   required>
       <input type="text" name="AdresExtra" value = "<?php if(isset($_SESSION['adresExtra'])){echo $_SESSION['adresExtra']; } ?>" maxlength="95">
@@ -98,29 +91,20 @@ if(isset($_GET['error'])){
       <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
         <?php foreach(getQuestions() as $key => $value){ ?>
-
          <option value="<?php echo $value['vraagNummer'] ?>"><?php echo $value['tekstVraag'] ?></option>
-
           <?php  } ?>
       </select>
-      <input type="text" name="Antwoordvraag" required> </br>
+      <input type="text" name="Antwoordvraag" required>
       <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required>
-
-
     </div>
-  </div>
+   </div>
   <div class="uk-flex uk-flex-center padding-large">
     <button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
-</div>
-
-
+  </div>
 </form>
-
-
 </main>
 <?php
   include "includes/footer.php";
   ?>
 </body>
-
 </html>

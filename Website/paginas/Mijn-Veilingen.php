@@ -9,44 +9,57 @@ if(!getPossibleBuyer($_SESSION['username'])){
   
   };
 
-  
-    if (isset($_POST['Titel'])){
-      $nummer = newVoorwerpNummer();
-      $nummer = $nummer[0]['voorwerpnummer'];
-      preparedInsertQuery("INSERT INTO tblVoorwerp values(".$nummer.",:titel,:beschrijving,:startPrijs,:betaalWijze,:betalingsInstructie,
-        :plaatsnaam,:land,:looptijd,convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP),:verzendkosten,:verzendinstructie,:verkoper)",
-        ["titel" => $_POST['Titel'], "beschrijving" => $_POST['Beschrijving'], "startPrijs" => $_POST['Startprijs'], "betaalWijze" => $_POST['Bank'],
-        "betalingsInstructie" => $_POST['Betaalinstructie'], "plaatsnaam" => $_POST['Plaatsnaam'], "land" => $_POST['Land'], "looptijd" => $_POST['Looptijd'],
-        "verzendkosten" => $_POST['Verzendkosten'], "verzendinstructie" => $_POST['Verzendinstructie'], "verkoper" => $_SESSION['username'] ]);
+    if (isset($_POST['Titel']) ){
+        $_aantal_fotos = count($_FILES['fotos']['name']);
+        var_dump($_aantal_fotos);
+        if($_FILES['fotos']['name'][0] =="" ){
+            echo "<script>
+            alert('Upload tenminste één bestand');
+                </script>";
+            }
+            if($_aantal_fotos > 4){
+                echo "<script>
+                alert('Je kunt maximaal 4 foto's uploaden);       
+                    </script>";
+                }
+        if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
+            $nummer = newVoorwerpNummer();
+            $nummer = $nummer[0]['voorwerpnummer'];
+            preparedInsertQuery("INSERT INTO tblVoorwerp values(".$nummer.",:titel,:beschrijving,:startPrijs,:betaalWijze,:betalingsInstructie,
+                :plaatsnaam,:land,:looptijd,convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP),:verzendkosten,:verzendinstructie,:verkoper)",
+                ["titel" => $_POST['Titel'], "beschrijving" => $_POST['Beschrijving'], "startPrijs" => $_POST['Startprijs'], "betaalWijze" => $_POST['Bank'],
+                "betalingsInstructie" => $_POST['Betaalinstructie'], "plaatsnaam" => $_POST['Plaatsnaam'], "land" => $_POST['Land'], "looptijd" => $_POST['Looptijd'],
+                "verzendkosten" => $_POST['Verzendkosten'], "verzendinstructie" => $_POST['Verzendinstructie'], "verkoper" => $_SESSION['username'] ]);
 
-        foreach($_POST['Rubriekaanbieden'] as $value){
-        preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
-        }
+                foreach($_POST['Rubriekaanbieden'] as $value){
+                preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
+                }
+
         $doel_map = "../../images/item".$nummer;
-        var_dump($_FILES["fotos"]["name"]);
-// Geef de bestandnaam op van het bestand op een bepaalde locatie
-        $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"]);
+        
+        for ($i=0; $i < count($_FILES['fotos']['name']); $i++) { 
+        // Geef de bestandnaam op van het bestand op een bepaalde locatie
+        $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
         $uploadOk = 1;
-//kijkt welke extensie de afbeelding heeft
+        //kijkt welke extensie de afbeelding heeft
         $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
 
-// Bepaalde bestand extensies toestaan
+        // Bepaalde bestand extensies toestaan
         if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
             && $afbeelding_type != "gif") {
             $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
             $uploadOk = 0;
         }
 
-// kijken of $uploadOk 0 is door een error hier boven
-        if ($uploadOk === 1) {
-            
-            if (move_uploaded_file($_FILES["fotos"]["tmp_name"], $doel_bestand)) {
-                $melding = "Het bestand " . basename($_FILES["fotos"]["name"]) . " is geupload.";
+        // kijken of $uploadOk 0 is door een error hier boven
+        if ($uploadOk === 1) {    
+            if (move_uploaded_file($_FILES["fotos"]["tmp_name"][$i], $doel_bestand)) {
+                $melding = "Het bestand " . basename($_FILES["fotos"]["name"][$i]) . " is geupload.";
             } else {
                 $melding = "Sorry, er was een error bij het uploaden van het bestand.";
+                }
             }
-            //verander de naam naar profielfoto + email zodat er unieke foto's per user kunnen worden weergegeven.
-           // rename("item" . basename($_FILES["fotos"]["name"]), "item" . $nummer . $afbeelding_type);
+        }
     }
 }
 ?>
@@ -65,7 +78,7 @@ if(!getPossibleBuyer($_SESSION['username'])){
 <body>
   <?php
     include "includes/header.php";
-
+    
 $myAuctions = getAuctions($_SESSION['username']);
               
 ?>
@@ -203,7 +216,7 @@ $form_ids = ["Titel" => "titel",
       <script>
           function previewFiles() {
 var preview = document.querySelector('#preview');
-var files   = document.querySelector('input[name="fotos"]').files;
+var files   = document.querySelector('input[name="fotos[]"]').files;
 
 function readAndPreview(file) {
   // Make sure `file.name` matches our extensions criteria
