@@ -7,6 +7,7 @@ function allSections(){
                     from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
                     order by rubriekNaam asc");
     }
+
 //veranderen! C:
 // if(isset($_SESSION['username'])){
 
@@ -14,7 +15,6 @@ function allSections(){
   
 //   }
   
-
     if (isset($_POST['Titel'])){
       $nummer = newVoorwerpNummer();
       $nummer = $nummer[0]['voorwerpnummer'];
@@ -56,19 +56,19 @@ function allSections(){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mijn veilingen</title>
-    <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
-    <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EenmaalAndermaal</title>
+  <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
+  <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<?php
+  <?php
     include "includes/header.php";
 
 $myAuctions = getAuctions($_SESSION['username']);
@@ -92,35 +92,42 @@ $myAuctions = getAuctions($_SESSION['username']);
                 </tr>
               </thead>
               <tbody>
-              <?php
+              <?php   
     
             $salesItems = "";
             foreach($myAuctions as $item => $key){
-
-              // bepaalt de tijd en datum van het moment
+                              // bepaalt de tijd en datum van het moment
               $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
 
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
+                $timeRemaining;
+                if($key['veilingGesloten'] == 0){
+                    $timeRemaining = format_interval($difference);
+                } else {
+                    $timeRemaining = 'Veiling gesloten';
+                }
                if(empty($key['bodBedrag'])){
                     $prijs =  $key['startPrijs'];
                     }else { 
                           $prijs = $key['bodBedrag'];
-                     };                
-    $salesItems .= '  
+                     };      
+                        $salesItems .= '  
                     <tr>
                     <td>'.$key['titel'].'</td>
                     <td>'.$key['looptijdBeginDag'].' </td>
                     <td>€ '.$prijs.'</td>
-                    <td>'. format_interval($difference).' </td>
+                    <td>'. $timeRemaining.' </td>
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
                     </tr>';       
 
                   }
+
+                  // print de items weer.
                         echo $salesItems;                  
                ?>
               </tbody>
@@ -224,8 +231,6 @@ if (files) {
 }
 }
 </script>
-
-
     </div>
     
   </div>
@@ -274,5 +279,4 @@ $(document).ready(function(){
     });
 });
 
-  
 </script>
