@@ -7,21 +7,22 @@
     } else {
       $data = 1;
     }
+    // Als er geen user is ingelogd, return naar de index pagina
     if($_SESSION['username'] == false){
       header('Location: index.php');
     }
+    // Als de huidige user geen "Mogelijk verkoper" is, return naar index pagina
     if(getSellerInfo($_SESSION['username']) && getPossibleBuyer($_SESSION['username'])){
       header('Location: index.php');
     };
-
+    // Sanitize creditcardnummer + error message
     if(isset($_POST['post_creditcardnummerInvoer'])){
       if(!filter_var($_POST['post_creditcardnummerInvoer'],FILTER_VALIDATE_INT) === false){
         header('Location: upgrade.php');
-        echo 'is geen geldige creditcardnummer'; 
         Die();
       }
     }
-
+    // Insert het ingevulde naar de database
     if(isset($_POST['Submit'])){
       $bank = $_POST['post_bank'];
       $bankrekening = filter_var($_POST['post_bankrekening'], FILTER_SANITIZE_STRING);
@@ -29,12 +30,9 @@
       $creditcardnummer = $_POST['post_creditcardnummerInvoer'];
       if($bankrekening !='' && $creditorpost !=''){
         $query = preparedQuery("INSERT INTO tblVerkoper VALUES (:chef,:bank,:bankrekening,:creditorpost,:creditcardnummer,convert(date,current_timestamp),0)",["bank"=> $bank,"chef"=>$_SESSION['username'], "bankrekening"=> $bankrekening, "creditorpost" => $creditorpost, "creditcardnummer" => $creditcardnummer]);
-        header('Location: index.php');
+        header('Location: index.php?msg=verkoper');
       }
     }
-   if(isset($_POST['Submit']) && ($_POST['post_bankrekening'])){
-     echo 'Nie goed bruh';
-   }
  ?>
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">

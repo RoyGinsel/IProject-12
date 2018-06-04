@@ -254,11 +254,11 @@ function addNewBid($amount, $item, $username){
 }
 // veilingen halen
 function getAuctions($seller){
-	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
+	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,veilingGesloten,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
 	from tblVoorwerp v
 	full join tblBod b on v.voorwerpNummer=b.voorwerpNummer
 	where verkoper = :verkoper
-	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer, looptijdEindeTijdstip",[":verkoper"=> $seller]);
+	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer,veilingGesloten, looptijdEindeTijdstip",[":verkoper"=> $seller]);
 
 }
 

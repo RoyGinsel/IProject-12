@@ -7,6 +7,7 @@ function allSections(){
                     from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
                     order by rubriekNaam asc");
     }
+
 //veranderen! C:
 // if(isset($_SESSION['username'])){
 
@@ -14,7 +15,6 @@ function allSections(){
   
 //   }
   
-
     if (isset($_POST['Titel'])){
       $nummer = newVoorwerpNummer();
       $nummer = $nummer[0]['voorwerpnummer'];
@@ -27,22 +27,48 @@ function allSections(){
         foreach($_POST['Rubriekaanbieden'] as $value){
         preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
         }
+        $doel_map = "../../images/item".$nummer;
+        var_dump($_FILES["fotos"]["name"]);
+// Geef de bestandnaam op van het bestand op een bepaalde locatie
+        $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"]);
+        $uploadOk = 1;
+//kijkt welke extensie de afbeelding heeft
+        $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
+
+// Bepaalde bestand extensies toestaan
+        if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
+            && $afbeelding_type != "gif") {
+            $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
+            $uploadOk = 0;
+        }
+
+// kijken of $uploadOk 0 is door een error hier boven
+        if ($uploadOk === 1) {
+            
+            if (move_uploaded_file($_FILES["fotos"]["tmp_name"], $doel_bestand)) {
+                $melding = "Het bestand " . basename($_FILES["fotos"]["name"]) . " is geupload.";
+            } else {
+                $melding = "Sorry, er was een error bij het uploaden van het bestand.";
+            }
+            //verander de naam naar profielfoto + email zodat er unieke foto's per user kunnen worden weergegeven.
+           // rename("item" . basename($_FILES["fotos"]["name"]), "item" . $nummer . $afbeelding_type);
     }
+}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mijn veilingen</title>
-    <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
-    <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EenmaalAndermaal</title>
+  <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
+  <script type="text/javascript" src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<?php
+  <?php
     include "includes/header.php";
 
 $myAuctions = getAuctions($_SESSION['username']);
@@ -54,7 +80,7 @@ $myAuctions = getAuctions($_SESSION['username']);
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk uk-text-center uk-margin-bottom">Mijn veilingen:</h1>
         </div>
-        <div class="uk-body  uk-height-large uk-overflow-auto">
+        <div class="uk-body uk-height-large uk-overflow-auto">
             <table class="uk-table uk-table-middle uk-table-responsive  uk-table-divider uk-table-hover">
             <thead>
                 <tr>
@@ -66,37 +92,42 @@ $myAuctions = getAuctions($_SESSION['username']);
                 </tr>
               </thead>
               <tbody>
-              <?php
+              <?php   
     
             $salesItems = "";
             foreach($myAuctions as $item => $key){
-
-              // bepaalt de tijd en datum van het moment
+                              // bepaalt de tijd en datum van het moment
               $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
 
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
+                $timeRemaining;
+                if($key['veilingGesloten'] == 0){
+                    $timeRemaining = format_interval($difference);
+                } else {
+                    $timeRemaining = 'Veiling gesloten';
+                }
                if(empty($key['bodBedrag'])){
                     $prijs =  $key['startPrijs'];
                     }else { 
                           $prijs = $key['bodBedrag'];
-                     };                
-    $salesItems .= '  
+                     };      
+                        $salesItems .= '  
                     <tr>
                     <td>'.$key['titel'].'</td>
                     <td>'.$key['looptijdBeginDag'].' </td>
                     <td>€ '.$prijs.'</td>
-                    <td>'. format_interval($difference).' </td>
+                    <td>'. $timeRemaining.' </td>
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
-                    </tr>';
-        
+                    </tr>';       
 
                   }
 
+                  // print de items weer.
                         echo $salesItems;                  
                ?>
               </tbody>
@@ -116,7 +147,7 @@ $myAuctions = getAuctions($_SESSION['username']);
 
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
   <div  class="uk-form  uk-wid uk-width-1-1 uk-flex uk-flex-inline uk-flex-center uk-margin-medium-top">
-   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple>
+   <select id="rubrieken" class="uk-form-select" name="Rubriekaanbieden[]" multiple required>
    <?php
                     foreach(allSections() as $row){
                         echo "<option value=".$row['rubriekNummer'].">".$row['rubriekNaam']." Pr.".$row['parentNaam']."</option>";
@@ -177,7 +208,7 @@ $form_ids = ["Titel" => "titel",
       <script>
           function previewFiles() {
 var preview = document.querySelector('#preview');
-var files   = document.querySelector('input[name="test"]').files;
+var files   = document.querySelector('input[name="fotos"]').files;
 
 function readAndPreview(file) {
   // Make sure `file.name` matches our extensions criteria
@@ -200,8 +231,6 @@ if (files) {
 }
 }
 </script>
-
-
     </div>
     
   </div>
@@ -250,5 +279,4 @@ $(document).ready(function(){
     });
 });
 
-  
 </script>
