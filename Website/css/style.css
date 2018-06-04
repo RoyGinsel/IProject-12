@@ -44,66 +44,56 @@ button>img:hover{
 @media only screen and (max-width: 600px) {
   button {
     background-color:#7D6444;
+  }
 
+  div table tr td{
+    font-size: 12px;
   }
 }
 
 
 @media only screen and (max-width: 600px) {
   .persoonsGegevens {
-
     font-size: 13px;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .invoervelden {
-
    width:140px;
-
   }
 }
 
 @media only screen and (max-width: 600px) {
   .mobileSize {
-
   flex-wrap:wrap;
-
   }
 }
 
 @media only screen and (max-width: 600px) {
   .submitButton {
-
     margin-left:50%;
-
   }
 }
 
 @media only screen and (max-width: 600px) {
   .mobileTitle {
-
   font-size:29px;
   text-decoration: none;
-
   }
 }
 
 @media only screen and (max-width: 600px) {
   .uk-button{
-
     font-size:10px;
-
     padding:8px;
   }
 }
 
 
 .rubriekenlijst{
-
 padding-left:8px;
 margin:0px;
-
 }
 
 .searchbartext{

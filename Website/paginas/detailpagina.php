@@ -18,19 +18,11 @@
     } else{
       $highestBid = $info[0]['startPrijs'];
     }
-
+    $error;
     if(isset($_POST['invoerBod']) && isset($_SESSION['username'])){
       $error = addNewBid($_POST['invoerBod'],$itemID,$_SESSION['username']);
       $error = substr($error,71); 
-      echo $error;
-      // if($error != false){
-      //   $pos = strpos($error, ']');
-      //   while($pos !== false){
-      //     $error = substr($error,$pos); 
-      //     $pos = strpos($error, ']');
-      //   }
-      // }
-    }
+    } 
  ?>
  <!-- Script om countdown te krijgen bij producten -->
  <script>
@@ -160,6 +152,19 @@
      echo $samenvatting;
       ?>
       <div class="uk-card uk-card-default uk-card-body uk-width-1-3 uk-margin-top">
+      <?php
+            if(!isset($_SESSION['username'])){
+              echo "<div class='uk-alert-danger' uk-alert>
+                  <a class='uk-alert-close' uk-close></a>
+                  <p> U moet ingelogd zijn om te kunnen bieden </p>
+                  </div>";
+            } elseif(isset($error)){
+              echo "<div class='uk-alert-danger' uk-alert>
+                    <a class='uk-alert-close' uk-close></a>
+                    <p> $error </p>
+                    </div>";
+            }
+          ?>
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>
           <form action="" method="post" class="uk-panel uk-panel-box uk-form">
@@ -300,6 +305,19 @@
 
         ?>
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
+          <?php
+            if(!isset($_SESSION['username'])){
+              echo "<div class='uk-alert-danger' uk-alert>
+                  <a class='uk-alert-close' uk-close></a>
+                  <p> U moet ingelogd zijn om te kunnen bieden </p>
+                  </div>";
+            } elseif(isset($error)){
+              echo "<div class='uk-alert-danger' uk-alert>
+                    <a class='uk-alert-close' uk-close></a>
+                    <p> $error </p>
+                    </div>";
+            }
+          ?>
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>
             <form action="" method="post" class="uk-panel uk-panel-box uk-form">
@@ -310,20 +328,22 @@
             </form>
           </div>
           <div class="uk-body">
-              <div class="uk-width-1-1 SamenvattingMobile">
-                <div class="uk-margin-top">
-                  <h1>Gebruiker:</h1>
-                  <p>Dex</p>
-                </div>
-                <div>
-                  <h1>Bod:</h1>
-                  <p>&euro; 20.000</p>
-                </div>
-                <div>
-                  <h1>Datum:</h1>
-                  <p></p>
-                </div>
-              </div>
+              <table class="uk-table uk-table-middle uk-table-divider ">
+              <tr>
+                <th>Gebruiker:</th>
+                <th>Bod:</th>
+                <th>Datum en Tijd:</th>
+              </tr>
+              <?php
+                foreach(getAllBids($itemID) as $row){
+                  echo '
+                      <tr>
+                        <td>'.$row['gebruiker'].'</td>
+                        <td> &euro;'.$row['bodBedrag'].'</td>
+                        <td>'.$row['bodDag'].' '. substr($row['bodTijdstip'],0,8).'</td>
+                      </tr>'; };
+              ?>
+            </table>
           </div>
         </div>
 
