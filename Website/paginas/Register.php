@@ -78,7 +78,7 @@ if(isset($_GET['error'])){
       <span>Geboortedatum:*</span>
       <span>Kies Geheimevraag:*  </span>
       <span>Geheimevraag Antwoord:* </span> </br>
-      <span>Accepteer de voorwaarden:*</span>
+      <span>Ik ga akkoord met het privacybeleid. *</span>
     </div>
     <!-- Formuliervelden, value is leeg of gevuld met post waarden  als de gebruiker niet goed is ingelogd zodat gegevens gevuld blijven-->
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
@@ -104,7 +104,7 @@ if(isset($_GET['error'])){
           <?php  } ?>
       </select>
       <input type="text" name="Antwoordvraag" required> </br>
-      <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required> 
+      <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required>
 
 
     </div>
