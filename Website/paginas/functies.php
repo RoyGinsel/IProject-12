@@ -21,7 +21,6 @@ function preparedQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-
 		$query = $dbh->prepare($stringquery);
 		$query->execute($parameters);
 		return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -34,11 +33,22 @@ function preparedInsertQuery($stringquery,$parameters)
 {
 	try{
 		global $dbh;
-
 		$query = $dbh->prepare($stringquery);
 		$query->execute($parameters);
 	}
 	catch(PDOException $e) {
+	}
+}
+
+function preparedSPQuery($stringquery,$parameters)
+{
+	try{
+		global $dbh;
+		$query = $dbh->prepare($stringquery);
+		$query->execute($parameters);
+	}
+	catch(PDOException $e) {
+		return $e->getMessage();
 	}
 }
 
@@ -209,10 +219,9 @@ function getseller($itemID)
 // Functie om hoogste bod van een item te krijgen
 function getHighestBid($itemID)
 {
-  return preparedQuery("SELECT TOP 1 tblBod.voorwerpNummer, tblBod.gebruiker, MAX(bodBedrag) AS HoogsteBod
+  return preparedQuery("SELECT TOP 1 MAX(bodBedrag) AS HoogsteBod
                         FROM tblBod, tblVoorwerp
-                        WHERE tblBod.voorwerpNummer = tblVoorwerp.voorwerpNummer  AND tblVoorwerp.voorwerpNummer = :voorwerpNummer
-                        GROUP BY tblBod.voorwerpNummer, tblBod.gebruiker", ["voorwerpNummer" =>$itemID]);
+                        WHERE tblBod.voorwerpNummer = tblVoorwerp.voorwerpNummer  AND tblVoorwerp.voorwerpNummer = :voorwerpNummer", ["voorwerpNummer" =>$itemID]);
 }
 // Functie om mogelijke verkoper te krijgen
 function getSellerInfo($username)
@@ -240,17 +249,31 @@ function newVoorwerpNummer(){
 	return query("SELECT max(voorwerpNummer) +1 as voorwerpnummer from tblVoorwerp");
 }
 
+function addNewBid($amount, $item, $username){
+	return preparedSPQuery("exec spNieuwBod :amount, :item, :username",["amount" => $amount,"item" => $item, "username" => $username]);
+}
 // veilingen halen
 function getAuctions($seller){
 	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
-	from tblVoorwerp v 
+	from tblVoorwerp v
 	full join tblBod b on v.voorwerpNummer=b.voorwerpNummer
 	where verkoper = :verkoper
 	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer, looptijdEindeTijdstip",[":verkoper"=> $seller]);
-	
-	}
 
-"SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
-from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
-order by rubriekNaam asc"
+}
+
+
+	// tijd berekenen overgebleven dagen veiling
+function format_interval(DateInterval $interval) {
+	$result = "";
+	if ($interval->d) { $result .= $interval->format("%d dagen "); }
+	if ($interval->h) { $result .= $interval->format("%h uur "); }
+
+	return $result;
+}
+
+function getAllBids($itemID){
+	preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+}
+
  ?>
