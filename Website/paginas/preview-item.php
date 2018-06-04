@@ -10,7 +10,7 @@
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Upload foto's</h1>
-        <input id="browse" type="file" name="test" onchange="previewFiles()" multiple>
+        <input id="browse" type="file" name="fotos" onchange="previewFiles()" multiple>
           <ul id="preview" class="uk-slideshow-items uk-slid uk-margin-right voorwerpFoto">
           </ul>
           <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
