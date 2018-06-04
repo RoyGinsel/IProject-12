@@ -287,6 +287,16 @@ begin
 		raiserror ('U heeft al het hoogste bod',16,1)
 		return
 	end
+	if (select verkoper from tblVoorwerp where voorwerpNummer = @voorwerpNummer) = @username
+	begin
+		raiserror ('Dit is uw eigen product',16,1)
+		return
+	end
+	if (select veilingGesloten from tblVoorwerp where voorwerpNummer = @voorwerpNummer) = 1
+	begin
+		raiserror ('Deze veiling is gesloten',16,1)
+		return
+	end
 	if (select max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) < 50
 	begin
 		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 0.5
@@ -342,7 +352,7 @@ begin
 end
 
 go
-exec spNieuwBod 1000061.00, 2, 'timovn1'
+exec spNieuwBod 1000061.00, 3, 'timovn1'
 
 
 select * from tblVoorwerp
@@ -359,4 +369,3 @@ alter table tblbod
 add bodDag date not null
 alter table tblbod
 add bodTijdstip time not null
-

@@ -16,7 +16,8 @@
 
     if(isset($_POST['post_creditcardnummerInvoer'])){
       if(!filter_var($_POST['post_creditcardnummerInvoer'],FILTER_VALIDATE_INT) === false){
-        echo "is geen geldige creditcardnummer";
+        header('Location: upgrade.php');
+        echo 'is geen geldige creditcardnummer'; 
         Die();
       }
     }
@@ -31,6 +32,9 @@
         header('Location: index.php');
       }
     }
+   if(isset($_POST['Submit']) && ($_POST['post_bankrekening'])){
+     echo 'Nie goed bruh';
+   }
  ?>
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
