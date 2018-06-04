@@ -297,6 +297,19 @@ begin
 		raiserror ('Deze veiling is gesloten',16,1)
 		return
 	end
+	if (select count(*) from tblBod where voorwerpNummer = @voorwerpNummer) = 0
+	begin
+		if(select startprijs from tblVoorwerp where voorwerpNummer = @voorwerpNummer) <= @bodBedrag
+		begin
+			INSERT into tblBod values (@voorwerpNummer,@bodBedrag,@username,convert(date,current_timestamp),convert(time,current_timestamp))
+			return
+		end
+		else
+		begin
+			raiserror ('U moet hoger bieden dan de start prijs',16,1)
+			return
+		end
+	end
 	if (select max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) < 50
 	begin
 		if (select @bodbedrag-max(bodBedrag) from tblBod where voorwerpNummer = @voorwerpNummer) >= 0.5
