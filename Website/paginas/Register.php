@@ -104,7 +104,7 @@ if(isset($_GET['error'])){
           <?php  } ?>
       </select>
       <input type="text" name="Antwoordvraag" required> </br>
-      <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required> 
+      <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required>
 
 
     </div>
