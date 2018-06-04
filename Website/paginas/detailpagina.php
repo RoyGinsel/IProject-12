@@ -7,19 +7,20 @@
     } else {
       $data = 1;
     }
-    $info = getProductinfo($_GET['item']);
-    $seller = getseller($_GET['item']);
+    $itemID = $_GET['item'];
+    $info = getProductinfo($itemID);
+    $seller = getseller($itemID);
     $review = getReview($seller[0]['verkoper']);
     $highestBid;
-    if (getHighestBid($_GET['item']) != false){
-      $highestBid = getHighestBid($_GET['item']);
+    if (isset(getHighestBid($itemID)[0]['bodBedrag'])){
+      $highestBid = getHighestBid($itemID);
       $highestBid = $highestBid[0]['HoogsteBod'];
     } else{
       $highestBid = $info[0]['startPrijs'];
     }
 
     if(isset($_POST['invoerBod']) && isset($_SESSION['username'])){
-      $error = addNewBid($_POST['invoerBod'],$_GET['item'],$_SESSION['username']);
+      $error = addNewBid($_POST['invoerBod'],$itemID,$_SESSION['username']);
       $error = substr($error,71); 
       echo $error;
       // if($error != false){
@@ -175,6 +176,15 @@
                 <th>Bod:</th>
                 <th>Datum en Tijd:</th>
               </tr>
+              <?php
+                foreach(getAllBids($itemID) as $row){
+                  echo '
+                      <tr>
+                        <td>'.$row['gebruiker'].'</td>
+                        <td> &euro;'.$row['bodBedrag'].'</td>
+                        <td>'.$row['bodDag'].' '. substr($row['bodTijdstip'],0,8).'</td>
+                      </tr>'; };
+              ?>
             </table>
         </div>
       </div>

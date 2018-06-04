@@ -273,7 +273,7 @@ function format_interval(DateInterval $interval) {
 }
 
 function getAllBids($itemID){
-	preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+	return preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
 }
 
  ?>
