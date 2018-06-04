@@ -21,27 +21,20 @@ $warningNumber = "";
 // geeft een foutmelding op basis van of de gebruikersnaam  / email  al bestaat of wachtwoord niet het zelfde is.
 if(isset($_GET['error'])){
   switch($_GET['error']){
-
     case "Email":
       $warningEmail = "Emailadres is al in gebruik.";
     break;
-
     case "Gebruikersnaam":
       $warningUsername = "Gebruikersnaam is al in gebruik.";
     break;
-
-    case "Wachtwoord":
+      case "Wachtwoord":
       $warningPassword = 'Wachtwoord is niet het zelfde';
       break;
-
       case "telefoonNummer":
         $warningNumber = 'Telefoonnummer is geen geldig nummer';
         break;
     }
-
 }
-
-
 
  ?>
 
@@ -59,16 +52,11 @@ if(isset($_GET['error'])){
   <link rel="stylesheet" href="../css/style.css">
   </head>
 <body>
-
   <?php
   include "includes/header.php";
   ?>
-
-
 <main class="page">
-
   <!-- registratieformulier-->
-
 </div>
 <p class='uk-flex  uk-flex-center uk-margin-small-top uk-text-large uk-text-bold'>Inschrijfformulier</p>
 <form action="handler.php" method="post">
@@ -89,10 +77,10 @@ if(isset($_GET['error'])){
       <span>Telefoonnummer:*</span>
       <span>Geboortedatum:*</span>
       <span>Kies Geheimevraag:*  </span>
-      <span>Geheimevraag Antwoord:* </span>
+      <span>Geheimevraag Antwoord:* </span> </br>
+      <span>Accepteer de voorwaarden:*</span>
     </div>
-
-
+    <!-- Formuliervelden, value is leeg of gevuld met post waarden  als de gebruiker niet goed is ingelogd zodat gegevens gevuld blijven-->
     <div class="invoervelden uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate">
       <input type="email"name="email" maxlength="25" value = "<?php if(isset($_SESSION['email']) && $warningEmail == "" ){echo $_SESSION['email']; }  ?>"  placeholder = "<?php echo $warningEmail; ?>" required >
       <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
@@ -115,13 +103,14 @@ if(isset($_GET['error'])){
 
           <?php  } ?>
       </select>
-      <input type="text" name="Antwoordvraag" required>
+      <input type="text" name="Antwoordvraag" required> </br>
+      <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required> 
 
 
     </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-<button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
+    <button type="submit" class="uk-button uk-button-default uk-button-primary uk-margin-medium-top" value="submitbutton" name="submit">Verzenden</button>
 </div>
 
 

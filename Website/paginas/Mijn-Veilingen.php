@@ -54,7 +54,7 @@ $myAuctions = getAuctions($_SESSION['username']);
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk uk-text-center uk-margin-bottom">Mijn veilingen:</h1>
         </div>
-        <div class="uk-body  uk-height-large uk-overflow-auto">
+        <div class="uk-body uk-height-large uk-overflow-auto">
             <table class="uk-table uk-table-middle uk-table-responsive  uk-table-divider uk-table-hover">
             <thead>
                 <tr>
@@ -92,11 +92,9 @@ $myAuctions = getAuctions($_SESSION['username']);
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
-                    </tr>';
-        
+                    </tr>';       
 
                   }
-
                         echo $salesItems;                  
                ?>
               </tbody>
