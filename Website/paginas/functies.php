@@ -254,11 +254,11 @@ function addNewBid($amount, $item, $username){
 }
 // veilingen halen
 function getAuctions($seller){
-	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
+	return preparedQuery("SELECT titel,looptijd , v.voorwerpNummer,looptijdBeginDag,veilingGesloten,max(bodBedrag) as bodBedrag,startPrijs,looptijdEindeDag,looptijdEindeTijdstip
 	from tblVoorwerp v
 	full join tblBod b on v.voorwerpNummer=b.voorwerpNummer
 	where verkoper = :verkoper
-	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer, looptijdEindeTijdstip",[":verkoper"=> $seller]);
+	group by titel, looptijdBeginDag, startPrijs, looptijdEindeDag,looptijd,v.voorwerpNummer,veilingGesloten, looptijdEindeTijdstip",[":verkoper"=> $seller]);
 
 }
 
@@ -272,8 +272,18 @@ function format_interval(DateInterval $interval) {
 	return $result;
 }
 
+
+// geeft allebiedingen weer voor mijnveilingen
 function getAllBids($itemID){
-	preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+	return preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
 }
+
+
+// geeft de select voor alle rubrieken weer
+function allSections(){
+	return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
+				from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
+				order by rubriekNaam asc");
+};  
 
  ?>

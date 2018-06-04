@@ -20,13 +20,22 @@
     header('Location: inloggen.php?msg=failed');
    }
  }
+ if (isset($_GET["msg"]) && $_GET["msg"] == 'verkoper') {
+   echo  '
+   <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+   <a class="sluiten uk-alert-close" uk-close ></a>
+   <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> Gefeliciteerd '.$_SESSION['username'].', u bent nu een verkoper!</h1>
+   <p> Welkom bij de club!, <br> u kunt nu items veilen d.m.v. de navigatieknop en dan naar "Mijn veilingen" te gaan! <br>
+   Of u klikt hier: <a href="Mijn-veilingen.php">"Mijn Veilingen"</a></p>
+   </div>';
+ }
 
  if (isset($_GET["msg"]) && $_GET["msg"] == 'uitgelogd') {
    echo  '
    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
    <a class="sluiten uk-alert-close" uk-close ></a>
    <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
-   <p> Tot de volgende keer! </p> </div>';     
+   <p> Tot de volgende keer! </p> </div>';
  }
 ?>
 
