@@ -7,10 +7,12 @@
     } else {
       $data = 1;
     }
+
     $itemID = $_GET['item'];
     $info = getProductinfo($itemID);
     $seller = getseller($itemID);
     $review = getReview($seller[0]['verkoper']);
+// Functie die hoogste bieding krijgt
     $highestBid;
     if (isset(getHighestBid($itemID)[0]['bodBedrag'])){
       $highestBid = getHighestBid($itemID);
@@ -18,46 +20,19 @@
     } else{
       $highestBid = $info[0]['startPrijs'];
     }
+// maakt een leesbare error message
     $error;
     if(isset($_POST['invoerBod']) && isset($_SESSION['username'])){
       $error = addNewBid($_POST['invoerBod'],$itemID,$_SESSION['username']);
-      $error = substr($error,71); 
-    } 
- ?>
- <!-- Script om countdown te krijgen bij producten -->
- <script>
-    // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
-    var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
-    // var countDownDate = new Date('2018-05-29T10:30:00')
-    // Zorgt voor de countdown met 1 seconden per refresh
-    var x = setInterval(function() {
-    // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
-    var now = new Date();
-    // Berekent de tijd vanaf je huidige datum en de opgegeven datum
-    var distance = countDownDate - now;
-    // Functies die zorgen voor het calculeren van de tijden
-    var dagen = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var uren = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minuten = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconden = Math.floor((distance % (1000 * 60)) / 1000);
-    // Output het resultaat in de ID
-    document.getElementById("cntdwn").innerHTML = dagen + "d " + uren + "u "
-    + minuten + "m " + seconden + "s ";
-    document.getElementById("cntdwnMobile").innerHTML = dagen + "d " + uren + "u "
-    + minuten + "m " + seconden + "s ";
-    // Wanneer de countdown bij '0' is, plaats wat tekst
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("cntdwn").innerHTML = "Verlopen";
-        document.getElementById("cntdwnMobile").innerHTML = "Verlopen";
+      $error = substr($error,71);
     }
-}, 1000);
-</script>
+ ?>
 
  <!DOCTYPE html>
 <html lang="nl" dir="ltr">
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EenmaalAndermaal</title>
     <script src="../css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
     <script src="../css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
@@ -65,6 +40,36 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
+<!-- Script om countdown te krijgen bij producten -->
+<script>
+   // Vul de datum in vanaf hij moet aftellen, wij hebben uit de database de einde dag en tijd gehaald.
+   var countDownDate = new Date(<?php echo "'". $info[0]['looptijdEindeDag'] ." ". $info[0]['looptijdEindeTijdstip']. "'"?>);
+   // var countDownDate = new Date('2018-05-29T10:30:00')
+   // Zorgt voor de countdown met 1 seconden per refresh
+   var x = setInterval(function() {
+   // Door deze functie krijg je de huidige datum en tijd. (Je eigen PC tijd)
+   var now = new Date();
+   // Berekent de tijd vanaf je huidige datum en de opgegeven datum
+   var distance = countDownDate - now;
+   // Functies die zorgen voor het calculeren van de tijden
+   var dagen = Math.floor(distance / (1000 * 60 * 60 * 24));
+   var uren = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+   var minuten = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+   var seconden = Math.floor((distance % (1000 * 60)) / 1000);
+   // Output het resultaat in de ID
+   document.getElementById("cntdwn").innerHTML = dagen + "d " + uren + "u "
+   + minuten + "m " + seconden + "s ";
+   document.getElementById("cntdwnMobile").innerHTML = dagen + "d " + uren + "u "
+   + minuten + "m " + seconden + "s ";
+   // Wanneer de countdown bij '0' is, plaats wat tekst
+   if (distance < 0) {
+       clearInterval(x);
+       document.getElementById("cntdwn").innerHTML = "Verlopen";
+       document.getElementById("cntdwnMobile").innerHTML = "Verlopen";
+   }
+}, 1000);
+</script>
 
 <body>
   <!-- Header -->
@@ -105,7 +110,7 @@
        $samenvatting = '
       <div class="uk-card uk-card-default uk-card-body uk-width-1-2 uk-margin-left">
         <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Samenvatting:</h1>
-        <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
+        <table class="uk-table uk-table-divider uk-width-1-1 ">
           <tr>
             <td>Voorwerpnummer:</td>
             <td>'.$info[0]['voorwerpNummer'].'</td>
@@ -131,7 +136,7 @@
             <td>&euro; '.$info[0]['verzendkosten'].'</td>
           </tr>
           </table>
-          <table method="post" class="uk-table uk-table-divider uk-width-1-1 ">
+          <table class="uk-table uk-table-divider uk-width-1-1 ">
           <h1 class="uk-card-title uk-margin-remove uk-text-center uk-width-1-1">Info over verkoper:</h1>
           <tr>
             <td>Naam:</td>
@@ -167,7 +172,7 @@
           ?>
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>
-          <form action="" method="post" class="uk-panel uk-panel-box uk-form">
+          <form action="#" method="post" class="uk-panel uk-panel-box uk-form">
             <div class="uk-form-row">
               <input class="uk-width-1-3 uk-form-large" name="invoerBod" type="number"  placeholder="Bod" required>
               <input class="uk-button uk-button-primary uk-width-1-2  uk-padding-remove" type="Submit" name="Bod" value="Bieden">
@@ -320,7 +325,7 @@
           ?>
           <div class="uk-card-header">
             <h1 class="uk-card-title uk-padding-remove uk-text-center">Bieden:</h1>
-            <form action="" method="post" class="uk-panel uk-panel-box uk-form">
+            <form action="#" method="post" class="uk-panel uk-panel-box uk-form">
               <div class="uk-form-row uk-margin uk-padding-remove">
                 <input class="uk-width-1-1 uk-input uk-form-width-medium uk-form-default" name="invoerBod" type="number"  placeholder="Bod" required>
                 <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove uk-margin-top" type="Submit" name="Bod" value="Bieden">
