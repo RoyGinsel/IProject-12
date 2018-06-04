@@ -272,8 +272,18 @@ function format_interval(DateInterval $interval) {
 	return $result;
 }
 
+
+// geeft allebiedingen weer voor mijnveilingen
 function getAllBids($itemID){
-	preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+	return preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
 }
+
+
+// geeft de select voor alle rubrieken weer
+function allSections(){
+	return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
+				from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
+				order by rubriekNaam asc");
+};  
 
  ?>
