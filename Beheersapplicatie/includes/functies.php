@@ -86,4 +86,19 @@
         preparedQuery("DELETE from tblVoorwerpRubriek
                         where rubriekNummer = :number",['number' => $number]);
     }
+
+
+    //geeft alle users weer 
+    function getUsers(){
+
+
+        return Query("Select gebruikersNaam, geblokkeerd from tblGebruiker where geblokkeerd = 0");
+    
+    }
+
+    function blockUser($user){
+
+     preparedQuery("UPDATE tblGebruiker SET geblokkeerd = 1 where gebruikersnaam = :gebruiker",['gebruiker' => $user]);
+
+    }
 ?>
