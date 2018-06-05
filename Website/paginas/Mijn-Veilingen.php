@@ -128,12 +128,12 @@ if (isset($_POST['Titel']) ){
             </table>
         </div>
     </div>
-    <div class='uk-margin-medium-top'
-        <p uk-margin>
+    <div class='uk-margin-top'>
+        <p>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <button  href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
-             uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> <a id="toggle-form">Item aanbieden </a></button>
+            <button uk-toggle="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
+             uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden </button>
         </p>
     </div>
 
@@ -172,8 +172,8 @@ if (isset($_POST['Titel']) ){
       <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="Titel" required >
       <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="Plaatsnaam" required>
       <input type="text" id=<?php echo $form_ids['Land'] ?> name="Land" maxlength="52" value="LAND" required >
-      <input type="number" id=<?php echo $form_ids['Startprijs'] ?> name="Startprijs" maxlengt="20" value="10.00" required>
-      <input type="number" id=<?php echo $form_ids['Verzendkosten'] ?> name="Verzendkosten" maxlength="95" value="0.00" required>
+      <input type="number" id=<?php echo $form_ids['Startprijs'] ?> name="Startprijs" value="10.00" required>
+      <input type="number" id=<?php echo $form_ids['Verzendkosten'] ?> name="Verzendkosten" value="0.00" required>
 
       <select id=<?php echo $form_ids['Looptijd'] ?> name="Looptijd" >
       <option value="1">1 dag</option>
