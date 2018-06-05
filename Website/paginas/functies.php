@@ -59,7 +59,7 @@ function hotItems()
 				inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
 				FROM tblBod
 				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-				where v.voorwerpNummer in(select top 2 voorwerpNummer
+				where v.voorwerpNummer in(select top 5 voorwerpNummer
 				from tblBod
 				group by voorwerpNummer
 				order by count(voorwerpnummer) desc)");

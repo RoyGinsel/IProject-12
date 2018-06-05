@@ -221,7 +221,7 @@ create table tblBod(
 
 create table tblBestand(
 	fileNumber bigint identity(1,1),
-	fileNaam varbinary(MAX) not null,
+	fileNaam varchar(max) not null,
 	voorwerpNummer bigint not null,
 	constraint pk_tblBestan primary key(fileNumber),
 	constraint fk_tblBestand_voorwerpNummer foreign key(voorwerpNummer) references tblVoorwerp(voorwerpNummer),
