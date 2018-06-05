@@ -85,17 +85,11 @@ button>img:hover{
 
 @media only screen and (max-width: 600px) {
   .uk-button{
-
     font-size:10px;
-
-<<<<<<< HEAD
-  width:70%;
-  margin:0px;
-  padding:0px;
+    width:70%;
+    margin:0px;
+    padding:0px;
     font-size:10px;
-=======
->>>>>>> parent of 38eb83e... mooiermaken layout producten enz
-    padding:8px;
   }
 }
 
