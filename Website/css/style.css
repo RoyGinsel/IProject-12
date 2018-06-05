@@ -83,17 +83,6 @@ button>img:hover{
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .uk-button{
-    font-size:10px;
-    width:70%;
-    margin:0px;
-    padding:0px;
-    font-size:10px;
-  }
-}
-
-
 .rubriekenlijst{
 padding-left:8px;
 margin:0px;
