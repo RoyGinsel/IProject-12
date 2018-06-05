@@ -107,13 +107,15 @@ function items($search)
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-					where r.rubriekNaam like :rubriekname",["rubriekname"=>$search]);
+					where veilingGesloten = 0 and
+					r.rubriekNaam like :rubriekname",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs, v.voorwerpNummer
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
-					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
+					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+					where veilingGesloten = 0");
 	}
 }
 
