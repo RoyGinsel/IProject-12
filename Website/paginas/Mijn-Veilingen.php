@@ -7,6 +7,7 @@ if(!getPossibleBuyer($_SESSION['username'])){
     header('Location: index.php');
   };
 
+
 if (isset($_POST['Titel']) ){
   $_aantal_fotos = count($_FILES['fotos']['name']);
   if($_FILES['fotos']['name'][0] =="" ){
@@ -110,18 +111,24 @@ if (isset($_POST['Titel']) ){
                     } else {
                         $prijs = $key['bodBedrag'];
                      };
-                        $salesItems .= '
+                $geblokkeerd;
+                 if($key['looptijdBeginDag'] == '2000-01-01'){
+                   $geblokkeerd = "Geblokkeerd";
+                 }else {
+                   $geblokkeerd= $key['looptijdBeginDag'];
+                 }
+                    $salesItems .= '
                     <tr>
                     <td>'.$key['titel'].'</td>
-                    <td>'.$key['looptijdBeginDag'].' </td>
+                    <td>'.$geblokkeerd.' </td>
                     <td>€ '.$prijs.'</td>
                     <td>'. $timeRemaining.' </td>
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
                     </tr>';
-                  }
                   // print de items weer.
+                };
                 echo $salesItems;
                ?>
               </tbody>
