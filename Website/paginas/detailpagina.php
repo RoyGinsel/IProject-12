@@ -192,7 +192,7 @@
                       <tr>
                         <td>'.$row['gebruiker'].'</td>
                         <td> &euro;'.$row['bodBedrag'].'</td>
-                        <td>'.$row['bodDag'].' '. substr($row['bodTijdstip'],0,8).'</td>
+                        <td>'.$row['bodDag'].' - '. substr($row['bodTijdstip'],0,8).'</td>
                       </tr>'; };
               ?>
             </table>

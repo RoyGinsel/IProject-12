@@ -54,7 +54,7 @@ function preparedSPQuery($stringquery,$parameters)
 
 function hotItems()
 {
-	return query("SELECT titel, beschrijving, bodBedrag
+	return query("SELECT titel, beschrijving, bodBedrag, v.voorwerpNummer
 				FROM tblVoorwerp v
 				inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
 				FROM tblBod
@@ -68,7 +68,7 @@ function hotItems()
 //Index.php -> Select statement voor uitgelichteitems
 function featuredItems()
 {
-  	return query("SELECT titel, beschrijving, b.bodBedrag
+  	return query("SELECT titel, beschrijving, b.bodBedrag, v.voorwerpNummer
   				from tblVoorwerp v
   				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
   							from tblBod
@@ -275,7 +275,9 @@ function format_interval(DateInterval $interval) {
 
 // geeft allebiedingen weer voor mijnveilingen
 function getAllBids($itemID){
-	return preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+	return preparedQuery("SELECT *
+                        FROM tblBod WHERE voorwerpNummer = :itemID
+                        ORDER BY bodBedrag DESC",["itemID" => $itemID]);
 }
 
 
@@ -284,6 +286,6 @@ function allSections(){
 	return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
 				from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
 				order by rubriekNaam asc");
-};  
+};
 
  ?>
