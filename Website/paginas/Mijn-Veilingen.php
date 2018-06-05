@@ -7,34 +7,30 @@ if(!getPossibleBuyer($_SESSION['username'])){
     header('Location: index.php');
   };
 
-    if (isset($_POST['Titel']) ){
-        $_aantal_fotos = count($_FILES['fotos']['name']);
-        var_dump($_aantal_fotos);
-        if($_FILES['fotos']['name'][0] =="" ){
-            echo "<script>
-            alert('Upload tenminste één bestand');
-                </script>";
-            }
-            else if($_aantal_fotos > 4){
-                echo "<script>
-                alert('Je kunt maximaal 4 fotos uploaden');       
-                    </script>";
-                }
-        if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
-            $nummer = newVoorwerpNummer();
-            $nummer = $nummer[0]['voorwerpnummer'];
-            preparedInsertQuery("INSERT INTO tblVoorwerp values(".$nummer.",:titel,:beschrijving,:startPrijs,:betaalWijze,:betalingsInstructie,
-                :plaatsnaam,:land,:looptijd,convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP),:verzendkosten,:verzendinstructie,:verkoper)",
-                ["titel" => $_POST['Titel'], "beschrijving" => $_POST['Beschrijving'], "startPrijs" => $_POST['Startprijs'], "betaalWijze" => $_POST['Bank'],
-                "betalingsInstructie" => $_POST['Betaalinstructie'], "plaatsnaam" => $_POST['Plaatsnaam'], "land" => $_POST['Land'], "looptijd" => $_POST['Looptijd'],
-                "verzendkosten" => $_POST['Verzendkosten'], "verzendinstructie" => $_POST['Verzendinstructie'], "verkoper" => $_SESSION['username'] ]);
+if (isset($_POST['Titel']) ){
+  $_aantal_fotos = count($_FILES['fotos']['name']);
+  if($_FILES['fotos']['name'][0] =="" ){
+    echo "<script>
+    alert('Upload tenminste één bestand');
+    </script>";
+  }else if($_aantal_fotos > 4){
+    echo "<script>
+    alert('Je kunt maximaal 4 fotos uploaden');
+    </script>";        }
+  if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
+    $nummer = newVoorwerpNummer();
+    $nummer = $nummer[0]['voorwerpnummer'];
+    preparedInsertQuery("INSERT INTO tblVoorwerp values(".$nummer.",:titel,:beschrijving,:startPrijs,:betaalWijze,:betalingsInstructie,
+        :plaatsnaam,:land,:looptijd,convert(date,CURRENT_TIMESTAMP),convert(time,CURRENT_TIMESTAMP),:verzendkosten,:verzendinstructie,:verkoper)",
+        ["titel" => $_POST['Titel'], "beschrijving" => $_POST['Beschrijving'], "startPrijs" => $_POST['Startprijs'], "betaalWijze" => $_POST['Bank'],
+        "betalingsInstructie" => $_POST['Betaalinstructie'], "plaatsnaam" => $_POST['Plaatsnaam'], "land" => $_POST['Land'], "looptijd" => $_POST['Looptijd'],
+        "verzendkosten" => $_POST['Verzendkosten'], "verzendinstructie" => $_POST['Verzendinstructie'], "verkoper" => $_SESSION['username'] ]);
+  foreach($_POST['Rubriekaanbieden'] as $value){
+  preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
+  }
 
-                foreach($_POST['Rubriekaanbieden'] as $value){
-                preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
-                }
-
-        $doel_map = "../../images/item".$nummer;
-        for ($i=0; $i < count($_FILES['fotos']['name']); $i++) { 
+    $doel_map = "../../images/item".$nummer;
+      for ($i=0; $i < count($_FILES['fotos']['name']); $i++) {
         // Geef de bestandnaam op van het bestand op een bepaalde locatie
         $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
         $uploadOk = 1;
@@ -47,18 +43,17 @@ if(!getPossibleBuyer($_SESSION['username'])){
             $uploadOk = 0;
         }
         // kijken of $uploadOk 0 is door een error hier boven
-        if ($uploadOk === 1) {    
+        if ($uploadOk === 1) {
             if (move_uploaded_file($_FILES["fotos"]["tmp_name"][$i], $doel_bestand)) {
                 $melding = "Het bestand " . basename($_FILES["fotos"]["name"][$i]) . " is geupload.";
             } else {
                 $melding = "Sorry, er was een error bij het uploaden van het bestand.";
-                }
             }
         }
+      }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,10 +70,9 @@ if(!getPossibleBuyer($_SESSION['username'])){
 <body>
   <?php
     include "includes/header.php";
-    $myAuctions = getAuctions($_SESSION['username']);         
-?>
+    $myAuctions = getAuctions($_SESSION['username']);
+  ?>
     <main class="page uk-margin-left uk-margin-right">
-
     <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin-top">
         <div class="uk-card-header">
           <h1 class="uk-card-title uk-padding-remove uk uk-text-center uk-margin-bottom">Mijn veilingen:</h1>
@@ -113,10 +107,10 @@ if(!getPossibleBuyer($_SESSION['username'])){
                 }
                if(empty($key['bodBedrag'])){
                     $prijs =  $key['startPrijs'];
-                    } else { 
+                    } else {
                         $prijs = $key['bodBedrag'];
-                     };      
-                        $salesItems .= '  
+                     };
+                        $salesItems .= '
                     <tr>
                     <td>'.$key['titel'].'</td>
                     <td>'.$key['looptijdBeginDag'].' </td>
@@ -125,10 +119,10 @@ if(!getPossibleBuyer($_SESSION['username'])){
                     <td>
                     <a class="uk-button uk-button-default uk-padding-small" type="button" href="detailpagina.php?item='.$key['voorwerpNummer'].'">Ga naar veiling</a>
                     </td>
-                    </tr>';       
+                    </tr>';
                   }
                   // print de items weer.
-                echo $salesItems;                  
+                echo $salesItems;
                ?>
               </tbody>
             </table>
@@ -136,9 +130,9 @@ if(!getPossibleBuyer($_SESSION['username'])){
     </div>
     <div class='uk-margin-medium-top'
         <p uk-margin>
-            <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>      
+            <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <button  href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+            <button  href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
              uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> <a id="toggle-form">Item aanbieden </a></button>
         </p>
     </div>
@@ -149,7 +143,6 @@ if(!getPossibleBuyer($_SESSION['username'])){
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline@m uk-flex-center uk-margin-medium-top">
   <div class="uk-flex uk-flex-column">
     <select id="rubrieken" class="uk-width-1-1 uk-form-select" name="Rubriekaanbieden[]" multiple required>
-   
     </select>
     <div class="uk-flex uk-flex-center">
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-text-nowrap">
@@ -163,25 +156,25 @@ if(!getPossibleBuyer($_SESSION['username'])){
       <span>Banknummer:</span>
     </div>
 
-<?php
-$form_ids = ["Titel" => "titel",
-"Plaatsnaam" => "plaatsnaam",
-"Land" => "land",
-"Startprijs" => "startprijs",
-"Verzendkosten" => "verzendkosten",
-"Looptijd" =>"looptijd",
-"Bank" => "bank",
- "Banknummer" => "banknummer",
- "Verzendinstructie" => 'Verzendinstructie',
-  "Beschrijving"=> 'Beschrijving'];
-?>
+    <?php
+    $form_ids = ["Titel" => "titel",
+    "Plaatsnaam" => "plaatsnaam",
+    "Land" => "land",
+    "Startprijs" => "startprijs",
+    "Verzendkosten" => "verzendkosten",
+    "Looptijd" =>"looptijd",
+    "Bank" => "bank",
+    "Banknummer" => "banknummer",
+    "Verzendinstructie" => 'Verzendinstructie',
+    "Beschrijving"=> 'Beschrijving'];
+    ?>
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate ">
       <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="Titel" required >
       <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="Plaatsnaam" required>
       <input type="text" id=<?php echo $form_ids['Land'] ?> name="Land" maxlength="52" value="LAND" required >
       <input type="number" id=<?php echo $form_ids['Startprijs'] ?> name="Startprijs" maxlengt="20" value="10.00" required>
       <input type="number" id=<?php echo $form_ids['Verzendkosten'] ?> name="Verzendkosten" maxlength="95" value="0.00" required>
-      
+
       <select id=<?php echo $form_ids['Looptijd'] ?> name="Looptijd" >
       <option value="1">1 dag</option>
       <option value="3">3 dagen</option>
@@ -189,7 +182,7 @@ $form_ids = ["Titel" => "titel",
       <option value="7" selected>7 dagen</option>
       <option value="10">10 dagen</option>
       </select>
-      
+
       <select id=<?php echo $form_ids['Bank'] ?> name="Bank">
       <option value="ABN">ABN Ambro</option>
       <option value="AEGON">Aegon</option>
@@ -205,57 +198,55 @@ $form_ids = ["Titel" => "titel",
     </div>
     </div>
       <script>
-          function previewFiles() {
-var preview = document.querySelector('#preview');
-var files   = document.querySelector('input[name="fotos[]"]').files;
+      function previewFiles() {
+      var preview = document.querySelector('#preview');
+      var files   = document.querySelector('input[name="fotos[]"]').files;
 
-function readAndPreview(file) {
-  // Make sure `file.name` matches our extensions criteria
-  if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-    var reader = new FileReader();
-    reader.addEventListener("load", function () {
-      var image = new Image();
-      var list =  document.createElement("li");
-      image.height = 100;
-      image.title = file.name;
-      image.src = this.result;
-      preview.appendChild( list );
-      list.appendChild(image);
-    }, false);
-    reader.readAsDataURL(file);
-  }
-}
-if (files) {
-  [].forEach.call(files, readAndPreview);
-}
-}
-</script>
-    </div>
-    
+      function readAndPreview(file) {
+        // Make sure `file.name` matches our extensions criteria
+        if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+          var reader = new FileReader();
+          reader.addEventListener("load", function () {
+            var image = new Image();
+            var list =  document.createElement("li");
+            image.height = 100;
+            image.title = file.name;
+            image.src = this.result;
+            preview.appendChild( list );
+            list.appendChild(image);
+          }, false);
+          reader.readAsDataURL(file);
+        }
+      }
+      if (files) {
+        [].forEach.call(files, readAndPreview);
+      }
+      }
+    </script>
+  </div>
   </div>
 
-      <div class="uk-flex uk-flex-center uk-text-center uk-margin uk-flex uk-flex-wrap">
-  <div class="uk-margin-right">
-    <h3>Verzendinstructie</h3>
-    <textarea style="resize:none" name="Verzendinstructie" id=<?php echo $form_ids['Verzendinstructie'] ?> cols="30" rows="10" >sdjkafoasidjf</textarea>
-</div>
-<div class="uk-margin-right uk-margin-left">
-    <h3>Betaalinstructie</h3>
-    <textarea style="resize:none" name="Betaalinstructie" cols="30" rows="10" >sdjkafoasidjf</textarea>
-</div>
-<div class="uk-margin-left">
-    <h3>Beschrijving</h3>
-    <textarea  style="resize:none" name="Beschrijving" id=<?php echo $form_ids['Beschrijving'] ?> cols="30" rows="10" >saklfjapifjosakdpfjpi9w</textarea>
-</div>
+  <div class="uk-flex uk-flex-center uk-text-center uk-margin uk-flex uk-flex-wrap">
+    <div class="uk-margin-right">
+      <h3>Verzendinstructie</h3>
+      <textarea style="resize:none" name="Verzendinstructie" id=<?php echo $form_ids['Verzendinstructie'] ?> cols="30" rows="10" >sdjkafoasidjf</textarea>
+    </div>
+    <div class="uk-margin-right uk-margin-left">
+        <h3>Betaalinstructie</h3>
+        <textarea style="resize:none" name="Betaalinstructie" cols="30" rows="10" >sdjkafoasidjf</textarea>
+    </div>
+    <div class="uk-margin-left">
+        <h3>Beschrijving</h3>
+        <textarea  style="resize:none" name="Beschrijving" id=<?php echo $form_ids['Beschrijving'] ?> cols="30" rows="10" >saklfjapifjosakdpfjpi9w</textarea>
+    </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-  <a id="previewButton" class="uk-button"> Next <br><br> Preview</a>
-  <div id="alert">
+    <a id="previewButton" class="uk-button"> Next <br><br> Preview</a>
+    <div id="alert"></div>
   </div>
-</div>
-<div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'>
-<?php if(isset($_GET['error'])){echo $Warning; }?> 
-</div>
+  <div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'>
+  <?php if(isset($_GET['error'])){echo $Warning; }?>
+  </div>
 
 </form>
 </div>
@@ -269,11 +260,11 @@ if (files) {
 <script>
 $(document).ready(function(){
   $('#previewButton').click(function (element) {
-    <?php 
+    <?php
     echo "var form_ids = [];";
     foreach ($form_ids as $key => $value) {
     echo "form_ids.push(document.getElementById('$value').value);";
-  }?> 
+  }?>
     $('#alert').load("preview-item.php",{ form_ids:form_ids });
     });
 });
