@@ -15,12 +15,12 @@
             echo $e->getMessage();
         }
     }
-    
+
     function preparedQuery($stringquery,$parameters)
     {
         try{
             global $dbh;
-    
+
             $query = $dbh->prepare($stringquery);
             $query->execute($parameters);
             return $query->fetchAll();
@@ -88,19 +88,29 @@
     }
 
 
-    //geeft alle users weer 
-    function getUsers(){
-
-
+    //geeft alle users weer
+    function getUsers()
+    {
         return Query("Select gebruikersNaam, geblokkeerd from tblGebruiker where geblokkeerd = 0");
-    
+    }
+
+    function blockUser($user)
+    {
+        preparedQuery("UPDATE tblGebruiker SET geblokkeerd = 1 where gebruikersnaam = :gebruiker",['gebruiker' => $user]);
     }
 
 
-    function blockUser($user){
+    function allAuctions()
+    {
+        return Query("SELECT *
+                      FROM tblVoorwerp
+                      WHERE veilingGesloten = '0' ");
+    }
 
-
-     preparedQuery("UPDATE tblGebruiker SET geblokkeerd = 1 where gebruikersnaam = :gebruiker",['gebruiker' => $user]);
-
+    function stopAuction($voorwerp)
+    {
+      preparedQuery("UPDATE tblVoorwerp
+                    SET looptijdBeginDag = '01-01-2000'
+                    WHERE voorwerpNummer =:voorwerp", ['voorwerp' => $voorwerp]);
     }
 ?>
