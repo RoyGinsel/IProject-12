@@ -67,7 +67,7 @@ button>img:hover{
 @media only screen and (max-width: 900px) {
   .mobileSize {
   flex-wrap:wrap;
-  
+
   }
 }
 
@@ -137,7 +137,10 @@ font-weight: bold;
   background-color: #C5Ae91;
   border: solid 4px #333333;
   width: 100%-300px;
+<<<<<<< HEAD
   height: 150px;
+=======
+>>>>>>> a35ec4528b9a333f26d7cc04f1f4fd4ea0385aa6
 }
 
 .uk-button {
