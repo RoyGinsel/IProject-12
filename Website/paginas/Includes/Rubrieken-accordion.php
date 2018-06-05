@@ -30,22 +30,22 @@ $(document).ready(function(){
     foreach(sections(-1) as $value){
       //kijkt of deze rubriek een subrubriek heeft
       if(sections($value['rubriekNummer']) != NULL){
-        $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a id='".$value['rubriekNummer']."' class='uk-accordion-title'>"
+        $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a id='".$value['rubriekNummer']."' class='uk-accordion-title uk-text-small'>"
         .$value['rubriekNaam']."</a>  <div class='uk-accordion-content'><ul class='uk-list'>";
       } else {
-          $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$value['rubriekNaam']."'>".$value['rubriekNaam']."</a></li>";
+          $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$value['rubriekNaam']."'>".$value['rubriekNaam']."</a></li>";
           $section .= "</ul></li></ul>";
         }
   
       foreach(sections($value['rubriekNummer'])as $sub){
         //kijkt of deze rubriek een subrubriek heeft
         if(sections($sub['rubriekNummer']) != NULL){
-          $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a id='".$sub['rubriekNummer']."'class='uk-accordion-title a'>"
-          .$sub['rubriekNaam']."</a>  <div id='".$sub['rubriekNummer']."div' class='uk-accordion-content'><ul class='uk-list'>
+          $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a id='".$sub['rubriekNummer']."'class='uk-accordion-title a uk-text-small'>"
+          .$sub['rubriekNaam']."</a>  <div id='".$sub['rubriekNummer']."div' class='uk-accordion-content'><ul class='uk-list uk-text-small'>
            </ul></li></ul>";
          }
           else {
-           $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>"; 
+           $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>"; 
           }
         }
         $section .= "</ul></li></ul>";

@@ -64,13 +64,14 @@ button>img:hover{
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .mobileSize {
   flex-wrap:wrap;
+  
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .submitButton {
     margin-left:50%;
   }
@@ -90,7 +91,9 @@ margin:0px;
 
 .searchbartext{
   width:auto;
-  margin-right:10px;
+
+  margin-left:2px;
+  margin-right:2px;
   margin-bottom:10px;
 }
 
@@ -301,3 +304,4 @@ input[type="radio"]:checked ~ .reveal-if-active {
   max-height: 100px;
   overflow: visible;
 }
+.

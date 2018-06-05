@@ -1,5 +1,5 @@
 <!-- search -->
-<div class="uk-margin-remove">
+<div class="uk-margin-remove uk-padding-remove">
    <!-- php pagina met rubrieken  en autocomplete-->
    <form class="mobileSize uk-search uk-search-default uk-flex-inline"  action=producten.php method="get" class="pointer">
      <div class="autocomplete">
@@ -16,7 +16,7 @@
 </div>
 
 <!-- Rubrieken accordion -->
-<div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2">
+<div class="uk-padding-remove uk-height-large uk-overflow-auto uk-flex  uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-expand">
   <?php
   include "includes/Rubrieken-accordion.php";
 ?>
