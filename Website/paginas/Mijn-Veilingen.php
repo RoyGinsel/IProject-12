@@ -111,16 +111,16 @@ if (isset($_POST['Titel']) ){
                     } else {
                         $prijs = $key['bodBedrag'];
                      };
-                $begintijd;
+                $geblokkeerd;
                  if($key['looptijdBeginDag'] == '2000-01-01'){
-                   $begintijd = "Verlopen";
+                   $geblokkeerd = "Geblokkeerd";
                  }else {
-                   $begintijd= $key['looptijdBeginDag'];
+                   $geblokkeerd= $key['looptijdBeginDag'];
                  }
                     $salesItems .= '
                     <tr>
                     <td>'.$key['titel'].'</td>
-                    <td>'.$begintijd.' </td>
+                    <td>'.$geblokkeerd.' </td>
                     <td>€ '.$prijs.'</td>
                     <td>'. $timeRemaining.' </td>
                     <td>
