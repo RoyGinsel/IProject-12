@@ -91,6 +91,15 @@
         </div>
           <!-- omschrijving lol -->
           <?php
+          $begintijd;
+          $eindetijd;
+           if($info[0]['looptijdBeginDag'] == '2000-01-01'){
+             $begintijd = "Geblokkeerd";
+             $eindetijd = "Geblokkeerd";
+           }else {
+             $begintijd= $info[0]['looptijdBeginDag'];
+             $eindetijd= $info[0]['looptijdEindeDag'];
+           }
         $omschrijving = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
@@ -98,8 +107,8 @@
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
             <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
-            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
-            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top">Gestart op: '.$begintijd. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$eindetijd. '</li>
             <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
         </div>
       </div>
@@ -192,7 +201,7 @@
                       <tr>
                         <td>'.$row['gebruiker'].'</td>
                         <td> &euro;'.$row['bodBedrag'].'</td>
-                        <td>'.$row['bodDag'].' '. substr($row['bodTijdstip'],0,8).'</td>
+                        <td>'.$row['bodDag'].' - '. substr($row['bodTijdstip'],0,8).'</td>
                       </tr>'; };
               ?>
             </table>

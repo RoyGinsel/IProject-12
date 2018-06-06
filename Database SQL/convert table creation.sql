@@ -2,7 +2,7 @@ drop table items
 drop table Illustraties
 drop table noHTML
 drop table Users
-drop function [dbo].[udf_StripHTML]
+drop table IDtable
 
 create table items(
 ID varchar(max) not null,
@@ -24,6 +24,7 @@ IllustratieFile varchar(max) not null
 )
 
 create table noHTML(
+counter bigint identity(1,1),
 ID bigint not null,
 Titel varchar(50) not null,
 Categorie int not null,
@@ -36,11 +37,14 @@ Beschrijving varchar(max) not null
 )
 
 create table Users(
-Username varchar(20) not null,
+Username varchar(max) not null,
 Postalcode varchar(9) not null,
 Location varchar(35) not null,
 Country varchar(55) not null,
 Rating numeric (4,1) not null
 )
 
-select * from items
+create table IDtable(
+original bigint null,
+new bigint not null
+)

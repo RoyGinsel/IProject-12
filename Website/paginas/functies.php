@@ -54,12 +54,12 @@ function preparedSPQuery($stringquery,$parameters)
 
 function hotItems()
 {
-	return query("SELECT titel, beschrijving, bodBedrag
+	return query("SELECT titel, beschrijving, bodBedrag, v.voorwerpNummer
 				FROM tblVoorwerp v
 				inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
 				FROM tblBod
 				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-				where v.voorwerpNummer in(select top 2 voorwerpNummer
+				where v.voorwerpNummer in(select top 5 voorwerpNummer
 				from tblBod
 				group by voorwerpNummer
 				order by count(voorwerpnummer) desc)");
@@ -68,7 +68,7 @@ function hotItems()
 //Index.php -> Select statement voor uitgelichteitems
 function featuredItems()
 {
-  	return query("SELECT titel, beschrijving, b.bodBedrag
+  	return query("SELECT titel, beschrijving, b.bodBedrag, v.voorwerpNummer
   				from tblVoorwerp v
   				inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
   							from tblBod
@@ -106,13 +106,15 @@ function items($search)
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-					where r.rubriekNummer = :rubriekname",["rubriekname"=>$search]);
+					where veilingGesloten = 0 and
+					r.rubriekNummer = :rubriekname",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs, v.voorwerpNummer
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
-					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer");
+					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
+					where veilingGesloten = 0");
 	}
 }
 
@@ -171,12 +173,12 @@ function newAccount($RegistrationForm){
 	try {
 
 		global $dbh;
-		$sql = "insert into tblGebruiker(gebruikersNaam,voornaam,achternaam,adresRegel,extraAdresRegel,postcode,plaatsNaam,land,geboorteDag,mail,wachtwoord,vraagNummer,antwoordvraag,mogelijkeVerkoper) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$sql = "insert into tblGebruiker(gebruikersNaam,voornaam,achternaam,adresRegel,extraAdresRegel,postcode,plaatsNaam,land,geboorteDag,mail,wachtwoord,vraagNummer,antwoordvraag,mogelijkeVerkoper,geblokkeerd) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$query = $dbh->prepare($sql);
 
 
 		$query->execute(array($RegistrationForm['userName'], $RegistrationForm['voornaam'], $RegistrationForm['achternaam'], $RegistrationForm['adres'], $RegistrationForm['adresExtra'], $RegistrationForm['postcode'], $RegistrationForm['plaatsnaam'], $RegistrationForm['land'],"08-08-1996", $RegistrationForm['mail'], $RegistrationForm['password'],
-							  $RegistrationForm['geheimevraag'],$RegistrationForm['antwoordvraag'],"0"));
+							  $RegistrationForm['geheimevraag'],$RegistrationForm['antwoordvraag'],"0","0"));
 
 
 
@@ -274,7 +276,9 @@ function format_interval(DateInterval $interval) {
 
 // geeft allebiedingen weer voor mijnveilingen
 function getAllBids($itemID){
-	return preparedQuery("select * from tblBod where voorwerpNummer = :itemID",["itemID" => $itemID]);
+	return preparedQuery("SELECT *
+                        FROM tblBod WHERE voorwerpNummer = :itemID
+                        ORDER BY bodBedrag DESC",["itemID" => $itemID]);
 }
 
 
@@ -283,6 +287,8 @@ function allSections(){
 	return Query("SELECT c.rubriekNaam, c.rubriekNummer, p.rubriekNaam as parentNaam
 				from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
 				order by rubriekNaam asc");
-};  
+};
+
+
 
  ?>

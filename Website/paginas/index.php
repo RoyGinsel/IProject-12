@@ -146,7 +146,7 @@
                                         <h4 class="uk-text-small">'.$value['beschrijving'].'</h4>
                                         </td>
                                         <td class="uk-visible@s">€ '.$value['bodBedrag'].'</td>
-                                        <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+                                        <td class="productenMobile"><a class="uk-button uk-text-small" type="button" href="detailpagina.php?item='.$value["voorwerpNummer"].'">Ga naar bieding</a></td>
                                         </tr>';
                                     }
                                 echo $list;
@@ -182,7 +182,7 @@
                                     <h4 class="uk-text-small">'.$value['beschrijving'].'</h4>
                                     </td>
                                     <td class="uk-visible@s">€ '.$value['bodBedrag'].'</td>
-                                    <td><button class="uk-button uk-button-default" type="button" href="#">Ga naar bieding</button></td>
+                                    <td class="productenMobile"><a class="uk-button uk-text-small" type="button" href="detailpagina.php?item='.$value["voorwerpNummer"].'">Ga naar bieding</a></td>
                                     </tr>';
                                 }
                                 echo $list;
