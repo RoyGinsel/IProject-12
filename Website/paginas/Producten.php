@@ -36,9 +36,16 @@
                   </ul>";
   // zoek query met data invoeren om volgende producten te krijgen
 
-  // if(isset($_POST['maximumprijs'])){
-  //   preparedInsertQuery("SELECT ",);
-  // }
+  $filter = "";
+  if(isset($_POST['maximumprijs'])){
+    $_SESSION['minimumprijs'] = $_POST['minimumprijs'];
+    $_SESSION['maximumprijs'] = $_POST['maximumprijs'];
+  }
+  if(isset($_SESSION['maximumprijs']) ){
+    
+    $filter = "AND (b.bodBedrag is not NULL AND b.bodBedrag BETWEEN ". $_SESSION['minimumprijs'] ." AND ".  $_SESSION['maximumprijs']  .")  
+    OR (b.bodBedrag is NULL AND startPrijs BETWEEN ". $_SESSION['minimumprijs']." AND ".  $_SESSION['maximumprijs'] .")";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,9 +72,9 @@
       <div class="uk-child-width-auto " id="toggle-usage">
         <div class="uk-flex-center uk-margin">
           <div class="uk-margin-bottom"><h2>Kies een prijsrange</h2></div>
-          <form action="producten.php" method="get">
+          <form action="producten.php" method="post">
           <input id="maximumprijsfilter" type="number" placeholder="Kies een maximumprijs" >
-          <button id="buttonprijsfilter" class="uk-button uk-button-primary uk-text-middle">Kies</button>
+          <a id="buttonprijsfilter" class="uk-button uk-button-primary uk-text-middle">Kies</a>
           <div class="uk-padding-remove">
           <input id="minimumprijs" class="uk-range" type="range" name="minimumprijs" min="0" max="" step="0.1">
           <script> var minslider = document.getElementById('minimumprijs').value;
@@ -87,7 +94,7 @@
                         maxprijs = document.getElementById("maximumprijsfilter").value;
                         $("#maximumprijs").attr("max", maxprijs);});
           </script> <span id="maxprijs"><h4> Maximale prijs:</h4> </span>
-          <button type="submit" class="uk-button uk-width-1-1 uk-button-default uk-button-primary uk-margin-medium-top" name="submit">Publiceer</button>
+          <button type="submit" class="uk-button uk-width-1-1 uk-button-default uk-button-primary uk-margin-medium-top" name="submit">Zoeken</button>
           </form>
           </div>          
       </div>
@@ -134,7 +141,7 @@
                   }
                   $lijst = "";
                   $prijs;
-                  foreach (items($section) as $waarde) {
+                  foreach (items($section, $filter) as $waarde) {
                     if(isset($waarde['bodBedrag'])){
                       $prijs = $waarde['bodBedrag'];
                     } else {
