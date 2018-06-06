@@ -14,11 +14,11 @@
     $review = getReview($seller[0]['verkoper']);
 // Functie die hoogste bieding krijgt
     $highestBid;
-    if (isset(getHighestBid($itemID)[0]['bodBedrag'])){
+    if (isset(getHighestBid($itemID)[0]['startPrijs'])){
+      $highestBid = $info[0]['startPrijs'];
+    } else{
       $highestBid = getHighestBid($itemID);
       $highestBid = $highestBid[0]['HoogsteBod'];
-    } else{
-      $highestBid = $info[0]['startPrijs'];
     }
 // maakt een leesbare error message
     $error;
