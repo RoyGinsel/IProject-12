@@ -6,7 +6,6 @@ if(isset($_GET['vwBlokkeren'])){
     stopAuction($voorwerp);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
