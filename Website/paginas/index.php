@@ -43,8 +43,8 @@
     echo  '
     <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
     <a class="sluiten uk-alert-close" uk-close ></a>
-    <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent geblokeerd </h1>
-    <p> Neem zsm contact op  </p> </div>';
+    <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> Uw account is geblokkeerd. </h1>
+    <p> neem contact op indien u denkt dat dit een misverstand is. </p> </div>';
     
   }
 
