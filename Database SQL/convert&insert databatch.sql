@@ -1,3 +1,6 @@
+update items
+set Beschrijving = stuff(Beschrijving,CHARINDEX('<script', Beschrijving),CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving),'hrd')
+
 insert into noHTML
 select distinct cast(id as bigint) as ID,
 	left([dbo].[udf_StripHTML](Titel),50) as Titel,
@@ -68,9 +71,21 @@ select Thumbnail as fileNaam,
 	new as voorwerpNummer
 from noHTML inner join IDtable on id=original
 
+delete from Illustraties
+where IllustratieFile not in (select IllustratieFile from Illustraties where IllustratieFile like '__\_2\_%' ESCAPE '\' or IllustratieFile like '__\_1\_%' ESCAPE '\' or IllustratieFile like '__\_3\_%' ESCAPE '\')
+
 insert into tblBestand
 select IllustratieFile as fileNaam,
 	new as voorwerpNummer
 from Illustraties inner join IDtable on itemID=original
 
-select * from Illustraties
+insert into tblVoorwerpRubriek
+select new as voorwerpNummer,
+	Categorie as rubriekNummer
+from noHTML inner join IDtable on id=original
+
+alter table items
+alter column beschrijving varchar(max) null
+
+
+select * from items where Beschrijving like '%<script%' and Beschrijving like '%</script>%'
