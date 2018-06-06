@@ -44,7 +44,7 @@
 
    <div class="uk-flex uk-flex-center" >
     <div class="uk-padding">
-        <H3 class="uk-text-right">Blokkeren van gebruiker</H3>
+        <H1 class="uk-text-right">Blokkeren van gebruiker</H1>
         <form action="" method="get" class="uk-flex uk-flex-column uk-form-width-medium">
             <select name = "selectUser" class="uk-margin-bottom uk-select">
                 <option value="">Kies een gebruiker</option>

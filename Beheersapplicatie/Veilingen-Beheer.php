@@ -34,7 +34,7 @@ if(isset($_GET['vwBlokkeren'])){
 </header>
 <body>
   <main>
-    <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2 " >
+    <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-flex-center " >
         <div class="uk-padding">
             <h1>Veilingen blokkeren</h1>
             <form action="#" method="get" class="uk-flex uk-flex-column uk-child-width-1-2">
@@ -46,7 +46,7 @@ if(isset($_GET['vwBlokkeren'])){
                         };
                     ?>
                 </select>
-                <input class="uk-text-danger" type="submit" value="Blokkeren">
+                <input class="uk-text-danger uk-margin-top" type="submit" value="Blokkeren">
             </form>
         </div>
   </main>
