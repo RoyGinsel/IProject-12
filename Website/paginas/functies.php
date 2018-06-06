@@ -116,7 +116,7 @@ function items($search, $filter)
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-					where veilingGesloten = 0");
+					where veilingGesloten = 0 $filter");
 	}
 }
 
