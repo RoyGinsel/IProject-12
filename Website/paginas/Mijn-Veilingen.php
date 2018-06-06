@@ -7,6 +7,12 @@ if(!getPossibleBuyer($_SESSION['username'])){
     header('Location: index.php');
   };
 
+if(isset($_SESSION['username'])){
+
+    checkIfBlocked($_SESSION['username']);
+
+ }
+
 
 if (isset($_POST['Titel']) ){
   $_aantal_fotos = count($_FILES['fotos']['name']);

@@ -256,8 +256,8 @@
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
             <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: <span id="cntdwnMobile"></span> </li>
-            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
-            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top">Gestart op: '.$begintijd.'</li>
+            <li class="uk-margin-top">Eindigd op: '.$eindetijd. '</li>
             <li class="uk-margin-top"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 <?php
     include "database.php";
 	//include "../../SQLSrvConnect.php";
-
+	
 
 function query($stringquery)
 {
@@ -290,6 +290,32 @@ function allSections(){
 				from tblRubriek c inner join tblRubriek p on c.parentRubriek=p.rubriekNummer
 				order by rubriekNaam asc");
 };
+
+
+// kijken of user blocked is 
+function getUserBlocked($gebruiker){
+
+
+	return  preparedQuery("SELECT geblokkeerd from tblGebruiker where gebruikersNaam = :gebruiker",["gebruiker" => $gebruiker]);
+
+};
+
+
+function checkIfBlocked($sessie){
+
+	if(isset($sessie)){
+
+		$user = getUserBlocked($_SESSION['username']);
+		if($user[0]['geblokkeerd'] == 1){
+	 
+		 session_destroy();
+		 header('location: index.php?msg=blocked');
+	
+		}
+	 }
+
+
+}
 
 
 

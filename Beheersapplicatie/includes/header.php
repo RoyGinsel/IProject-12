@@ -4,6 +4,8 @@
     Ga naar:
     <a href="../Website/paginas/index.php" class="">Hoofd site</a></br>
     Ga naar:
+    <a href="veilingen-beheer.php" class="">veiling beheer</a></br>
+    Ga naar:
     <a href="user-beheer.php" class="">Gebruiker beheer</a>
     </div>
 </div>

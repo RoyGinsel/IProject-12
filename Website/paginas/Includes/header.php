@@ -7,6 +7,12 @@ $url =  $_SERVER['REQUEST_URI'];
     $breadcrumb .= "<li><a href='$crumb.php'>$crumb</a></li>";
   }
 
+  if(isset($_SESSION['username'])){
+
+    checkIfBlocked($_SESSION['username']);
+
+ }
+
   //Cookie zetten voor callout
   $cookie_name = "Callout";
   $cookie_value = date("Y-m-d");
