@@ -139,8 +139,8 @@ if (isset($_POST['Titel']) ){
         <p>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <button uk-toggle="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
-             uk-toggle="target: #toggle-animation; animation: uk-animation-fade">Item aanbieden </button>
+            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+             uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> Item aanbieden </a>
         </p>
     </div>
 
@@ -248,11 +248,8 @@ if (isset($_POST['Titel']) ){
     </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-    <a id="previewButton" class="uk-button"> Next <br><br> Preview</a>
-    <div id="alert"></div>
-  </div>
-  <div class='uk-flex uk-flex-center uk-margin-small-top uk-text-danger'>
-  <?php if(isset($_GET['error'])){echo $Warning; }?>
+  <a id="previewButton" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"> Next <br><br> <strong>Preview</strong></a>
+  <div id="alert">
   </div>
 
 </form>

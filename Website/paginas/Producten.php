@@ -35,6 +35,10 @@
                   <li><a href='producten.php?data=$next1&rubriek=$section'>></a></li>
                   </ul>";
   // zoek query met data invoeren om volgende producten te krijgen
+
+  // if(isset($_POST['maximumprijs'])){
+  //   preparedInsertQuery("SELECT ",);
+  // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,10 +60,36 @@
   <div class="uk-clearfix">
     <div class="uk-float-left uk-width-1-4@s uk-width-1-1 uk-margin uk-child-width-1-1 uk-text-small uk-text-large@m">
       <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage">
-        <h5>Rubrieken-filter</h5>
+        <h5>Zoek-filter</h5>
       </button>
       <div class="uk-child-width-auto " id="toggle-usage">
-        <div class="uk-flex-center uk-margin uk-grid-small uk-child-width-auto uk-grid ">
+        <div class="uk-flex-center uk-margin">
+          <div class="uk-margin-bottom"><h2>Kies een prijsrange</h2></div>
+          <form action="producten.php" method="get">
+          <input id="maximumprijsfilter" type="number" placeholder="Kies een maximumprijs" >
+          <button id="buttonprijsfilter" class="uk-button uk-button-primary uk-text-middle">Kies</button>
+          <div class="uk-padding-remove">
+          <input id="minimumprijs" class="uk-range" type="range" name="minimumprijs" min="0" max="" step="0.1">
+          <script> var minslider = document.getElementById('minimumprijs').value;
+            $('#minimumprijs').click(function (element) {
+            minslider = document.getElementById('minimumprijs').value;
+            document.getElementById("minimumprijs").max = maxslider;
+            document.getElementById("minprijs").innerHTML =  "<h4> Minimale prijs: "+ minslider +"</h4>" ; });
+          </script> <span id="minprijs"><h4> Minimale prijs:</h4></span>
+
+          <input id="maximumprijs" class="uk-range uk-padding-remove" type="range" name="maximumprijs" min="" max="" step="0.1">
+          <script> var maxslider = document.getElementById('maximumprijs').value; var maxprijs;
+            $('#maximumprijs').click(function (element) {
+            maxslider = document.getElementById('maximumprijs').value;
+            document.getElementById("maximumprijs").min = minslider;
+            document.getElementById("maxprijs").innerHTML =  "<h4> Maximale prijs: "+ maxslider +"</h4>" ; });
+                      $('#buttonprijsfilter').click(function (element) {
+                        maxprijs = document.getElementById("maximumprijsfilter").value;
+                        $("#maximumprijs").attr("max", maxprijs);});
+          </script> <span id="maxprijs"><h4> Maximale prijs:</h4> </span>
+          <button type="submit" class="uk-button uk-width-1-1 uk-button-default uk-button-primary uk-margin-medium-top" name="submit">Publiceer</button>
+          </form>
+          </div>          
       </div>
       <?php
         include "includes/Rubrieken-accordion.php";
@@ -99,7 +129,7 @@
                   $section;
                   if(isset($_GET["rubriek"])){
                     $section = htmlspecialchars($_GET["rubriek"]);
-                  }else{
+                  } else{
                     $section = "";
                   }
                   $lijst = "";
@@ -139,4 +169,7 @@
   include "includes/footer.php";
 ?>
 </body>
+
+
 </html>
+
