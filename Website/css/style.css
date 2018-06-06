@@ -137,7 +137,13 @@ font-weight: bold;
   background-color: #C5Ae91;
   border: solid 4px #333333;
   width: 100%-300px;
-  height: 150px;
+  height: 120px;
+}
+
+.headerBeheerder{
+
+height:190px;
+
 }
 
 .uk-button {

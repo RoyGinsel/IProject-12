@@ -1,18 +1,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <?php
+ if(isset($_SESSION['username'])){
+
+  checkIfBlocked($_SESSION['username']);
+
+}
 $url =  $_SERVER['REQUEST_URI'];
  $url = basename($url);;
   $breadcrumb = "<li><a href='index.php'>Home</a></li>";
   foreach($crumbs as $crumb) {
     $breadcrumb .= "<li><a href='$crumb.php'>$crumb</a></li>";
   }
-
-  if(isset($_SESSION['username'])){
-
-    checkIfBlocked($_SESSION['username']);
-
- }
-
   //Cookie zetten voor callout
   $cookie_name = "Callout";
   $cookie_value = date("Y-m-d");

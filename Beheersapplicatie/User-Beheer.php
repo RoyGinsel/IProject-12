@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="../Website/css/style.css">
 </head>
 <header>
-  <div class="header uk-width-1-1  uk-flex uk-flex-around uk-flex-middle">
+  <div class="header headerBeheerder uk-width-1-1 uk-flex uk-flex-around uk-flex-middle">
     <div>
-      <h1>Veilingen beheren</h1>
+      <h1 class="uk-margin-top">Veilingen beheren</h1>
       Ga naar:
       <a href="../Website/paginas/index.php" class=""><br>Hoofdsite</a>
       <br>
@@ -44,7 +44,7 @@
 
    <div class="uk-flex uk-flex-center" >
     <div class="uk-padding">
-        <H3 class="uk-text-right">Blokkeren van gebruiker</H3>
+        <H1 class="uk-text-right">Blokkeren van gebruiker</H1>
         <form action="" method="get" class="uk-flex uk-flex-column uk-form-width-medium">
             <select name = "selectUser" class="uk-margin-bottom uk-select">
                 <option value="">Kies een gebruiker</option>

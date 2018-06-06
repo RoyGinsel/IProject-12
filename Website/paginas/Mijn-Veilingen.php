@@ -102,15 +102,17 @@ if (isset($_POST['Titel']) ){
             $salesItems = "";
             foreach($myAuctions as $item => $key){
                 // bepaalt de tijd en datum van het moment
-              $DateOfToday = new DateTime(date("d-m-Y h:i:s"));
+              $DateOfToday = new DateTime(date("d-m-Y H:i:s"));
+            
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
-
+            
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
                 $timeRemaining;
                 if($key['veilingGesloten'] == 0){
                     $timeRemaining = format_interval($difference);
+                    
                 } else {
                     $timeRemaining = 'Veiling gesloten';
                 }
