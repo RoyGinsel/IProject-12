@@ -221,7 +221,7 @@ create table tblBod(
 
 create table tblBestand(
 	fileNumber bigint identity(1,1),
-	fileNaam varbinary(MAX) not null,
+	fileNaam varchar(max) not null,
 	voorwerpNummer bigint not null,
 	constraint pk_tblBestan primary key(fileNumber),
 	constraint fk_tblBestand_voorwerpNummer foreign key(voorwerpNummer) references tblVoorwerp(voorwerpNummer),
@@ -247,3 +247,27 @@ create table tblTelefoonNummer(
 	constraint pk_tblTelefoonNummer primary key(volgNummer,gebruikersNaam),
 	constraint fk_tblTelefoonNummer_gebruikersNaam foreign key(gebruikersNaam) references tblGebruiker(gebruikersNaam)
 )
+
+alter table tblBod
+drop column bodDag
+
+alter table tblBod
+drop column bodtijdstip
+
+alter table tblBod
+add bodDag date not null
+
+alter table tblBod
+add bodTijdstip time not null
+
+alter table tblBestand
+drop column fileNaam
+
+alter table tblBestand
+add filenaam varchar(max) not null
+
+alter table tblGebruiker
+add geblokkeerd bit not null default 0
+
+select* from tblGebruiker
+select * from tblBestand

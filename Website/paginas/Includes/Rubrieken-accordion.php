@@ -33,7 +33,7 @@ $(document).ready(function(){
         $section .=  "<ul uk-accordion class='rubriekenlijst'> <li> <a id='".$value['rubriekNummer']."' class='uk-accordion-title uk-text-small'>"
         .$value['rubriekNaam']."</a>  <div class='uk-accordion-content'><ul class='uk-list'>";
       } else {
-          $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$value['rubriekNaam']."'>".$value['rubriekNaam']."</a></li>";
+          $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$value['rubriekNummer']."'>".$value['rubriekNaam']."</a></li>";
           $section .= "</ul></li></ul>";
         }
   
@@ -45,7 +45,7 @@ $(document).ready(function(){
            </ul></li></ul>";
          }
           else {
-           $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>"; 
+           $section .= "<li> <a class='uk-link-reset uk-text-small' href='producten.php?rubriek=".$sub['rubriekNummer']."'>".$sub['rubriekNaam']."</a></li>"; 
           }
         }
         $section .= "</ul></li></ul>";

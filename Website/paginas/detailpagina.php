@@ -14,11 +14,11 @@
     $review = getReview($seller[0]['verkoper']);
 // Functie die hoogste bieding krijgt
     $highestBid;
-    if (isset(getHighestBid($itemID)[0]['bodBedrag'])){
+    if (isset(getHighestBid($itemID)[0]['startPrijs'])){
+      $highestBid = $info[0]['startPrijs'];
+    } else{
       $highestBid = getHighestBid($itemID);
       $highestBid = $highestBid[0]['HoogsteBod'];
-    } else{
-      $highestBid = $info[0]['startPrijs'];
     }
 // maakt een leesbare error message
     $error;
@@ -91,6 +91,15 @@
         </div>
           <!-- omschrijving lol -->
           <?php
+          $begintijd;
+          $eindetijd;
+           if($info[0]['looptijdBeginDag'] == '2000-01-01'){
+             $begintijd = "Geblokkeerd";
+             $eindetijd = "Geblokkeerd";
+           }else {
+             $begintijd= $info[0]['looptijdBeginDag'];
+             $eindetijd= $info[0]['looptijdEindeDag'];
+           }
         $omschrijving = '
         <div class="uk-width-1-1">
           <h1 class="uk-card-title uk-text-center uk-margin-top">Omschrijving</h1>
@@ -98,8 +107,8 @@
             <li class="uk-margin-top">Titel: '.$info[0]['titel']. '</li>
             <li class="uk-margin-top uk-margin-right">Omschrijving: '.$info[0]['beschrijving']. '</li>
             <li class="uk-margin-top">Looptijd: <span id="cntdwn"></span> </li>
-            <li class="uk-margin-top">Gestart op: '.$info[0]['looptijdBeginDag']. '</li>
-            <li class="uk-margin-top">Eindigd op: '.$info[0]['looptijdEindeDag']. '</li>
+            <li class="uk-margin-top">Gestart op: '.$begintijd. '</li>
+            <li class="uk-margin-top">Eindigd op: '.$eindetijd. '</li>
             <li class="uk-margin-top uk-margin-bottom"><strong>Hoogste bod: &euro; '.$highestBid. '</strong></li>
         </div>
       </div>

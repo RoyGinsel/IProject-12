@@ -1,127 +1,3 @@
-create FUNCTION [dbo].[udf_StripHTML]
-(
-@HTMLText varchar(MAX)
-)
-RETURNS varchar(MAX)
-AS
-BEGIN
-DECLARE @Start  int
-DECLARE @End    int
-DECLARE @Length int
-
--- Replace the HTML entity &amp; with the '&' character (this needs to be done first, as
--- '&' might be double encoded as '&amp;amp;')
-SET @Start = CHARINDEX('&amp;', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, '&')
-SET @Start = CHARINDEX('&amp;', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace the HTML entity &lt; with the '<' character
-SET @Start = CHARINDEX('&lt;', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, '<')
-SET @Start = CHARINDEX('&lt;', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace the HTML entity &gt; with the '>' character
-SET @Start = CHARINDEX('&gt;', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, '>')
-SET @Start = CHARINDEX('&gt;', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace the HTML entity &amp; with the '&' character
-SET @Start = CHARINDEX('&amp;amp;', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, '&')
-SET @Start = CHARINDEX('&amp;amp;', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace the HTML entity &nbsp; with the ' ' character
-SET @Start = CHARINDEX('&nbsp;', @HTMLText)
-SET @End = @Start + 5
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, ' ')
-SET @Start = CHARINDEX('&nbsp;', @HTMLText)
-SET @End = @Start + 5
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace any <br> tags with a newline
-SET @Start = CHARINDEX('<br>', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, CHAR(13) + CHAR(10))
-SET @Start = CHARINDEX('<br>', @HTMLText)
-SET @End = @Start + 3
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace any <br/> tags with a newline
-SET @Start = CHARINDEX('<br/>', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, CHAR(13) + CHAR(10))
-SET @Start = CHARINDEX('<br/>', @HTMLText)
-SET @End = @Start + 4
-SET @Length = (@End - @Start) + 1
-END
-
--- Replace any <br /> tags with a newline
-SET @Start = CHARINDEX('<br />', @HTMLText)
-SET @End = @Start + 5
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, CHAR(13) + CHAR(10))
-SET @Start = CHARINDEX('<br />', @HTMLText)
-SET @End = @Start + 5
-SET @Length = (@End - @Start) + 1
-END
-
--- Remove anything between <whatever> tags
-SET @Start = CHARINDEX('<', @HTMLText)
-SET @End = CHARINDEX('>', @HTMLText, CHARINDEX('<', @HTMLText))
-SET @Length = (@End - @Start) + 1
-
-WHILE (@Start > 0 AND @End > 0 AND @Length > 0) BEGIN
-SET @HTMLText = STUFF(@HTMLText, @Start, @Length, '')
-SET @Start = CHARINDEX('<', @HTMLText)
-SET @End = CHARINDEX('>', @HTMLText, CHARINDEX('<', @HTMLText))
-SET @Length = (@End - @Start) + 1
-END
-
-RETURN LTRIM(RTRIM(@HTMLText))
-
-END
-
 insert into noHTML
 select distinct cast(id as bigint) as ID,
 	left([dbo].[udf_StripHTML](Titel),50) as Titel,
@@ -139,10 +15,6 @@ update noHTML
 set Beschrijving = replace(replace(replace(Beschrijving,' ','<>'),'><',''),'<>',' ')
 update noHTML
 set Beschrijving = REPLACE(REPLACE(Beschrijving, CHAR(13), ''), char(10), '')
-select * from noHTML
-
-select * from users
-select * from tblGebruiker
 
 insert into tblGebruiker
 select distinct left(Username,20) as gebruikersNaam,
@@ -161,6 +33,44 @@ select distinct left(Username,20) as gebruikersNaam,
 	1 as mogelijkeVerkoper
 from users
 
-insert into tblVoorwerp
+insert into tblVerkoper
+select distinct left(Username,20) as gebruikersNaam,
+	'Geen' as bank,
+	0000 as bankrekening,
+	'Post' as controle,
+	null as creditcardNummer,
+	convert(date,Current_timestamp) as lidsinds,
+	0 as succesvolleVerkopen
+from users
 
-select * from tblvoorwerp order by 
+go
+exec spCreateIDLinks
+
+insert into tblVoorwerp
+select new as voorwerpnummer,
+	titel as titel,
+	Beschrijving as beshrijving,
+	startPrijs as startPrijs,
+	'Paypal' as betaalWijze,
+	'niks speciaals' as betalingsInstructie,
+	plaatsnaam as plaatsnaam,
+	plaatsnaam as land,
+	7 as looptijd,
+	convert(date,current_timestamp) as looptijdBeginDag,
+	convert(time,current_timestamp) as looptijdBegintijdstip,
+	2.50 as verzendkosten,
+	'DHL bezorging' as verzendInstructie,
+	verkoper as verkoper
+from noHTML inner join idtable on id=original
+
+insert into tblBestand
+select Thumbnail as fileNaam,
+	new as voorwerpNummer
+from noHTML inner join IDtable on id=original
+
+insert into tblBestand
+select IllustratieFile as fileNaam,
+	new as voorwerpNummer
+from Illustraties inner join IDtable on itemID=original
+
+select * from Illustraties
