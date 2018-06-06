@@ -12,7 +12,7 @@ $section = "";
       class='uk-accordion-title'>"
       .$value['rubriekNaam']."</a>  <div class='uk-accordion-content'><ul class='uk-list'>";
     } else {
-        $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$value['rubriekNaam']."'>".$value['rubriekNaam']."</a></li>";
+        $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$value['rubriekNummer']."'>".$value['rubriekNaam']."</a></li>";
         $section .= "</ul></li></ul>";
       }
 
@@ -23,7 +23,7 @@ $section = "";
          </ul></li></ul>";
        }
         else {
-         $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$sub['rubriekNaam']."'>".$sub['rubriekNaam']."</a></li>"; 
+         $section .= "<li> <a class='uk-link-reset' href='producten.php?rubriek=".$sub['rubriekNummer']."'>".$sub['rubriekNaam']."</a></li>"; 
         }
       }
       $section .= "</ul></li></ul>";

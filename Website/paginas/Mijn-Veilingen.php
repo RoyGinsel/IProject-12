@@ -138,8 +138,8 @@ if(!getPossibleBuyer($_SESSION['username'])){
         <p uk-margin>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>      
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <button  href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
-             uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> <a id="toggle-form">Item aanbieden </a></button>
+            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+             uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> Item aanbieden </a>
         </p>
     </div>
 
@@ -251,7 +251,7 @@ if (files) {
 </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
-  <a id="previewButton" class="uk-button"> Next <br><br> Preview</a>
+  <a id="previewButton" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"> Next <br><br> <strong>Preview</strong></a>
   <div id="alert">
   </div>
 </div>

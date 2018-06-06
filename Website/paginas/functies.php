@@ -98,8 +98,7 @@ function changes($date)
 
 function items($search)
 {
-  $search = "%".$search."%";
-	if($search != "%%"){
+	if($search != ""){
 		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
@@ -107,7 +106,7 @@ function items($search)
 					group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
-					where r.rubriekNaam like :rubriekname",["rubriekname"=>$search]);
+					where r.rubriekNummer = :rubriekname",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs, v.voorwerpNummer
 					from tblVoorwerp v
