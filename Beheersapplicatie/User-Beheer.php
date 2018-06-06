@@ -1,12 +1,6 @@
 <?php
-
-include "includes/functies.php";
-
-$allUsers = getUsers();
-
-
-
-
+    include "includes/functies.php";
+    $allUsers = getUsers();
 ?>
 
 <!DOCTYPE html>
@@ -37,17 +31,15 @@ $allUsers = getUsers();
 </header>
 <body>
 
-<?php
-
-    if(isset($_GET['selectUser'])){
-        blockUser($_GET['selectUser']);
-
-        echo ' <div class="uk-alert-primary uk-align-center uk-width-1-2" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <p>Gebruiker is met succes geblokkeerd</p>
-        </div>';
-        header('location: ./user-beheer.php');
-    }
+    <?php
+        if(isset($_GET['selectUser'])){
+            blockUser($_GET['selectUser']);
+            echo ' <div class="uk-alert-primary uk-align-center uk-width-1-2" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>Gebruiker is met succes geblokkeerd</p>
+            </div>';
+            header('location: ./user-beheer.php');
+        }
     ?>
 
    <div class="uk-flex uk-flex-center" >
@@ -57,22 +49,16 @@ $allUsers = getUsers();
             <select name = "selectUser" class="uk-margin-bottom uk-select">
                 <option value="">Kies een gebruiker</option>
                 <?php
-                foreach($allUsers as $user => $key){
-
-             echo '<option value="'.$key['gebruikersNaam'].'">'.$key['gebruikersNaam'].'</option>';
-
-                }
-
+                    foreach($allUsers as $user => $key){
+                        echo '<option value="'.$key['gebruikersNaam'].'">'.$key['gebruikersNaam'].'</option>';
+                    }
                 ?>
             </select>
             <label><input class="uk-checkbox uk-margin-small-top uk-margin-bottom" type="checkbox" name="submit" Required><span class=" uk-margin-left uk-text-danger">Bevestig Keuze</span></label>
             <input type="submit" value="Blokkeren">
         </form>
     </div>
-
-
-
-
+   </div>
 </body>
 </html>
 
