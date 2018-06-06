@@ -113,9 +113,4 @@
                     SET looptijdBeginDag = '01-01-2000'
                     WHERE voorwerpNummer =:voorwerp", ['voorwerp' => $voorwerp]);
     }
-<<<<<<< HEAD
-
 ?>
-=======
-?>
->>>>>>> 546f809d8d8ea015938f3d4fff3829a5e0f791b1

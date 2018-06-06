@@ -2,6 +2,7 @@
   session_start();
   include "functies.php";
   $crumbs = array("Producten");
+
   if(isset($_GET["data"])){
     $data = htmlspecialchars($_GET["data"]);
   } else {

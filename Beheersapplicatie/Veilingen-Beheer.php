@@ -27,7 +27,7 @@ if(isset($_GET['vwBlokkeren'])){
       Ga naar:
       <a href="../Website/paginas/index.php" class=""><br>Hoofdsite</a>
       <br>
-      <a href="User-beheer.php" class="">User beheer</a>
+      <a href="User-beheer.php" class="">Gebruiker beheer</a>
       <br>
       <a href="Rubrieken-beheer.php" class="">Rubrieken beheer</a>
     </div>

@@ -9,30 +9,35 @@ $allUsers = getUsers();
 
 ?>
 
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gebruiker Beheer</title>
+    <title>Document</title>
     <script type="text/javascript" src="../Website/css/uikit-3.0.0-beta.42/dist/js/uikit.min.js"></script>
     <script type="text/javascript" src="../Website/css/uikit-3.0.0-beta.42/dist/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../Website/css/uikit-3.0.0-beta.42/dist/css/uikit.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:600" rel="stylesheet">
     <link rel="stylesheet" href="../Website/css/style.css">
 </head>
-<body>      
-    <div class="header uk-width-1-1 uk-height-medium uk-flex uk-flex-around uk-flex-middle">
-        <div>
-            <h1>Gebruiker Beheer</h1> 
-            Ga naar:
-            <a href="../Website/paginas/index.php">Hoofd site</a></br>
-            Ga naar:
-            <a href="Rubrieken-Beheer.php">Rubriekenbeheer</a>
-       </div>
-     </div>
-     <?php
+<header>
+  <div class="header uk-width-1-1  uk-flex uk-flex-around uk-flex-middle">
+    <div>
+      <h1>Veilingen beheren</h1>
+      Ga naar:
+      <a href="../Website/paginas/index.php" class=""><br>Hoofdsite</a>
+      <br>
+      <a href="veilingen-beheer.php" class="">veilingen beheer</a>
+      <br>
+      <a href="Rubrieken-beheer.php" class="">Rubrieken beheer</a>
+    </div>
+  </div>
+</header>
+<body>
+
+<?php
 
     if(isset($_GET['selectUser'])){
         blockUser($_GET['selectUser']);

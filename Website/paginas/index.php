@@ -21,18 +21,6 @@
    }
  }
 
- if(isset($_SESSION['username'])){
-
-    $user = getUserBlocked($_SESSION['username']);
-    if($user[0]['geblokkeerd'] == 1){
- 
-     session_destroy();
-     header('location: index.php?msg=blocked');
-
-    }
- }
-
-
  if (isset($_GET["msg"]) && $_GET["msg"] == 'verkoper') {
    echo  '
    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
