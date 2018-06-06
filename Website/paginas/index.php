@@ -2,13 +2,13 @@
     session_start();
     include "functies.php";
     $crumbs = array();
+    
 // InlogCheck
  if(isset($_POST['post_gebruikersnaam']) && isset($_POST['post_wachtwoord'])){
 
    $username = $_POST['post_gebruikersnaam'];
    $password = $_POST['post_wachtwoord'];
    $hash = getPassword($username);
-
   if(loginCheck($username) == false){
        header('location: inloggen.php?msg=failed');
   }
@@ -20,6 +20,19 @@
     header('Location: inloggen.php?msg=failed');
    }
  }
+
+ if(isset($_SESSION['username'])){
+
+    $user = getUserBlocked($_SESSION['username']);
+    if($user[0]['geblokkeerd'] == 1){
+ 
+     session_destroy();
+     header('location: index.php?msg=blocked');
+
+    }
+ }
+
+
  if (isset($_GET["msg"]) && $_GET["msg"] == 'verkoper') {
    echo  '
    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
@@ -36,7 +49,17 @@
    <a class="sluiten uk-alert-close" uk-close ></a>
    <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent uitgelogd!</h1>
    <p> Tot de volgende keer! </p> </div>';
- }
+ };
+ if (isset($_GET["msg"]) && $_GET["msg"] == 'blocked') {
+   
+    echo  '
+    <div class="call-out uk-width-1-2 uk-text-center uk-position-center  uk-padding-large" uk-alert>
+    <a class="sluiten uk-alert-close" uk-close ></a>
+    <h2 class ="uk-text-small@s uk-text-large@m uk-margin-remove"> U bent geblokeerd </h1>
+    <p> Neem zsm contact op  </p> </div>';
+    
+  }
+
 ?>
 
 <html lang="nl" dir="ltr">

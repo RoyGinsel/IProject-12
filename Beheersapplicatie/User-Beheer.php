@@ -32,28 +32,22 @@ $allUsers = getUsers();
             <a href="Rubrieken-Beheer.php">Rubriekenbeheer</a>
        </div>
      </div>
-
-
      <?php
 
     if(isset($_GET['selectUser'])){
-
-    
         blockUser($_GET['selectUser']);
 
         echo ' <div class="uk-alert-primary uk-align-center uk-width-1-2" uk-alert>
         <a class="uk-alert-close" uk-close></a>
         <p>Gebruiker is met succes geblokkeerd</p>
         </div>';
-
+        header('location: ./user-beheer.php');
     }
-
-
     ?>
 
    <div class="uk-flex uk-flex-center" >
     <div class="uk-padding">
-        <H3 class="uk-text-danger">Blokkeren van gebruiker</H3>
+        <H3 class="uk-text-right">Blokkeren van gebruiker</H3>
         <form action="" method="get" class="uk-flex uk-flex-column uk-form-width-medium">
             <select name = "selectUser" class="uk-margin-bottom uk-select">
                 <option value="">Kies een gebruiker</option>
