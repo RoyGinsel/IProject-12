@@ -55,14 +55,15 @@ function preparedSPQuery($stringquery,$parameters)
 function hotItems()
 {
 	return query("SELECT titel, beschrijving, bodBedrag, v.voorwerpNummer
-				FROM tblVoorwerp v
-				inner join (select voorwerpNummer, max(bodBedrag) AS bodBedrag
-				FROM tblBod
-				group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-				where v.voorwerpNummer in(select top 5 voorwerpNummer
-				from tblBod
-				group by voorwerpNummer
-				order by count(voorwerpnummer) desc)");
+                FROM tblVoorwerp v
+                inner join (select voorwerpNummer,max(bodBedrag) AS bodBedrag
+                      FROM tblBod
+                      GROUP BY voorwerpNummer) b ON v.voorwerpNummer=b.voorwerpNummer
+                      WHERE v.voorwerpNummer IN(SELECT top 5 voorwerpNummer
+                                                FROM tblBod
+                                                GROUP BY voorwerpNummer
+                                                ORDER BY count(voorwerpnummer) DESC)
+                                                AND veilingGesloten = 0");
 }
 
 //Index.php -> Select statement voor uitgelichteitems
@@ -78,7 +79,8 @@ function featuredItems()
   											inner join (select voorwerpNummer, max(bodBedrag) as bodBedrag
   														from tblBod
 														group by voorwerpNummer) b on v.voorwerpNummer=b.voorwerpNummer
-  				order by startPrijs/bodBedrag*100 desc)");
+  				order by bodBedrag/Startprijs*100 desc)
+          AND veilingGesloten = 0");
 }
 
 function sections($value)
