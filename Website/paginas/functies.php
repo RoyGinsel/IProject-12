@@ -96,7 +96,7 @@ function changes($date)
 				where  looptijdBeginDag > :date",["date"=>$date]);
 }
 
-function items($search)
+function items($search, $filter)
 {
 	if($search != ""){
 		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
@@ -107,7 +107,7 @@ function items($search)
 					inner join tblVoorwerpRubriek vr on v.voorwerpNummer= vr.voorwerpNummer
 					inner join tblRubriek r on vr.rubriekNummer=r.rubriekNummer
 					where veilingGesloten = 0 and
-					r.rubriekNummer = :rubriekname",["rubriekname"=>$search]);
+					r.rubriekNummer = :rubriekname $filter",["rubriekname"=>$search]);
 	} else {
 		return query("SELECT titel, beschrijving, b.bodBedrag, startPrijs, v.voorwerpNummer
 					from tblVoorwerp v
