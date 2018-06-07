@@ -32,12 +32,12 @@
 <body>
 
     <?php
+
+    // blokkeert de gebruiker door de functie aan te roepen
         if(isset($_GET['selectUser'])){
             blockUser($_GET['selectUser']);
-            echo ' <div class="uk-alert-primary uk-align-center uk-width-1-2" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p>Gebruiker is met succes geblokkeerd</p>
-            </div>';
+            
+            
             header('location: ./user-beheer.php');
         }
     ?>
@@ -48,6 +48,8 @@
         <form action="" method="get" class="uk-flex uk-flex-column uk-form-width-medium">
             <select name = "selectUser" class="uk-margin-bottom uk-select">
                 <option value="">Kies een gebruiker</option>
+
+                <!-- geeft alle users weer -->
                 <?php
                     foreach($allUsers as $user => $key){
                         echo '<option value="'.$key['gebruikersNaam'].'">'.$key['gebruikersNaam'].'</option>';

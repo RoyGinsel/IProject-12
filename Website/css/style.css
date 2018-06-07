@@ -59,6 +59,18 @@ button>img:hover{
 }
 
 @media only screen and (max-width: 600px) {
+  .button-mobile {
+  margin:0px;
+  padding:5px;
+  border: solid 4px #333333;
+  width:20px;
+  font-size:12px;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px) {
   .invoervelden {
    width:140px;
   }
