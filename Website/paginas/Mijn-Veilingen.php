@@ -23,7 +23,7 @@ if (isset($_POST['Titel']) ){
   } else if($_aantal_fotos > 4){
     echo "<script>
     alert('Je kunt maximaal 4 fotos uploaden');
-    </script>";  
+    </script>";
     }
       //Insert van gegevens in db
   if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
@@ -103,16 +103,16 @@ if (isset($_POST['Titel']) ){
             foreach($myAuctions as $item => $key){
                 // bepaalt de tijd en datum van het moment
               $DateOfToday = new DateTime(date("d-m-Y H:i:s"));
-            
+
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
-            
+
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
                 $timeRemaining;
                 if($key['veilingGesloten'] == 0){
                     $timeRemaining = format_interval($difference);
-                    
+
                 } else {
                     $timeRemaining = 'Veiling gesloten';
                 }
@@ -149,7 +149,7 @@ if (isset($_POST['Titel']) ){
         <p>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
              uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> Item aanbieden </a>
         </p>
     </div>
@@ -214,7 +214,7 @@ if (isset($_POST['Titel']) ){
       <option value="SNS">SNS Bank</option>
       </select>
 
-      <input id=<?php echo $form_ids['Banknummer'] ?> type="number" name="Banknummer" value="20389456" required>
+      <input id=<?php echo $form_ids['Banknummer'] ?> type="text" name="Banknummer" value="20389456" required>
     </div>
     </div>
 
