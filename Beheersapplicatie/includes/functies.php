@@ -97,6 +97,8 @@
     function blockUser($user)
     {
         preparedQuery("UPDATE tblGebruiker SET geblokkeerd = 1 where gebruikersnaam = :gebruiker",['gebruiker' => $user]);
+
+    
     }
 
 

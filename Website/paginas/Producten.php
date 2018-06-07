@@ -3,6 +3,8 @@
   include "functies.php";
   $crumbs = array("Producten");
 
+  
+
   if(isset($_GET["data"])){
     $data = htmlspecialchars($_GET["data"]);
   } else {
@@ -121,6 +123,8 @@
       <?php
       //rubriekaccordion
         include "includes/Rubrieken-accordion.php";
+
+        
       ?>
     </div>
   </div>
@@ -136,6 +140,7 @@
               $section = "";
             }
             echo '<h3>'. $section.'</h3>';
+          
           ?>
         </div>
       </nav>
@@ -177,7 +182,7 @@
                     <h4 class='uk-text-small'>".$waarde['beschrijving']."</h4>
                     </td>
                     <td class='uk-visible'>€ ".$prijs."</td>
-                    <td class='productenMobile'><a class='uk-button uk-text-small' type='button' href='detailpagina.php?item=".$waarde['voorwerpNummer']."'>Ga naar bieding</a></td>
+                    <td class=''><a class='button-mobile uk-button uk-text-small' type='button' href='detailpagina.php?item=".$waarde['voorwerpNummer']."'>Ga naar bieding</a></td>
                     </tr>";
                   }
                   echo $lijst;
