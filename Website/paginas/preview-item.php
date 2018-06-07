@@ -5,7 +5,7 @@
      include "functies.php";
     $date = date_create(date("Y/m/d"));
      date_add($date, date_interval_create_from_date_string($_POST['form_ids'][5].'days'));
-     
+
     ?>
 <main class="uk-visible@s uk-grid detailpaginaLayout uk-flex-center uk-margin-remove">
       <div class="uk-card uk-card-default uk-width-1-3">
@@ -86,7 +86,7 @@
           <form action="" method="post" class="uk-panel uk-panel-box uk-form">
             <div class="uk-form-row">
               <input class="uk-width-1-3 uk-form-large" name="invoerBod" type="number"  placeholder="Bod" >
-              <input class="uk-button uk-button-primary uk-width-1-2 uk-padding-remove" type="Submit" name="Bod" value="Bieden">
+              <button class="uk-button uk-button-primary uk-margin-bottom uk-width-small uk-padding-remove">Bieden</button>
             </div>
           </form>
         </div>
@@ -198,7 +198,7 @@
             <form action="" method="post" class="uk-panel uk-panel-box uk-form">
               <div class="uk-form-row uk-margin uk-padding-remove">
                 <input class="uk-width-1-1 uk-input uk-form-width-medium uk-form-default" name="invoerBod" type="number"  placeholder="Bod" required>
-                <input class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove uk-margin-top" type="Submit" name="Bod" value="Bieden">
+                <button class="uk-button uk-button-primary uk-margin-bottom uk-width-small uk-padding-remove">Bieden</button>
               </div>
             </form>
           </div>

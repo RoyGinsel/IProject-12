@@ -39,13 +39,15 @@
                   </ul>";
   // zoek query met data invoeren om volgende producten te krijgen
 
+  //filteren op prijs door het in een sessie te gooien zodat het ook op pagination werkt
   $filter = "";
   if(isset($_POST['maximumprijs'])){
     $_SESSION['minimumprijs'] = $_POST['minimumprijs'];
     $_SESSION['maximumprijs'] = $_POST['maximumprijs'];
   }
+  //String van een where clause om te filteren,
+  //bepaald of er al geboden is of niet en kiest dan tussen startprijs of hoogste bod
   if(isset($_SESSION['maximumprijs']) ){
-    
     $filter = "AND (b.bodBedrag is not NULL AND b.bodBedrag BETWEEN ". $_SESSION['minimumprijs'] ." AND ".  $_SESSION['maximumprijs']  .")  
     OR (b.bodBedrag is NULL AND startPrijs BETWEEN ". $_SESSION['minimumprijs']." AND ".  $_SESSION['maximumprijs'] .")";
   }
@@ -69,32 +71,48 @@
   <main>
   <div class="uk-clearfix">
     <div class="uk-float-left uk-width-1-4@s uk-width-1-1 uk-margin uk-child-width-1-1 uk-text-small uk-text-large@m">
+    <!-- toggle zoekfilter -->
       <button class="uk-button uk-button-default " type="button" uk-toggle="target: #toggle-usage">
         <h5>Zoek-filter</h5>
       </button>
+      <!-- toggle content -->
       <div class="uk-child-width-auto " id="toggle-usage">
         <div class="uk-flex-center uk-margin">
+        <!-- Prijs filteren -->
           <div class="uk-margin-bottom"><h2>Kies een prijsrange</h2></div>
+          <!-- form met sliders -->
           <form action="producten.php" method="post">
           <input id="maximumprijsfilter" type="number" placeholder="Kies een maximumprijs" >
           <a id="buttonprijsfilter" class="uk-button uk-button-primary uk-text-middle">Kies</a>
+          <!-- slider voor minimumprijs -->
           <div class="uk-padding-remove">
           <input id="minimumprijs" class="uk-range" type="range" name="minimumprijs" min="0" max="" step="0.1">
-          <script> var minslider = document.getElementById('minimumprijs').value;
+          <script>
+          //waarde aflezen van de slider 
+          var minslider = document.getElementById('minimumprijs').value;
+          //als er op de slider wordt geklikt
             $('#minimumprijs').click(function (element) {
+              //toekennen waarde aan variabele
             minslider = document.getElementById('minimumprijs').value;
+            //max attribute die waarde geven van de variabele
             document.getElementById("minimumprijs").max = maxslider;
+            //html schrijven van de waarde op de div hieronder met het id "minprijs"
             document.getElementById("minprijs").innerHTML =  "<h4> Minimale prijs: "+ minslider +"</h4>" ; });
           </script> <span id="minprijs"><h4> Minimale prijs:</h4></span>
 
+          <!-- slider voor maximumprijs -->
           <input id="maximumprijs" class="uk-range uk-padding-remove" type="range" name="maximumprijs" min="" max="" step="0.1">
+          <!-- Js werkt hetzelfde als bij de minimumprijs -->
           <script> var maxslider = document.getElementById('maximumprijs').value; var maxprijs;
             $('#maximumprijs').click(function (element) {
             maxslider = document.getElementById('maximumprijs').value;
             document.getElementById("maximumprijs").min = minslider;
             document.getElementById("maxprijs").innerHTML =  "<h4> Maximale prijs: "+ maxslider +"</h4>" ; });
+            //Als er op de button met de id buttonprijsfilter wordt gedrukt
                       $('#buttonprijsfilter').click(function (element) {
+                        //waarde afgelezen van input naast de button
                         maxprijs = document.getElementById("maximumprijsfilter").value;
+                        //geef het attribuut max de waarde van maxprijs
                         $("#maximumprijs").attr("max", maxprijs);});
           </script> <span id="maxprijs"><h4> Maximale prijs:</h4> </span>
           <button type="submit" class="uk-button uk-width-1-1 uk-button-default uk-button-primary uk-margin-medium-top" name="submit">Zoeken</button>
@@ -102,6 +120,7 @@
           </div>          
       </div>
       <?php
+      //rubriekaccordion
         include "includes/Rubrieken-accordion.php";
 
         
@@ -116,7 +135,7 @@
           <?php
             if(isset($_GET["rubriek"])){
               $section = htmlspecialchars($_GET["rubriek"]);
-            }else{
+            } else{
               $section = "";
             }
             echo '<h3>'. $section.'</h3>';
@@ -153,7 +172,7 @@
                     } else {
                       $prijs = $waarde['startPrijs'];
                     }
-
+                    //items opgehaald van database
                     $lijst .= "
                     <tr>
                     <td><img class='uk-preserve-width uk-border-rounded' src=../media/Hamburgermenu.png width='80' alt=''>

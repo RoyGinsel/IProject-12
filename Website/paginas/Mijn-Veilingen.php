@@ -8,22 +8,24 @@ if(!getPossibleBuyer($_SESSION['username'])){
   };
 
 if(isset($_SESSION['username'])){
-
     checkIfBlocked($_SESSION['username']);
-
  }
 
-
+//Als er een post is gestuurd om een item aan te bieden
 if (isset($_POST['Titel']) ){
+    //Tellen van aantal geuploadde fotos
   $_aantal_fotos = count($_FILES['fotos']['name']);
+  //error messages
   if($_FILES['fotos']['name'][0] =="" ){
     echo "<script>
     alert('Upload tenminste één bestand');
     </script>";
-  }else if($_aantal_fotos > 4){
+  } else if($_aantal_fotos > 4){
     echo "<script>
     alert('Je kunt maximaal 4 fotos uploaden');
-    </script>";        }
+    </script>";
+    }
+      //Insert van gegevens in db
   if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
     $nummer = newVoorwerpNummer();
     $nummer = $nummer[0]['voorwerpnummer'];
@@ -35,7 +37,7 @@ if (isset($_POST['Titel']) ){
   foreach($_POST['Rubriekaanbieden'] as $value){
   preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
   }
-
+    //fotos uploaden
     $doel_map = "../../images/item".$nummer;
       for ($i=0; $i < count($_FILES['fotos']['name']); $i++) {
         // Geef de bestandnaam op van het bestand op een bepaalde locatie
@@ -101,16 +103,16 @@ if (isset($_POST['Titel']) ){
             foreach($myAuctions as $item => $key){
                 // bepaalt de tijd en datum van het moment
               $DateOfToday = new DateTime(date("d-m-Y H:i:s"));
-            
+
               // zet de eind datum  en tijd van het voorwerp in end date
               $endDate = new DateTime($key['looptijdEindeDag'].$key['looptijdEindeTijdstip']);
-            
+
               // rekent het verschill uit tussen de dag en tijd van vandaag en de einddag en tijd
               $difference = $DateOfToday->diff($endDate);
                 $timeRemaining;
                 if($key['veilingGesloten'] == 0){
                     $timeRemaining = format_interval($difference);
-                    
+
                 } else {
                     $timeRemaining = 'Veiling gesloten';
                 }
@@ -147,7 +149,7 @@ if (isset($_POST['Titel']) ){
         <p>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="index.php">Home</a>
             <a class="uk-button uk-margin-right uk-padding-small uk-button-primary" href="Producten.php">Producten</a>
-            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button" 
+            <a id="toggle-form" href="#toggle-animation" class=" uk-padding-small uk-button uk-button-primary uk-button-default" type="button"
              uk-toggle="target: #toggle-animation; animation: uk-animation-fade"> Item aanbieden </a>
         </p>
     </div>
@@ -157,6 +159,7 @@ if (isset($_POST['Titel']) ){
 <form action="Mijn-Veilingen.php" method="post" enctype="multipart/form-data">
   <div class="uk-form uk-width-1-1 uk-flex uk-flex-inline@m uk-flex-center uk-margin-medium-top">
   <div class="uk-flex uk-flex-column">
+    <!-- Plek waar de geladen rubrieken komen -->
     <select id="rubrieken" class="uk-width-1-1 uk-form-select" name="Rubriekaanbieden[]" multiple required>
     </select>
     <div class="uk-flex uk-flex-center">
@@ -172,6 +175,7 @@ if (isset($_POST['Titel']) ){
     </div>
 
     <?php
+    //Form ids in een array gezet zodat die makkelijker aangepast kunnen worden
     $form_ids = ["Titel" => "titel",
     "Plaatsnaam" => "plaatsnaam",
     "Land" => "land",
@@ -183,6 +187,7 @@ if (isset($_POST['Titel']) ){
     "Verzendinstructie" => 'Verzendinstructie',
     "Beschrijving"=> 'Beschrijving'];
     ?>
+    <!-- form inputs -->
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate ">
       <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="Titel" required >
       <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="Plaatsnaam" required>
@@ -209,10 +214,12 @@ if (isset($_POST['Titel']) ){
       <option value="SNS">SNS Bank</option>
       </select>
 
-      <input id=<?php echo $form_ids['Banknummer'] ?> type="number" name="Banknummer" value="20389456" required>
+      <input id=<?php echo $form_ids['Banknummer'] ?> type="text" name="Banknummer" value="20389456" required>
     </div>
     </div>
+
       <script>
+      //Preview van fotos
       function previewFiles() {
       var preview = document.querySelector('#preview');
       var files   = document.querySelector('input[name="fotos[]"]').files;
@@ -222,7 +229,9 @@ if (isset($_POST['Titel']) ){
         if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
           var reader = new FileReader();
           reader.addEventListener("load", function () {
+            //image maken
             var image = new Image();
+            //in een list item zetten
             var list =  document.createElement("li");
             image.height = 100;
             image.title = file.name;
@@ -240,7 +249,7 @@ if (isset($_POST['Titel']) ){
     </script>
   </div>
   </div>
-
+<!-- Textarea's -->
   <div class="uk-flex uk-flex-center uk-text-center uk-margin uk-flex uk-flex-wrap">
     <div class="uk-margin-right">
       <h3>Verzendinstructie</h3>
@@ -270,18 +279,21 @@ if (isset($_POST['Titel']) ){
 </html>
 
 <script>
+
 $(document).ready(function(){
   $('#previewButton').click(function (element) {
     <?php
     echo "var form_ids = [];";
+    //waarden van de elementen die de ids hebben in de array uitlezen en in een andere array zetten
     foreach ($form_ids as $key => $value) {
     echo "form_ids.push(document.getElementById('$value').value);";
   }?>
+  //Deze array doorgeven aan het externe bestand die geladen wordt (de preview)
     $('#alert').load("preview-item.php",{ form_ids:form_ids });
     });
 });
 
- //als er een key is ingedrukt op de id ''
+ //als er een key is ingedrukt op de id 'toggleform'
  $( "#toggle-form" ).one("click",function (element) {
         //stuurt een request naar de url
              $('#rubrieken').load("item-aanbieden-load.php");
