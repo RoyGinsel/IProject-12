@@ -46,9 +46,10 @@
   //String van een where clause om te filteren,
   //bepaald of er al geboden is of niet en kiest dan tussen startprijs of hoogste bod
   if(isset($_SESSION['maximumprijs']) ){
-    $filter = "AND (b.bodBedrag is not NULL AND b.bodBedrag BETWEEN ". $_SESSION['minimumprijs'] ." AND ".  $_SESSION['maximumprijs']  .")  
+    $filter = "AND (b.bodBedrag is not NULL AND b.bodBedrag BETWEEN ". $_SESSION['minimumprijs'] ." AND ".  $_SESSION['maximumprijs']  .")
     OR (b.bodBedrag is NULL AND startPrijs BETWEEN ". $_SESSION['minimumprijs']." AND ".  $_SESSION['maximumprijs'] .")";
   }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +87,7 @@
           <div class="uk-padding-remove">
           <input id="minimumprijs" class="uk-range" type="range" name="minimumprijs" min="0" max="" step="0.1">
           <script>
-          //waarde aflezen van de slider 
+          //waarde aflezen van de slider
           var minslider = document.getElementById('minimumprijs').value;
           //als er op de slider wordt geklikt
             $('#minimumprijs').click(function (element) {
@@ -115,7 +116,7 @@
           </script> <span id="maxprijs"><h4> Maximale prijs:</h4> </span>
           <button type="submit" class="uk-button uk-width-1-1 uk-button-default uk-button-primary uk-margin-medium-top" name="submit">Zoeken</button>
           </form>
-          </div>          
+          </div>
       </div>
       <?php
       //rubriekaccordion
@@ -199,4 +200,3 @@
 
 
 </html>
-

@@ -1,7 +1,7 @@
 <?php
     include "database.php";
-	//include "../../SQLSrvConnect.php";
-	
+//	include "../../SQLSrvConnect.php";
+
 
 function query($stringquery)
 {
@@ -292,7 +292,7 @@ function allSections(){
 };
 
 
-// kijken of user blocked is 
+// kijken of user blocked is
 function getUserBlocked($gebruiker){
 
 
@@ -307,10 +307,10 @@ function checkIfBlocked($sessie){
 
 		$user = getUserBlocked($_SESSION['username']);
 		if($user[0]['geblokkeerd'] == 1){
-	 
+
 		 session_destroy();
 		 header('location: index.php?msg=blocked');
-	
+
 		}
 	 }
 

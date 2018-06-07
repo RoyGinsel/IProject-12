@@ -38,8 +38,10 @@ if (isset($_POST['Titel']) ){
   preparedInsertQuery("INSERT INTO tblVoorwerpRubriek Values(".$nummer.",:rubriek)", ["rubriek" => $value]);
   }
     //fotos uploaden
-    $doel_map = "../../images/item".$nummer;
+    $doel_map = "../../images/NDB_item".$nummer;
       for ($i=0; $i < count($_FILES['fotos']['name']); $i++) {
+        preparedInsertQuery("INSERT INTO tblBestand values(:fotonaam, :nummer)",
+        ['fotonaam' => basename($_FILES["fotos"]["name"][$i]) , 'nummer' => $nummer]);
         // Geef de bestandnaam op van het bestand op een bepaalde locatie
         $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
         $uploadOk = 1;
