@@ -40,8 +40,10 @@ if (isset($_POST['Titel']) ){
     //fotos uploaden
     $doel_map = "../../images/NDB_item".$nummer;
       for ($i=0; $i < count($_FILES['fotos']['name']); $i++) {
+        var_dump(basename($_FILES["fotos"]["name"][$i]));
+        var_dump($nummer);
         preparedInsertQuery("INSERT INTO tblBestand values(:fotonaam, :nummer)",
-        ['fotonaam' => basename($_FILES["fotos"]["name"][$i]) , 'nummer' => $nummer]);
+        ['fotonaam' => "NDB_item".$nummer.basename($_FILES["fotos"]["name"][$i]) , 'nummer' => $nummer]);
         // Geef de bestandnaam op van het bestand op een bepaalde locatie
         $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
         $uploadOk = 1;

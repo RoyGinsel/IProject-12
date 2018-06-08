@@ -86,10 +86,11 @@
           <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
               <?php
               foreach ($fotos as $value) {
-                if(strpos("NDB_item",$value) !== false){
-                  $src = "../../images/".$value;
+                $BestandNaam = $value['fileNaam'] ;
+                if(strpos($BestandNaam,"N") == 0 && strpos($BestandNaam,"D") == 1 && strpos($BestandNaam,"B") == 2 && strpos($BestandNaam,"_") == 3){
+                  $src = "../../images/".$value['fileNaam'];
                 } else {
-                  $src = "../../pics/".$value;
+                  $src = "../../pics/".$value['fileNaam'];
                 }
                 echo "<li> <img src='$src' uk-cover> </li>";
               } ?>
