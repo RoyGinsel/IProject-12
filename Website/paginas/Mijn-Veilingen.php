@@ -39,33 +39,33 @@ if (isset($_POST['Titel']) ){
   }
     //fotos uploaden
     $doel_map = "../../images/NDB_item".$nummer;
-      for ($i=0; $i < count($_FILES['fotos']['name']); $i++) {
-        var_dump(basename($_FILES["fotos"]["name"][$i]));
-        var_dump($nummer);
-        preparedInsertQuery("INSERT INTO tblBestand values(:fotonaam, :nummer)",
-        ['fotonaam' => "NDB_item".$nummer.basename($_FILES["fotos"]["name"][$i]) , 'nummer' => $nummer]);
-        // Geef de bestandnaam op van het bestand op een bepaalde locatie
-        $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
-        $uploadOk = 1;
-        //kijkt welke extensie de afbeelding heeft
-        $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
-        // Bepaalde bestand extensies toestaan
-        if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
-            && $afbeelding_type != "gif") {
-            $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
-            $uploadOk = 0;
-        }
-        // kijken of $uploadOk 0 is door een error hier boven
-        if ($uploadOk === 1) {
-            if (move_uploaded_file($_FILES["fotos"]["tmp_name"][$i], $doel_bestand)) {
-                $melding = "Het bestand " . basename($_FILES["fotos"]["name"][$i]) . " is geupload.";
-            } else {
-                $melding = "Sorry, er was een error bij het uploaden van het bestand.";
-            }
+      for ($i=0; $i <= count($_FILES['fotos']['name']); $i++) {
+        if(basename($_FILES["fotos"]["name"][$i]) != ""){
+          preparedInsertQuery("INSERT INTO tblBestand values(:fotonaam, :nummer)",
+          ['fotonaam' => "NDB_item".$nummer.basename($_FILES["fotos"]["name"][$i]) , 'nummer' => $nummer]);
+          // Geef de bestandnaam op van het bestand op een bepaalde locatie
+          $doel_bestand = $doel_map . basename($_FILES["fotos"]["name"][$i]);
+          $uploadOk = 1;
+          //kijkt welke extensie de afbeelding heeft
+          $afbeelding_type = strtolower(pathinfo($doel_bestand, PATHINFO_EXTENSION));
+          // Bepaalde bestand extensies toestaan
+          if ($afbeelding_type != "jpg" && $afbeelding_type != "png" && $afbeelding_type != "jpeg"
+              && $afbeelding_type != "gif") {
+              $melding = "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
+              $uploadOk = 0;
+          }
+          // kijken of $uploadOk 0 is door een error hier boven
+          if ($uploadOk === 1) {
+              if (move_uploaded_file($_FILES["fotos"]["tmp_name"][$i], $doel_bestand)) {
+                  $melding = "Het bestand " . basename($_FILES["fotos"]["name"][$i]) . " is geupload.";
+              } else {
+                  $melding = "Sorry, er was een error bij het uploaden van het bestand.";
+              }
+          }
         }
       }
     }
-}
+  }
 ?>
 
 <!DOCTYPE html>
@@ -229,7 +229,6 @@ if (isset($_POST['Titel']) ){
       var files   = document.querySelector('input[name="fotos[]"]').files;
 
       function readAndPreview(file) {
-        // Make sure `file.name` matches our extensions criteria
         if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
           var reader = new FileReader();
           reader.addEventListener("load", function () {
