@@ -1,9 +1,10 @@
 <?php
 include "includes/functies.php";
-
+//hernoemt een rubriek als dat gedaan moet worden
 if(isset($_GET['hrRubriek'])){
     renameSection($_GET['hrNaam'],$_GET['hrRubriek']);
 }
+//kijkt of er een rubriek verwijderd moet worden en doet dat als er geen errors komen
 if(isset($_GET['vwRubriek']) && !isset($_GET['probleem']) && !isset($_GET['doorgaan'])){
     $number = $_GET['vwRubriek'];
     if(checkSubSections($number)){
@@ -43,6 +44,7 @@ if(isset($_GET['vwRubriek']) && !isset($_GET['probleem']) && !isset($_GET['doorg
 <body>
     <?php
         include "includes/header.php";
+        // maakt een error message als een rubriek veiling items onder zich heeft
         if(isset($_GET['probleem'])){
             $number = $_GET['vwRubriek'];
             echo "<div class='uk-align-center uk-width-1-2'>

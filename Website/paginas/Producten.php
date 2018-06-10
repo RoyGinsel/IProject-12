@@ -135,7 +135,8 @@
         <div class="uk-navbar-left">
           <?php
             if(isset($_GET["rubriek"])){
-              $section = htmlspecialchars($_GET["rubriek"]);
+              $section = getSectionInfo($_GET["rubriek"]);
+              $section = $section[0]['rubriekNaam'];
             } else{
               $section = "";
             }
@@ -168,27 +169,32 @@
                   $lijst = "";
                   $prijs;
                   $items = items($section, $filter);
-                  for($i = 0; $i < 5;$i++){
-                    $count = $i;
-                    if(isset($_GET['data'])){
-                      $count = $i + ($_GET['data']-1)*5;
+                  //check of er items zijn
+                  if(items($section, $filter) != false){
+                    // maakt voor 5 items een table
+                    for($i = 0; $i < 5;$i++){
+                      $count = $i;
+                      // kiest de goede items om te laten zien
+                      if(isset($_GET['data'])){
+                        $count = $i + ($_GET['data']-1)*5;
+                      }
+                      if(isset($items[$count]['bodBedrag'])){
+                        $prijs = $items[$count]['bodBedrag'];
+                      } else {
+                        $prijs = $items[$count]['startPrijs'];
+                      }
+                      // zet elke item in een row in de table
+                      $lijst .= "
+                      <tr>
+                      <td><img class='uk-preserve-width uk-border-rounded' src=../media/Hamburgermenu.png width='80' alt=''>
+                      <h3 class='uk-text-top uk-margin-small-left uk-margin-remove-top uk uk-text-bold uk-text-small'>".$items[$count]['titel']."</h3></td>
+                      <td class='uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate'>
+                      <h4 class='uk-text-small'>".$items[$count]['beschrijving']."</h4>
+                      </td>
+                      <td class='uk-visible'>€ ".$prijs."</td>
+                      <td class=''><a class='button-mobile uk-button uk-text-small' type='button' href='detailpagina.php?item=".$items[$count]['voorwerpNummer']."'>Ga naar bieding</a></td>
+                      </tr>";
                     }
-                    if(isset($items[$count]['bodBedrag'])){
-                      $prijs = $items[$count]['bodBedrag'];
-                    } else {
-                      $prijs = $items[$count]['startPrijs'];
-                    }
-                    //items opgehaald van database
-                    $lijst .= "
-                    <tr>
-                    <td><img class='uk-preserve-width uk-border-rounded' src=../media/Hamburgermenu.png width='80' alt=''>
-                    <h3 class='uk-text-top uk-margin-small-left uk-margin-remove-top uk uk-text-bold uk-text-small'>".$items[$count]['titel']."</h3></td>
-                    <td class='uk-visible@s uk-text-break uk-text-nowrap uk-text-truncate'>
-                    <h4 class='uk-text-small'>".$items[$count]['beschrijving']."</h4>
-                    </td>
-                    <td class='uk-visible'>€ ".$prijs."</td>
-                    <td class=''><a class='button-mobile uk-button uk-text-small' type='button' href='detailpagina.php?item=".$items[$count]['voorwerpNummer']."'>Ga naar bieding</a></td>
-                    </tr>";
                   }
                   // foreach (items($section, $filter) as $waarde) {
                   //   if(isset($waarde['bodBedrag'])){

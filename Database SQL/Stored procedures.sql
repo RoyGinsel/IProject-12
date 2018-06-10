@@ -18,7 +18,7 @@ begin
 	return
 end
 
-alter procedure spRemoveJS
+create procedure spRemoveJS
 @Counter bigint = 0
 as
 begin

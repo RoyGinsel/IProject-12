@@ -19,6 +19,17 @@ set Beschrijving = replace(replace(replace(Beschrijving,' ','<>'),'><',''),'<>',
 update noHTML
 set Beschrijving = REPLACE(REPLACE(Beschrijving, CHAR(13), ''), char(10), '')
 
+insert into convertedUsers
+select distinct left(username,20) username,
+	postalcode as postalcode,
+	Location as Location,
+	Country as Country,
+	Rating as Rating
+from Users
+
+delete from convertedUsers
+where Username in (select gebruikersNaam from tblGebruiker)
+
 insert into tblGebruiker
 select distinct left(Username,20) as gebruikersNaam,
 	'unknown' as voornaam,
@@ -34,7 +45,7 @@ select distinct left(Username,20) as gebruikersNaam,
 	1 as vraagNummer,
 	'nee' as antwoordVraag,
 	1 as mogelijkeVerkoper
-from users
+from convertedUsers
 
 insert into tblVerkoper
 select distinct left(Username,20) as gebruikersNaam,
@@ -44,7 +55,7 @@ select distinct left(Username,20) as gebruikersNaam,
 	null as creditcardNummer,
 	convert(date,Current_timestamp) as lidsinds,
 	0 as succesvolleVerkopen
-from users
+from convertedUsers
 
 go
 exec spCreateIDLinks
@@ -83,12 +94,3 @@ insert into tblVoorwerpRubriek
 select new as voorwerpNummer,
 	Categorie as rubriekNummer
 from noHTML inner join IDtable on id=original
-
-/*
-select * from noHTML
-select CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving) from items
-select CHARINDEX('<script', Beschrijving) from items
-select stuff(Beschrijving,CHARINDEX('<script', Beschrijving),CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving),'') from items
-*/
-
-select * from noHTML

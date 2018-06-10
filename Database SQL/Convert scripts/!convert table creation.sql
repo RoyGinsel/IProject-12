@@ -3,6 +3,7 @@ drop table Illustraties
 drop table noHTML
 drop table Users
 drop table IDtable
+drop table convertedUsers
 
 create table items(
 ID varchar(max) not null,
@@ -39,6 +40,14 @@ Beschrijving varchar(max) not null
 
 create table Users(
 Username varchar(max) not null,
+Postalcode varchar(9) not null,
+Location varchar(35) not null,
+Country varchar(55) not null,
+Rating numeric (4,1) not null
+)
+
+create table convertedUsers(
+username varchar(20) not null,
 Postalcode varchar(9) not null,
 Location varchar(35) not null,
 Country varchar(55) not null,
