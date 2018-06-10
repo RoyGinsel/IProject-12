@@ -16,7 +16,8 @@ Prijs varchar(max) not null,
 Valuta varchar(max) not null,
 Conditie varchar(max) not null,
 Thumbnail varchar(max) not null,
-Beschrijving varchar(max) not null)
+Beschrijving varchar(max) not null,
+counter bigint identity(1,1))
 
 create table Illustraties (
 ItemID varchar(max) not null,
@@ -48,3 +49,11 @@ create table IDtable(
 original bigint null,
 new bigint not null
 )
+/*
+delete from tblVoorwerpRubriek
+delete from tblBestand
+delete from tblBod
+delete from tblVoorwerp
+delete from tblVerkoper
+delete from tblGebruiker
+*/

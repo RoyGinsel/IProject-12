@@ -18,6 +18,29 @@ begin
 	return
 end
 
+alter procedure spRemoveJS
+@Counter bigint = 0
+as
+begin
+	if(select count(*) from items) = 0
+	begin
+		return
+	end
+	else
+	begin
+		while(select count(*) from items) > @Counter
+		begin
+			while(select count(*) from items where counter = @counter and Beschrijving like '%<script%' and Beschrijving like '%</script>%') > 0
+			begin
+				update items
+					set Beschrijving = stuff(Beschrijving,CHARINDEX('<script', Beschrijving),CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving),'')
+					where Beschrijving like '%<script%' and Beschrijving like '%</script>%' and counter = @Counter
+			end
+		set @counter = @counter + 1
+		end
+	end
+end
+
 create procedure spNieuwBod
 @bodBedrag numeric(11,2),
 @voorwerpNummer bigint,

@@ -1,5 +1,5 @@
-update items
-set Beschrijving = stuff(Beschrijving,CHARINDEX('<script', Beschrijving),CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving),'hrd')
+go
+exec spRemoveJS
 
 insert into noHTML
 select distinct cast(id as bigint) as ID,
@@ -84,8 +84,11 @@ select new as voorwerpNummer,
 	Categorie as rubriekNummer
 from noHTML inner join IDtable on id=original
 
-alter table items
-alter column beschrijving varchar(max) null
+/*
+select * from noHTML
+select CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving) from items
+select CHARINDEX('<script', Beschrijving) from items
+select stuff(Beschrijving,CHARINDEX('<script', Beschrijving),CHARINDEX('</script>',Beschrijving)+9-CHARINDEX('<script', Beschrijving),'') from items
+*/
 
-
-select * from items where Beschrijving like '%<script%' and Beschrijving like '%</script>%'
+select * from noHTML
