@@ -79,8 +79,8 @@ if(isset($_GET['error'])){
       <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
       <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>" maxlength="52" required >
       <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlength="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
-      <input type="Password" name="Wachtwoord" placeholder="<?php echo $warningPassword; ?>" maxlength="25" required >
-      <input type="Password" name="WachtwoordHer" maxlength="25" required >
+      <input type="Password" name="Wachtwoord"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Moet teminste 8 karakters , één nummer en één hoofdletter bevatten" placeholder="<?php echo $warningPassword; ?>" maxlength="25" required >
+      <input type="Password" name="WachtwoordHer" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Moet teminste 8 karakters , één nummer en één hoofdletter bevatten" maxlength="25" required >
       <input type="text" name="Adres" maxlength="95" value = "<?php if(isset($_SESSION['adres'])){echo $_SESSION['adres']; }  ?>"   required>
       <input type="text" name="AdresExtra" value = "<?php if(isset($_SESSION['adresExtra'])){echo $_SESSION['adresExtra']; } ?>" maxlength="95">
       <input type="text" name="Postcode" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['postcode']; } ?>" maxlength="9" required>
