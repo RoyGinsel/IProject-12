@@ -268,6 +268,3 @@ add filenaam varchar(max) not null
 
 alter table tblGebruiker
 add geblokkeerd bit not null default 0
-
-select* from tblGebruiker
-select * from tblBestand
