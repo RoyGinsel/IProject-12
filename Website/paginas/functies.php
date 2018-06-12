@@ -1,7 +1,7 @@
 <?php
     include "database.php";
-	//include "../../SQLSrvConnect.php";
-	
+//	include "../../SQLSrvConnect.php";
+
 
 function query($stringquery)
 {
@@ -101,7 +101,7 @@ function changes($date)
 function items($search, $filter)
 {
 	if($search != ""){
-		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs
+		return preparedQuery("SELECT titel, beschrijving, b.bodBedrag, startPrijs,  v.voorwerpNummer
 					from tblVoorwerp v
 					full join (select voorwerpNummer, max(bodBedrag) as bodBedrag
 					from tblBod
@@ -170,28 +170,16 @@ function getPassword($username){
 
 // registreren.
 function newAccount($RegistrationForm){
-
-
 	try {
 
 		global $dbh;
 		$sql = "insert into tblGebruiker(gebruikersNaam,voornaam,achternaam,adresRegel,extraAdresRegel,postcode,plaatsNaam,land,geboorteDag,mail,wachtwoord,vraagNummer,antwoordvraag,mogelijkeVerkoper,geblokkeerd) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$query = $dbh->prepare($sql);
-
-
 		$query->execute(array($RegistrationForm['userName'], $RegistrationForm['voornaam'], $RegistrationForm['achternaam'], $RegistrationForm['adres'], $RegistrationForm['adresExtra'], $RegistrationForm['postcode'], $RegistrationForm['plaatsnaam'], $RegistrationForm['land'],"08-08-1996", $RegistrationForm['mail'], $RegistrationForm['password'],
 							  $RegistrationForm['geheimevraag'],$RegistrationForm['antwoordvraag'],"0","0"));
-
-
-
-
-
 	} catch (PDOException $e) {
-
-
 		echo $e->getMessage();
 	}
-
 	header('location: ./index.php');
 }
 
@@ -292,7 +280,7 @@ function allSections(){
 };
 
 
-// kijken of user blocked is 
+// kijken of user blocked is
 function getUserBlocked($gebruiker){
 
 
@@ -307,14 +295,16 @@ function checkIfBlocked($sessie){
 
 		$user = getUserBlocked($_SESSION['username']);
 		if($user[0]['geblokkeerd'] == 1){
-	 
+
 		 session_destroy();
 		 header('location: index.php?msg=blocked');
-	
+
 		}
 	 }
+}
 
-
+function getSectionInfo($number){
+	return preparedQuery('select rubriekNaam from tblRubriek where rubriekNummer = :number',['number' => $number]);
 }
 
 

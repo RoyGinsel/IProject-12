@@ -26,6 +26,9 @@
       $error = addNewBid($_POST['invoerBod'],$itemID,$_SESSION['username']);
       $error = substr($error,71);
     }
+    $fotos = preparedQuery("SELECT * FROM tblBestand WHERE voorwerpNummer = :nummer",["nummer" => $_GET['item']]);
+    var_dump($fotos);
+
  ?>
 
  <!DOCTYPE html>
@@ -81,9 +84,17 @@
       <div class="uk-card uk-card-default uk-width-1-3">
         <div class="uk-card-media-top uk-margin-top" uk-slideshow>
           <ul class="uk-slideshow-items uk-slid uk-margin-right uk-border-rounded voorwerpFoto">
-            <li>
-                <img src="https://www.opumo.com/wordpress/wp-content/uploads/2018/04/OPUMO-1-7.jpg" alt="" uk-cover>
-            </li>
+              <?php
+              foreach ($fotos as $value) {
+                $BestandNaam = $value['fileNaam'] ;
+                if(strpos($BestandNaam,"N") == 0 && strpos($BestandNaam,"D") == 1 && strpos($BestandNaam,"B") == 2 && strpos($BestandNaam,"_") == 3){
+                  $src = "../../images/".$value['fileNaam'];
+                } else {
+                  $src = "../../pics/".$value['fileNaam'];
+                }
+                echo "<li> <img src='$src' uk-cover> </li>";
+              } ?>
+
             <li>
                 <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
             </li>
