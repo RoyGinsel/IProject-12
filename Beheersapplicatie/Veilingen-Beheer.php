@@ -42,7 +42,7 @@ if(isset($_GET['vwBlokkeren'])){
                     <option value="">Niks blokkeren</option>
                     <?php
                         foreach(allAuctions() as $row){
-                            echo "<option value=".$row['voorwerpNummer'].">".$row['titel']." | Omschrijving: ".$row['beschrijving']." | Voorwerpnummer: ".$row['voorwerpNummer']."</option>";
+                            echo "<option value=".$row['voorwerpNummer'].">".$row['titel']." | Voorwerpnummer: ".$row['voorwerpNummer']."</option>";
                         };
                     ?>
                 </select>
