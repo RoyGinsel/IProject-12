@@ -3,11 +3,11 @@ exec spRemoveJS
 
 insert into noHTML
 select distinct cast(id as bigint) as ID,
-	left([dbo].[udf_StripHTML](Titel),50) as Titel,
+	left(Titel,50) as Titel,
 	cast(Categorie as int) as Categorie,
-	left([dbo].[udf_StripHTML](Locatie),60) as plaatsnaam,
-	left([dbo].[udf_StripHTML](Land),50) as land,
-	left([dbo].[udf_StripHTML](verkoper),20) as verkoper,
+	left(Locatie,60) as plaatsnaam,
+	left(Land,50) as land,
+	left(verkoper,20) as verkoper,
 	cast(Prijs as numeric(11,2)) as startprijs,
 	cast(Thumbnail as varchar(max)) as Thumbnail,
 	left([dbo].[udf_StripHTML](CONCAT('Conditie: ',Conditie,'. Beschrijving: ',Beschrijving)),4000) as Beschrijving
@@ -44,7 +44,8 @@ select distinct left(Username,20) as gebruikersNaam,
 	'$2y$10$PuNXUvL2X6Ro.WSTAGlcCO5j5FibomwZO5YURb1zr/JDjJnc5jNdi' as wachtwoord,
 	1 as vraagNummer,
 	'nee' as antwoordVraag,
-	1 as mogelijkeVerkoper
+	1 as mogelijkeVerkoper,
+	0 as geblokkeerd
 from convertedUsers
 
 insert into tblVerkoper

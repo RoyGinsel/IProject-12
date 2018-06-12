@@ -27,7 +27,6 @@
       $error = substr($error,71);
     }
     $fotos = preparedQuery("SELECT * FROM tblBestand WHERE voorwerpNummer = :nummer",["nummer" => $_GET['item']]);
-    var_dump($fotos);
 
  ?>
 
