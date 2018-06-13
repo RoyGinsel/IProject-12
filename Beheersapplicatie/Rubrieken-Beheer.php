@@ -54,7 +54,7 @@ if(isset($_GET['vwRubriek']) && !isset($_GET['probleem']) && !isset($_GET['doorg
                 <a href='Rubrieken-Beheer.php?doorgaan=1&vwRubriek=$number&iets=iets'>Ja</a>
                 <a href='Rubrieken-Beheer.php'>Nee</a>
             </div>
-        </div>";
+            </div>";
         }
     ?>
 <div class="uk-flex uk-flex-wrap uk-flex-space-around uk-width-1-1 uk-child-width-1-2" >

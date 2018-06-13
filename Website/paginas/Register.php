@@ -79,14 +79,14 @@ if(isset($_GET['error'])){
       <input type="text" name="Voornaam"  maxlength="50" value = "<?php if(isset($_SESSION['voornaam'])){echo $_SESSION['voornaam']; }  ?>"  required>
       <input type="text" name="Achternaam"  value = "<?php if(isset($_SESSION['achternaam'])){echo $_SESSION['achternaam']; } ?>" maxlength="52" required >
       <input type="text" name="Gebruikersnaam" value = "<?php if(isset($_SESSION['gebruikersNaam']) && $warningUsername == "" ){echo $_SESSION['gebruikersNaam']; }  ?>" maxlength="20" placeholder="<?php echo  $warningUsername; ?>" minlenght='5'required>
-      <input type="Password" name="Wachtwoord" placeholder="<?php echo $warningPassword; ?>" maxlength="25" required >
-      <input type="Password" name="WachtwoordHer" maxlength="25" required >
+      <input type="Password" name="Wachtwoord"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Moet teminste 8 karakters , één nummer en één hoofdletter bevatten" placeholder="<?php echo $warningPassword; ?>" maxlength="25" required >
+      <input type="Password" name="WachtwoordHer" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Moet teminste 8 karakters , één nummer en één hoofdletter bevatten" maxlength="25" required >
       <input type="text" name="Adres" maxlength="95" value = "<?php if(isset($_SESSION['adres'])){echo $_SESSION['adres']; }  ?>"   required>
       <input type="text" name="AdresExtra" value = "<?php if(isset($_SESSION['adresExtra'])){echo $_SESSION['adresExtra']; } ?>" maxlength="95">
       <input type="text" name="Postcode" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['postcode']; } ?>" maxlength="9" required>
       <input type="text" name="Plaatsnaam" value = "<?php if(isset($_SESSION['postcode'])){echo $_SESSION['plaatsNaam']; } ?>" maxlength="35" required>
       <input type="text" name="Land"  value = "<?php if(isset($_SESSION['land'])){echo $_SESSION['land']; } ?>" maxlength="55" required>
-      <input type="number" class='uk-width-medium' value ="<?php if(isset($_SESSION['telefoonNummer'])){echo $_SESSION['telefoonNummer']; } ?>" name="Telefoonnummer" placeholder="<?php echo $warningNumber; ?>"  required>
+      <input type="number" class='uk-width-medium'  value ="<?php if(isset($_SESSION['telefoonNummer']) && $warningEmail ==- ""){echo $_SESSION['telefoonNummer']; } ?>" name="Telefoonnummer" max="25" maxlenght="5"  placeholder="<?php echo $warningNumber; ?>" required>
       <input type="date" name="Geboortedatum" value = "<?php if(isset($_SESSION['geboorteDag'])){echo $_SESSION['geboorteDag']; } ?>"  max="<?php echo date("Y-m-d") ?>">
       <select class="uk-text-bold"  name="Geheimevraag" required>
        <!-- haalt de geheimenvraag uit de database met value -->
@@ -94,7 +94,7 @@ if(isset($_GET['error'])){
          <option value="<?php echo $value['vraagNummer'] ?>"><?php echo $value['tekstVraag'] ?></option>
           <?php  } ?>
       </select>
-      <input type="text" name="Antwoordvraag" required>
+      <input type="text" name="Antwoordvraag" maxlength="25"  required >
       <input class="uk-checkbox"  type="checkbox" name="voorwaarden" value = "agreed" required>
     </div>
    </div>

@@ -46,7 +46,7 @@
     <div class="uk-padding">
         <H1 class="uk-text-right">Blokkeren van gebruiker</H1>
         <form action="" method="get" class="uk-flex uk-flex-column uk-form-width-medium">
-            <select name = "selectUser" class="uk-margin-bottom uk-select">
+            <select name = "selectUser" class="uk-margin-bottom uk-select" required>
                 <option value="">Kies een gebruiker</option>
 
                 <!-- geeft alle users weer -->
