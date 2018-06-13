@@ -2,7 +2,7 @@
   $hostname = "(local)";
   $dbname = "lokaaliproject";
   $username = "sa";
-  $pw = "Samsung7!";
+  $pw = "gofckurself!";
 
     try { //probeer connectie te maken
         $dbh = new PDO ("sqlsrv:Server=$hostname;Database=$dbname;
