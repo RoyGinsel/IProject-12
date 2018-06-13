@@ -27,7 +27,6 @@
       $error = substr($error,71);
     }
     $fotos = preparedQuery("SELECT * FROM tblBestand WHERE voorwerpNummer = :nummer",["nummer" => $_GET['item']]);
-    var_dump($fotos);
 
  ?>
 
@@ -94,10 +93,6 @@
                 }
                 echo "<li> <img src='$src' uk-cover> </li>";
               } ?>
-
-            <li>
-                <img src="https://ringbrothers.com/media/gallery/galleryimages//d/e/defector_2_.jpg" alt="" uk-cover>
-            </li>
           </ul>
         </div>
           <!-- omschrijving lol -->

@@ -15,18 +15,23 @@ if(isset($_SESSION['username'])){
 if (isset($_POST['Titel']) ){
     //Tellen van aantal geuploadde fotos
   $_aantal_fotos = count($_FILES['fotos']['name']);
+  var_dump($_FILES['fotos']['name']);
+  var_dump($_aantal_fotos);
+  $insertOK = 0;
   //error messages
   if($_FILES['fotos']['name'][0] =="" ){
+    $insertOK = 1;
     echo "<script>
     alert('Upload tenminste één bestand');
     </script>";
-  } else if($_aantal_fotos > 4){
+  } if($_aantal_fotos > 5){
+    $insertOK = 1;
     echo "<script>
     alert('Je kunt maximaal 4 fotos uploaden');
     </script>";
     }
       //Insert van gegevens in db
-  if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 4) {
+  if($_FILES['fotos']['name'][0] !="" && $_aantal_fotos < 6 && $insertOK == 0) {
     $nummer = newVoorwerpNummer();
     $nummer = $nummer[0]['voorwerpnummer'];
     preparedInsertQuery("INSERT INTO tblVoorwerp values(".$nummer.",:titel,:beschrijving,:startPrijs,:betaalWijze,:betalingsInstructie,
@@ -193,11 +198,11 @@ if (isset($_POST['Titel']) ){
     ?>
     <!-- form inputs -->
     <div class="uk-flex uk-flex-around uk-flex-column uk-margin-small-left uk-margin-small-right uk-text-truncate ">
-      <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="Titel" required >
-      <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="Plaatsnaam" required>
-      <input type="text" id=<?php echo $form_ids['Land'] ?> name="Land" maxlength="52" value="LAND" required >
-      <input type="number" id=<?php echo $form_ids['Startprijs'] ?> name="Startprijs" value="10.00" required>
-      <input type="number" id=<?php echo $form_ids['Verzendkosten'] ?> name="Verzendkosten" value="0.00" required>
+      <input type="text" id=<?php echo $form_ids['Titel'] ?> name="Titel" maxlength="25" value="" required >
+      <input type="text" id=<?php echo $form_ids['Plaatsnaam'] ?> name="Plaatsnaam"  maxlength="50" value="" required>
+      <input type="text" id=<?php echo $form_ids['Land'] ?> name="Land" maxlength="52" value="" required >
+      <input type="number" id=<?php echo $form_ids['Startprijs'] ?> min="0.5" name="Startprijs" value="" required>
+      <input type="number" id=<?php echo $form_ids['Verzendkosten'] ?> min="0.5" name="Verzendkosten" value="" required>
 
       <select id=<?php echo $form_ids['Looptijd'] ?> name="Looptijd" >
       <option value="1">1 dag</option>
@@ -218,7 +223,7 @@ if (isset($_POST['Titel']) ){
       <option value="SNS">SNS Bank</option>
       </select>
 
-      <input id=<?php echo $form_ids['Banknummer'] ?> type="text" name="Banknummer" value="20389456" required>
+      <input id=<?php echo $form_ids['Banknummer'] ?> type="text" name="Banknummer" value="" required>
     </div>
     </div>
 
@@ -256,15 +261,15 @@ if (isset($_POST['Titel']) ){
   <div class="uk-flex uk-flex-center uk-text-center uk-margin uk-flex uk-flex-wrap">
     <div class="uk-margin-right">
       <h3>Verzendinstructie</h3>
-      <textarea style="resize:none" name="Verzendinstructie" id=<?php echo $form_ids['Verzendinstructie'] ?> cols="30" rows="10" >sdjkafoasidjf</textarea>
+      <textarea style="resize:none" name="Verzendinstructie" id=<?php echo $form_ids['Verzendinstructie'] ?> cols="30" rows="10" ></textarea>
     </div>
     <div class="uk-margin-right uk-margin-left">
         <h3>Betaalinstructie</h3>
-        <textarea style="resize:none" name="Betaalinstructie" cols="30" rows="10" >sdjkafoasidjf</textarea>
+        <textarea style="resize:none" name="Betaalinstructie" cols="30" rows="10" ></textarea>
     </div>
     <div class="uk-margin-left">
         <h3>Beschrijving</h3>
-        <textarea  style="resize:none" name="Beschrijving" id=<?php echo $form_ids['Beschrijving'] ?> cols="30" rows="10" >saklfjapifjosakdpfjpi9w</textarea>
+        <textarea  style="resize:none" name="Beschrijving" id=<?php echo $form_ids['Beschrijving'] ?> cols="30" rows="10" ></textarea>
     </div>
   </div>
   <div class="uk-flex uk-flex-center padding-large">
